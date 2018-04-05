@@ -1,36 +1,35 @@
 <div class=panel>
-  <div class="panel-heading border">
+  <div class="panel-heading border mb15">
     <span class="pull-left">
       <b>Communication Dashboard</b>
     </span>
     <div class="pb30">
       <button type="button" class="btn btn-create pull-right mr5" kendoButton (click)="addClick()">
         <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
-        <button type="button" class="btn btn-create pull-right mr5" kendoButton (click)="goTOListClick()">
-          <i class="fa fa-list-ul" aria-hidden="true"></i> Go to List</button>
+      <button type="button" class="btn btn-create pull-right mr5" kendoButton (click)="goTOListClick()">
+        <i class="fa fa-list-ul" aria-hidden="true"></i> Go to List</button>
     </div>
-    
+
   </div>
-</div>
-<div class="row">
-  <div class="col-sm-3">
-    <div class="profile-sidebar">
-      <div class="profile-sidebar-item profile-avatar">
-        <img [src]="url" class="img-rounded" alt="">
-      </div>
-      <hr>
-      <ul class="profile-sidebar-item profile-numbers-count">
-        <li>
-          <span class="bold">{{caseDetails.CaseNo}}</span> Case No </li>
-        <li>
-          <span class="bold">{{caseDetails.CaseType}}</span> Case Type </li>
-      </ul>
-      <hr>
-      <div class="profile-sidebar-item profile-bio">
-        <small class="bold text-uppercase">Description</small>
-        <p>{{caseDetails.Description}}</p>
-      </div>
-      <!--<hr>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="profile-sidebar">
+        <div class="profile-sidebar-item profile-avatar">
+          <img [src]="url" class="img-rounded" alt="">
+        </div>
+        <hr>
+        <ul class="profile-sidebar-item profile-numbers-count">
+          <li>
+            <span class="bold">{{caseDetails.CaseNo}}</span> Case No </li>
+          <li>
+            <span class="bold">{{caseDetails.CaseType}}</span> Case Type </li>
+        </ul>
+        <hr>
+        <div class="profile-sidebar-item profile-bio">
+          <small class="bold text-uppercase">Description</small>
+          <p>{{caseDetails.Description}}</p>
+        </div>
+        <!--<hr>
        <div class="profile-sidebar-item profile-reccomendations">
         <small class="bold text-uppercase">Reccomendations</small>
         <ul class="user-meta">
@@ -48,26 +47,28 @@
           </li>
         </ul>
       </div> -->
+      </div>
     </div>
-  </div>
-  <div class="col-sm-9">
-    <section class="profile-timeline" *ngFor="let communication of caseCommunications | orderBy : 'CommunicateDate': true">
-      <div class="profile-timeline-header ">
-        <!-- <a href=javascript:; class="profile-timeline-user ">
+    <div class="col-sm-9">
+      <section class="profile-timeline" *ngFor="let communication of caseCommunications | orderBy : 'CommunicateDate': true">
+        <div class="profile-timeline-header ">
+          <!-- <a href=javascript:; class="profile-timeline-user ">
           <img [src]="url " alt=" " class="img-circle ">
         </a> -->
-        <div class="profile-timeline-user-details ">
-          <a href=javascript:; class="bold ">{{communication.Summary}}</a>
-          <br>
-          <em class="text-success small ">{{communication.CommunicateDate | date: 'dd/MM/yyyy'}}</em>
+          <div class="profile-timeline-user-details ">
+            <a href=javascript:; class="bold ">{{communication.Summary}}</a>
+            <br>
+            <em class="text-success small ">{{communication.CommunicateDate | date: 'dd/MM/yyyy'}}</em>
+          </div>
         </div>
-      </div>
-      <div class="profile-timeline-content ">
-        <p>
-          {{communication.CommunicationDetails}}
-        </p>
-        <a class="mr15" href="javascript:;" (click)="editComment(communication.Id)"> <i class="fa fa-edit mr5"></i>Edit </a>
-      </div>
-    </section>
+        <div class="profile-timeline-content ">
+          <p>
+            {{communication.CommunicationDetails}}
+          </p>
+          <a class="mr15" href="javascript:;" (click)="editComment(communication.Id)">
+            <i class="fa fa-edit mr5"></i>Edit </a>
+        </div>
+      </section>
+    </div>
   </div>
 </div>

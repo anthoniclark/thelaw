@@ -89,7 +89,7 @@ export class CommunicationDetailComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.router.navigateByUrl(`/case/${this.model.CaseId}/communication`);
+    this.router.navigateByUrl(`/case/${this.model.CaseId}/communication/dashboard`);
     // this.router.navigate(['/case/' + this.model.CaseId]);
   }
 }
