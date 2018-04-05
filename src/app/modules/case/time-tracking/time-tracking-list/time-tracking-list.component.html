@@ -1,0 +1,56 @@
+<div class=panel>
+  <div class="panel-heading border">
+    <span class="pull-left">
+      <b>Time Tracking for Case</b>
+    </span>
+    <div class="pb30">
+      <button type="button" class="btn btn-create pull-right" kendoButton (click)="createNewTimeTracking()">
+        <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+    </div>
+  </div>
+  <div class=panel-body>
+    <ngx-datatable class="material" [rows]="rows" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
+      [rowHeight]="'auto'" [columnMode]="'force'">
+      <ngx-datatable-column name="Contact Name" sortable="true" prop="ContactName">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Task Category Name" sortable="true" prop="TaskCategoryName">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Worked Hours" sortable="true" prop="WorkedHours">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Billed Hours" sortable="true" prop="BilledHours">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Rate" sortable="true" prop="Rate">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Do not Bill" sortable="true" prop="DontBill">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value ? true : false}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <button (click)="editClick(value)" md-icon-button>
+            <i class="fa fa-edit"></i>
+          </button>
+          <button (click)="deleteClick(value)" md-icon-button>
+            <i class="fa fa-trash"></i>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

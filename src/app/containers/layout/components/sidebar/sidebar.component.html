@@ -1,0 +1,57 @@
+<div class="sidebar-panel offscreen-left">
+  <div class=brand>
+    <div class=brand-logo>
+      LAWYER DIARY
+    </div>
+    <a href="javascript:;" class="toggle-sidebar hidden-xs hamburger-icon v3" (click)="toggleMenu()" data-toggle=layout-small-menu>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </a>
+  </div>
+
+  <nav role="navigation">
+    <perfect-scrollbar>
+      <ul class="nav">
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]='["/contact"]'>
+            <i class="fa fa-flask"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]='["/case"]'>
+            <i class="fa fa-toggle-on"></i>
+            <span>Case</span>
+          </a>
+        </li>
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]='["/case-expense"]'>
+            <i class="fa fa-toggle-on"></i>
+            <span>Case Expense</span>
+          </a>
+        </li>
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]='["/complain"]'>
+            <i class="fa fa-toggle-on"></i>
+            <span>Complain</span>
+          </a>
+        </li>
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]='["/expense-type"]'>
+            <i class="fa fa-toggle-on"></i>
+            <span>Expense Types</span>
+          </a>
+        </li>
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]='["/companies"]'>
+            <i class="fa fa-toggle-on"></i>
+            <span>Companies</span>
+          </a>
+        </li>
+      </ul>
+    </perfect-scrollbar>
+  </nav>
+
+</div>

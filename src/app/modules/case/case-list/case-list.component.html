@@ -1,0 +1,106 @@
+<div class=panel>
+  <div class="panel-heading border">
+    <span class="pull-left">
+      <b>Cases</b>
+    </span>
+    <div class="pb30">
+      <button type="button" class="btn btn-create pull-right" kendoButton (click)="router.navigate(['/case/new'])">
+        <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+    </div>
+
+  </div>
+  <div class=panel-body>
+    <ngx-datatable class="material" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+      [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="70" [footerHeight]="40"
+      [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
+      <ngx-datatable-column name="Case Number" sortable="true" prop="CaseNo">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="case-no" (click)="sort()">Case Number</label>
+            <br/>
+            <input type='text' name="case-no" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value" data-column-name="CaseNo"
+              #CaseNo placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Case Type" data-custom="custom" class="custom-sort" sortable="true" prop="CaseType">
+        <ng-template let-row="row" let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="case-no" (click)="sort()">Case Type</label>
+            <br/>
+            <input type='text' name="CaseType" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value" data-column-name="CaseType"
+              #CaseNo placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Start Date" sortable="true" prop="OpenDate">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value | date: 'dd/MM/yyyy'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="End Date" sortable="true" prop="EndDate">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value | date: 'dd/MM/yyyy'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Refference Number" sortable="true" prop="RefferenceNumber">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="RefferenceNumber" (click)="sort()">Refference Number</label>
+            <br/>
+            <input type='text' name="RefferenceNumber" class="column-filter-input form-control" [(ngModel)]="filterModel[2].value" data-column-name="RefferenceNumber"
+              #CaseNo placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Status" sortable="true" prop="CaseStatus">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="Status" (click)="sort()">Status</label>
+            <br/>
+            <input type='text' name="CaseStatus" class="column-filter-input form-control" [(ngModel)]="filterModel[3].value" data-column-name="CaseStatus"
+              #CaseNo placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <button title="Edit" (click)="editClick(value)" md-icon-button>
+            <i class="fa fa-edit"></i>
+          </button>
+          <button title="Delete" (click)="deleteClick(value)" md-icon-button>
+            <i class="fa fa-trash"></i>
+          </button>
+          <button title="Change Status" (click)="changeStatus(row)" md-icon-button>
+            <i class="fa fa-repeat"></i>
+          </button>
+          <button title="Show Communication" (click)="showCommunication(row)" md-icon-button>
+            <i class="fa fa-bullhorn"></i>
+          </button>
+          <button title="Show Time Tracker" (click)="ShowTimeTracker(row)" md-icon-button>
+            <i class="fa fa-clock-o"></i>
+          </button>
+          <button title="Show Notes" (click)="ShowNotes(row)" md-icon-button>
+            <i class="fa fa-file-text"></i>
+          </button>
+          <!-- <button title="Show Communication" (click)="ShowCommunications(row)" md-icon-button>
+            <i class="fa fa-comments-o"></i>
+          </button> -->
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

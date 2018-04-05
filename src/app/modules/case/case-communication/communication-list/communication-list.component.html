@@ -1,0 +1,46 @@
+<div class=panel>
+  <div class="panel-heading border">
+    <span class="pull-left">
+      <b>Communication</b>
+    </span>
+    <div class="pb30">
+      <button type="button" class="btn btn-create pull-right" kendoButton (click)="addClick()">
+        <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+    </div>
+  </div>
+  <div class=panel-body>
+    <ngx-datatable class="bootstrap" [rows]="rows" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
+      [rowHeight]="'auto'" [columnMode]="'force'">
+      <ngx-datatable-column name="Communicate Date" sortable="true" prop="CommunicateDate">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value | date: 'dd/MM/yyyy'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Communication Type" sortable="true" prop="CommunicationType">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Communicate From" sortable="true" prop="CommunicateFromName">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Communicate To" sortable="true" prop="CommunicateToName">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <button (click)="editClick(value)" md-icon-button>
+            <i class="fa fa-edit"></i>
+          </button>
+          <button (click)="deleteClick(value)" md-icon-button>
+            <i class="fa fa-trash"></i>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

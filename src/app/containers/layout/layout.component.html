@@ -1,0 +1,11 @@
+<div class="app layout-fixed-header" #layoutMenu>
+    <app-sidebar [layoutMenu]="layoutMenu"></app-sidebar>
+    <div class=main-panel>
+        <header class="header navbar" [layoutMenu]="layoutMenu"></header>
+        <div class=main-content>
+            <router-outlet>
+            </router-outlet>
+        </div>
+    </div>
+    <footer class="content-footer"></footer>
+</div>

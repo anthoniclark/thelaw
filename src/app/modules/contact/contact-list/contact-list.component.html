@@ -1,0 +1,14 @@
+<div class=panel>
+  <div class="panel-heading border">
+    <span class="pull-left">
+      <b>Contacts</b>
+    </span>
+    <div class="pb30">
+      <button type="button" class="btn btn-default pull-right ml5" kendoButton (click)="router.navigate(['/contact'])">Goto Dashboard</button>
+      <button type="button" class="btn btn-success pull-right" kendoButton (click)="router.navigate(['/contact/new'])">Create</button>
+    </div>
+  </div>
+  <div class=panel-body>
+    <app-contact-grid [data]="rows" [showAction]="true"></app-contact-grid>
+  </div>
+</div>

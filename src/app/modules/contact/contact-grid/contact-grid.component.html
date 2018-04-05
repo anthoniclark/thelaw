@@ -1,0 +1,42 @@
+<!-- <ngx-datatable class="bootstrap" [rows]="_data" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
+  [rowHeight]="'auto'" [columnMode]="'force'"> -->
+<ngx-datatable class="material" [rows]="_data" [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+  [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="cType !== 'NewlyAdded'? 70: 40"
+  [footerHeight]="40" [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
+  <ngx-datatable-column *ngIf="cType === 'NewlyAdded' || cType === 'Other' " name="Contact Type" sortable="true" prop="ContactType">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      {{value}}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Name" sortable="true" prop="Title">
+    <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+      <div class="custom-sort">
+        <label class="case-no" (click)="sort()">Name</label>
+        <br/>
+        <input type='text' name="case-no" *ngIf="cType !== 'NewlyAdded'" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value"
+          data-column-name="CaseNo" #CaseNo placeholder='Filter...' (keyup)="filterData($event)" />
+      </div>
+    </ng-template>
+
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.Title}} {{row.FirstName}} {{row.LastName}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Important Contact" sortable="true">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <i class="big-icon important-icon fa {{ row.IsImportant ? 'fa-star' : 'fa-star-o' }}" (click)="toggleImportant(row)" aria-hidden="true"></i>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      <button (click)="editClick(value)" md-icon-button>
+        <i class="fa fa-edit"></i>
+      </button>
+      <button (click)="deleteClick(value)" md-icon-button>
+        <i class="fa fa-trash"></i>
+      </button>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

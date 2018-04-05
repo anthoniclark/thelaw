@@ -1,0 +1,70 @@
+<div class=panel>
+  <div class="panel-heading border">
+    <span class="pull-left">
+      <b>Case Expenses</b>
+    </span>
+    <div class="pb30">
+      <button type="button" class="btn btn-create pull-right" (click)="router.navigate(['/case-expense/new'])">
+        <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+    </div>
+
+  </div>
+  <div class=panel-body>
+    <ngx-datatable class="material" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+      [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="60" [footerHeight]="40"
+      [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
+      <ngx-datatable-column name="Case Number" sortable="true" prop="CaseNo">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Expense Name" sortable="true" prop="ExpenseName">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="column-filter-label" (click)="sort()">Expense Name</label>
+            <br/>
+            <input type='text' id="id" name="expense-name-filter" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value"
+              data-column-name="ExpenseName" #expenseNameSearch placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Expense Date" sortable="true" prop="ExpenseDate">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value | date: 'dd/MM/yyyy'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Category" sortable="true" prop="CategoryName">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="column-filter-label" (click)="sort()">Category Name</label>
+            <br/>
+            <input type='text' id="id" name="expense-name-filter" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value"
+              data-column-name="ExpenseName" #expenseNameSearch placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Amount" sortable="true" prop="Amount">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <button (click)="editClick(value)" md-icon-button>
+            <i class="fa fa-edit"></i>
+          </button>
+          <button (click)="deleteClick(value)" md-icon-button>
+            <i class="fa fa-trash"></i>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

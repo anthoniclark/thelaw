@@ -1,0 +1,64 @@
+<div class="container-fluid custom-modal-container" style="padding: 15px 30px;">
+  <div class="row custom-modal-header">
+    <div class="col">
+      <h2 class="my-3">Suggestion</h2>
+    </div>
+  </div>
+  <form name="suggestionForm" (ngSubmit)="suggestionForm.form.valid && changeStatus()" #suggestionForm='ngForm' novalidate>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="Name">Name</label>
+          <input type="text" maxlength="150" id="Name" name="Name" required class="form-control" [(ngModel)]="model.Name" #Name="ngModel"
+          />
+          <label *ngIf="suggestionForm.submitted && !Name.valid" class="err-label">
+            Please enter Name
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="Email">Email</label>
+          <input class="form-control" type="email" id="Email" name="Email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$"
+            [(ngModel)]="model.Email" #Email="ngModel" required />
+          <label *ngIf="(suggestionForm.submitted || Email.dirty) && Email.errors && Email.errors['required']" class="err-label">
+            Please enter Email</label>
+          <label *ngIf="(suggestionForm.submitted || Email.dirty) && Email.errors && Email.errors['pattern']" class="err-label">
+            Email Address must be in email format</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="Phone">Phone</label>
+          <input type="text" (keypress)="_keyPress($event)" maxlength="15" id="Phone" name="Phone" required class="form-control" [(ngModel)]="model.Phone"
+            #Phone="ngModel" />
+          <label *ngIf="suggestionForm.submitted && !Phone.valid" class="err-label">
+            Please enter Phone
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="Suggestion">Suggestion</label>
+          <input type="text" maxlength="250" id="Suggestion" name="Suggestion" required class="form-control" [(ngModel)]="model.Suggestion"
+            #Suggestion="ngModel" />
+          <label *ngIf="suggestionForm.submitted && !Suggestion.valid" class="err-label">
+            Please enter Suggestion
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <button type="button" class="btn btn-default" (click)="closeClick()">Cancel</button>
+      <button type="submit" [disabled]="isLoading" class="btn btn-primary">{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
+    </div>
+  </form>
+  <div class="row custom-modal-footer">
+    <div class="col-xs-12">
+    </div>
+  </div>
+</div>

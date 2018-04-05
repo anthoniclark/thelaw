@@ -1,0 +1,56 @@
+<div class="brand visible-xs">
+  <div class=toggle-offscreen>
+    <a href="javascript:void(0)" class="hamburger-icon visible-xs" (click)="toggleMenu()" data-toggle=offscreen data-move=ltr>
+      <span></span>
+      <span></span>
+      <span></span>
+    </a>
+  </div>
+  <div class=brand-logo>
+    <img src="assets/images/logo-dark.5ba260bb.png" height=15 alt=""> </div>
+  <div class=toggle-chat>
+    <a href=javascript:; class="hamburger-icon v2 visible-xs" data-toggle=layout-chat-open>
+      <span></span>
+      <span></span>
+      <span></span>
+    </a>
+  </div>
+</div>
+<ul class="nav navbar-nav hidden-xs">
+  <li>
+    <p class=navbar-text> </p>
+  </li>
+</ul>
+<ul class="nav navbar-nav navbar-right hidden-xs">
+  <!-- <li>
+    <a href=javascript:; data-toggle=quick-launch-panel>
+      <i class="fa fa-circle-thin"></i>
+    </a>
+  </li> -->
+  <li>
+    <a href=javascript:; data-toggle=dropdown>
+      <img src="assets/images/avatar.21d1cc35.jpg" class="header-avatar img-circle ml10" alt=user title=user>
+      <span class=pull-left>Samuel Perkins</span>
+    </a>
+    <ul class=dropdown-menu>
+      <li>
+        <a href=javascript:;>Settings</a>
+      </li>
+      <li>
+        <a href=javascript:;>Upgrade</a>
+      </li>
+      <li>
+        <a href=javascript:;>
+          <span class="label bg-danger pull-right">34</span>
+          <span>Notifications</span>
+        </a>
+      </li>
+      <li>
+        <a href=javascript:;>Help</a>
+      </li>
+      <li>
+        <a (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </li>
+</ul>

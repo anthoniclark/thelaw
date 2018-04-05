@@ -1,0 +1,67 @@
+<div class=panel>
+  <div class="panel-heading border">
+    <span class="pull-left">
+      <b>Case Documents</b>
+    </span>
+    <div class="pb30">
+      <button type="button" class="btn btn-success pull-right" (click)="router.navigate(['/companies/new'])">Create</button>
+    </div>
+
+  </div>
+  <div class=panel-body>
+    <ngx-datatable class="material" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+      [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="60" [footerHeight]="40"
+      [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
+      <ngx-datatable-column name="Document Name" sortable="true" prop="DocumentName">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="column-filter-label" (click)="sort()">Document Name</label>
+            <br/>
+            <input type='text' name="company-name-filter" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value"
+              data-column-name="DocumentName" #DocumentName placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Document Category" sortable="true" prop="DocumentCategory">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="column-filter-label" (click)="sort()">Document Category</label>
+            <br/>
+            <input type='text' name="company-name-filter" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value"
+              data-column-name="DocumentCategory" #DocumentCategory placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="File Type" sortable="true" prop="FileType">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="column-filter-label" (click)="sort()">File Type</label>
+            <br/>
+            <input type='text' name="company-name-filter" class="column-filter-input form-control" [(ngModel)]="filterModel[2].value"
+              data-column-name="FileType" #FileType placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <button (click)="editClick(value)" md-icon-button>
+            <i class="fa fa-edit"></i>
+          </button>
+          <button (click)="deleteClick(value)" md-icon-button>
+            <i class="fa fa-trash"></i>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

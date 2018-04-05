@@ -1,0 +1,38 @@
+<section class="section-login">
+  <div class="section-login__main section-login__main--bg-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="section-login__main-content">
+            <h3>Login to your account</h3>
+            <form name="loginForm" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" [(ngModel)]="model.username"
+                  #username="ngModel" required>
+                <div *ngIf="f.submitted && !username.valid" class="invalid-feedback">
+                  Username is required
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="model.password"
+                  #password="ngModel" required>
+                <div *ngIf="f.submitted && !password.valid" class="invalid-feedback">
+                  Password is required
+                </div>
+              </div>
+
+              <div class="form__group">
+                <button [disabled]="isLoading" class="btn btn-primary">SUBMIT</button>
+              </div>
+              <p *ngIf="error" class="alert alert-danger paragraph paragraph--small u-color-red u-shadow-text u-letter-spacing-small u-margin-bottom-med u-align-inline-center">
+                {{ error }}
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,73 @@
+<div class=panel>
+  <div class="panel-heading border">
+    <span class="pull-left">
+      <b>Complains</b>
+    </span>
+    <div class="pb30">
+      <button type="button" class="btn btn-create pull-right" kendoButton (click)="router.navigate(['/complain/new'])">
+        <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+    </div>
+
+  </div>
+  <div class=panel-body>
+    <ngx-datatable class="material" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+      [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="70" [footerHeight]="40"
+      [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
+
+      <ngx-datatable-column name="Complain Date" sortable="true" prop="ComplainDate">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value | date: 'dd/MM/yyyy'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Complain By" sortable="true" prop="ComplainByName">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="complainBy-name" (click)="sort()">ComplainBy Name</label>
+            <br/>
+            <input type='text' name="complain-name" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value" data-column-name="ComplainByName"
+              #ComplainByName placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Complain Of" sortable="true" prop="ComplainOfName">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="complain-of" (click)="sort()">Complain Of</label>
+            <br/>
+            <input type='text' name="complain-of" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value" data-column-name="ComplainOfName"
+              #ComplainOfName placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Status" sortable="true" prop="ComplainStatus">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort" (click)="sort()">
+            <label class="complain-status">Status</label>
+            <br/>
+            <input type='text' name="complain-status" class="column-filter-input form-control" [(ngModel)]="filterModel[2].value" data-column-name="ComplainStatus"
+              #ComplainStatus placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <button (click)="editClick(value)" md-icon-button>
+            <i class="fa fa-edit"></i>
+          </button>
+          <button (click)="deleteClick(value)" md-icon-button>
+            <i class="fa fa-trash"></i>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

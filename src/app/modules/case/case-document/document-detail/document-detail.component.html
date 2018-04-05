@@ -1,0 +1,62 @@
+<div>
+    <div class="panel mb25">
+        <div class="panel-heading border">
+            <b>{{ (paramId !='new') ? 'Modify':'Add' }} Case Document</b>
+        </div>
+        <div class=panel-body>
+            <div class="row no-margin">
+                <div class=col-lg-12>
+                    <form name="caseDocumentForm" (ngSubmit)="caseDocumentForm.form.valid && save()" #caseDocumentForm="ngForm" novalidate>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="DocumentName">Document Name <span class="req">*</span></label>
+                                    <input type="text" maxlength="150" id="DocumentName" name="DocumentName" required class="form-control" [(ngModel)]="model.DocumentName"
+                                        #DocumentName="ngModel" [class.inValidField]="caseDocumentForm.submitted && !DocumentName.valid"
+                                    />
+                                    <label *ngIf="caseDocumentForm.submitted && !DocumentName.valid" class="err-label">
+                                        Please enter Document Name
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="DocumentCategory">Document Category</label>
+                                    <select class="form-control" [(ngModel)]="model.DocumentCategory" id="DocumentCategory" name="DocumentCategory" #DocumentCategory="ngModel">
+                                        <option [value]='undefined'>Select Document Category</option>
+                                        <option *ngFor="let category of CategoryDropDown" value={{category.Id}}>
+                                            {{category.Name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="CaseId">Document</label>
+                                    <div>{{fileToUpload?.name || 'Select File'}}
+                                    </div>
+                                    <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">Browse</a>
+                                    <input type="file" class="fileUpload" #fileUpload style="display:none" accept=".doc, application/pdf, image/jpg, image/jpeg, image/png, .xls"
+                                        #fileUpload style="display:none" (change)="onFileChange($event)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
+                                <i class="fa fa-times-circle mr5"></i> Cancel
+                            </a>
+                            <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+                                <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="clr"></div>
+</div>

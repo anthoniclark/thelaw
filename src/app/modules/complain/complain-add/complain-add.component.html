@@ -1,0 +1,101 @@
+<div>
+  <div class="panel mb25">
+    <div class="panel-heading border">
+      <b>{{ (paramId !='new') ? 'Modify':'Add' }} Complain</b>
+    </div>
+    <div class=panel-body>
+      <div class="row no-margin">
+        <div class=col-lg-12>
+          <form name="complainForm" (ngSubmit)="complainForm.form.valid && save()" #complainForm="ngForm" novalidate>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="ComplainDate">Complain Date
+                    <span class="req">*</span>
+                  </label>
+                  <input class="form-control" [(ngModel)]="model.ComplainDate" ngui-datetime-picker date-only="true" #ComplainDate="ngModel"
+                    required name="ComplainDate" id="ComplainDate" [class.inValidField]="complainForm.submitted && !ComplainDate.valid"
+                  />
+                  <label *ngIf="complainForm.submitted && !ComplainDate.valid" class="err-label">
+                    Please select Complain Date.
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="ComplainById">Complain By
+                    <span class="req">*</span>
+                  </label>
+                  <input ngui-auto-complete class="form-control" [(ngModel)]="ComplainById" name="ComplainById" [source]="contactSearch.bind(this)"
+                    min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectComplainBy($event)"
+                    value-property-name="Id" display-property-name="Name" [class.inValidField]="complainForm.submitted && !model.ComplainBy"
+                  />
+                  <label *ngIf="complainForm.submitted && !model.ComplainBy" class="err-label">
+                    Please select valid Complain By.
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="ComplainOfId">Complain Of
+                    <span class="req">*</span>
+                  </label>
+                  <input ngui-auto-complete class="form-control" [(ngModel)]="ComplainOfId" name="ComplainOfId" [source]="contactSearch.bind(this)"
+                    min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectComplainOf($event)"
+                    value-property-name="Id" display-property-name="Name" [class.inValidField]="complainForm.submitted && !model.ComplainOf"
+                  />
+                  <label *ngIf="complainForm.submitted && !model.ComplainOf" class="err-label">
+                    Please select valid Complain Of.
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="ComplainStatus">Status</label>
+                  <select class="form-control" [(ngModel)]="model.ComplainStatus" #ComplainStatus="ngModel" id="ComplainStatus" name="ComplainStatus">
+                    <option *ngFor="let status of ComplainStatusDropDown" value={{status.Id}}>
+                      {{status.Name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="Description">Description
+                    <span class="req">*</span>
+                  </label>
+                  <!-- <input type="text" id="Description" name="Description" maxlength="250" [class.inValidField]="complainForm.submitted && !model.Description"
+                    class="form-control" [(ngModel)]="model.Description" required #Description="ngModel" /> -->
+                  <textarea class="form-control" [class.inValidField]="complainForm.submitted && !model.Description" rows="3" id="Description"
+                    name="Description" maxlength="250" [(ngModel)]="model.Description" #Description="ngModel" required></textarea>
+                  <label *ngIf="complainForm.submitted && !Description.valid" class="err-label">
+                    Please enter Description.
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+              </div>
+            </div>
+
+            <div class="row">
+              <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
+                <i class="fa fa-times-circle mr5"></i> Cancel
+              </a>
+              <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+                <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="clr"></div>
+</div>

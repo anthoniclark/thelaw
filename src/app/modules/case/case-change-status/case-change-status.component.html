@@ -1,0 +1,90 @@
+<div class="container-fluid custom-modal-container" style="padding: 15px 30px;">
+  <div class="row custom-modal-header">
+    <div class="col">
+      <h2 class="my-3">Change Case Status</h2>
+    </div>
+  </div>
+  <form name="changeStatusForm" (ngSubmit)="changeStatusForm.form.valid && changeStatus()" #changeStatusForm='ngForm' novalidate>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="StageID">Stage</label>
+          <select class="form-control" [(ngModel)]="model.StageID" id="StageID" name="StageID" #StageID="ngModel">
+            <option [value]='undefined'>Select Stage</option>
+            <option *ngFor="let stage of stages" value={{stage.Id}}>
+              {{stage.StageName}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="CourtId">Court</label>
+          <select class="form-control" [(ngModel)]="model.CourtId" id="CourtId" name="CourtId" #CourtId="ngModel">
+            <option [value]='undefined'>Select Court</option>
+            <option *ngFor="let court of courts" value={{court.Id}}>
+              {{court.CourtName}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="HearingDate">Hearing Date</label>
+          <input class="form-control" [(ngModel)]="model.HearingDate" ngui-datetime-picker date-only="true" name="HearingDate" id="HearingDate"
+            #HearingDate="ngModel" />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="NextDate">Next Date</label>
+          <input class="form-control" [(ngModel)]="model.NextDate" ngui-datetime-picker date-only="true" name="NextDate" id="NextDate"
+            #NextDate="ngModel" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="Description">Description</label>
+          <textarea class="form-control" rows="3" id="Description" name="Description" maxlength="250" [(ngModel)]="model.Description"
+            #Description="ngModel"></textarea>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="DefendantRemark">Defendant Remark</label>
+          <input type="text" maxlength="250" class="form-control" [(ngModel)]="model.DefendantRemark" name="DefendantRemark" id="DefendantRemark"
+            #DefendantRemark="ngModel" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="NextActivity">Next Activity</label>
+          <input type="text" maxlength="250" class="form-control" [(ngModel)]="model.NextActivity" name="NextActivity" id="NextActivity"
+            #NextActivity="ngModel" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <a href=javascript:; (click)="closeClick()" class="btn btn-default btn-cancel mr5">
+        <i class="fa fa-times-circle mr5"></i> Cancel
+      </a>
+      <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+        <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+      </button>
+    </div>
+  </form>
+  <div class="row custom-modal-footer">
+    <div class="col-xs-12">
+    </div>
+  </div>
+</div>
