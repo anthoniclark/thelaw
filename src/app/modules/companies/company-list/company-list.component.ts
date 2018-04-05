@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CompaniesService } from '../companies.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../../shared/services/notification.service';
@@ -6,14 +6,15 @@ import { Page, Sorting, FilterModel } from '../../../models/page';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-companies-list',
-  templateUrl: './companies-list.component.html'
+  selector: 'app-company-list',
+  templateUrl: './company-list.component.html'
 })
-export class CompaniesListComponent implements OnInit {
+export class CompanyListComponent implements OnInit {
   public rows: any[];
   public page: Page = new Page();
   loadingIndicator: boolean = false;
   sorting: Sorting = new Sorting();
+  @ViewChild('myTable') table: any;
 
   filterModel: FilterModel[] = [{
     columnName: 'CompanyName',
@@ -128,6 +129,15 @@ export class CompaniesListComponent implements OnInit {
     } else {
       this.getDataSource();
     }
+  }
+
+  toggleExpandRow(row) {
+    console.log('Toggled Expand Row!', row);
+    this.table.rowDetail.toggleExpandRow(row);
+  }
+
+  onDetailToggle(event) {
+    console.log('Detail Toggled', event);
   }
 
 }
