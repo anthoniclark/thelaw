@@ -19,7 +19,7 @@ import { NoteDetailComponent } from './case-note/note-detail/note-detail.compone
 import { CommunicationDashboardComponent } from './case-communication/communication-dashboard/communication-dashboard.component';
 import { DocumentListComponent } from './case-document/document-list/document-list.component';
 import { DocumentDetailComponent } from './case-document/document-detail/document-detail.component';
-
+import { PopoverModule } from "ngx-popover";
 
 @NgModule({
   imports: [
@@ -27,7 +27,8 @@ import { DocumentDetailComponent } from './case-document/document-detail/documen
     SharedModule,
     caseRouting,
     AngularMultiSelectModule,
-    BootstrapModalModule
+    BootstrapModalModule,
+    PopoverModule
   ],
   declarations: [
     CaseListComponent,

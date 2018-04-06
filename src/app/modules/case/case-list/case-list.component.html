@@ -78,27 +78,38 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <button title="Edit" (click)="editClick(value)" md-icon-button>
-            <i class="fa fa-edit"></i>
-          </button>
-          <button title="Delete" (click)="deleteClick(value)" md-icon-button>
-            <i class="fa fa-trash"></i>
-          </button>
-          <button title="Change Status" (click)="changeStatus(row)" md-icon-button>
-            <i class="fa fa-repeat"></i>
-          </button>
-          <button title="Show Communication" (click)="showCommunication(row)" md-icon-button>
-            <i class="fa fa-bullhorn"></i>
-          </button>
-          <button title="Show Time Tracker" (click)="ShowTimeTracker(row)" md-icon-button>
-            <i class="fa fa-clock-o"></i>
-          </button>
-          <button title="Show Notes" (click)="ShowNotes(row)" md-icon-button>
-            <i class="fa fa-file-text"></i>
-          </button>
+          <div>
+            <popover-content #myPopover title="Actions" [closeOnClickOutside]="true">
+              <button title="Edit" (click)="editClick(value)" md-icon-button>
+                <i class="fa fa-edit"></i>
+              </button>
+              <button title="Delete" (click)="deleteClick(value)" md-icon-button>
+                <i class="fa fa-trash"></i>
+              </button>
+              <button title="Change Status" (click)="changeStatus(row)" md-icon-button>
+                <i class="fa fa-repeat"></i>
+              </button>
+              <button title="Show Communication" (click)="showCommunication(row)" md-icon-button>
+                <i class="fa fa-bullhorn"></i>
+              </button>
+              <button title="Show Time Tracker" (click)="ShowTimeTracker(row)" md-icon-button>
+                <i class="fa fa-clock-o"></i>
+              </button>
+              <button title="Show Notes" (click)="ShowNotes(row)" md-icon-button>
+                <i class="fa fa-file-text"></i>
+              </button>
+            </popover-content>
+            <div [popover]="myPopover" popoverPlacement="left" class="action-popover pointer-cursor">
+              <i class="fa fa-ellipsis-h"></i>
+            </div>
+            <div>
+
+            </div>
+          </div>
+
           <!-- <button title="Show Communication" (click)="ShowCommunications(row)" md-icon-button>
-            <i class="fa fa-comments-o"></i>
-          </button> -->
+                         <i class="fa fa-comments-o"></i>
+                       </button> -->
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>
