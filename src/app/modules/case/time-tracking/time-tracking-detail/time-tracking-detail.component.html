@@ -29,10 +29,10 @@
                     <span class="req">*</span>
                   </label>
                   <input class="form-control" [(ngModel)]="model.TaskDate" required ngui-datetime-picker date-only="true" name="date" id="date"
-                    #TaskDate="ngModel" [class.inValidField]="timeTrackingForm.submitted && !model.TaskDate"/>
-                    <label *ngIf="timeTrackingForm.submitted && !model.TaskDate" class="err-label">
-                      Please select date
-                    </label>
+                    #TaskDate="ngModel" [class.inValidField]="timeTrackingForm.submitted && !model.TaskDate" />
+                  <label *ngIf="timeTrackingForm.submitted && !model.TaskDate" class="err-label">
+                    Please select date
+                  </label>
                 </div>
               </div>
 
@@ -43,13 +43,21 @@
                   <label for="TaskCategory">Task Category
                     <span class="req">*</span>
                   </label>
-                  <input ngui-auto-complete class="form-control" required [(ngModel)]="model.TaskCategoryName" name="TaskCategory" [source]="taskCategorySearch.bind(this)"
+                  <!-- <input ngui-auto-complete class="form-control" required [(ngModel)]="model.TaskCategoryName" name="TaskCategory" [source]="taskCategorySearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" value-property-name="Id"
                     (valueChanged)="onSelectTaskCategory($event)" display-property-name="Name" 
-                    [class.inValidField]="timeTrackingForm.submitted && !model.TaskCategoryName"/>
-                    <label *ngIf="timeTrackingForm.submitted && !model.TaskCategoryName" class="err-label">
-                      Please select Task Category
-                    </label>
+                    [class.inValidField]="timeTrackingForm.submitted && !model.TaskCategoryName"/> -->
+
+                  <select class="form-control" [(ngModel)]="model.TaskCategoryName" [class.inValidField]="timeTrackingForm.submitted && !model.TaskCategoryName"
+                    id="taskCategory" name="taskCategory" required #taskCategory="ngModel">
+                    <option value="">Select Task Category</option>
+                    <option *ngFor="let tc of taskCategoryList" value={{tc.Id}}>
+                      {{tc.Name}}
+                    </option>
+                  </select>
+                  <label *ngIf="timeTrackingForm.submitted && !model.TaskCategoryName" class="err-label">
+                    Please select Task Category
+                  </label>
                 </div>
               </div>
               <div class="col-sm-6">
@@ -58,11 +66,12 @@
                     <span class="req">*</span>
                   </label>
                   <input class="form-control" type="number" id="HoursSpend" required name="HoursSpend" pattern="^\d+(\.\d{1,2})?$" step="1"
-                    [(ngModel)]="model.WorkedHours" #HoursSpend="ngModel" [class.inValidField]="timeTrackingForm.submitted && !HoursSpend.valid"/>
-                    <label *ngIf="(timeTrackingForm.submitted || HoursSpend.dirty) && HoursSpend.errors && HoursSpend.errors['required']" class="err-label">
-                      Please enter Hours spend</label>
-                    <label *ngIf="(timeTrackingForm.submitted || HoursSpend.dirty) && HoursSpend.errors && HoursSpend.errors['pattern']" class="err-label">
-                      Enter Valid Hours spend</label>
+                    [(ngModel)]="model.WorkedHours" #HoursSpend="ngModel" [class.inValidField]="timeTrackingForm.submitted && !HoursSpend.valid"
+                  />
+                  <label *ngIf="(timeTrackingForm.submitted || HoursSpend.dirty) && HoursSpend.errors && HoursSpend.errors['required']" class="err-label">
+                    Please enter Hours spend</label>
+                  <label *ngIf="(timeTrackingForm.submitted || HoursSpend.dirty) && HoursSpend.errors && HoursSpend.errors['pattern']" class="err-label">
+                    Enter Valid Hours spend</label>
                 </div>
               </div>
             </div>
@@ -74,11 +83,13 @@
                     <span class="req">*</span>
                   </label>
                   <input class="form-control" type="number" id="BilledHours" required name="BilledHours" pattern="^\d+(\.\d{1,2})?$" step="1"
-                    [(ngModel)]="model.BilledHours" #BilledHours="ngModel" [class.inValidField]="timeTrackingForm.submitted && !BilledHours.valid"/>
-                    <label *ngIf="(timeTrackingForm.submitted || BilledHours.dirty) && BilledHours.errors && BilledHours.errors['required']" class="err-label">
-                      Please enter Billed Hours</label>
-                    <label *ngIf="(timeTrackingForm.submitted || BilledHours.dirty) && BilledHours.errors && BilledHours.errors['pattern']" class="err-label">
-                      Enter Valid Billed Hours</label>
+                    [(ngModel)]="model.BilledHours" #BilledHours="ngModel" [class.inValidField]="timeTrackingForm.submitted && !BilledHours.valid"
+                  />
+                  <label *ngIf="(timeTrackingForm.submitted || BilledHours.dirty) && BilledHours.errors && BilledHours.errors['required']"
+                    class="err-label">
+                    Please enter Billed Hours</label>
+                  <label *ngIf="(timeTrackingForm.submitted || BilledHours.dirty) && BilledHours.errors && BilledHours.errors['pattern']" class="err-label">
+                    Enter Valid Billed Hours</label>
                 </div>
               </div>
               <div class="col-sm-6">
@@ -87,11 +98,11 @@
                     <span class="req">*</span>
                   </label>
                   <input class="form-control" type="number" id="Rate" required name="Rate" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.Rate"
-                    #Rate="ngModel" [class.inValidField]="timeTrackingForm.submitted && !Rate.valid"/>
-                    <label *ngIf="(timeTrackingForm.submitted || Rate.dirty) && Rate.errors && Rate.errors['required']" class="err-label">
-                      Please enter Rate</label>
-                    <label *ngIf="(timeTrackingForm.submitted || Rate.dirty) && Rate.errors && Rate.errors['pattern']" class="err-label">
-                      Enter Valid Rate</label>
+                    #Rate="ngModel" [class.inValidField]="timeTrackingForm.submitted && !Rate.valid" />
+                  <label *ngIf="(timeTrackingForm.submitted || Rate.dirty) && Rate.errors && Rate.errors['required']" class="err-label">
+                    Please enter Rate</label>
+                  <label *ngIf="(timeTrackingForm.submitted || Rate.dirty) && Rate.errors && Rate.errors['pattern']" class="err-label">
+                    Enter Valid Rate</label>
                 </div>
               </div>
             </div>

@@ -32,6 +32,13 @@
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Expense Date" sortable="true" prop="ExpenseDate">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="column-filter-label" (click)="sort()">Expense Date</label>
+            <input type='text' id="ExpenseDate" name="ExpenseDate" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value"
+              data-column-name="ExpenseDate" #expenseNameSearch placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value | date: 'dd/MM/yyyy'}}
         </ng-template>
@@ -41,7 +48,7 @@
           <div class="custom-sort">
             <label class="column-filter-label" (click)="sort()">Category Name</label>
             <br/>
-            <input type='text' id="id" name="expense-name-filter" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value"
+            <input type='text' id="id" name="expense-name-filter" class="column-filter-input form-control" [(ngModel)]="filterModel[2].value"
               data-column-name="ExpenseName" #expenseNameSearch placeholder='Filter...' (keyup)="filterData($event)" />
           </div>
         </ng-template>

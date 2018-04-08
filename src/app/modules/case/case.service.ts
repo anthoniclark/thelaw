@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from 'app/lib/http/http-client.service';
-import { Case, CaseStatus, CaseCommunication, TimeTracking, CaseNote, Document, AppealType, CaseEvidence } from 'app/models/case';
+import { Case, CaseStatus, CaseCommunication, TimeTracking, CaseNote, Document, AppealType, CaseEvidence, Judge } from 'app/models/case';
 import { Page, Sorting } from 'app/models/page';
 import { environment } from 'environments/environment';
 
@@ -452,12 +452,13 @@ export class CaseService {
     });
   }
 
-  getCasePageData(page: Page, sort: Sorting, filterColumn?: string, filterValue?: string) {
+  getCasePageData(contactId: string, page: Page, sort: Sorting, filterColumn?: string, filterValue?: string) {
     let filter = '';
     if (filterColumn) {
       filter += '&' + filterColumn + filterValue;
     }
-    return this.httpService.get(`Case/GetAllFilter?page=${page.pageNumber}&pageSize=${page.size}&orderBy=${sort.columnName}&ascending=${sort.dir}${filter}`).map((res: any) => {
+    const link = (contactId ? ("contactId=" + contactId)+'&' : '') + `page=${page.pageNumber}&pageSize=${page.size}&orderBy=${sort.columnName}&ascending=${sort.dir}${filter}`;
+    return this.httpService.get(`Case/GetAllFilter?${link}`).map((res: any) => {
       if (res.Success) {
         return res.Result;
       }
@@ -493,6 +494,7 @@ export class CaseService {
       throw err;
     });
   }
+
   deleteCaseEvidence(id) {
     return this.httpService.delete(`CaseEvidence/Delete/${id}`).map((res: any) => {
       if (res.Success) {
@@ -554,6 +556,58 @@ export class CaseService {
       throw err;
     });
 
+  }
+
+  getNotesByCaseIdPageData(caseId: number, page: Page, sort: Sorting, filterColumn?: string, filterValue?: string) {
+    let filter = '';
+    if (filterColumn) {
+      filter += '&' + filterColumn + filterValue;
+    }
+    return this.httpService.get(`Notes/GetAllFilter?caseId=${caseId}&page=${page.pageNumber}&pageSize=${page.size}&orderBy=${sort.columnName}&ascending=${sort.dir}${filter}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  addJudge(judgeModel: Judge) {
+    return this.httpService.post(`Judge/Create`, judgeModel).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  getTimeTrackerPageDate(caseId: number, page: Page, sort: Sorting, filterColumn?: string, filterValue?: string) {
+    let filter = '';
+    if (filterColumn) {
+      filter += '&' + filterColumn + filterValue;
+    }
+    return this.httpService.get(`TaskTimeTracker/GetAllFilter?caseId=${caseId}&page=${page.pageNumber}&pageSize=${page.size}&orderBy=${sort.columnName}&ascending=${sort.dir}${filter}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  getAllTaskCategories() {
+    return this.httpService.get(`TaskCategory/GetAll`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
   }
 }
 

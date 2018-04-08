@@ -30,9 +30,10 @@ export class ContactDetailComponent implements OnInit {
   officeAddressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false }];
   emailSet = [{ Id: undefined, EmailId: '', IsPrimary: true, IsDeleted: false }];
   visibleEmail: number = 0;
-  mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false }];
+  mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false, isDisabled: false, tempId: 1 }];
   validFileType: boolean = true;
   CompanyId;
+  isDisabled: boolean = false;
   constructor(private route: ActivatedRoute, private contactService: ContactService, private router: Router,
     private _notify: NotificationService, private modalDialog: Modal, private _sanitizer: DomSanitizer) { }
 
@@ -114,12 +115,14 @@ export class ContactDetailComponent implements OnInit {
             });
           });
 
-          this.model.MobileNumbers.forEach(element => {
+          this.model.MobileNumbers.forEach((element, index) => {
             this.mobileSet.push({
               Id: element.Id,
               IsDeleted: false,
               IsPrimary: element.IsPrimary,
-              MobileNumber: element.MobileNumber
+              MobileNumber: element.MobileNumber,
+              isDisabled: false,
+              tempId: index + 1
             });
           });
         }, err => {
@@ -200,7 +203,8 @@ export class ContactDetailComponent implements OnInit {
       }
     });
     if (!isEmpty) {
-      this.mobileSet.push({ Id: undefined, MobileNumber: '', IsPrimary: false, IsDeleted: false });
+      const isPrimary = this.mobileSet.some(x => x.IsPrimary === true);
+      this.mobileSet.push({ Id: undefined, MobileNumber: '', IsPrimary: false, IsDeleted: false, isDisabled: isPrimary, tempId: this.mobileSet.length + 1 });
     } else {
       this._notify.error('Please fill all added mobile');
     }
@@ -495,4 +499,13 @@ export class ContactDetailComponent implements OnInit {
       this.fileToUpload = null;
     }
   }
+
+  changeIsPrimary(data: any) {
+    if (!data.IsPrimary) {
+      this.mobileSet.forEach(x => x.isDisabled = false);
+    } else {
+      this.mobileSet.filter(x => x.tempId !== data.tempId).forEach(y => y.isDisabled = true);
+    }
+  }
+
 }

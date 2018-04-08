@@ -74,7 +74,7 @@
                   <label for="CaseYear">Case Year
                     <span class="req">*</span>
                   </label>
-                  <input type="text" maxlength="4" name="CaseYear" id="CaseYear" class="form-control" [(ngModel)]="model.CaseYear" #CaseYear="ngModel"
+                  <input type="number" maxlength="4" name="CaseYear" id="CaseYear" class="form-control" [(ngModel)]="model.CaseYear" #CaseYear="ngModel"
                     [class.inValidField]="caseForm.submitted && !model.CaseYear" required />
                   <label *ngIf="caseForm.submitted && !model.CaseYear" class="err-label">
                     Please enter Case Year
@@ -125,6 +125,9 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="JudgeId">Judge</label>
+                  <a class="pull-right" (click)="appJugge()">
+                    <i aria-hidden="true" class="fa fa-plus"></i> Create New
+                  </a>
                   <!-- <select class="form-control" [(ngModel)]="model.JudgeId" id="JudgeId" name="JudgeId" #JudgeId="ngModel">
                     <option [value]='undefined'>Select Judge</option>
                     <option *ngFor="let judge of judges" [value]='judge.Id'>
@@ -265,20 +268,11 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="BillingDate">Billing Date</label>
-                  <input class="form-control" [(ngModel)]="model.BillingDate" ngui-datetime-picker date-only="true" name="BillingDate" id="BillingDate"
-                    #BillingDate="ngModel" />
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
                   <label for="FilledDate">Filled Date</label>
                   <input class="form-control" [(ngModel)]="model.FilledDate" ngui-datetime-picker date-only="true" name="FilledDate" id="FilledDate"
                     #FilledDate="ngModel" />
                 </div>
               </div>
-            </div>
-            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="AdvanceFees">Advance Fees</label>
@@ -288,15 +282,19 @@
                     Enter Valid Advance Fees</label>
                 </div>
               </div>
+            </div>
+            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="PricingType">Pricing Type</label>
-                  <input class="form-control" [(ngModel)]="model.PricingType" name="PricingType" id="PricingType" #PricingType="ngModel" />
+                  <!-- <input class="form-control" [(ngModel)]="model.PricingType" name="PricingType" id="PricingType" #PricingType="ngModel" /> -->
+                  <select class="form-control" [(ngModel)]="model.PricingType" name="PricingType" #PricingType="ngModel">
+                    <option *ngFor="let pricingType of casePricingType" [value]='pricingType.Id'>
+                      {{pricingType.Name}}
+                    </option>
+                  </select>
                 </div>
               </div>
-            </div>
-
-            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CourtFees">Court Fees</label>
@@ -306,17 +304,28 @@
                     Enter Valid Court Fees</label>
                 </div>
               </div>
+
+            </div>
+
+            <div class="row">
+
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="BillingFrequency">Billing Frequency</label>
                   <!-- <input class="form-control" [(ngModel)]="model.BillingFrequency" name="BillingFrequency" id="BillingFrequency" #BillingFrequency="ngModel"
                   /> -->
                   <select class="form-control" [(ngModel)]="model.BillingFrequency" id="BillingFrequency" name="BillingFrequency" #BillingFrequency="ngModel">
-                    <option [value]='undefined'>Select Billing Frequency</option>
                     <option *ngFor="let billFrq of BillingFrequencyDropDown" [value]='billFrq.Id'>
                       {{billFrq.Name}}
                     </option>
                   </select>
+                </div>
+              </div>
+              <div class="col-sm-6" *ngIf="model.BillingFrequency === 'Monthly' || model.BillingFrequency === 'Quarterly' || model.BillingFrequency === 'Yearly' ">
+                <div class="form-group">
+                  <label for="BillingDate">Billing Date</label>
+                  <input class="form-control" [(ngModel)]="model.BillingDate" ngui-datetime-picker date-only="true" name="BillingDate" id="BillingDate"
+                    #BillingDate="ngModel" />
                 </div>
               </div>
             </div>

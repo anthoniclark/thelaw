@@ -19,6 +19,7 @@ import { CaseEvidenceDetailComponent } from 'app/modules/case/case-evidence-deta
 const routes: Routes = [
     { path: '', component: CaseListComponent },
     { path: ':id', component: CaseAddComponent },
+    { path: 'contact/:contactId', component: CaseListComponent },
     { path: ':caseId/communication', component: CommunicationListComponent },
     { path: ':caseId/communication/dashboard', component: CommunicationDashboardComponent },
     { path: ':caseId/communication/:id', component: CommunicationDetailComponent },

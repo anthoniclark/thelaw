@@ -4,7 +4,7 @@ import { NotificationService } from '../../../shared/services/notification.servi
 import { ContactService } from '../../contact/contact.service';
 import { Case } from 'app/models/case';
 import { DropDownModel } from 'app/models/dropDownModel';
-import { CaseType, CasePriority, WorkedAs, BillingFrequencies } from 'app/shared/constants';
+import { CaseType, CasePriority, WorkedAs, BillingFrequencies, CasePricingType } from 'app/shared/constants';
 
 import { Observable } from 'rxjs/Observable';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
 import { overlayConfigFactory } from 'ngx-modialog';
 import { CaseAppealTypeDetailComponent } from 'app/modules/case/case-appeal-type-detail/case-appeal-type-detail.component';
+import { JudgeDetailComponent } from 'app/modules/case/judge-detail/judge-detail.component';
 
 @Component({
   selector: 'app-case-add',
@@ -33,10 +34,12 @@ export class CaseAddComponent implements OnInit {
   isLoading: boolean = false;
   settings = {};
   taskTimeTrackingId: number;
+  casePricingType: Array<DropDownModel> = CasePricingType;
   constructor(private route: ActivatedRoute, private caseService: CaseService, private _notify: NotificationService,
     private contactService: ContactService, private _sanitizer: DomSanitizer, private router: Router, private modal: Modal) { }
 
   ngOnInit() {
+    this.model.CaseYear = new Date().getFullYear();
     this.settings = {
       singleSelection: false,
       text: "Select Judges",
@@ -64,6 +67,8 @@ export class CaseAddComponent implements OnInit {
     }, err => {
       this._notify.error(err.Result);
     });
+    this.model.PricingType = CasePricingType[0].Id;
+    this.model.BillingFrequency = BillingFrequencies[1].Id;
     if (this.paramId.toString() != "new") {
       this.caseService.getCaseById(this.paramId).subscribe(
         response => {
@@ -231,6 +236,21 @@ export class CaseAddComponent implements OnInit {
         this.caseService.getCaseAppealTypes().subscribe(res => {
           this._notify.success("New Appeal created successfully!");
           this.CaseAppealTypeDropDown = res;
+        });
+      }
+    });
+  }
+
+  appJugge() {
+    const resul = this.modal.open(JudgeDetailComponent, overlayConfigFactory({ caseModel: this.model }, BSModalContext));
+    resul.result.then(res => {
+      if (res) {
+        this.judges = [];
+        this._notify.success("New Judge successfully!");
+        this.caseService.getJudgesDD().subscribe(res => {
+          res.forEach(element => {
+            this.judges.push({ id: element.Id, itemName: element.FirstName + ' ' + element.LastName });
+          });
         });
       }
     });

@@ -22,9 +22,13 @@ export class CaseExpenseListComponent implements OnInit {
     value: ''
   },
   {
-    columnName: 'CategoryName',
+    columnName: 'ExpenseDate',
     value: ''
   },
+  {
+    columnName: 'CategoryName',
+    value: ''
+  }
   ];
   constructor(private caseExpenseService: CaseExpenseService, private router: Router, private _notify: NotificationService) {
     this.page.pageNumber = 0;
@@ -115,8 +119,25 @@ export class CaseExpenseListComponent implements OnInit {
       let filterColumnString = 'columnName=';
       let searchValue = '&searchValue='
       filter.forEach((model) => {
-        filterColumnString += model.columnName + ",";
-        searchValue += model.value + ",";
+        if (model.columnName !== "ExpenseDate") {
+          filterColumnString += model.columnName + ",";
+          searchValue += model.value + ",";
+        } else {
+          const objDate = model.value.split("/");
+          let isVaidDate = true;
+          if (objDate.length === 3) {
+            objDate.forEach(date => {
+              if (parseInt(date) === NaN) {
+                isVaidDate = true;
+                return false;
+              }
+            });
+            if (isVaidDate && objDate[2].length === 4) {
+              filterColumnString += "ExpenseDate,";
+              searchValue += `${objDate[2]}-${((objDate[1].length < 2 && + objDate[1] < 10) ? "0" + objDate[1] : objDate[1])}-${((+objDate[0].length < 2 && +objDate[0] < 10) ? "0" + objDate[0] : objDate[0])},`;
+            }
+          }
+        }
       });
       filterColumnString = filterColumnString.substring(0, filterColumnString.length - 1);
       searchValue = searchValue.substring(0, searchValue.length - 1);

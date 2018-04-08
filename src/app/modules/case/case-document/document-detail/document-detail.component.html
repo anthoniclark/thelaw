@@ -10,7 +10,9 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="DocumentName">Document Name <span class="req">*</span></label>
+                                    <label for="DocumentName">Document Name
+                                        <span class="req">*</span>
+                                    </label>
                                     <input type="text" maxlength="150" id="DocumentName" name="DocumentName" required class="form-control" [(ngModel)]="model.DocumentName"
                                         #DocumentName="ngModel" [class.inValidField]="caseDocumentForm.submitted && !DocumentName.valid"
                                     />
@@ -34,13 +36,18 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="CaseId">Document</label>
+                                    <label for="CaseId">Document (Accept file types .doc, .docx, .pdf, .xls, .xs, .jpg, .jpeg, .png, .txt, .rtf)
+                                        less then 3 mb</label>
                                     <div>{{fileToUpload?.name || 'Select File'}}
                                     </div>
                                     <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">
-                                            <i class="fa fa-upload mr5"></i> Upload</a>
-                                    <input type="file" class="fileUpload" #fileUpload style="display:none" accept=".doc, application/pdf, image/jpg, image/jpeg, image/png, .xls"
+                                        <i class="fa fa-upload mr5"></i> Upload</a>
+                                    <input type="file" class="fileUpload" #fileUpload style="display:none" accept=".doc, application/pdf, image/jpg, image/jpeg, image/png, .xls, .ppt, .txt, .rtf"
                                         #fileUpload style="display:none" (change)="onFileChange($event)" />
+                                    <div>
+                                        <label *ngIf="!validFileType" class="err-label"> Invalid File Type </label>
+                                        <label *ngIf="!validFileSize" class="err-label"> File size should less than 3 MB. </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -18,6 +18,7 @@ export class TimeTrackingDetailComponent implements OnInit {
   paramId: string;
   caseDetail: Case = new Case();
   AssociatesDropDown: Array<DropDownModel> = Associates;
+  taskCategoryList: Array<DropDownModel> = [];
   constructor(private route: ActivatedRoute, private _notify: NotificationService, private caseService: CaseService,
     private router: Router, private _sanitizer: DomSanitizer) { }
   autocompleListFormatter = (data: any) => {
@@ -27,6 +28,14 @@ export class TimeTrackingDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(param => this.paramId = param['id']);
     this.route.params.subscribe(param => this.model.CaseId = param['caseId']);
+    this.caseService.getAllTaskCategories().subscribe(response => {
+      this.taskCategoryList = [];
+      response.forEach(data => {
+        this.taskCategoryList.push({ Id: data.Id, Name: data.TaskCategoryName });
+      });
+    }, err => {
+      this._notify.error(err.detail);
+    });
     this.caseService.getCaseById(this.model.CaseId).subscribe(response => {
       this.caseDetail = response;
     }, error => {

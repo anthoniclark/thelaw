@@ -116,3 +116,10 @@ export class CaseEvidence {
     FileType: string;
     FileName: string;
 }
+
+export class Judge {
+    Id: number;
+    FirstName: string;
+    LastName: string;
+    AddressId: number;
+}

@@ -1,7 +1,7 @@
 <div class=panel>
   <div class="panel-heading border">
     <span class="pull-left">
-      <b>Time Tracking for Case</b>
+      <b>Time Tracking for Case Number {{caseDetail.CaseNo}}</b>
     </span>
     <div class="pb30">
       <button type="button" class="btn btn-create pull-right" kendoButton (click)="createNewTimeTracking()">
@@ -9,29 +9,73 @@
     </div>
   </div>
   <div class=panel-body>
-    <ngx-datatable class="material" [rows]="rows" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
-      [rowHeight]="'auto'" [columnMode]="'force'">
+    <ngx-datatable class="material" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+      [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="70" [footerHeight]="40"
+      [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
       <ngx-datatable-column name="Contact Name" sortable="true" prop="ContactName">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="column-filter-label" for="ContactName" (click)="sort()">Contact Name</label>
+            <br/>
+            <input type='text' id="id" name="ContactName" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value"
+              data-column-name="ContactName" placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value }}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Task Category Name" sortable="true" prop="TaskCategoryName">
+
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="column-filter-label" for="TaskCategoryName" (click)="sort()">Task Category Name</label>
+            <br/>
+            <input type='text' id="TaskCategoryName" name="TaskCategoryName" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value"
+              data-column-name="TaskCategoryName"  placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
+
         <ng-template let-value="value" ngx-datatable-cell-template>
           {{value}}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Worked Hours" sortable="true" prop="WorkedHours">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="column-filter-label" for="WorkedHours" (click)="sort()">Worked Hours</label>
+            <br/>
+            <input type='text' id="WorkedHours" name="WorkedHours" class="column-filter-input form-control" [(ngModel)]="filterModel[2].value"
+              data-column-name="WorkedHours"  placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
+
         <ng-template let-value="value" ngx-datatable-cell-template>
           {{value}}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Billed Hours" sortable="true" prop="BilledHours">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="column-filter-label" for="BilledHours" (click)="sort()">Billed Hours</label>
+            <br/>
+            <input type='text' id="BilledHours" name="BilledHours" class="column-filter-input form-control" [(ngModel)]="filterModel[3].value"
+              data-column-name="BilledHours"  placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
         <ng-template let-value="value" ngx-datatable-cell-template>
           {{value}}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Rate" sortable="true" prop="Rate">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="column-filter-label" for="Rate" (click)="sort()">Rate</label>
+            <br/>
+            <input type='text' id="Rate" name="Rate" class="column-filter-input form-control" [(ngModel)]="filterModel[4].value" data-column-name="Rate"
+               placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
         <ng-template let-value="value" ngx-datatable-cell-template>
           {{value}}
         </ng-template>

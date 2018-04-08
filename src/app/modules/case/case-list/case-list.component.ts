@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'app/shared/services/notification.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CaseService } from 'app/modules/case/case.service';
 import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
 import { CaseChangeStatusComponent } from '../case-change-status/case-change-status.component';
@@ -31,13 +31,17 @@ export class CaseListComponent implements OnInit {
     columnName: 'CaseStatus',
     value: ''
   }];
-  constructor(private caseService: CaseService, private router: Router, private _notify: NotificationService,
+  contactId: any;
+  constructor(private caseService: CaseService, private router: Router, private route: ActivatedRoute, private _notify: NotificationService,
     private modal: Modal) {
     this.page.pageNumber = 0;
     this.page.size = 5;
   }
 
   ngOnInit() {
+    this.route.params.subscribe((data) => {
+      this.contactId = data.contactId;
+    })
     this.sorting = { columnName: "Id", dir: true };
     this.setPage({ offset: 0 });
   }
@@ -49,7 +53,7 @@ export class CaseListComponent implements OnInit {
 
   getDataSource(filterColumn?: string, filterValue?: string) {
     this.loadingIndicator = true;
-    this.caseService.getCasePageData(this.page, this.sorting, filterColumn, filterValue).subscribe(pagedData => {
+    this.caseService.getCasePageData(this.contactId, this.page, this.sorting, filterColumn, filterValue).subscribe(pagedData => {
       this.loadingIndicator = false;
       this.page.totalElements = pagedData.TotalNumberOfRecords;
       this.page.totalPages = pagedData.TotalNumberOfPages;
@@ -154,3 +158,4 @@ export class CaseListComponent implements OnInit {
     this.router.navigateByUrl(`/case/${rowData.Id}/document`);
   }
 }
+

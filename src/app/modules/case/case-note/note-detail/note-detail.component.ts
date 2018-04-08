@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { CaseService } from 'app/modules/case/case.service';
 import { ContactService } from 'app/modules/contact/contact.service';
-import { CaseNote } from 'app/models/case';
+import { CaseNote, Case } from 'app/models/case';
 import { Observable } from 'rxjs/Observable';
 
 
@@ -17,7 +17,7 @@ export class NoteDetailComponent implements OnInit {
   model: CaseNote = new CaseNote();
   NotesById;
   isLoading: boolean = false;
-
+  caseModel :Case = new  Case();
   constructor(private route: ActivatedRoute, private _notify: NotificationService,
     private _sanitizer: DomSanitizer, private router: Router, private caseService: CaseService,
     private contactService: ContactService) { }
@@ -26,6 +26,12 @@ export class NoteDetailComponent implements OnInit {
     this.model.IsImportant = false;
     this.route.params.subscribe(param => this.paramId = param['id']);
     this.route.params.subscribe(param => this.model.CaseId = param['caseId']);
+    this.caseService.getCaseById(this.model.CaseId).subscribe(
+      response => {
+        this.caseModel = <Case>response;
+      }, err => {
+        this._notify.error(err.Result);
+      });
     if (this.paramId.toString() !== 'new') {
       this.caseService.getCommunicationById(this.paramId).subscribe(
         response => {

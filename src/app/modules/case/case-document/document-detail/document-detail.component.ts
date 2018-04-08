@@ -18,7 +18,8 @@ export class DocumentDetailComponent implements OnInit {
   url: string;
   isLoading: boolean = false;
   fileToUpload: File = null;
-
+  validFileSize: boolean = true;
+  validFileType: boolean = true;
   constructor(private route: ActivatedRoute, private _notify: NotificationService,
     private caseService: CaseService, private router: Router) { }
 
@@ -84,11 +85,17 @@ export class DocumentDetailComponent implements OnInit {
     const files: FileList = target.files;
     if (files.length > 0) {
       let fileType: string = files[0].type.toString();
+      const type = files[0].name.substr(files[0].name.lastIndexOf(".") + 1);
       if (fileType.toString() !== "application/msword" && fileType.toString() !== "application/pdf"
-        && fileType.toString() !== "image/jpg" && fileType.toString() !== "image/jpeg" && fileType.toString() !== "image/png") {
+        && fileType.toString() !== "image/jpg" && fileType.toString() !== "image/jpeg" && fileType.toString() !== "image/png"
+        && type.toString() !== "xls" && type.toString() !== "xs" && type.toString() !== "txt" && type.toString() !== "rtf") {
+        this.validFileType = false;
+        return false;
+      } else if (files[0].size > 3145728) {
+        this.validFileSize = false;
         return false;
       }
-
+      this.validFileType = this.validFileSize = true;
       this.fileToUpload = files[0];
       var reader = new FileReader();
       reader.onload = (event: any) => {

@@ -82,4 +82,8 @@ export class DocumentListComponent implements OnInit {
         });
     }
   }
+
+  createNewDocument(){
+    this.router.navigate([`case/${this.CaseId}/document/new`]);
+  }
 }

@@ -145,8 +145,19 @@ export const DocumentCategory = [
 ]
 
 export const BillingFrequencies = [
-    { Id: "Hourly", Name: "Hourly" },
+    { Id: "Weekly", Name: "Weekly" },
     { Id: "Monthly", Name: "Monthly" },
     { Id: "Quarterly", Name: "Quarterly" },
     { Id: "Yearly", Name: "Yearly" }
+]
+
+
+export const CasePricingType = [
+    { Id: "Fixed Fee", Name: "Fixed Fee" },
+    { Id: "Retainer-ship", Name: "Retainer-ship" },
+    { Id: "Hourly Blended Rate", Name: "Hourly Blended Rate" },
+    { Id: "Fixed", Name: "Fixed" },
+    { Id: "Attorney Rate", Name: "Attorney Rate" },
+    { Id: "Contract Based", Name: "Contract Based" },
+    { Id: "Day wise", Name: "Day wise" },
 ]

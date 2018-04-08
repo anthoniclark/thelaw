@@ -1,7 +1,7 @@
 <div>
   <div class="panel mb25">
     <div class="panel-heading border">
-      <b>{{ (paramId !='new') ? 'Modify':'Add' }} Note</b>
+      <b>{{ (paramId !='new') ? 'Modify':'Add' }} Note for case number {{caseModel.CaseId}}</b>
       <span class="pull-right pointer-cursor" (click)="toggleIsImportant()">
         <i class="big-icon fa {{ (model.IsImportant) ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"></i>
       </span>

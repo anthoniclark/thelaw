@@ -23,6 +23,7 @@ import { PopoverModule } from "ngx-popover";
 import { CaseAppealTypeDetailComponent } from './case-appeal-type-detail/case-appeal-type-detail.component';
 import { CaseEvidenceListComponent } from './case-evidence-list/case-evidence-list.component';
 import { CaseEvidenceDetailComponent } from './case-evidence-detail/case-evidence-detail.component';
+import { JudgeDetailComponent } from './judge-detail/judge-detail.component';
 
 @NgModule({
   imports: [
@@ -49,13 +50,14 @@ import { CaseEvidenceDetailComponent } from './case-evidence-detail/case-evidenc
     DocumentDetailComponent,
     CaseAppealTypeDetailComponent,
     CaseEvidenceListComponent,
-    CaseEvidenceDetailComponent
+    CaseEvidenceDetailComponent,
+    JudgeDetailComponent
   ],
   providers: [
     CaseService,
     ContactService,
     Modal
   ],
-  entryComponents: [CaseChangeStatusComponent, CaseAppealTypeDetailComponent]
+  entryComponents: [CaseChangeStatusComponent, CaseAppealTypeDetailComponent, JudgeDetailComponent]
 })
 export class CaseModule { }
