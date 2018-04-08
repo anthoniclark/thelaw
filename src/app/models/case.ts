@@ -104,3 +104,15 @@ export class Document {
     UpdatedTime: Date;
     FileName: string;
 }
+
+export class AppealType {
+    Id: number;
+    AppealTypeName: string;
+}
+
+export class CaseEvidence {
+    Id: number;
+    EvidenceName: string;
+    FileType: string;
+    FileName: string;
+}

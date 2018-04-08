@@ -46,7 +46,7 @@ export class CaseChangeStatusComponent implements OnInit, OnDestroy, CloseGuard,
 
   changeStatus() {
     if (new Date(this.model.NextDate) < new Date()) {
-      this._notify.error('Next should be greater then today');
+      this._notify.error('Next date should be greater then today');
     }
     this.caseService.addOrUpdateStatus(this.model).subscribe(res => {
       this.closeClick();

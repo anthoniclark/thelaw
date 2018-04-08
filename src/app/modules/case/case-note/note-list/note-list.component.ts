@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CaseService } from 'app/modules/case/case.service';
 import { NotificationService } from 'app/shared/services/notification.service';
+import { Case } from 'app/models/case';
 
 @Component({
   selector: 'app-note-list',
@@ -12,13 +13,18 @@ export class NoteListComponent implements OnInit {
   loadingIndicator: boolean = true;
   reorderable: boolean = true;
   CaseId: number;
-
+  caseDetail: Case = new Case();
   constructor(private route: ActivatedRoute, private caseService: CaseService,
     private router: Router,
     private _notify: NotificationService) { }
 
   ngOnInit() {
     this.route.params.subscribe(param => this.CaseId = param['caseId']);
+    this.caseService.getCaseById(this.CaseId).subscribe(response => {
+      this.caseDetail = response;
+    }, error => {
+
+    });
     this.caseService.getNoteByCaseId(this.CaseId).subscribe(
       response => {
         this.rows = response;

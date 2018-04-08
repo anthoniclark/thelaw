@@ -98,6 +98,13 @@
               <button title="Show Notes" (click)="ShowNotes(row)" md-icon-button>
                 <i class="fa fa-file-text"></i>
               </button>
+              <button title="Show Documents" (click)="ShowDocuments(row)" md-icon-button>
+                <i class="fa fa-book"></i>
+              </button>
+              <button title="Show Evidence" (click)="ShowEvidence(row)" md-icon-button>
+                <i class="fa fa-gavel"></i>
+              </button>
+
             </popover-content>
             <div [popover]="myPopover" popoverPlacement="left" class="action-popover pointer-cursor">
               <i class="fa fa-ellipsis-h"></i>

@@ -24,6 +24,8 @@ export class CaseExpenseDetailComponent implements OnInit {
   fileToUpload: File = null;
   AssociateContactId;
   fileName: string;
+  validFileSize: boolean = true;
+  validFileType: boolean = true;
   constructor(private route: ActivatedRoute, private caseExpenseService: CaseExpenseService, private _notify: NotificationService,
     private _sanitizer: DomSanitizer, private contactService: ContactService, private caseService: CaseService,
     private router: Router) { }
@@ -111,8 +113,15 @@ export class CaseExpenseDetailComponent implements OnInit {
       let fileType: string = files[0].type.toString();
       if (fileType.toString() !== "application/msword" && fileType.toString() !== "application/pdf"
         && fileType.toString() !== "image/jpg" && fileType.toString() !== "image/jpeg" && fileType.toString() !== "image/png") {
+          this.validFileType = false;
+        return false;
+      } else if(files[0].size > 2097152) {
+        this.validFileSize = false;
         return false;
       }
+      
+      this.validFileSize = true;
+      this.validFileType = true;
 
       this.fileToUpload = files[0];
       this.fileName = this.fileToUpload.name;

@@ -8,75 +8,6 @@
       <div class="row no-margin">
         <div class=col-lg-12>
           <form name="companyForm" (ngSubmit)="companyForm.form.valid && save()" #companyForm="ngForm" novalidate>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="CompanyName">Company Name</label>
-                  <input type="text" maxlength="50" id="CompanyName" name="CompanyName" required class="form-control"
-                    [(ngModel)]="model.CompanyName" #CompanyName="ngModel" />
-                  <label *ngIf="companyForm.submitted && !CompanyName.valid" class="err-label">
-                    Please enter Company Name
-                  </label>
-                </div>
-              </div>
-
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="InsdustrySection">Insdustry Section <span class="req">*</span></label>
-                  <input type="text" maxlength="50" id="InsdustrySection" name="InsdustrySection" class="form-control" [class.inValidField]="companyForm.submitted && !InsdustrySection.valid"
-                    [(ngModel)]="model.InsdustrySection" #InsdustrySection="ngModel" />
-                  <label *ngIf="companyForm.submitted && !InsdustrySection.valid" class="err-label">
-                    Please enter Insdustry Section
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="Category">Category</label>
-                  <input type="text" maxlength="50" id="Category" name="Category" class="form-control" [(ngModel)]="model.Category" #Category="ngModel"
-                  />
-                  <label *ngIf="companyForm.submitted && !Category.valid" class="err-label">
-                    Please enter Category
-                  </label>
-                </div>
-              </div>
-
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="CompanySize">CompanySize</label>
-                  <input type="number" pattern="^\d+(\.\d{1,2})?$" step="1" id="CompanySize" name="CompanySize" class="form-control" [(ngModel)]="model.CompanySize"
-                    #CompanySize="ngModel" />
-                  <label *ngIf="companyForm.submitted && !CompanySize.valid" class="err-label">
-                    Please enter CompanySize
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="Website">Website</label>
-                  <input type="text" maxlength="100" id="Website" name="Website" class="form-control" [(ngModel)]="model.Website" #Website="ngModel"
-                  />
-                  <label *ngIf="companyForm.submitted && !Website.valid" class="err-label">
-                    Please enter Website
-                  </label>
-                </div>
-              </div>
-
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="ContactIds">Contacts</label>
-                  <angular2-multiselect [data]="contacts" [(ngModel)]="selectedContacts" [settings]="settings" class="form-control" #ContactIds="ngModel"
-                    name="ContactIds" id="ContactIds">
-                  </angular2-multiselect>
-                </div>
-              </div>
-            </div>
 
             <div class="row">
               <div class="col-sm-6">
@@ -90,9 +21,84 @@
                   <div *ngIf="!validFileType">
                     <label class="err-label"> Invalid File Type </label>
                   </div>
-                  <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">Browse</a>
+                  <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">
+                    <i class="fa fa-upload mr5"></i> Upload</a>
                   <input type="file" class="fileUpload" accept="image/*" #fileUpload style="display:none" #fileUpload style="display:none"
                     (change)="onFileChange($event)" />
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="CompanyName">Company Name
+                    <span class="req">*</span>
+                  </label>
+                  <input type="text" maxlength="50" id="CompanyName" [class.inValidField]="companyForm.submitted && !companyForm.CaseId" name="CompanyName" required class="form-control" [(ngModel)]="model.CompanyName"
+                    #CompanyName="ngModel" />
+                  <label *ngIf="companyForm.submitted && !CompanyName.valid" class="err-label">
+                    Please enter Company Name
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="InsdustrySection">Insdustry Section
+                  </label>
+                  <input type="text" maxlength="50" id="InsdustrySection" name="InsdustrySection" class="form-control" [class.inValidField]="companyForm.submitted && !InsdustrySection.valid"
+                    [(ngModel)]="model.InsdustrySection" #InsdustrySection="ngModel" />
+                  <label *ngIf="companyForm.submitted && !InsdustrySection.valid" class="err-label">
+                    Please enter Insdustry Section
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="Category">Category</label>
+                  <input type="text" maxlength="50" id="Category" name="Category" class="form-control" [(ngModel)]="model.Category" #Category="ngModel"
+                  />
+                  <label *ngIf="companyForm.submitted && !Category.valid" class="err-label">
+                    Please enter Category
+                  </label>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="CompanySize">Company Size</label>
+                  <input type="number" pattern="^\d+(\.\d{1,2})?$" step="1" id="CompanySize" name="CompanySize" class="form-control" [(ngModel)]="model.CompanySize"
+                    #CompanySize="ngModel" />
+                  <label *ngIf="companyForm.submitted && !CompanySize.valid" class="err-label">
+                    Please enter CompanySize
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="Website">Website</label>
+                  <input type="text" maxlength="100" id="Website" name="Website" class="form-control" [(ngModel)]="model.Website" #Website="ngModel"
+                  />
+                  <label *ngIf="companyForm.submitted && !Website.valid" class="err-label">
+                    Please enter Website
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="ContactIds">Contacts</label>
+                  <angular2-multiselect [data]="contacts" [(ngModel)]="selectedContacts" [settings]="settings" class="form-control" #ContactIds="ngModel"
+                    name="ContactIds" id="ContactIds">
+                  </angular2-multiselect>
                 </div>
               </div>
             </div>

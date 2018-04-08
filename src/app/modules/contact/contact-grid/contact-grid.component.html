@@ -23,6 +23,20 @@
     </ng-template>
   </ngx-datatable-column>
 
+  <ngx-datatable-column name="Name" sortable="true" prop="Designation">
+    <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+      <div class="custom-sort">
+        <label class="case-no" (click)="sort()">Designation</label>
+        <br/>
+        <input type='text' name="case-no" *ngIf="cType !== 'NewlyAdded'" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value"
+          data-column-name="Designation" #CaseNo placeholder='Filter...' (keyup)="filterData($event)" />
+      </div>
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      {{value}}
+    </ng-template>
+  </ngx-datatable-column>
+
   <ngx-datatable-column name="Important Contact" sortable="true">
     <ng-template let-row="row" ngx-datatable-cell-template>
       <i class="big-icon important-icon fa {{ row.IsImportant ? 'fa-star' : 'fa-star-o' }}" (click)="toggleImportant(row)" aria-hidden="true"></i>

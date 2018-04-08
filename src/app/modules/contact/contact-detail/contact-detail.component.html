@@ -25,7 +25,8 @@
                   <div *ngIf="!validFileType">
                     <label class="err-label"> Invalid File Type </label>
                   </div>
-                  <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">Browse</a>
+                  <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">
+                    <i class="fa fa-upload mr5"></i> Upload</a>
                   <input type="file" class="fileUpload" accept="image/*" #fileUpload style="display:none" #fileUpload style="display:none"
                     (change)="onFileChange($event)" />
                 </div>
@@ -100,6 +101,13 @@
               </div>
             </div>
             <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="Designation">Designation</label>
+                  <input class="form-control" type="text" id="Designation" name="Designation" [(ngModel)]="model.Designation" #Designation="ngModel"
+                  />
+                </div>
+              </div>
               <div class="col-sm-6" *ngIf="model.ContactType ==='Advocate' || model.ContactType ==='Associates'">
                 <div class="form-group">
                   <label for="PriceRate">Price Rate</label>

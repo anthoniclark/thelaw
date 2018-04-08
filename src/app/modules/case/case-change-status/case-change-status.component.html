@@ -1,7 +1,7 @@
 <div class="container-fluid custom-modal-container" style="padding: 15px 30px;">
   <div class="row custom-modal-header">
     <div class="col">
-      <h2 class="my-3">Change Case Status</h2>
+      <h2 class="my-3">Change Case Status for case number {{dialogContext.caseRow.CaseNo}}</h2>
     </div>
   </div>
   <form name="changeStatusForm" (ngSubmit)="changeStatusForm.form.valid && changeStatus()" #changeStatusForm='ngForm' novalidate>

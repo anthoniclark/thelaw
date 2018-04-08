@@ -12,6 +12,9 @@ import { NoteDetailComponent } from './case-note/note-detail/note-detail.compone
 import { CommunicationDashboardComponent } from './case-communication/communication-dashboard/communication-dashboard.component';
 import { DocumentListComponent } from './case-document/document-list/document-list.component';
 import { DocumentDetailComponent } from './case-document/document-detail/document-detail.component';
+import { CaseEvidenceListComponent } from 'app/modules/case/case-evidence-list/case-evidence-list.component';
+import { CaseEvidenceDetailComponent } from 'app/modules/case/case-evidence-detail/case-evidence-detail.component';
+
 
 const routes: Routes = [
     { path: '', component: CaseListComponent },
@@ -24,7 +27,10 @@ const routes: Routes = [
     { path: ':caseId/note', component: NoteListComponent },
     { path: ':caseId/note/:id', component: NoteDetailComponent },
     { path: ':caseId/document', component: DocumentListComponent },
-    { path: ':caseId/document/:id', component: DocumentDetailComponent }
+    { path: ':caseId/document/:id', component: DocumentDetailComponent },
+    { path: ':caseId/evidence', component: CaseEvidenceListComponent },
+    { path: ':caseId/evidence/:id', component: CaseEvidenceDetailComponent },
+
 
 ];
 

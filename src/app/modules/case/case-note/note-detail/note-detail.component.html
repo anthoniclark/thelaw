@@ -17,7 +17,7 @@
                     <span class="req">*</span>
                   </label>
                   <input class="form-control" [(ngModel)]="model.NoteDate" ngui-datetime-picker date-only="true" #NoteDate="ngModel" required
-                    name="NoteDate" id="NoteDate" [class.inValidField]="noteForm.submitted && !NoteDate.CommunicateToId" />
+                    name="NoteDate" id="NoteDate" [class.inValidField]="noteForm.submitted && !NoteDate.valid" />
                   <label *ngIf="noteForm.submitted && !NoteDate.valid" class="err-label">
                     Please select Note Date.
                   </label>

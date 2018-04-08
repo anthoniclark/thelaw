@@ -15,6 +15,7 @@ export class Contact {
     Address: Address[];
     MobileNumbers: Mobile[];
     EmailAddress: Email[];
+    Designation: string;
 }
 
 export class Address {

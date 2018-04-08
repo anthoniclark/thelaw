@@ -37,7 +37,8 @@
                                     <label for="CaseId">Document</label>
                                     <div>{{fileToUpload?.name || 'Select File'}}
                                     </div>
-                                    <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">Browse</a>
+                                    <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">
+                                            <i class="fa fa-upload mr5"></i> Upload</a>
                                     <input type="file" class="fileUpload" #fileUpload style="display:none" accept=".doc, application/pdf, image/jpg, image/jpeg, image/png, .xls"
                                         #fileUpload style="display:none" (change)="onFileChange($event)" />
                                 </div>

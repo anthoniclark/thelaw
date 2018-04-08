@@ -20,6 +20,9 @@ import { CommunicationDashboardComponent } from './case-communication/communicat
 import { DocumentListComponent } from './case-document/document-list/document-list.component';
 import { DocumentDetailComponent } from './case-document/document-detail/document-detail.component';
 import { PopoverModule } from "ngx-popover";
+import { CaseAppealTypeDetailComponent } from './case-appeal-type-detail/case-appeal-type-detail.component';
+import { CaseEvidenceListComponent } from './case-evidence-list/case-evidence-list.component';
+import { CaseEvidenceDetailComponent } from './case-evidence-detail/case-evidence-detail.component';
 
 @NgModule({
   imports: [
@@ -43,13 +46,16 @@ import { PopoverModule } from "ngx-popover";
     NoteDetailComponent,
     CommunicationDashboardComponent,
     DocumentListComponent,
-    DocumentDetailComponent
+    DocumentDetailComponent,
+    CaseAppealTypeDetailComponent,
+    CaseEvidenceListComponent,
+    CaseEvidenceDetailComponent
   ],
   providers: [
     CaseService,
     ContactService,
     Modal
   ],
-  entryComponents: [CaseChangeStatusComponent]
+  entryComponents: [CaseChangeStatusComponent, CaseAppealTypeDetailComponent]
 })
 export class CaseModule { }

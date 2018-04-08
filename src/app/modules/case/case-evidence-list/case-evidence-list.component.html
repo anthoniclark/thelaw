@@ -1,0 +1,42 @@
+<div class=panel>
+  <div class="panel-heading border">
+    <span class="pull-left">
+      <b>Case Evidence List for case number {{caseDetail.CaseNo}}</b>
+    </span>
+    <div class="pb30">
+      <button type="button" class="btn btn-create pull-right" kendoButton (click)="createNewEvidence()">
+        <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+    </div>
+
+  </div>
+  <div class=panel-body>
+    <ngx-datatable class="material" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+      [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="70" [footerHeight]="40"
+      [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
+      <ngx-datatable-column name="Evidence Name" sortable="true" prop="EvidenceName">
+        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
+          <div class="custom-sort">
+            <label class="case-no" (click)="sort()">Case Number</label>
+            <br/>
+            <input type='text' name="case-no" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value" data-column-name="EvidenceName"
+              #CaseNo placeholder='Filter...' (keyup)="filterData($event)" />
+          </div>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <button title="Edit" (click)="editClick(value)" md-icon-button>
+            <i class="fa fa-edit"></i>
+          </button>
+          <button title="Delete" (click)="deleteClick(value)" md-icon-button>
+            <i class="fa fa-trash"></i>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

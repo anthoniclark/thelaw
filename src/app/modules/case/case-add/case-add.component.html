@@ -86,6 +86,9 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CaseAppealType">Case Appeal Type</label>
+                  <a class="pull-right" (click)="appAppealType()">
+                    <i aria-hidden="true" class="fa fa-plus"></i> Create New
+                  </a>
                   <select class="form-control" [(ngModel)]="model.CaseAppealType" id="CaseAppealType" name="CaseAppealType" #CaseAppealType="ngModel">
                     <option [value]='undefined'>Select CaseAppeal Type</option>
                     <option *ngFor="let caseAppealType of CaseAppealTypeDropDown" value={{caseAppealType.Id}}>
@@ -253,7 +256,7 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="RefferenceNumber">Refference Number</label>
+                  <label for="RefferenceNumber">Reference Number</label>
                   <input type="text" maxlength="250" id="RefferenceNumber" name="RefferenceNumber" class="form-control" [(ngModel)]="model.RefferenceNumber"
                     #RefferenceNumber="ngModel" />
                 </div>

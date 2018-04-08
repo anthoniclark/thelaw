@@ -9,6 +9,9 @@ import { CaseType, CasePriority, WorkedAs, BillingFrequencies } from 'app/shared
 import { Observable } from 'rxjs/Observable';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
+import { overlayConfigFactory } from 'ngx-modialog';
+import { CaseAppealTypeDetailComponent } from 'app/modules/case/case-appeal-type-detail/case-appeal-type-detail.component';
 
 @Component({
   selector: 'app-case-add',
@@ -31,7 +34,7 @@ export class CaseAddComponent implements OnInit {
   settings = {};
   taskTimeTrackingId: number;
   constructor(private route: ActivatedRoute, private caseService: CaseService, private _notify: NotificationService,
-    private contactService: ContactService, private _sanitizer: DomSanitizer, private router: Router) { }
+    private contactService: ContactService, private _sanitizer: DomSanitizer, private router: Router, private modal: Modal) { }
 
   ngOnInit() {
     this.settings = {
@@ -83,12 +86,12 @@ export class CaseAddComponent implements OnInit {
         }, err => {
           this._notify.error(err.Result);
         });
+      this.caseService.getTimeTrackingByCaseId(this.paramId).subscribe(response => {
+        this.taskTimeTrackingId = response.length ? response[response.length - 1].Id : undefined;
+      }, error => {
+        this._notify.error(error.Result);
+      });
     }
-    this.caseService.getTimeTrackingByCaseId(this.paramId).subscribe(response => {
-      this.taskTimeTrackingId = response.length ? response[response.length - 1].Id : undefined;
-    }, error => {
-      this._notify.error(error.Result);
-    })
   }
 
   _keyPress(event: any) {
@@ -219,6 +222,18 @@ export class CaseAddComponent implements OnInit {
 
   addDocument() {
     this.router.navigate([`/case/${this.paramId}/document/new`]);
+  }
+
+  appAppealType() {
+    const resul = this.modal.open(CaseAppealTypeDetailComponent, overlayConfigFactory({ caseModel: this.model }, BSModalContext));
+    resul.result.then(res => {
+      if (res) {
+        this.caseService.getCaseAppealTypes().subscribe(res => {
+          this._notify.success("New Appeal created successfully!");
+          this.CaseAppealTypeDropDown = res;
+        });
+      }
+    });
   }
 
 }

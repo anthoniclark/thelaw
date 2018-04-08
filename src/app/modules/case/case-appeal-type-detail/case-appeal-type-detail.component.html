@@ -1,0 +1,34 @@
+<div class="container-fluid custom-modal-container" style="padding: 15px 30px;">
+  <div class="row custom-modal-header">
+    <div class="col">
+      <h2 class="my-3">Create Appeal Type </h2>
+    </div>
+  </div>
+  <form name="appealTypeForm" (ngSubmit)="appealTypeForm.form.valid && createAppealType()" #appealTypeForm='ngForm' novalidate>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="form-label" for="appealTypeName">Appeal Type Name
+            <span class="req">*</span>
+          </label>
+          <input type="text" class="form-control" required name="appealTypeName" [(ngModel)]="appealTypeModel.AppealTypeName" #appealTypeName="ngModel"
+            [class.inValidField]="appealTypeForm.submitted && !appealTypeName.valid" />
+          <label class="err-label" *ngIf="appealTypeForm.submitted && !appealTypeName.valid">Please enter Appeal Type Name</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <a href=javascript:; (click)="closeClick()" class="btn btn-default btn-cancel mr5">
+        <i class="fa fa-times-circle mr5"></i> Cancel
+      </a>
+      <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+        <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+      </button>
+    </div>
+  </form>
+  <div class="row custom-modal-footer">
+    <div class="col-xs-12">
+    </div>
+  </div>
+</div>

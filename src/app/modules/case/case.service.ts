@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from 'app/lib/http/http-client.service';
-import { Case, CaseStatus, CaseCommunication, TimeTracking, CaseNote, Document } from 'app/models/case';
+import { Case, CaseStatus, CaseCommunication, TimeTracking, CaseNote, Document, AppealType, CaseEvidence } from 'app/models/case';
 import { Page, Sorting } from 'app/models/page';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class CaseService {
@@ -466,4 +467,93 @@ export class CaseService {
     });
   }
 
+  addAppealType(model: AppealType) {
+    return this.httpService.post(`AppealType/Create`, model).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+
+  }
+
+  getCaseEvidencePageData(caseId: number, page: Page, sort: Sorting, filterColumn?: string, filterValue?: string) {
+    let filter = '';
+    if (filterColumn) {
+      filter += '&' + filterColumn + filterValue;
+    }
+    return this.httpService.get(`CaseEvidence/GetAllFilter?caseId=${caseId}&page=${page.pageNumber}&pageSize=${page.size}&orderBy=${sort.columnName}&ascending=${sort.dir}${filter}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+  deleteCaseEvidence(id) {
+    return this.httpService.delete(`CaseEvidence/Delete/${id}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  getCaseEvidenceById(id) {
+    return this.httpService.get(`CaseEvidence/GetCaseEvidenceById/${id}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  addOrUpdateCaseEvidence(caseEvidenceModel: CaseEvidence, caseId: number) {
+    const model = {
+      EvidenceName: caseEvidenceModel.EvidenceName,
+      CaseId: caseId
+    };
+    return this.httpService.post(`CaseEvidence/Create/`, model).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  uploadCaseEvidenceFile(id: number, caseId: number, formData: FormData) {
+    return this.httpService.postFormData(`CaseEvidence/UploadEvidence/${id}?caseId=${caseId}`, formData).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+  downloadCaseEvidenceFile(id) {
+    window.open(`${environment.origin}CaseEvidence/DownloadEvidenceFile/${id}`, '_blank');
+  }
+
+  deleteCaseEvidenceFile(id) {
+    return this.httpService.get(`CaseEvidence/DeleteEvidenceFile/${id}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+
+  }
 }
+

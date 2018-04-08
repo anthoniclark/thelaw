@@ -18,7 +18,10 @@ export class ContactDashboardComponent implements OnInit {
   filterModel: FilterModel[] = [{
     columnName: 'Title',
     value: ''
-  },];
+  }, {
+    columnName: 'Designation',
+    value: ''
+  }];
   loadingIndicator: boolean = false;
   contactType: string = contactDashboardTab[0];
   sorting: Sorting = new Sorting();
@@ -56,11 +59,15 @@ export class ContactDashboardComponent implements OnInit {
       filter.forEach((model) => {
         filterColumnString += model.columnName + ",";
         searchValue += model.value + ",";
+        if (model.columnName === "Title") {
+          filterColumnString += "FirstName,"
+          filterColumnString += "LastName"
+          searchValue += model.value + ",";
+          searchValue += model.value + ",";
+        }
       });
-      filterColumnString += "FirstName,"
-      filterColumnString += "LastName"
-      searchValue += filter[0].value + ",";
-      searchValue += filter[0].value;
+      filterColumnString = filterColumnString.substring(0, filterColumnString.length - 1);
+      searchValue = searchValue.substring(0, searchValue.length - 1);
       this.getDataSource(filterColumnString, searchValue);
     } else {
       this.getDataSource();

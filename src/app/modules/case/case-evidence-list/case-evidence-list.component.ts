@@ -1,44 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { NotificationService } from 'app/shared/services/notification.service';
-import { Router } from '@angular/router';
-import { CaseService } from 'app/modules/case/case.service';
-import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
-import { CaseChangeStatusComponent } from '../case-change-status/case-change-status.component';
-import { overlayConfigFactory } from 'ngx-modialog';
 import { Page, Sorting, FilterModel } from 'app/models/page';
+import { CaseService } from 'app/modules/case/case.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NotificationService } from 'app/shared/services/notification.service';
 import swal from 'sweetalert2';
+import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
+import { Case } from 'app/models/case';
 
 @Component({
-  selector: 'app-case-list',
-  templateUrl: './case-list.component.html'
+  selector: 'app-case-evidence-list',
+  templateUrl: './case-evidence-list.component.html',
+  styleUrls: ['./case-evidence-list.component.css']
 })
-export class CaseListComponent implements OnInit {
+export class CaseEvidenceListComponent implements OnInit {
   rows = [];
+  caseId: number;
   public page: Page = new Page();
   loadingIndicator: boolean = false;
   sorting: Sorting = new Sorting();
   reorderable: boolean = true;
+  caseDetail: Case = new Case();
   filterModel: FilterModel[] = [{
-    columnName: 'CaseNo',
-    value: ''
-  }, {
-    columnName: 'CaseType',
-    value: ''
-  }, {
-    columnName: 'RefferenceNumber',
-    value: ''
-  }, {
-    columnName: 'CaseStatus',
+    columnName: 'EvidenceName',
     value: ''
   }];
   constructor(private caseService: CaseService, private router: Router, private _notify: NotificationService,
-    private modal: Modal) {
+    private modal: Modal, private route: ActivatedRoute) {
     this.page.pageNumber = 0;
     this.page.size = 5;
   }
 
   ngOnInit() {
+    this.route.params.subscribe(param => this.caseId = +param["caseId"]);
     this.sorting = { columnName: "Id", dir: true };
+    this.caseService.getCaseById(this.caseId).subscribe(res => {      
+      this.caseDetail = res;
+    }, error => {
+      this._notify.error(error.detail);
+    });
     this.setPage({ offset: 0 });
   }
 
@@ -47,9 +46,10 @@ export class CaseListComponent implements OnInit {
     this.getDataSource();
   }
 
+
   getDataSource(filterColumn?: string, filterValue?: string) {
     this.loadingIndicator = true;
-    this.caseService.getCasePageData(this.page, this.sorting, filterColumn, filterValue).subscribe(pagedData => {
+    this.caseService.getCaseEvidencePageData(this.caseId, this.page, this.sorting, filterColumn, filterValue).subscribe(pagedData => {
       this.loadingIndicator = false;
       this.page.totalElements = pagedData.TotalNumberOfRecords;
       this.page.totalPages = pagedData.TotalNumberOfPages;
@@ -68,6 +68,7 @@ export class CaseListComponent implements OnInit {
     }
     return this.getDataSource();
   }
+
 
   filterData(event) {
     const target = event.target;
@@ -88,13 +89,13 @@ export class CaseListComponent implements OnInit {
   }
 
   editClick(id) {
-    this.router.navigateByUrl('/case/' + id);
+    this.router.navigate([`/case/${this.caseId}/evidence/${id}`]);
   }
 
   deleteClick(id) {
     swal({
-      title: 'Delete Case',
-      text: "Are you sure want to delete this Case?",
+      title: 'Delete Case Evidence',
+      text: "Are you sure want to delete this Case Evidence?",
       type: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes',
@@ -106,12 +107,12 @@ export class CaseListComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.loadingIndicator = true;
-        this.caseService.deleteCase(id).subscribe(
+        this.caseService.deleteCaseEvidence(id).subscribe(
           response => {
             swal({
               position: 'top-end',
               type: 'success',
-              title: 'Case deleted successfully',
+              title: 'Case Evidence deleted successfully',
               showConfirmButton: false,
               timer: 3000
             });
@@ -130,27 +131,10 @@ export class CaseListComponent implements OnInit {
     });
   }
 
-  changeStatus(rowData: any) {
-    this.modal.open(CaseChangeStatusComponent, overlayConfigFactory({ caseRow: rowData }, BSModalContext));
+  createNewEvidence() {
+    this.router.navigate([`/case/${this.caseId}/evidence/new`]);
   }
 
-  showCommunication(rowData: any) {
-    this.router.navigateByUrl('/case/' + rowData.Id + '/communication/dashboard');
-  }
-  ShowTimeTracker(rowData: any) {
-    this.router.navigateByUrl(`/case/${rowData.Id}/time-tracking`);
-  }
-  ShowNotes(rowData: any) {
-    this.router.navigateByUrl(`/case/${rowData.Id}/note`);
-  }
-  ShowCommunications(rowData: any) {
-    this.router.navigateByUrl(`/case/${rowData.Id}/communication`);
-  }
-  ShowEvidence(rowData: any) {
-    this.router.navigateByUrl(`/case/${rowData.Id}/evidence`);
-  }
 
-  ShowDocuments(rowData: any) {
-    this.router.navigateByUrl(`/case/${rowData.Id}/document`);
-  }
+
 }
