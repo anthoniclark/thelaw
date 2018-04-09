@@ -144,6 +144,15 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
+                  <label for="JudgeId">Associates</label>
+                  <angular2-multiselect [data]="associates" [(ngModel)]="selectedAssociates" [settings]="settings" class="form-control" #associatesIds="ngModel"
+                    name="associates" id="associates"  (keyup)="getAssociates($event)">
+                    
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
                   <label for="Description">Description</label>
                   <textarea class="form-control" rows="3" id="Description" name="Description" maxlength="250" [(ngModel)]="model.Description"
                     #Description="ngModel"></textarea>

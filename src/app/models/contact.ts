@@ -33,6 +33,7 @@ export class Mobile {
     Id: number;
     MobileNumber: string;
     IsPrimary: boolean;
+    MobileType: string;
 }
 
 export class Email {

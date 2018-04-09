@@ -37,6 +37,7 @@ export class Case {
     BillingDate: Date;
     TrustAccount: number;
     JudgeIds: number[];
+    AssociatesId: number[];
 }
 
 export class CaseStatus {

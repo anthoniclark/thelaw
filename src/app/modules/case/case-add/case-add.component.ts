@@ -22,8 +22,10 @@ export class CaseAddComponent implements OnInit {
   public paramId: any;
   courts: any[] = [];
   judges: any[] = [];
+  associates: any[] = [];
   offices: any[] = [];
   selectedJudges: any[] = [];
+  selectedAssociates: any[] = [];
   CaseAppealTypeDropDown: any[] = [];
   model: Case = new Case();
   CaseTypeDropDown: Array<DropDownModel> = CaseType;
@@ -72,6 +74,7 @@ export class CaseAddComponent implements OnInit {
     if (this.paramId.toString() != "new") {
       this.caseService.getCaseById(this.paramId).subscribe(
         response => {
+          debugger
           this.model = <Case>response;
           this.OpponentContactId = response.OpponentContactName;
           this.OppnentAdvocateId = response.OppnentAdvocateName;
@@ -181,8 +184,14 @@ export class CaseAddComponent implements OnInit {
   }
 
   save() {
+    debugger
     this.isLoading = true;
     this.model.JudgeIds = [];
+    this.model.AssociatesId = [];
+    this.selectedAssociates.forEach(element => {
+      this.model.AssociatesId.push(element.id);
+    });
+
     this.selectedJudges.forEach(element => {
       this.model.JudgeIds.push(element.id);
     });
@@ -253,6 +262,17 @@ export class CaseAddComponent implements OnInit {
           });
         });
       }
+    });
+  }
+  getAssociates(event) {
+    this.caseService.searchAssociateName(event.target.value).subscribe(res => {
+      this.associates = [];
+      res.forEach(element => {
+        this.associates.push({ id: element.Id, itemName: element.Name });
+      });
+
+    }, err => {
+      this._notify.error(err.Result);
     });
   }
 

@@ -113,37 +113,36 @@ export class CaseExpenseListComponent implements OnInit {
   }
 
   filterData(event) {
+    debugger
     const target = event.target;
     let filter = this.filterModel.filter(x => x.value.length >= 2);
-    if (filter.length) {
+    if (filter.length || this.filterModel[1].value) {
       let filterColumnString = 'columnName=';
       let searchValue = '&searchValue='
       filter.forEach((model) => {
-        if (model.columnName !== "ExpenseDate") {
+        if (model.columnName === "ExpenseDate") {
+          if ((new Date(model.value).toString() !== "Invalid Date")) {
+            filterColumnString += model.columnName + ",";
+            searchValue += model.value + ",";
+          }
+        } else {
           filterColumnString += model.columnName + ",";
           searchValue += model.value + ",";
-        } else {
-          const objDate = model.value.split("/");
-          let isVaidDate = true;
-          if (objDate.length === 3) {
-            objDate.forEach(date => {
-              if (parseInt(date) === NaN) {
-                isVaidDate = true;
-                return false;
-              }
-            });
-            if (isVaidDate && objDate[2].length === 4) {
-              filterColumnString += "ExpenseDate,";
-              searchValue += `${objDate[2]}-${((objDate[1].length < 2 && + objDate[1] < 10) ? "0" + objDate[1] : objDate[1])}-${((+objDate[0].length < 2 && +objDate[0] < 10) ? "0" + objDate[0] : objDate[0])},`;
-            }
-          }
         }
       });
+      if (!filter.length) {
+        filterColumnString += "ExpenseDate,";
+        searchValue += this.filterModel[1].value + ",";
+      }
       filterColumnString = filterColumnString.substring(0, filterColumnString.length - 1);
       searchValue = searchValue.substring(0, searchValue.length - 1);
       this.getDataSource(filterColumnString, searchValue);
     } else {
       this.getDataSource();
     }
+  }
+
+  onFocus() {
+    debugger
   }
 }

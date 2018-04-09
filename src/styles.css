@@ -115,3 +115,11 @@
 .fa-star {color: #03a9f4; }
 .mobile-type-select{ width: 20%; margin-bottom: 3px;}
 .mr20 {margin-right: 20px;}
+
+.datatable-header-cell,
+.datatable-header {
+    overflow:visible !important;   
+}
+.datatable-row-center{
+   z-index:11;
+}

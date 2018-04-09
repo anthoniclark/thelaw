@@ -30,7 +30,7 @@ export class ContactDetailComponent implements OnInit {
   officeAddressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false }];
   emailSet = [{ Id: undefined, EmailId: '', IsPrimary: true, IsDeleted: false }];
   visibleEmail: number = 0;
-  mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false, isDisabled: false, tempId: 1 }];
+  mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false, isDisabled: false, tempId: 1, MobileType: "Home" }];
   validFileType: boolean = true;
   CompanyId;
   isDisabled: boolean = false;
@@ -64,6 +64,7 @@ export class ContactDetailComponent implements OnInit {
     if (this.paramId.toString() != "new") {
       this.contactService.getContactById(this.paramId).subscribe(
         response => {
+          debugger
           this.model = <Contact>response;
           this.CompanyId = response.CompanyName;
           if (this.model.Address.some(x => x.AddressType === AddressType.Home)) {
@@ -122,7 +123,8 @@ export class ContactDetailComponent implements OnInit {
               IsPrimary: element.IsPrimary,
               MobileNumber: element.MobileNumber,
               isDisabled: false,
-              tempId: index + 1
+              tempId: index + 1,
+              MobileType: element.MobileType
             });
           });
         }, err => {
@@ -204,7 +206,10 @@ export class ContactDetailComponent implements OnInit {
     });
     if (!isEmpty) {
       const isPrimary = this.mobileSet.some(x => x.IsPrimary === true);
-      this.mobileSet.push({ Id: undefined, MobileNumber: '', IsPrimary: false, IsDeleted: false, isDisabled: isPrimary, tempId: this.mobileSet.length + 1 });
+      this.mobileSet.push({
+        Id: undefined, MobileNumber: '', IsPrimary: false, IsDeleted: false, isDisabled: isPrimary, tempId: this.mobileSet.length + 1,
+        MobileType: "Home"
+      });
     } else {
       this._notify.error('Please fill all added mobile');
     }
@@ -344,7 +349,8 @@ export class ContactDetailComponent implements OnInit {
           const mobileModel: Mobile = {
             Id: mobile.Id,
             MobileNumber: mobile.MobileNumber,
-            IsPrimary: mobile.IsPrimary
+            IsPrimary: mobile.IsPrimary,
+            MobileType: mobile.MobileType,
           }
           if (mobileModel.MobileNumber) {
             this.model.MobileNumbers.push(mobileModel);
@@ -354,7 +360,8 @@ export class ContactDetailComponent implements OnInit {
         const mobileModel: Mobile = {
           Id: undefined,
           MobileNumber: mobile.MobileNumber,
-          IsPrimary: mobile.IsPrimary
+          IsPrimary: mobile.IsPrimary,
+          MobileType: mobile.MobileType
         }
         if (mobileModel.MobileNumber) {
           this.model.MobileNumbers.push(mobileModel);
