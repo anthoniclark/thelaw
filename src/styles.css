@@ -110,6 +110,7 @@
 .mb5 {margin-bottom: 5px;}
 .action-popover {width:20%}
 .pl25 {padding-left: 25px;}
+.pl15 {padding-left: 15px;}
 .pr25 {padding-right: 25px;}
 .pr15 {padding-right: 15px;}
 .fa-star {color: #03a9f4; }
@@ -123,3 +124,5 @@
 .datatable-row-center{
    z-index:11;
 }
+
+.case-advance-search-form {display: inline; padding-left: 20px;}

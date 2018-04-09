@@ -12,7 +12,7 @@
                 <div class="form-group">
                   <label for="CommunicateDate">Communicate Date <span class="req">*</span></label>
                   <input class="form-control" [(ngModel)]="model.CommunicateDate" ngui-datetime-picker date-only="true" #CommunicateDate="ngModel"
-                    required name="CommunicateDate" id="CommunicateDate" [class.inValidField]="communicationForm.submitted && !CommunicateDate.valid"
+                    required name="CommunicateDate" id="CommunicateDate" (ngModelChange)="communicationDateChanged($event)" [class.inValidField]="communicationForm.submitted && !CommunicateDate.valid"
                   />
                   <label *ngIf="communicationForm.submitted && !CommunicateDate.valid" class="err-label">
                     Please select Communicate Date.
@@ -62,8 +62,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Summary">Summary</label>
-                  <input type="text" id="Summary" name="Summary" maxlength="250" class="form-control" [(ngModel)]="model.Summary" #Summary="ngModel"
-                  />
+                  <textarea type="text" id="Summary" name="Summary" maxlength="250" class="form-control" [(ngModel)]="model.Summary" #Summary="ngModel"
+                  ></textarea>
                 </div>
               </div>
               <div class="col-sm-6">

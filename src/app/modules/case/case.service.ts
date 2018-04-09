@@ -457,7 +457,7 @@ export class CaseService {
     if (filterColumn) {
       filter += '&' + filterColumn + filterValue;
     }
-    const link = (contactId ? ("contactId=" + contactId)+'&' : '') + `page=${page.pageNumber}&pageSize=${page.size}&orderBy=${sort.columnName}&ascending=${sort.dir}${filter}`;
+    const link = (contactId ? ("contactId=" + contactId) + '&' : '') + `page=${page.pageNumber}&pageSize=${page.size}&orderBy=${sort.columnName}&ascending=${sort.dir}${filter}`;
     return this.httpService.get(`Case/GetAllFilter?${link}`).map((res: any) => {
       if (res.Success) {
         return res.Result;
@@ -601,6 +601,29 @@ export class CaseService {
 
   getAllTaskCategories() {
     return this.httpService.get(`TaskCategory/GetAll`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  caseFullTextSearch(text: string, contactId: string, page: Page, sort: Sorting) {
+    const link = (contactId ? ("contactId=" + contactId) + '&' : '') + `page=${page.pageNumber}&pageSize=${page.size}&orderBy=${sort.columnName}&ascending=${sort.dir}
+    &searchValue=${text}`;
+    return this.httpService.get(`Case/GetFullTextSearch?${link}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+  deleteDocumentFile(id) {
+    return this.httpService.get('Document/DeleteDocumentFile/' + id).map((res: any) => {
       if (res.Success) {
         return res.Result;
       }

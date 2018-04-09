@@ -18,6 +18,8 @@ export class CaseListComponent implements OnInit {
   loadingIndicator: boolean = false;
   sorting: Sorting = new Sorting();
   reorderable: boolean = true;
+  advanceSearch: string;
+  searchApplied: boolean = false;
   filterModel: FilterModel[] = [{
     columnName: 'CaseNo',
     value: ''
@@ -156,6 +158,30 @@ export class CaseListComponent implements OnInit {
 
   ShowDocuments(rowData: any) {
     this.router.navigateByUrl(`/case/${rowData.Id}/document`);
+  }
+
+  advanceFilter() {
+    if (this.advanceSearch.length) {
+      this.loadingIndicator = true;
+      this.searchApplied = true;
+      this.caseService.caseFullTextSearch(this.advanceSearch, this.contactId, this.page, this.sorting).subscribe(res => {
+        this.loadingIndicator = false;
+        this.page.totalElements = res.TotalNumberOfRecords;
+        this.page.totalPages = res.TotalNumberOfPages;
+        this.page.pageNumber = res.PageNumber;
+        this.rows = res.Results;
+      }, error => {
+        this._notify.error(error.detail);
+      });
+    } else {
+      this.searchApplied = false;
+    }
+  }
+
+  removeadvanceFilter() {
+    this.searchApplied = false;
+    this.advanceSearch = "";
+    this.setPage(this.page);
   }
 }
 

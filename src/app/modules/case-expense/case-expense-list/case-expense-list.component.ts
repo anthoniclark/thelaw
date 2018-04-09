@@ -113,7 +113,6 @@ export class CaseExpenseListComponent implements OnInit {
   }
 
   filterData(event) {
-    debugger
     const target = event.target;
     let filter = this.filterModel.filter(x => x.value.length >= 2);
     if (filter.length || this.filterModel[1].value) {
@@ -143,6 +142,6 @@ export class CaseExpenseListComponent implements OnInit {
   }
 
   onFocus() {
-    debugger
+    
   }
 }

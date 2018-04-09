@@ -64,7 +64,6 @@ export class ContactDetailComponent implements OnInit {
     if (this.paramId.toString() != "new") {
       this.contactService.getContactById(this.paramId).subscribe(
         response => {
-          debugger
           this.model = <Contact>response;
           this.CompanyId = response.CompanyName;
           if (this.model.Address.some(x => x.AddressType === AddressType.Home)) {

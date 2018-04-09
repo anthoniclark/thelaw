@@ -14,7 +14,7 @@
                     <span class="req">*</span>
                   </label>
                   <input type="text" maxlength="50" id="CaseNo" name="CaseNo" [class.inValidField]="caseForm.submitted && !CaseNo.valid" required
-                    class="form-control" [(ngModel)]="model.CaseNo" #CaseNo="ngModel" />
+                    class="form-control" (change)="changeDoctNo()" [(ngModel)]="model.CaseNo" #CaseNo="ngModel" />
                   <label *ngIf="caseForm.submitted && !CaseNo.valid" class="err-label">
                     Please enter Case number
                   </label>
@@ -38,15 +38,18 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="NickName">Nick Name</label>
+                  <label for="NickName">Nick Name <span class="req">*</span></label>
                   <input type="text" maxlength="100" id="NickName" name="NickName" class="form-control" [(ngModel)]="model.NickName" #NickName="ngModel"
-                  />
+                    [class.inValidField]="caseForm.submitted && !NickName.valid" required/>
+                  <label *ngIf="caseForm.submitted && !NickName.valid" class="err-label">
+                    Please select valid Client
+                  </label>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="DoctNumber">Doct Number</label>
-                  <input type="text" maxlength="100" id="DoctNumber" name="DoctNumber" class="form-control" [(ngModel)]="model.DoctNumber"
+                  <input type="text" readonly maxlength="100" id="DoctNumber" name="DoctNumber" class="form-control" [(ngModel)]="model.DoctNumber"
                     #DoctNumber="ngModel" />
                 </div>
               </div>
@@ -75,7 +78,7 @@
                     <span class="req">*</span>
                   </label>
                   <input type="number" maxlength="4" name="CaseYear" id="CaseYear" class="form-control" [(ngModel)]="model.CaseYear" #CaseYear="ngModel"
-                    [class.inValidField]="caseForm.submitted && !model.CaseYear" required />
+                    [class.inValidField]="caseForm.submitted && !model.CaseYear" required (change)="changeDoctNo()"/>
                   <label *ngIf="caseForm.submitted && !model.CaseYear" class="err-label">
                     Please enter Case Year
                   </label>
@@ -146,8 +149,8 @@
                 <div class="form-group">
                   <label for="JudgeId">Associates</label>
                   <angular2-multiselect [data]="associates" [(ngModel)]="selectedAssociates" [settings]="settings" class="form-control" #associatesIds="ngModel"
-                    name="associates" id="associates"  (keyup)="getAssociates($event)">
-                    
+                    name="associates" id="associates" (keyup)="getAssociates($event)">
+
                   </angular2-multiselect>
                 </div>
               </div>

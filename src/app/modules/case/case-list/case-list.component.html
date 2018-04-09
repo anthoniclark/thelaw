@@ -1,11 +1,24 @@
 <div class=panel>
   <div class="panel-heading border">
-    <span class="pull-left">
-      <b>Cases</b>
-    </span>
-    <div class="pb30">
-      <button type="button" class="btn btn-create pull-right" kendoButton (click)="router.navigate(['/case/new'])">
-        <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+
+    <div>
+      <div class="case-header">
+        <b>Cases</b>
+        <form class="form-inline case-advance-search-form" (ngSubmit)="searchForm.form.valid && advanceFilter()" #searchForm="ngForm">
+          <div class="form-group">
+            <label for="advanceSearch">Advance Search</label>
+            <input name="advanceSearch" class="form-control" required id="advanceSearch" [(ngModel)]="advanceSearch" />
+          </div>
+          <button class="btn btn-primary" *ngIf="searchApplied" (click)="removeadvanceFilter()">
+            <i class="fa fa-eraser mr5"></i>Clear</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="fa fa-search mr5"></i>Search</button>
+        </form>
+
+        <button type="button" class="btn btn-create pull-right" kendoButton (click)="router.navigate(['/case/new'])">
+          <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+      </div>
+
     </div>
 
   </div>

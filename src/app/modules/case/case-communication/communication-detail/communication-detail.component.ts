@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CaseCommunication } from '../../../../models/case';
+import { CaseCommunication, Case } from '../../../../models/case';
 import { DropDownModel } from 'app/models/dropDownModel';
 import { CommunicationType } from '../../../../shared/constants';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,7 +19,8 @@ export class CommunicationDetailComponent implements OnInit {
   CommunicationTypeDropDown: Array<DropDownModel> = CommunicationType;
   CommunicateFromId; CommunicateToId;
   isLoading: boolean = false;
-
+  caseDetail: Case = new Case();
+  selectedClient = {};
   constructor(private route: ActivatedRoute, private _notify: NotificationService,
     private _sanitizer: DomSanitizer, private router: Router, private caseService: CaseService,
     private contactService: ContactService) { }
@@ -27,6 +28,16 @@ export class CommunicationDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(param => this.paramId = param['id']);
     this.route.params.subscribe(param => this.model.CaseId = param['caseId']);
+    this.caseService.getCaseById(this.model.CaseId).subscribe(res => {
+      this.caseDetail = res;
+      this.contactService.getContactById(res.ClientId).subscribe(result => {
+        this.selectedClient = result;
+      }, err => {
+
+      });
+    }, error => {
+      this._notify.error(error.detail);
+    });
     if (this.paramId.toString() !== 'new') {
       this.caseService.getCommunicationById(this.paramId).subscribe(
         response => {
@@ -79,13 +90,20 @@ export class CommunicationDetailComponent implements OnInit {
           }
 
           setTimeout(() => {
-            this.router.navigate(['/case/' + this.model.CaseId]);
+            this.router.navigateByUrl(`/case/${this.model.CaseId}/communication/dashboard`);
           });
         }
       }, err => {
         this.isLoading = false;
         this._notify.error(err.Result);
       });
+  }
+
+  communicationDateChanged(event) {
+    if (new Date(event) < new Date(this.caseDetail.OpenDate)) {
+      this._notify.error("Communication Date should be greater than case start date");
+      this.model.CommunicateDate = null;
+    }
   }
 
   onCancelClick() {

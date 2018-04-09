@@ -74,7 +74,6 @@ export class CaseAddComponent implements OnInit {
     if (this.paramId.toString() != "new") {
       this.caseService.getCaseById(this.paramId).subscribe(
         response => {
-          debugger
           this.model = <Case>response;
           this.OpponentContactId = response.OpponentContactName;
           this.OppnentAdvocateId = response.OppnentAdvocateName;
@@ -137,6 +136,11 @@ export class CaseAddComponent implements OnInit {
   }
 
   onSelectClient(item: any) {
+    if (item.Id === this.OpponentContactId.Id || item.Id === this.OppnentAdvocateId.Id) {
+      this._notify.error("Client and Oppnent should not be same person!");
+      this.ClientId = "";
+      return;
+    }
     if (item) {
       this.model.ClientId = item.Id;
     } else {
@@ -145,6 +149,11 @@ export class CaseAddComponent implements OnInit {
   }
 
   onSelectOponent(item: any) {
+    if (item.Id === this.ClientId.Id) {
+      this._notify.error("Client and Oppnent should not be same person!");
+      this.OpponentContactId = "";
+      return;
+    }
     if (item) {
       this.model.OpponentContactId = item.Id;
     } else {
@@ -153,6 +162,11 @@ export class CaseAddComponent implements OnInit {
   }
 
   onSelectOponentAdvocate(item: any) {
+    if (item.Id === this.ClientId.Id ) {
+      this._notify.error("Client and Oppnent should not be same person!");
+      this.OppnentAdvocateId = "";
+      return;
+    }
     if (item) {
       this.model.OppnentAdvocateId = item.Id;
     } else {
@@ -184,7 +198,6 @@ export class CaseAddComponent implements OnInit {
   }
 
   save() {
-    debugger
     this.isLoading = true;
     this.model.JudgeIds = [];
     this.model.AssociatesId = [];
@@ -274,6 +287,10 @@ export class CaseAddComponent implements OnInit {
     }, err => {
       this._notify.error(err.Result);
     });
+  }
+
+  changeDoctNo() {
+    this.model.DoctNumber = `${this.model.CaseNo}-${this.model.CaseYear}`;
   }
 
 }

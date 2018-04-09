@@ -42,6 +42,10 @@
                                     </div>
                                     <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">
                                         <i class="fa fa-upload mr5"></i> Upload</a>
+                                    <a href="javascript:void(0);" class="change btn btn-primary" *ngIf="fileName" (click)="showDocument()">
+                                        <i class="fa fa-download mr5" aria-hidden="true"></i>Download</a>
+                                    <a href="javascript:void(0);" class="change btn btn-primary" *ngIf="fileName" (click)="deleteDocument()">
+                                        <i class="fa fa-trash mr5" aria-hidden="true"></i>Delete</a>
                                     <input type="file" class="fileUpload" #fileUpload style="display:none" accept=".doc, application/pdf, image/jpg, image/jpeg, image/png, .xls, .ppt, .txt, .rtf"
                                         #fileUpload style="display:none" (change)="onFileChange($event)" />
                                     <div>
