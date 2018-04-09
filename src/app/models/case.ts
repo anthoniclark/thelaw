@@ -1,4 +1,4 @@
-export class Case {
+export class Case { 
     Id: number;
     CaseNo: string;
     NickName: string;
