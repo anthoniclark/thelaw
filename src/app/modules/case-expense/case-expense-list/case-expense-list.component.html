@@ -10,7 +10,7 @@
 
   </div>
   <div class=panel-body>
-    <ngx-datatable class="material" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+    <ngx-datatable class="material case-expense-list-grid" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
       [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="60" [footerHeight]="40"
       [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
       <ngx-datatable-column name="Case Number" sortable="true" prop="CaseNo">

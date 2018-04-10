@@ -24,6 +24,7 @@ import { CaseAppealTypeDetailComponent } from './case-appeal-type-detail/case-ap
 import { CaseEvidenceListComponent } from './case-evidence-list/case-evidence-list.component';
 import { CaseEvidenceDetailComponent } from './case-evidence-detail/case-evidence-detail.component';
 import { JudgeDetailComponent } from './judge-detail/judge-detail.component';
+import { ContactQuickAddComponent } from './contact-quick-add/contact-quick-add.component';
 
 @NgModule({
   imports: [
@@ -51,13 +52,14 @@ import { JudgeDetailComponent } from './judge-detail/judge-detail.component';
     CaseAppealTypeDetailComponent,
     CaseEvidenceListComponent,
     CaseEvidenceDetailComponent,
-    JudgeDetailComponent
+    JudgeDetailComponent,
+    ContactQuickAddComponent
   ],
   providers: [
     CaseService,
     ContactService,
     Modal
   ],
-  entryComponents: [CaseChangeStatusComponent, CaseAppealTypeDetailComponent, JudgeDetailComponent]
+  entryComponents: [CaseChangeStatusComponent, CaseAppealTypeDetailComponent, JudgeDetailComponent, ContactQuickAddComponent]
 })
 export class CaseModule { }

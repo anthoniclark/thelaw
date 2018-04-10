@@ -124,3 +124,10 @@ export class Judge {
     LastName: string;
     AddressId: number;
 }
+
+export class ContactQuickAdd {
+    FirstName: string;
+    LastName: string;
+    ContactType: string;
+    Designation: string;
+}

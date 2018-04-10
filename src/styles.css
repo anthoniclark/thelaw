@@ -117,12 +117,20 @@
 .mobile-type-select{ width: 20%; margin-bottom: 3px;}
 .mr20 {margin-right: 20px;}
 
+.datatable-body-cell {
+    overflow-x: visible !important;
+}
+
+.case-expense-list-grid 
 .datatable-header-cell,
-.datatable-header {
+.case-expense-list-grid  .datatable-header {
     overflow:visible !important;   
 }
-.datatable-row-center{
+.case-expense-list-grid  .datatable-row-center{
    z-index:11;
 }
 
 .case-advance-search-form {display: inline; padding-left: 20px;}
+.dropdown-menu li {
+    cursor: pointer;
+}

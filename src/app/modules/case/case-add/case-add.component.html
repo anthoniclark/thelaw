@@ -25,6 +25,9 @@
                   <label for="ClientId">Client
                     <span class="req">*</span>
                   </label>
+                  <a class="pull-right" (click)="addClient()">
+                    <i aria-hidden="true" class="fa fa-plus"></i> Create New
+                  </a>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="ClientId" [class.inValidField]="caseForm.submitted && !model.ClientId"
                     name="ClientId" [source]="contactSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter"
                     [accept-user-input]="false" (valueChanged)="onSelectClient($event)" value-property-name="Id" display-property-name="Name"
@@ -38,7 +41,9 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="NickName">Nick Name <span class="req">*</span></label>
+                  <label for="NickName">Nick Name
+                    <span class="req">*</span>
+                  </label>
                   <input type="text" maxlength="100" id="NickName" name="NickName" class="form-control" [(ngModel)]="model.NickName" #NickName="ngModel"
                     [class.inValidField]="caseForm.submitted && !NickName.valid" required/>
                   <label *ngIf="caseForm.submitted && !NickName.valid" class="err-label">
@@ -78,7 +83,7 @@
                     <span class="req">*</span>
                   </label>
                   <input type="number" maxlength="4" name="CaseYear" id="CaseYear" class="form-control" [(ngModel)]="model.CaseYear" #CaseYear="ngModel"
-                    [class.inValidField]="caseForm.submitted && !model.CaseYear" required (change)="changeDoctNo()"/>
+                    [class.inValidField]="caseForm.submitted && !model.CaseYear" required (change)="changeDoctNo()" />
                   <label *ngIf="caseForm.submitted && !model.CaseYear" class="err-label">
                     Please enter Case Year
                   </label>
@@ -148,8 +153,11 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="JudgeId">Associates</label>
-                  <angular2-multiselect [data]="associates" [(ngModel)]="selectedAssociates" [settings]="settings" class="form-control" #associatesIds="ngModel"
-                    name="associates" id="associates" (keyup)="getAssociates($event)">
+                  <a class="pull-right" (click)="addAssociates()">
+                    <i aria-hidden="true" class="fa fa-plus"></i> Create New
+                  </a>
+                  <angular2-multiselect [data]="associates" [(ngModel)]="selectedAssociates" [settings]="associatesSettings" class="form-control"
+                    #associatesIds="ngModel" name="associates" id="associates" (keyup)="getAssociates($event)">
 
                   </angular2-multiselect>
                 </div>
@@ -176,6 +184,9 @@
                   <label for="OpponentContactId">Opponent Contact
                     <span class="req">*</span>
                   </label>
+                  <a class="pull-right" (click)="addOpponentContact()">
+                    <i aria-hidden="true" class="fa fa-plus"></i> Create New
+                  </a>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="OpponentContactId" [class.inValidField]="caseForm.submitted && !model.OpponentContactId"
                     name="OpponentContactId" [source]="contactSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter"
                     [accept-user-input]="false" (valueChanged)="onSelectOponent($event)" value-property-name="Id" display-property-name="Name"
@@ -188,6 +199,9 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="OppnentAdvocateId">Oppnent Advocate</label>
+                  <a class="pull-right" (click)="addOpponentAdvocate()">
+                    <i aria-hidden="true" class="fa fa-plus"></i> Create New
+                  </a>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="OppnentAdvocateId" name="OppnentAdvocateId" [source]="advocateSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectOponentAdvocate($event)"
                     value-property-name="Id" display-property-name="Name" />

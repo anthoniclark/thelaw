@@ -13,6 +13,7 @@ import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
 import { overlayConfigFactory } from 'ngx-modialog';
 import { CaseAppealTypeDetailComponent } from 'app/modules/case/case-appeal-type-detail/case-appeal-type-detail.component';
 import { JudgeDetailComponent } from 'app/modules/case/judge-detail/judge-detail.component';
+import { ContactQuickAddComponent } from 'app/modules/case/contact-quick-add/contact-quick-add.component';
 
 @Component({
   selector: 'app-case-add',
@@ -35,7 +36,9 @@ export class CaseAddComponent implements OnInit {
   ClientId; OpponentContactId; OppnentAdvocateId; WitnessContactId; JugmentFavourId;
   isLoading: boolean = false;
   settings = {};
+  associatesSettings = {};
   taskTimeTrackingId: number;
+  contactType: string;
   casePricingType: Array<DropDownModel> = CasePricingType;
   constructor(private route: ActivatedRoute, private caseService: CaseService, private _notify: NotificationService,
     private contactService: ContactService, private _sanitizer: DomSanitizer, private router: Router, private modal: Modal) { }
@@ -50,6 +53,14 @@ export class CaseAddComponent implements OnInit {
       badgeShowLimit: 3,
       enableSearchFilter: true,
     }
+    this.associatesSettings = {
+      singleSelection: false,
+      text: "Select Associates",
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      badgeShowLimit: 3,
+      enableSearchFilter: true,
+    };
     this.route.params.subscribe(param => this.paramId = param["id"]);
     this.model.NotifyMe = true;
 
@@ -136,7 +147,7 @@ export class CaseAddComponent implements OnInit {
   }
 
   onSelectClient(item: any) {
-    if (item.Id === this.OpponentContactId.Id || item.Id === this.OppnentAdvocateId.Id) {
+    if (item && item.Id === this.OpponentContactId.Id || item.Id === this.OppnentAdvocateId.Id) {
       this._notify.error("Client and Oppnent should not be same person!");
       this.ClientId = "";
       return;
@@ -149,7 +160,7 @@ export class CaseAddComponent implements OnInit {
   }
 
   onSelectOponent(item: any) {
-    if (item.Id === this.ClientId.Id) {
+    if (item && item.Id === this.ClientId.Id) {
       this._notify.error("Client and Oppnent should not be same person!");
       this.OpponentContactId = "";
       return;
@@ -162,7 +173,7 @@ export class CaseAddComponent implements OnInit {
   }
 
   onSelectOponentAdvocate(item: any) {
-    if (item.Id === this.ClientId.Id ) {
+    if (item && item.Id === this.ClientId.Id) {
       this._notify.error("Client and Oppnent should not be same person!");
       this.OppnentAdvocateId = "";
       return;
@@ -277,6 +288,36 @@ export class CaseAddComponent implements OnInit {
       }
     });
   }
+
+  addClient() {
+    this.contactType = "Client";
+    this.openQuickAddPopup();
+  }
+
+  addAssociates() {
+    this.contactType = "Associates";
+    this.openQuickAddPopup();
+  }
+
+  addOpponentContact() {
+    this.contactType = "Opponent";
+    this.openQuickAddPopup();
+  }
+
+  addOpponentAdvocate() {
+    this.contactType = "Advocate";
+    this.openQuickAddPopup();
+  }
+
+  openQuickAddPopup() {
+    const resul = this.modal.open(ContactQuickAddComponent, overlayConfigFactory({ contactType: this.contactType }, BSModalContext));
+    resul.result.then(res => {
+      if (res) {
+        this._notify.success(`New ${this.contactType} successfully!`);
+      }
+    });
+  }
+
   getAssociates(event) {
     this.caseService.searchAssociateName(event.target.value).subscribe(res => {
       this.associates = [];

@@ -104,7 +104,10 @@ export class ContactGridComponent implements OnInit {
     });
   }
 
-  goTOCase(id) {
+  goTOCase(id, totalCases) {
+    if (!totalCases) {
+      return false;
+    }
     this.router.navigate([`case/contact/${id}`]);
   }
 }

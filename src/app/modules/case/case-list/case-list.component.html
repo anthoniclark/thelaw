@@ -91,7 +91,7 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <div>
+          <!-- <div>
             <popover-content #myPopover title="Actions" [closeOnClickOutside]="true">
               <button title="Edit" (click)="editClick(value)" md-icon-button>
                 <i class="fa fa-edit"></i>
@@ -125,6 +125,41 @@
             <div>
 
             </div>
+          </div> -->
+
+          <div class="btn-group">
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+              Action
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="javascript:void(0)" (click)="editClick(value)">
+                  Edit
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="deleteClick(value)">Delete</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="changeStatus(row)">Change Status</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="showCommunication(row)">Communications</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="ShowTimeTracker(row)">Time Tracker</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="ShowNotes(row)">Notes</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="ShowDocuments(row)">Document</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="ShowEvidence(row)">Evidence</a>
+              </li>
+            </ul>
           </div>
 
           <!-- <button title="Show Communication" (click)="ShowCommunications(row)" md-icon-button>

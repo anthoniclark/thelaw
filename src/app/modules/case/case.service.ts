@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from 'app/lib/http/http-client.service';
-import { Case, CaseStatus, CaseCommunication, TimeTracking, CaseNote, Document, AppealType, CaseEvidence, Judge } from 'app/models/case';
+import { Case, CaseStatus, CaseCommunication, TimeTracking, CaseNote, Document, AppealType, CaseEvidence, Judge, ContactQuickAdd } from 'app/models/case';
 import { Page, Sorting } from 'app/models/page';
 import { environment } from 'environments/environment';
 
@@ -624,6 +624,17 @@ export class CaseService {
   }
   deleteDocumentFile(id) {
     return this.httpService.get('Document/DeleteDocumentFile/' + id).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  createQuickContact(contactQuickAddModel: ContactQuickAdd) {
+    return this.httpService.post(`Contact/CreateQuick`, contactQuickAddModel).map((res: any) => {
       if (res.Success) {
         return res.Result;
       }

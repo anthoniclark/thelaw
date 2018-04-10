@@ -1,0 +1,57 @@
+<div class="container-fluid custom-modal-container" style="padding: 15px 30px;">
+  <div class="row custom-modal-header">
+    <div class="col">
+      <h2 class="my-3">Add Judge</h2>
+    </div>
+  </div>
+  <form name="contactQuickAdd" (ngSubmit)="contactQuickAdd.form.valid && createContact()" #contactQuickAdd='ngForm' novalidate>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="form-label" for="firstName">First Name
+            <span class="req">*</span>
+          </label>
+          <input type="text" class="form-control" required name="firstName" [(ngModel)]="contactQuickAddModel.FirstName" #firstName="ngModel"
+            [class.inValidField]="contactQuickAdd.submitted && !firstName.valid" />
+          <label class="err-label" *ngIf="contactQuickAdd.submitted && !firstName.valid">Please enter First Name</label>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="form-label" for="LastName">Last Name
+            <span class="req">*</span>
+          </label>
+          <input type="text" class="form-control" required name="LastName" [(ngModel)]="contactQuickAddModel.LastName" #LastName="ngModel"
+            [class.inValidField]="contactQuickAdd.submitted && !LastName.valid" />
+          <label class="err-label" *ngIf="contactQuickAdd.submitted && !LastName.valid">Please enter Last Name</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="form-label" for="Designation">Designation
+            <span class="req">*</span>
+          </label>
+          <input type="text" class="form-control" required name="Designation" [(ngModel)]="contactQuickAddModel.Designation" #Designation="ngModel"
+            [class.inValidField]="contactQuickAdd.submitted && !Designation.valid" />
+          <label class="err-label" *ngIf="contactQuickAdd.submitted && !Designation.valid">Please enter Designation</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <a href=javascript:; (click)="closeClick()" class="btn btn-default btn-cancel mr5">
+        <i class="fa fa-times-circle mr5"></i> Cancel
+      </a>
+      <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+        <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+      </button>
+    </div>
+  </form>
+  <div class="row custom-modal-footer">
+    <div class="col-xs-12">
+    </div>
+  </div>
