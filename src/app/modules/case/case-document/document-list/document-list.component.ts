@@ -3,7 +3,7 @@ import { CaseService } from 'app/modules/case/case.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { Page, Sorting, FilterModel } from 'app/models/page';
-
+import swal from 'sweetalert2';
 @Component({
   selector: 'app-document-list',
   templateUrl: './document-list.component.html'
@@ -69,21 +69,43 @@ export class DocumentListComponent implements OnInit {
     return this.getDataSource();
   }
 
+
   deleteClick(id) {
-    if (confirm('Are you sure you want to delete case document?')) {
-      this.caseService.deleteCaseDocument(id).subscribe(
-        response => {
-          this.caseService.deleteCaseDocumentFile(id).subscribe(res => { });
-          this.rows = this.rows.filter(row => {
-            return row.Id != id;
+    swal({
+      title: 'Delete Case Expense',
+      text: "Are you sure want to delete this Case Expense?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: true,
+      reverseButtons: false,
+    }).then((result) => {
+      if (result.value) {
+        this.loadingIndicator = true;
+        this.caseService.deleteCaseDocument(id).subscribe(
+          response => {
+            this.caseService.deleteCaseDocumentFile(id).subscribe(res => { });
+            this.rows = this.rows.filter(row => {
+              return row.Id != id;
+            });
+          }, err => {
+            this._notify.error(err.Result);
           });
-        }, err => {
-          this._notify.error(err.Result);
+        swal({
+          position: 'top-end',
+          type: 'success',
+          title: 'Case Expense deleted successfully',
+          showConfirmButton: false,
+          timer: 3000
         });
-    }
+      }
+    });
   }
 
-  createNewDocument(){
+  createNewDocument() {
     this.router.navigate([`case/${this.CaseId}/document/new`]);
   }
 }

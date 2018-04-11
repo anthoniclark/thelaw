@@ -72,6 +72,15 @@ export class CaseAddComponent implements OnInit {
     }, err => {
       this._notify.error(err.Result);
     });
+
+    this.caseService.getAllAssociates().subscribe(res => {
+      this.associates = [];
+      res.forEach(element => {
+        this.associates.push({ id: element.Id, itemName: element.FirstName + " " + element.LastName });
+      });
+    }, err => {
+      this._notify.error(err.Result);
+    });
     this.caseService.getJudgesDD().subscribe(res => {
       res.forEach(element => {
         this.judges.push({ id: element.Id, itemName: element.FirstName + ' ' + element.LastName });
@@ -93,6 +102,12 @@ export class CaseAddComponent implements OnInit {
           this.judges.forEach(element => {
             if (response.JudgeIds.indexOf(element.id) != -1) {
               this.selectedJudges.push(element);
+            }
+          });
+
+          this.associates.forEach(element => {
+            if (response.AssociatesId.indexOf(element.id) != -1) {
+              this.selectedAssociates.push(element);
             }
           });
 
@@ -319,15 +334,15 @@ export class CaseAddComponent implements OnInit {
   }
 
   getAssociates(event) {
-    this.caseService.searchAssociateName(event.target.value).subscribe(res => {
-      this.associates = [];
-      res.forEach(element => {
-        this.associates.push({ id: element.Id, itemName: element.Name });
-      });
+    // this.caseService.searchAssociateName(event.target.value).subscribe(res => {
+    //   this.associates = [];
+    //   res.forEach(element => {
+    //     this.associates.push({ id: element.Id, itemName: element.Name });
+    //   });
 
-    }, err => {
-      this._notify.error(err.Result);
-    });
+    // }, err => {
+    //   this._notify.error(err.Result);
+    // });
   }
 
   changeDoctNo() {

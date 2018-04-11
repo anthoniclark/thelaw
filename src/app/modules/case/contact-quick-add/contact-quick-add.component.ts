@@ -12,7 +12,6 @@ import { Judge, ContactQuickAdd } from 'app/models/case';
   styleUrls: ['./contact-quick-add.component.css']
 })
 export class ContactQuickAddComponent implements OnInit {
-
   context: BSModalContext;
   dialogContext: any;
   contactQuickAddModel: ContactQuickAdd = new ContactQuickAdd();
@@ -23,6 +22,8 @@ export class ContactQuickAddComponent implements OnInit {
     dialog.context.dialogClass = "modal-dialog modal-lg";
     this.dialogContext = dialog.context;
     this.contactQuickAddModel.ContactType = this.dialogContext.contactType;
+   
+
   }
 
   beforeDismiss(): boolean {

@@ -94,7 +94,7 @@ export class TimeTrackingDetailComponent implements OnInit {
           }
 
           setTimeout(() => {
-            this.router.navigate(['/case/' + this.model.CaseId]);
+            this.router.navigate(['/case/' + this.model.CaseId + '/time-tracking']);
           });
         }
       }, err => {

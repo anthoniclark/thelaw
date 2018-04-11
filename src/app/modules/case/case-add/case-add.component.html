@@ -10,6 +10,13 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
+                  <label for="DoctNumber">Doct Number</label>
+                  <input type="text" readonly maxlength="100" id="DoctNumber" name="DoctNumber" class="form-control" [(ngModel)]="model.DoctNumber"
+                    #DoctNumber="ngModel" />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
                   <label for="CaseNo">Case No
                     <span class="req">*</span>
                   </label>
@@ -20,6 +27,9 @@
                   </label>
                 </div>
               </div>
+
+            </div>
+            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="ClientId">Client
@@ -37,8 +47,6 @@
                   </label>
                 </div>
               </div>
-            </div>
-            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="NickName">Nick Name
@@ -49,13 +57,6 @@
                   <label *ngIf="caseForm.submitted && !NickName.valid" class="err-label">
                     Please select valid Client
                   </label>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="DoctNumber">Doct Number</label>
-                  <input type="text" readonly maxlength="100" id="DoctNumber" name="DoctNumber" class="form-control" [(ngModel)]="model.DoctNumber"
-                    #DoctNumber="ngModel" />
                 </div>
               </div>
             </div>
@@ -131,7 +132,7 @@
                 </div>
               </div>
               <div class="col-sm-6">
-                <div class="form-group"> 
+                <div class="form-group">
                   <label for="JudgeId">Judge</label>
                   <a class="pull-right" (click)="appJugge()">
                     <i aria-hidden="true" class="fa fa-plus"></i> Create New
@@ -157,7 +158,7 @@
                     <i aria-hidden="true" class="fa fa-plus"></i> Create New
                   </a>
                   <angular2-multiselect [data]="associates" [(ngModel)]="selectedAssociates" [settings]="associatesSettings" class="form-control"
-                    #associatesIds="ngModel" name="associates" id="associates" (keyup)="getAssociates($event)">
+                    #associatesIds="ngModel" name="associates" id="associates" >
 
                   </angular2-multiselect>
                 </div>

@@ -134,3 +134,4 @@
 .dropdown-menu li {
     cursor: pointer;
 }
+.case-panel-header {min-height: 65px !important;}

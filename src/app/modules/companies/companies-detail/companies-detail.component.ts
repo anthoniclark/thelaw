@@ -6,6 +6,7 @@ import { NoImagePath } from '../../../shared/constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Modal } from 'ngx-modialog/plugins/bootstrap';
 import { ContactService } from '../../contact/contact.service';
+import { Mobile, Email } from 'app/models/contact';
 
 @Component({
   selector: 'app-companies-detail',
@@ -52,11 +53,18 @@ export class CompaniesDetailComponent implements OnInit {
     });
     if (this.paramId !== 'new') {
       this.conmapiesService.getCompanyById(this.paramId).subscribe(response => {
+        debugger
         this.model = response;
         this.selectedContacts = [];
         response.Contacts.forEach(element => {
           this.selectedContacts.push({ id: element.Id, itemName: element.Name });
         });
+        if (response.MobileNumbers.length) {
+          this.mobileSet = [];
+          response.MobileNumbers.forEach(element => {
+            
+          });
+        }
       }, error => {
       });
       this.conmapiesService.getCompanyLogo(this.paramId).subscribe(
@@ -71,6 +79,44 @@ export class CompaniesDetailComponent implements OnInit {
   }
 
   save() {
+    if (!this.validateEmail() || !this.validateMobile() || !this.validateAddress()) {
+      return false;
+    }
+
+    this.mobileSet.forEach(mobileset => {
+      if (mobileset.isDisabled) {
+        if (mobileset.Id)
+          this.contactService.deleteMobile(mobileset.Id).subscribe(res => { });
+      } else {
+        const mobileModel: Mobile = {
+          Id: mobileset.Id,
+          MobileNumber: mobileset.MobileNumber,
+          IsPrimary: mobileset.IsPrimary,
+          MobileType: mobileset.MobileType,
+          ContactId: this.paramId === 'new' ? undefined : +this.paramId
+        }
+        if (mobileModel.MobileNumber) {
+          this.model.MobileNumbers.push(mobileModel);
+        }
+      }
+    });
+
+    this.emailSet.forEach(email => {
+      if (email.IsDeleted) {
+        if (email.Id)
+          this.contactService.deleteMobile(email.Id).subscribe(res => { });
+      } else {
+        const emailModel: Email = {
+          Id: email.Id,
+          EmailId: email.EmailId,
+          IsPrimary: email.IsPrimary,
+          ContactId: this.paramId === 'new' ? undefined : +this.paramId
+        }
+        if (emailModel.EmailId) {
+          this.model.EmailAddress.push(emailModel);
+        }
+      }
+    });
     this.isLoading = true;
     this.model.ContactIds = [];
     this.selectedContacts.forEach(data => {
@@ -161,37 +207,58 @@ export class CompaniesDetailComponent implements OnInit {
   }
 
   addEmail() {
+    if (this.validateEmail()) {
+      this.emailSet.push({ Id: undefined, EmailId: '', IsPrimary: false, IsDeleted: false });
+    }
+  }
+
+  validateEmail() {
     const emailAddress = this.emailSet.filter(x => !x.IsDeleted);
     if (emailAddress.some(x => !x.EmailId.length)) {
       this._notify.error('Please fill all email address');
-      return;
+      return false;
     }
     const email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/;
     if (emailAddress.some(x => !email.test(x.EmailId))) {
       this._notify.error('Please fill all valid email address');
-      return;
+      return false;
     }
-    this.emailSet.push({ Id: undefined, EmailId: '', IsPrimary: false, IsDeleted: false });
+    return true;
   }
 
   addMobile() {
+    if (this.validateMobile) {
+      const isPrimary = this.mobileSet.some(x => x.IsPrimary === true);
+      this.mobileSet.push({
+        Id: undefined, MobileNumber: '', IsPrimary: false, IsDeleted: false, isDisabled: isPrimary, tempId: this.mobileSet.length + 1,
+        MobileType: "home"
+      });
+    }
+  }
+
+  validateMobile() {
     const mobileSet = this.mobileSet.filter(x => !x.IsDeleted);
     if (mobileSet.some(x => !x.MobileNumber.length || x.MobileNumber.length < 10)) {
       this._notify.error('Please fill all valid mobile numbers');
-      return;
+      return false;
     }
     const mobile = /^\d+$/;
     if (mobileSet.some(x => !mobile.test(x.MobileNumber))) {
       this._notify.error('Please fill all valid mobile number');
-      return;
+      return false;
     }
-    this.mobileSet.push({
-      Id: undefined, MobileNumber: '', IsPrimary: false, IsDeleted: false, isDisabled: false, tempId: this.mobileSet.length + 1,
-      MobileType: "home"
-    });
+    return true;
   }
 
   addAddress() {
+    if (this.validateAddress()) {
+      this.addressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: false, IsDeleted: false, AddressType: "Home" });
+    } else {
+
+    }
+  }
+
+  validateAddress() {
     let isEmpty = false;
     const addressSet = this.addressSet.filter(x => !x.IsDeleted);
     addressSet.forEach(element => {
@@ -199,10 +266,41 @@ export class CompaniesDetailComponent implements OnInit {
         isEmpty = true;
       }
     });
-    if (!isEmpty) {
-      this.addressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: false, IsDeleted: false, AddressType: "Home" });
-    } else {
+    if (isEmpty) {
       this._notify.error('Please fill all added address details');
+      return false;
+    }
+    return true;
+  }
+
+  CountryChanges(countryId: number) {
+    this.contactService.getStates(countryId).subscribe(res => {
+      this.states = res;
+    });
+  }
+
+  StateChanges(stateId: number) {
+    this.contactService.getCities(stateId).subscribe(res => {
+      this.cities = res;
+    });
+  }
+
+  _keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+
+    if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
     }
   }
+
+  changeIsPrimary(data: any) {
+    if (!data.IsPrimary) {
+      this.mobileSet.forEach(x => x.isDisabled = false);
+    } else {
+      this.mobileSet.filter(x => x.tempId !== data.tempId).forEach(y => y.isDisabled = true);
+    }
+  }
+
 }

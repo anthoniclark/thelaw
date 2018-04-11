@@ -34,13 +34,7 @@ export class DocumentDetailComponent implements OnInit {
           this.model = <Document>response;
           this.fileName = this.model.DocumentName;
           if (this.model.FileName) {
-            this.caseService.getCaseDocument(this.model.Id).subscribe(res => {
-              if (res && res !== "No Data Found") {
-                this.url = res;
-              }
-            }, error => {
-              this._notify.error(error.result);
-            })
+            this.url = this.caseService.getCaseDocument(this.paramId);
           }
         }, err => {
           this._notify.error(err.Result);
@@ -61,7 +55,7 @@ export class DocumentDetailComponent implements OnInit {
               this._notify.success(`Case Document  ${this.paramId === 'new' ? 'added' : 'updated'} successfully.`);
               if (this.paramId !== "new") {
                 setTimeout(() => {
-                  this.router.navigate(['/case/' + this.caseId]);
+                  this.router.navigate(['/case/' + this.caseId + '/document']);
                 });
               }
             }, error => {
@@ -74,7 +68,7 @@ export class DocumentDetailComponent implements OnInit {
             this._notify.success("Case Document updated successfully.");
           }
           setTimeout(() => {
-            this.router.navigate(['/case/' + this.caseId]);
+            this.router.navigate(['/case/' + this.caseId + '/document']);
           });
         }
       }, err => {
@@ -120,7 +114,7 @@ export class DocumentDetailComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.router.navigate(['/case/' + this.caseId]);
+    this.router.navigate(['/case/' + this.caseId + '/document']);
   }
 
   showDocument() {

@@ -363,14 +363,7 @@ export class CaseService {
   }
 
   getCaseDocument(id: number) {
-    return this.httpService.get(`Document/DownloadDocument/${id}`).map((res: any) => {
-      if (res.Success) {
-        return res.Result;
-      }
-      throw 'We are facing some issue with server, Plesae try after some time.';
-    }).catch((err: any) => {
-      throw err;
-    });
+    return `${environment.origin}Document/downloaddocument/${id}`;
   }
 
   deleteCaseDocument(id: number) {
@@ -635,6 +628,17 @@ export class CaseService {
 
   createQuickContact(contactQuickAddModel: ContactQuickAdd) {
     return this.httpService.post(`Contact/CreateQuick`, contactQuickAddModel).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  getAllAssociates() {
+    return this.httpService.get(`Contact/GetContactByType?type=associates`).map((res: any) => {
       if (res.Success) {
         return res.Result;
       }

@@ -34,10 +34,12 @@ export class Mobile {
     MobileNumber: string;
     IsPrimary: boolean;
     MobileType: string;
+    ContactId: number;
 }
 
 export class Email {
     Id: number;
     EmailId: string;
     IsPrimary: boolean;
+    ContactId: number;
 }

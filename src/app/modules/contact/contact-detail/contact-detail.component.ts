@@ -350,6 +350,7 @@ export class ContactDetailComponent implements OnInit {
             MobileNumber: mobile.MobileNumber,
             IsPrimary: mobile.IsPrimary,
             MobileType: mobile.MobileType,
+            ContactId: this.paramId === 'new' ? undefined : +this.paramId
           }
           if (mobileModel.MobileNumber) {
             this.model.MobileNumbers.push(mobileModel);
@@ -360,7 +361,8 @@ export class ContactDetailComponent implements OnInit {
           Id: undefined,
           MobileNumber: mobile.MobileNumber,
           IsPrimary: mobile.IsPrimary,
-          MobileType: mobile.MobileType
+          MobileType: mobile.MobileType,
+          ContactId: this.paramId === 'new' ? undefined : +this.paramId
         }
         if (mobileModel.MobileNumber) {
           this.model.MobileNumbers.push(mobileModel);
@@ -376,7 +378,8 @@ export class ContactDetailComponent implements OnInit {
           const emailModel: Email = {
             Id: email.Id,
             EmailId: email.EmailId,
-            IsPrimary: email.IsPrimary
+            IsPrimary: email.IsPrimary,
+            ContactId: this.paramId === 'new' ? undefined : +this.paramId
           }
           if (emailModel.EmailId) {
             this.model.EmailAddress.push(emailModel);
@@ -386,7 +389,8 @@ export class ContactDetailComponent implements OnInit {
         const emailModel: Email = {
           Id: undefined,
           EmailId: email.EmailId,
-          IsPrimary: email.IsPrimary
+          IsPrimary: email.IsPrimary,
+          ContactId: this.paramId === 'new' ? undefined : +this.paramId
         }
         if (emailModel.EmailId) {
           this.model.EmailAddress.push(emailModel);
