@@ -5,6 +5,7 @@ import { NotificationService } from '../../../shared/services/notification.servi
 import { NoImagePath } from '../../../shared/constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Modal } from 'ngx-modialog/plugins/bootstrap';
+import { ContactService } from '../../contact/contact.service';
 
 @Component({
   selector: 'app-companies-detail',
@@ -20,9 +21,15 @@ export class CompaniesDetailComponent implements OnInit {
   validFileType: boolean = true;
   url: string = NoImagePath;
   selectedContacts: any[] = [];
+  countries: any[] = [];
+  states: any[] = [];
+  cities: any[] = [];
   settings = { enableSearchFilter: true };
+  emailSet = [{ Id: undefined, EmailId: '', IsPrimary: true, IsDeleted: false }];
+  mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false, isDisabled: false, tempId: 1, MobileType: "home" }];
+  addressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false, AddressType: "Home" }];
   constructor(private conmapiesService: CompaniesService, private _notify: NotificationService,
-    private activatedRoute: ActivatedRoute, private router: Router, private modalDialog: Modal) { }
+    private activatedRoute: ActivatedRoute, private router: Router, private modalDialog: Modal, private contactService: ContactService) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => this.paramId = params["id"]);
@@ -32,6 +39,16 @@ export class CompaniesDetailComponent implements OnInit {
       });
     }, error => {
       this._notify.error(error);
+    });
+    this.contactService.getCountries().subscribe(res => {
+      this.countries = res;
+    });
+    this.contactService.getAllCities().subscribe(res => {
+      this.cities = res;
+    });
+
+    this.contactService.getAllStates().subscribe(res => {
+      this.states = res;
     });
     if (this.paramId !== 'new') {
       this.conmapiesService.getCompanyById(this.paramId).subscribe(response => {
@@ -140,6 +157,52 @@ export class CompaniesDetailComponent implements OnInit {
     } else {
       this.url = NoImagePath;
       this.fileToUpload = null;
+    }
+  }
+
+  addEmail() {
+    const emailAddress = this.emailSet.filter(x => !x.IsDeleted);
+    if (emailAddress.some(x => !x.EmailId.length)) {
+      this._notify.error('Please fill all email address');
+      return;
+    }
+    const email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/;
+    if (emailAddress.some(x => !email.test(x.EmailId))) {
+      this._notify.error('Please fill all valid email address');
+      return;
+    }
+    this.emailSet.push({ Id: undefined, EmailId: '', IsPrimary: false, IsDeleted: false });
+  }
+
+  addMobile() {
+    const mobileSet = this.mobileSet.filter(x => !x.IsDeleted);
+    if (mobileSet.some(x => !x.MobileNumber.length || x.MobileNumber.length < 10)) {
+      this._notify.error('Please fill all valid mobile numbers');
+      return;
+    }
+    const mobile = /^\d+$/;
+    if (mobileSet.some(x => !mobile.test(x.MobileNumber))) {
+      this._notify.error('Please fill all valid mobile number');
+      return;
+    }
+    this.mobileSet.push({
+      Id: undefined, MobileNumber: '', IsPrimary: false, IsDeleted: false, isDisabled: false, tempId: this.mobileSet.length + 1,
+      MobileType: "home"
+    });
+  }
+
+  addAddress() {
+    let isEmpty = false;
+    const addressSet = this.addressSet.filter(x => !x.IsDeleted);
+    addressSet.forEach(element => {
+      if (!element.Address1 || !element.State || !element.City) {
+        isEmpty = true;
+      }
+    });
+    if (!isEmpty) {
+      this.addressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: false, IsDeleted: false, AddressType: "Home" });
+    } else {
+      this._notify.error('Please fill all added address details');
     }
   }
 }

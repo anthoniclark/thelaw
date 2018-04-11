@@ -30,7 +30,7 @@ export class ContactDetailComponent implements OnInit {
   officeAddressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false }];
   emailSet = [{ Id: undefined, EmailId: '', IsPrimary: true, IsDeleted: false }];
   visibleEmail: number = 0;
-  mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false, isDisabled: false, tempId: 1, MobileType: "Home" }];
+  mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false, isDisabled: false, tempId: 1, MobileType: "home" }];
   validFileType: boolean = true;
   CompanyId;
   isDisabled: boolean = false;
@@ -207,7 +207,7 @@ export class ContactDetailComponent implements OnInit {
       const isPrimary = this.mobileSet.some(x => x.IsPrimary === true);
       this.mobileSet.push({
         Id: undefined, MobileNumber: '', IsPrimary: false, IsDeleted: false, isDisabled: isPrimary, tempId: this.mobileSet.length + 1,
-        MobileType: "Home"
+        MobileType: "home"
       });
     } else {
       this._notify.error('Please fill all added mobile');

@@ -7,6 +7,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import { ModalModule } from 'ngx-modialog';
 import { CompanyListComponent } from './company-list/company-list.component';
+import { ContactService } from '../contact/contact.service';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { CompanyListComponent } from './company-list/company-list.component';
     AngularMultiSelectModule,
     ModalModule.forRoot()
   ],
+  providers: [ContactService],
   declarations: [CompaniesListComponent, CompaniesDetailComponent, CompanyListComponent]
 })
 export class CompaniesModule { }

@@ -1,3 +1,5 @@
+import { Address, Mobile, Email } from "./contact";
+
 export class Company {
     Id: number;
     CompanyName: string;
@@ -11,6 +13,9 @@ export class Company {
     ContactIds: number[];
     DeletedContactIds: number[];
     Contacts: Contacts[];
+    Address: Address[];
+    MobileNumbers: Mobile[];
+    EmailAddress: Email[];
 }
 
 export class Contacts {
