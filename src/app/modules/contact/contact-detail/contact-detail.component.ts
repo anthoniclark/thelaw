@@ -26,7 +26,7 @@ export class ContactDetailComponent implements OnInit {
   companies: any[] = [];
   fileToUpload: File = null;
   url: any = NoImagePath;
-  addressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false }];
+  addressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false, ContactId: undefined }];
   officeAddressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false }];
   emailSet = [{ Id: undefined, EmailId: '', IsPrimary: true, IsDeleted: false }];
   visibleEmail: number = 0;
@@ -90,7 +90,8 @@ export class ContactDetailComponent implements OnInit {
                 IsPrimary: element.IsPrimary,
                 PostCode: element.PostCode,
                 State: element.State,
-                Country: element.CountryId
+                Country: element.CountryId,
+                ContactId: this.paramId === 'new' ? undefined : +this.paramId
               });
             } else {
               this.officeAddressSet.push({
@@ -162,7 +163,7 @@ export class ContactDetailComponent implements OnInit {
       }
     });
     if (!isEmpty) {
-      this.addressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: false, IsDeleted: false });
+      this.addressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: false, IsDeleted: false, ContactId: undefined });
     } else {
       this._notify.error('Please fill all added address');
     }
@@ -283,7 +284,8 @@ export class ContactDetailComponent implements OnInit {
             IsPrimary: address.IsPrimary,
             State: address.State,
             PostCode: address.PostCode,
-            AddressType: AddressType.Home
+            AddressType: AddressType.Home,
+            ContactId: this.paramId === 'new' ? undefined : +this.paramId
           }
           if (address.City && address.State && address.Country) {
             this.model.Address.push(addressModel);
@@ -298,7 +300,8 @@ export class ContactDetailComponent implements OnInit {
           IsPrimary: address.IsPrimary,
           State: address.State,
           PostCode: address.PostCode,
-          AddressType: AddressType.Home
+          AddressType: AddressType.Home,
+          ContactId: this.paramId === 'new' ? undefined : +this.paramId
         }
         if (address.City && address.State && address.Country) {
           this.model.Address.push(addressModel);
@@ -318,7 +321,8 @@ export class ContactDetailComponent implements OnInit {
             IsPrimary: address.IsPrimary,
             State: address.State,
             PostCode: address.PostCode,
-            AddressType: AddressType.Office
+            AddressType: AddressType.Office,
+            ContactId: this.paramId === 'new' ? undefined : +this.paramId
           }
           if (address.City && address.State && address.Country) {
             this.model.Address.push(addressModel);
@@ -333,7 +337,8 @@ export class ContactDetailComponent implements OnInit {
           IsPrimary: address.IsPrimary,
           State: address.State,
           PostCode: address.PostCode,
-          AddressType: AddressType.Office
+          AddressType: AddressType.Office,
+          ContactId: this.paramId === 'new' ? undefined : +this.paramId
         }
         if (address.City && address.State && address.Country) {
           this.model.Address.push(addressModel);

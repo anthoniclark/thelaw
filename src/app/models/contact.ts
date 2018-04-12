@@ -27,6 +27,7 @@ export class Address {
     PostCode: string;
     AddressType: string;
     IsPrimary: boolean;
+    ContactId: number;
 }
 
 export class Mobile {
@@ -35,6 +36,7 @@ export class Mobile {
     IsPrimary: boolean;
     MobileType: string;
     ContactId: number;
+    CompanyId?: number;
 }
 
 export class Email {

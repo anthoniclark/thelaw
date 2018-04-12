@@ -6,7 +6,7 @@ import { NoImagePath } from '../../../shared/constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Modal } from 'ngx-modialog/plugins/bootstrap';
 import { ContactService } from '../../contact/contact.service';
-import { Mobile, Email } from 'app/models/contact';
+import { Mobile, Email, Address } from 'app/models/contact';
 
 @Component({
   selector: 'app-companies-detail',
@@ -28,7 +28,7 @@ export class CompaniesDetailComponent implements OnInit {
   settings = { enableSearchFilter: true };
   emailSet = [{ Id: undefined, EmailId: '', IsPrimary: true, IsDeleted: false }];
   mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false, isDisabled: false, tempId: 1, MobileType: "home" }];
-  addressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false, AddressType: "Home" }];
+  addressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false, AddressType: "Home", ContactId: undefined }];
   constructor(private conmapiesService: CompaniesService, private _notify: NotificationService,
     private activatedRoute: ActivatedRoute, private router: Router, private modalDialog: Modal, private contactService: ContactService) { }
 
@@ -61,8 +61,36 @@ export class CompaniesDetailComponent implements OnInit {
         });
         if (response.MobileNumbers.length) {
           this.mobileSet = [];
-          response.MobileNumbers.forEach(element => {
-            
+          response.MobileNumbers.forEach((element, index) => {
+            this.mobileSet.push({
+              Id: element.Id, IsDeleted: false, isDisabled: !element.IsPrimary, MobileNumber: element.MobileNumber, MobileType:
+                element.MobileType, IsPrimary: element.IsPrimary, tempId: index + 1
+            });
+          });
+        }
+
+        if (response.EmailAddress.length) {
+          this.emailSet = [];
+          response.EmailAddress.forEach((element, index) => {
+            this.emailSet.push({ Id: element.Id, IsDeleted: false, IsPrimary: element.IsPrimary, EmailId: element.EmailId });
+          });
+        }
+
+        if (response.Address.length) {
+          this.addressSet = [];
+          response.Address.forEach((element, index) => {
+            this.addressSet.push({
+              Id: element.Id,
+              Address1: element.Address1,
+              IsPrimary: element.IsPrimary,
+              State: element.State,
+              AddressType: element.AddressType,
+              PostCode: element.PostCode,
+              ContactId: element.ContactId.toString(),
+              IsDeleted: false,
+              Country: element.CountryId,
+              City: element.CityId
+            });
           });
         }
       }, error => {
@@ -84,6 +112,7 @@ export class CompaniesDetailComponent implements OnInit {
     }
 
     this.mobileSet.forEach(mobileset => {
+      debugger
       if (mobileset.isDisabled) {
         if (mobileset.Id)
           this.contactService.deleteMobile(mobileset.Id).subscribe(res => { });
@@ -93,7 +122,8 @@ export class CompaniesDetailComponent implements OnInit {
           MobileNumber: mobileset.MobileNumber,
           IsPrimary: mobileset.IsPrimary,
           MobileType: mobileset.MobileType,
-          ContactId: this.paramId === 'new' ? undefined : +this.paramId
+          ContactId: this.paramId === 'new' ? undefined : +this.paramId,
+          CompanyId: this.paramId === 'new' ? undefined : +this.paramId
         }
         if (mobileModel.MobileNumber) {
           this.model.MobileNumbers.push(mobileModel);
@@ -104,7 +134,7 @@ export class CompaniesDetailComponent implements OnInit {
     this.emailSet.forEach(email => {
       if (email.IsDeleted) {
         if (email.Id)
-          this.contactService.deleteMobile(email.Id).subscribe(res => { });
+          this.contactService.deleteEmail(email.Id).subscribe(res => { });
       } else {
         const emailModel: Email = {
           Id: email.Id,
@@ -117,6 +147,27 @@ export class CompaniesDetailComponent implements OnInit {
         }
       }
     });
+
+    this.addressSet.forEach(address => {
+      if (address.IsDeleted) {
+        if (address.Id)
+          this.contactService.deleteAddress(address.Id).subscribe(res => { });
+      } else {
+        const addressModel: Address = {
+          Id: address.Id,
+          Address1: address.Address1,
+          IsPrimary: address.IsPrimary,
+          State: address.State,
+          AddressType: address.AddressType,
+          CityId: address.City,
+          CountryId: address.Country,
+          PostCode: address.PostCode,
+          ContactId: this.paramId === 'new' ? undefined : +this.paramId
+        }
+        this.model.Address.push(addressModel);
+      }
+    });
+
     this.isLoading = true;
     this.model.ContactIds = [];
     this.selectedContacts.forEach(data => {
@@ -252,7 +303,7 @@ export class CompaniesDetailComponent implements OnInit {
 
   addAddress() {
     if (this.validateAddress()) {
-      this.addressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: false, IsDeleted: false, AddressType: "Home" });
+      this.addressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: false, IsDeleted: false, AddressType: "Home", ContactId: undefined });
     } else {
 
     }
