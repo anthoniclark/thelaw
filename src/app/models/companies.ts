@@ -11,11 +11,11 @@ export class Company {
     Website: string;
     CompanyLogo: string;
     ContactIds: number[];
-    DeletedContactIds: number[];
+    DeletedContactIds: number[] = [];
     Contacts: Contacts[];
-    Address: Address[];
-    MobileNumbers: Mobile[];
-    EmailAddress: Email[];
+    Address: Address[] = [];
+    MobileNumbers: Mobile[] = [];
+    EmailAddress: Email[] = [];
 }
 
 export class Contacts {

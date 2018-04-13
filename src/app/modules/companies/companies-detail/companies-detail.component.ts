@@ -53,7 +53,6 @@ export class CompaniesDetailComponent implements OnInit {
     });
     if (this.paramId !== 'new') {
       this.conmapiesService.getCompanyById(this.paramId).subscribe(response => {
-        debugger
         this.model = response;
         this.selectedContacts = [];
         response.Contacts.forEach(element => {
@@ -75,7 +74,6 @@ export class CompaniesDetailComponent implements OnInit {
             this.emailSet.push({ Id: element.Id, IsDeleted: false, IsPrimary: element.IsPrimary, EmailId: element.EmailId });
           });
         }
-
         if (response.Address.length) {
           this.addressSet = [];
           response.Address.forEach((element, index) => {
@@ -86,7 +84,7 @@ export class CompaniesDetailComponent implements OnInit {
               State: element.State,
               AddressType: element.AddressType,
               PostCode: element.PostCode,
-              ContactId: element.ContactId.toString(),
+              ContactId: element.ContactId,
               IsDeleted: false,
               Country: element.CountryId,
               City: element.CityId
@@ -110,10 +108,11 @@ export class CompaniesDetailComponent implements OnInit {
     if (!this.validateEmail() || !this.validateMobile() || !this.validateAddress()) {
       return false;
     }
-
+    this.model.MobileNumbers = [];
+    this.model.EmailAddress = [];
+    this.model.Address = [];
     this.mobileSet.forEach(mobileset => {
-      debugger
-      if (mobileset.isDisabled) {
+      if (mobileset.IsDeleted) {
         if (mobileset.Id)
           this.contactService.deleteMobile(mobileset.Id).subscribe(res => { });
       } else {
