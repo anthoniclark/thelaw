@@ -15,8 +15,9 @@ const routes: Routes = [
     // }
 
     { path: '', component: ContactDashboardComponent },
-    { path: 'list', component: ContactListComponent },
-    { path: ':id', component: ContactDetailComponent }
+    // { path: 'list', component: ContactListComponent },
+    { path: ':id', component: ContactDetailComponent },
+    { path: 'view/:id', component: ContactDetailComponent },
 ];
 
 export const contactRouting: ModuleWithProviders = RouterModule.forChild(routes);

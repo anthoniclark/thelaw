@@ -110,4 +110,9 @@ export class ContactGridComponent implements OnInit {
     }
     this.router.navigate([`case/contact/${id}`]);
   }
+
+  viewDetail(id) {
+    this.router.navigate([`contact/view/${id}`]);
+  }
+
 }

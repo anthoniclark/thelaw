@@ -54,10 +54,13 @@
 
   <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
     <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-      <button (click)="editClick(value)" md-icon-button>
+      <button (click)="viewDetail(value)" title="View" md-icon-button>
+        <i class="fa fa-eye" aria-hidden="true"></i>
+      </button>
+      <button (click)="editClick(value)" title="edit" md-icon-button>
         <i class="fa fa-edit"></i>
       </button>
-      <button (click)="deleteClick(value)" md-icon-button>
+      <button (click)="deleteClick(value)" title="delete" md-icon-button>
         <i class="fa fa-trash"></i>
       </button>
       <!-- <button (click)="goTOCase(value)" md-icon-button>

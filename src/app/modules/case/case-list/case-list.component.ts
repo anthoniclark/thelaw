@@ -16,7 +16,7 @@ import { PageSize } from '../../../shared/constants';
 })
 export class CaseListComponent implements OnInit {
   rows = [];
-  pageSize:number = PageSize;
+  pageSize: number = PageSize;
   public page: Page = new Page();
   loadingIndicator: boolean = false;
   sorting: Sorting = new Sorting();
@@ -65,7 +65,9 @@ export class CaseListComponent implements OnInit {
     let searchValue = ""
     if (event.filters) {
       filterColumnString = 'columnName=';
-      searchValue = '&searchValue='
+      searchValue = '&searchValue=';
+      this.page.pageNumber = 0;
+
       Object.keys(event.filters).forEach(key => {
         filterColumnString += `${key},`;
         searchValue += `${event.filters[key].value},`;
@@ -164,24 +166,24 @@ export class CaseListComponent implements OnInit {
     this.modal.open(CaseChangeStatusComponent, overlayConfigFactory({ caseRow: rowData }, BSModalContext));
   }
 
-  showCommunication(rowData: any) {
-    this.router.navigateByUrl('/case/' + rowData.Id + '/communication/dashboard');
+  showCommunication(id: any) {
+    this.router.navigateByUrl('/case/' + id + '/communication/dashboard');
   }
-  ShowTimeTracker(rowData: any) {
-    this.router.navigateByUrl(`/case/${rowData.Id}/time-tracking`);
+  ShowTimeTracker(id: any) {
+    this.router.navigateByUrl(`/case/${id}/time-tracking`);
   }
-  ShowNotes(rowData: any) {
-    this.router.navigateByUrl(`/case/${rowData.Id}/note`);
+  ShowNotes(id: any) {
+    this.router.navigateByUrl(`/case/${id}/note`);
   }
-  ShowCommunications(rowData: any) {
-    this.router.navigateByUrl(`/case/${rowData.Id}/communication`);
+  ShowCommunications(id: any) {
+    this.router.navigateByUrl(`/case/${id}/communication`);
   }
-  ShowEvidence(rowData: any) {
-    this.router.navigateByUrl(`/case/${rowData.Id}/evidence`);
+  ShowEvidence(id: any) {
+    this.router.navigateByUrl(`/case/${id}/evidence`);
   }
 
-  ShowDocuments(rowData: any) {
-    this.router.navigateByUrl(`/case/${rowData.Id}/document`);
+  ShowDocuments(id: any) {
+    this.router.navigateByUrl(`/case/${id}/document`);
   }
 
   paginate(event) {
@@ -216,5 +218,10 @@ export class CaseListComponent implements OnInit {
     this.advanceSearch = "";
     // this.setPage(this.page);
   }
+
+  viewDetail(id) {
+    this.router.navigateByUrl(`/case/view/${id}`);
+  }
+
 }
 

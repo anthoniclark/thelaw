@@ -30,6 +30,8 @@ export class CaseExpenseListComponent implements OnInit {
     value: ''
   }
   ];
+  ds = [{ "caseNo": 1, "children": [{ "expenseType": "Copying", "children": [{ "name": "maulik" }] }, { "expenseType": "Printing", "children": [{ "name": "John" }] }] }, { "caseNo": 2, "children": [{ "expenseType": "Documentation", "children": [{ "name": "Nilay" }] }, { "expenseType": "Research", "children": [{ "name": "Nikolus" }] }] }];
+
   constructor(private caseExpenseService: CaseExpenseService, private router: Router, private _notify: NotificationService) {
     this.page.pageNumber = 0;
     this.page.size = 5;
@@ -37,7 +39,14 @@ export class CaseExpenseListComponent implements OnInit {
 
   ngOnInit() {
     this.sorting = { columnName: "Id", dir: true }
-    this.setPage({ offset: 0 });
+    // this.setPage({ offset: 0 });
+
+    this.caseExpenseService.getAllExpenseData().subscribe(res => {
+      this.loadingIndicator = false;
+      this.rows = res;
+    }, error => {
+
+    });
   }
 
 
@@ -142,6 +151,6 @@ export class CaseExpenseListComponent implements OnInit {
   }
 
   onFocus() {
-    
+
   }
 }

@@ -1,12 +1,12 @@
 <div>
   <div class="panel mb25">
     <div class="panel-heading border">
-      <b>{{ (paramId !='new') ? 'Modify':'Add' }} Case</b>
+      <b>{{ isViewModel ? 'View' : ((paramId !='new') ? 'Modify':'Add') }} Case</b>
     </div>
     <div class=panel-body>
       <div class="row no-margin">
         <div class=col-lg-12>
-          <form name="caseForm" (ngSubmit)="caseForm.form.valid && save()" #caseForm="ngForm" novalidate>
+          <form name="caseForm" (ngSubmit)="!isViewModel && caseForm.form.valid && save()" #caseForm="ngForm" novalidate>
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
@@ -20,8 +20,8 @@
                   <label for="CaseNo">Case No
                     <span class="req">*</span>
                   </label>
-                  <input type="text" maxlength="50" id="CaseNo" name="CaseNo" [class.inValidField]="caseForm.submitted && !CaseNo.valid" required
-                    class="form-control" (change)="changeDoctNo()" [(ngModel)]="model.CaseNo" #CaseNo="ngModel" />
+                  <input type="text" maxlength="50" id="CaseNo" name="CaseNo" [readonly]="isViewModel" [class.inValidField]="caseForm.submitted && !CaseNo.valid"
+                    required class="form-control" (change)="changeDoctNo()" [(ngModel)]="model.CaseNo" #CaseNo="ngModel" />
                   <label *ngIf="caseForm.submitted && !CaseNo.valid" class="err-label">
                     Please enter Case number
                   </label>
@@ -35,10 +35,10 @@
                   <label for="ClientId">Client
                     <span class="req">*</span>
                   </label>
-                  <a class="pull-right" (click)="addClient()">
+                  <a class="pull-right" (click)="addClient()" *ngIf="!isViewModel">
                     <i aria-hidden="true" class="fa fa-plus"></i> Create New
                   </a>
-                  <input ngui-auto-complete class="form-control" [(ngModel)]="ClientId" [class.inValidField]="caseForm.submitted && !model.ClientId"
+                  <input ngui-auto-complete class="form-control" [(ngModel)]="ClientId" [readonly]="isViewModel" [class.inValidField]="caseForm.submitted && !model.ClientId"
                     name="ClientId" [source]="contactSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter"
                     [accept-user-input]="false" (valueChanged)="onSelectClient($event)" value-property-name="Id" display-property-name="Name"
                   />
@@ -52,8 +52,8 @@
                   <label for="NickName">Nick Name
                     <span class="req">*</span>
                   </label>
-                  <input type="text" maxlength="100" id="NickName" name="NickName" class="form-control" [(ngModel)]="model.NickName" #NickName="ngModel"
-                    [class.inValidField]="caseForm.submitted && !NickName.valid" required/>
+                  <input type="text" maxlength="100" id="NickName" name="NickName" class="form-control" [readonly]="isViewModel" [(ngModel)]="model.NickName"
+                    #NickName="ngModel" [class.inValidField]="caseForm.submitted && !NickName.valid" required/>
                   <label *ngIf="caseForm.submitted && !NickName.valid" class="err-label">
                     Please select valid Client
                   </label>
@@ -66,7 +66,7 @@
                   <label for="CaseType">Case Type
                     <span class="req">*</span>
                   </label>
-                  <select class="form-control" [(ngModel)]="model.CaseType" id="CaseType" [class.inValidField]="caseForm.submitted && !model.CaseType"
+                  <select class="form-control" [(ngModel)]="model.CaseType" id="CaseType" [disabled]="isViewModel" [class.inValidField]="caseForm.submitted && !model.CaseType"
                     name="CaseType" #CaseType="ngModel">
                     <option [value]='undefined'>Select Case Type</option>
                     <option *ngFor="let caseType of CaseTypeDropDown" value={{caseType.Id}}>
@@ -83,8 +83,9 @@
                   <label for="CaseYear">Case Year
                     <span class="req">*</span>
                   </label>
-                  <input type="number" maxlength="4" name="CaseYear" id="CaseYear" class="form-control" [(ngModel)]="model.CaseYear" #CaseYear="ngModel"
-                    [class.inValidField]="caseForm.submitted && !model.CaseYear" required (change)="changeDoctNo()" />
+                  <input type="number" maxlength="4" name="CaseYear" id="CaseYear" [readonly]="isViewModel" class="form-control" [(ngModel)]="model.CaseYear"
+                    #CaseYear="ngModel" [class.inValidField]="caseForm.submitted && !model.CaseYear" required (change)="changeDoctNo()"
+                  />
                   <label *ngIf="caseForm.submitted && !model.CaseYear" class="err-label">
                     Please enter Case Year
                   </label>
@@ -95,10 +96,11 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CaseAppealType">Case Appeal Type</label>
-                  <a class="pull-right" (click)="appAppealType()">
+                  <a class="pull-right" (click)="appAppealType()" *ngIf="!isViewModel">
                     <i aria-hidden="true" class="fa fa-plus"></i> Create New
                   </a>
-                  <select class="form-control" [(ngModel)]="model.CaseAppealType" id="CaseAppealType" name="CaseAppealType" #CaseAppealType="ngModel">
+                  <select class="form-control" [(ngModel)]="model.CaseAppealType" [disabled]="isViewModel" id="CaseAppealType" name="CaseAppealType"
+                    #CaseAppealType="ngModel">
                     <option [value]='undefined'>Select CaseAppeal Type</option>
                     <option *ngFor="let caseAppealType of CaseAppealTypeDropDown" value={{caseAppealType.Id}}>
                       {{caseAppealType.AppealTypeName}}
@@ -109,7 +111,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="City">City</label>
-                  <input type="text" id="City" name="City" maxlength="25" class="form-control" [(ngModel)]="model.City" #City="ngModel" />
+                  <input type="text" id="City" name="City" maxlength="25" [readonly]="isViewModel" class="form-control" [(ngModel)]="model.City"
+                    #City="ngModel" />
                 </div>
               </div>
             </div>
@@ -119,7 +122,7 @@
                   <label for="CourtId">Court
                     <span class="req">*</span>
                   </label>
-                  <select class="form-control" required [(ngModel)]="model.CourtId" [class.inValidField]="caseForm.submitted && !model.CourtId"
+                  <select class="form-control" required [(ngModel)]="model.CourtId" [disabled]="isViewModel" [class.inValidField]="caseForm.submitted && !model.CourtId"
                     id="CourtId" name="CourtId" #CourtId="ngModel">
                     <option [value]='undefined'>Select Court</option>
                     <option *ngFor="let court of courts" [value]='court.Id'>
@@ -134,7 +137,7 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="JudgeId">Judge</label>
-                  <a class="pull-right" (click)="appJugge()">
+                  <a class="pull-right" (click)="appJugge()" *ngIf="!isViewModel">
                     <i aria-hidden="true" class="fa fa-plus"></i> Create New
                   </a>
                   <!-- <select class="form-control" [(ngModel)]="model.JudgeId" id="JudgeId" name="JudgeId" #JudgeId="ngModel">
@@ -143,8 +146,8 @@
                       {{judge.FirstName}} {{judge.LastName}}
                     </option>
                   </select> -->
-                  <angular2-multiselect [data]="judges" [(ngModel)]="selectedJudges" [settings]="settings" class="form-control" #JudgeId="ngModel"
-                    name="JudgeId" id="JudgeId" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
+                  <angular2-multiselect [data]="judges" [(ngModel)]="selectedJudges" [disabled]="isViewModel" [settings]="settings" class="form-control"
+                    #JudgeId="ngModel" name="JudgeId" id="JudgeId" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
                   </angular2-multiselect>
                 </div>
               </div>
@@ -154,11 +157,11 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="JudgeId">Associates</label>
-                  <a class="pull-right" (click)="addAssociates()">
+                  <a class="pull-right" (click)="addAssociates()" *ngIf="!isViewModel">
                     <i aria-hidden="true" class="fa fa-plus"></i> Create New
                   </a>
                   <angular2-multiselect [data]="associates" [(ngModel)]="selectedAssociates" [settings]="associatesSettings" class="form-control"
-                    #associatesIds="ngModel" name="associates" id="associates" >
+                    #associatesIds="ngModel" name="associates" id="associates">
 
                   </angular2-multiselect>
                 </div>
@@ -166,14 +169,14 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Description">Description</label>
-                  <textarea class="form-control" rows="3" id="Description" name="Description" maxlength="250" [(ngModel)]="model.Description"
+                  <textarea class="form-control" rows="3" id="Description" name="Description" [readonly]="isViewModel" maxlength="250" [(ngModel)]="model.Description"
                     #Description="ngModel"></textarea>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="AppearedFor">Appeared For</label>
-                  <input type="text" id="AppearedFor" name="AppearedFor" maxlength="250" class="form-control" [(ngModel)]="model.AppearedFor"
+                  <input type="text" id="AppearedFor" name="AppearedFor" maxlength="250" [readonly]="isViewModel" class="form-control" [(ngModel)]="model.AppearedFor"
                     #AppearedFor="ngModel" />
                 </div>
               </div>
@@ -185,10 +188,10 @@
                   <label for="OpponentContactId">Opponent Contact
                     <span class="req">*</span>
                   </label>
-                  <a class="pull-right" (click)="addOpponentContact()">
+                  <a class="pull-right" (click)="addOpponentContact()" *ngIf="!isViewModel">
                     <i aria-hidden="true" class="fa fa-plus"></i> Create New
                   </a>
-                  <input ngui-auto-complete class="form-control" [(ngModel)]="OpponentContactId" [class.inValidField]="caseForm.submitted && !model.OpponentContactId"
+                  <input ngui-auto-complete class="form-control" [(ngModel)]="OpponentContactId" [disabled]="isViewModel" [class.inValidField]="caseForm.submitted && !model.OpponentContactId"
                     name="OpponentContactId" [source]="contactSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter"
                     [accept-user-input]="false" (valueChanged)="onSelectOponent($event)" value-property-name="Id" display-property-name="Name"
                   />
@@ -200,12 +203,13 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="OppnentAdvocateId">Oppnent Advocate</label>
-                  <a class="pull-right" (click)="addOpponentAdvocate()">
+                  <a class="pull-right" (click)="addOpponentAdvocate()" *ngIf="!isViewModel">
                     <i aria-hidden="true" class="fa fa-plus"></i> Create New
                   </a>
-                  <input ngui-auto-complete class="form-control" [(ngModel)]="OppnentAdvocateId" name="OppnentAdvocateId" [source]="advocateSearch.bind(this)"
-                    min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectOponentAdvocate($event)"
-                    value-property-name="Id" display-property-name="Name" />
+                  <input ngui-auto-complete class="form-control" [(ngModel)]="OppnentAdvocateId" [disabled]="isViewModel" name="OppnentAdvocateId"
+                    [source]="advocateSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false"
+                    (valueChanged)="onSelectOponentAdvocate($event)" value-property-name="Id" display-property-name="Name"
+                  />
                 </div>
               </div>
             </div>
@@ -215,16 +219,16 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="WitnessContactId">Witness Contact</label>
-                  <input ngui-auto-complete class="form-control" [(ngModel)]="WitnessContactId" name="WitnessContactId" [source]="contactSearch.bind(this)"
-                    min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectWitness($event)"
-                    value-property-name="Id" display-property-name="Name" />
+                  <input ngui-auto-complete class="form-control" [(ngModel)]="WitnessContactId" [disabled]="isViewModel" name="WitnessContactId"
+                    [source]="contactSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false"
+                    (valueChanged)="onSelectWitness($event)" value-property-name="Id" display-property-name="Name" />
                   <!-- <input autocomplete class="form-control" [items]="contacts" (inputChangedEvent)="contactSearch($event)" (selectEvent)="onSelectWitness($event)"> -->
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Priority">Priority</label>
-                  <select class="form-control" [(ngModel)]="model.Priority" id="Priority" name="Priority" #Priority="ngModel">
+                  <select class="form-control" [(ngModel)]="model.Priority" id="Priority" [disabled]="isViewModel" name="Priority" #Priority="ngModel">
                     <option [value]='undefined'>Select Priority</option>
                     <option *ngFor="let priority of PriorityDropDown" value={{priority.Id}}>
                       {{priority.Name}}
@@ -238,15 +242,15 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="OpenDate">Open Date</label>
-                  <input class="form-control" [(ngModel)]="model.OpenDate" ngui-datetime-picker date-only="true" name="OpenDate" id="OpenDate"
-                    #OpenDate="ngModel" />
+                  <input class="form-control" [(ngModel)]="model.OpenDate" [disabled]="isViewModel" ngui-datetime-picker date-only="true" name="OpenDate"
+                    id="OpenDate" #OpenDate="ngModel" />
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="EndDate">End Date</label>
-                  <input class="form-control" [(ngModel)]="model.EndDate" ngui-datetime-picker date-only="true" name="EndDate" id="EndDate"
-                    #EndDate="ngModel" />
+                  <input class="form-control" [(ngModel)]="model.EndDate" [disabled]="isViewModel" ngui-datetime-picker date-only="true" name="EndDate"
+                    id="EndDate" #EndDate="ngModel" />
                 </div>
               </div>
             </div>
@@ -255,7 +259,7 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="WorkedAs">Worked As</label>
-                  <select class="form-control" [(ngModel)]="model.WorkedAs" id="WorkedAs" name="WorkedAs" #WorkedAs="ngModel">
+                  <select class="form-control" [(ngModel)]="model.WorkedAs" [disabled]="isViewModel" id="WorkedAs" name="WorkedAs" #WorkedAs="ngModel">
                     <option [value]='undefined'>Select Worked As</option>
                     <option *ngFor="let wa of WorkedAsDropDown" value={{wa.Id}}>
                       {{wa.Name}}
@@ -266,7 +270,7 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CaseStatus">Case Status</label>
-                  <input type="text" maxlength="250" id="CaseStatus" name="CaseStatus" class="form-control" [(ngModel)]="model.CaseStatus"
+                  <input type="text" maxlength="250" id="CaseStatus" [readonly]="isViewModel" name="CaseStatus" class="form-control" [(ngModel)]="model.CaseStatus"
                     #CaseStatus="ngModel" />
                 </div>
               </div>
@@ -276,7 +280,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="OfficeAddressId">Office Address</label>
-                  <select class="form-control" [(ngModel)]="model.OfficeAddressId" id="OfficeAddressId" name="OfficeAddressId" #OfficeAddressId="ngModel">
+                  <select class="form-control" [(ngModel)]="model.OfficeAddressId" [disabled]="isViewModel" id="OfficeAddressId" name="OfficeAddressId"
+                    #OfficeAddressId="ngModel">
                     <option [value]='undefined'>Select Office Address</option>
                     <option *ngFor="let office of offices" value={{office.Id}}>
                       {{office.Address1}}
@@ -287,8 +292,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="RefferenceNumber">Reference Number</label>
-                  <input type="text" maxlength="250" id="RefferenceNumber" name="RefferenceNumber" class="form-control" [(ngModel)]="model.RefferenceNumber"
-                    #RefferenceNumber="ngModel" />
+                  <input type="text" maxlength="250" id="RefferenceNumber" [readonly]="isViewModel" name="RefferenceNumber" class="form-control"
+                    [(ngModel)]="model.RefferenceNumber" #RefferenceNumber="ngModel" />
                 </div>
               </div>
             </div>
@@ -296,15 +301,15 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="FilledDate">Filled Date</label>
-                  <input class="form-control" [(ngModel)]="model.FilledDate" ngui-datetime-picker date-only="true" name="FilledDate" id="FilledDate"
-                    #FilledDate="ngModel" />
+                  <input class="form-control" [(ngModel)]="model.FilledDate" [disabled]="isViewModel" ngui-datetime-picker date-only="true"
+                    name="FilledDate" id="FilledDate" #FilledDate="ngModel" />
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="AdvanceFees">Advance Fees</label>
-                  <input class="form-control" type="number" id="AdvanceFees" name="AdvanceFees" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.AdvanceFees"
-                    (keypress)="_keyPress($event)" #AdvanceFees="ngModel" />
+                  <input class="form-control" type="number" id="AdvanceFees" [readonly]="isViewModel" name="AdvanceFees" pattern="^\d+(\.\d{1,2})?$"
+                    step="0.01" [(ngModel)]="model.AdvanceFees" (keypress)="_keyPress($event)" #AdvanceFees="ngModel" />
                   <label *ngIf="(caseForm.submitted || AdvanceFees.dirty) && AdvanceFees.errors && AdvanceFees.errors['pattern']" class="err-label">
                     Enter Valid Advance Fees</label>
                 </div>
@@ -315,7 +320,7 @@
                 <div class="form-group">
                   <label for="PricingType">Pricing Type</label>
                   <!-- <input class="form-control" [(ngModel)]="model.PricingType" name="PricingType" id="PricingType" #PricingType="ngModel" /> -->
-                  <select class="form-control" [(ngModel)]="model.PricingType" name="PricingType" #PricingType="ngModel">
+                  <select class="form-control" [(ngModel)]="model.PricingType" [disabled]="isViewModel" name="PricingType" #PricingType="ngModel">
                     <option *ngFor="let pricingType of casePricingType" [value]='pricingType.Id'>
                       {{pricingType.Name}}
                     </option>
@@ -325,8 +330,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CourtFees">Court Fees</label>
-                  <input class="form-control" type="number" id="CourtFees" name="CourtFees" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.CourtFees"
-                    #CourtFees="ngModel" />
+                  <input class="form-control" type="number" id="CourtFees" name="CourtFees" [readonly]="isViewModel" pattern="^\d+(\.\d{1,2})?$"
+                    step="0.01" [(ngModel)]="model.CourtFees" #CourtFees="ngModel" />
                   <label *ngIf="(caseForm.submitted || CourtFees.dirty) && CourtFees.errors && CourtFees.errors['pattern']" class="err-label">
                     Enter Valid Court Fees</label>
                 </div>
@@ -341,7 +346,8 @@
                   <label for="BillingFrequency">Billing Frequency</label>
                   <!-- <input class="form-control" [(ngModel)]="model.BillingFrequency" name="BillingFrequency" id="BillingFrequency" #BillingFrequency="ngModel"
                   /> -->
-                  <select class="form-control" [(ngModel)]="model.BillingFrequency" id="BillingFrequency" name="BillingFrequency" #BillingFrequency="ngModel">
+                  <select class="form-control" [(ngModel)]="model.BillingFrequency" [disabled]="isViewModel" id="BillingFrequency" name="BillingFrequency"
+                    #BillingFrequency="ngModel">
                     <option *ngFor="let billFrq of BillingFrequencyDropDown" [value]='billFrq.Id'>
                       {{billFrq.Name}}
                     </option>
@@ -351,8 +357,8 @@
               <div class="col-sm-6" *ngIf="model.BillingFrequency === 'Monthly' || model.BillingFrequency === 'Quarterly' || model.BillingFrequency === 'Yearly' ">
                 <div class="form-group">
                   <label for="BillingDate">Billing Date</label>
-                  <input class="form-control" [(ngModel)]="model.BillingDate" ngui-datetime-picker date-only="true" name="BillingDate" id="BillingDate"
-                    #BillingDate="ngModel" />
+                  <input class="form-control" [(ngModel)]="model.BillingDate" [disabled]="isViewModel" ngui-datetime-picker date-only="true"
+                    name="BillingDate" id="BillingDate" #BillingDate="ngModel" />
                 </div>
               </div>
             </div>
@@ -361,8 +367,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="TrustAccount">Trust Account</label>
-                  <input class="form-control" type="number" id="TrustAccount" name="TrustAccount" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.TrustAccount"
-                    (keypress)="_keyPress($event)" #TrustAccount="ngModel" />
+                  <input class="form-control" type="number" id="TrustAccount" [readonly]="isViewModel" name="TrustAccount" pattern="^\d+(\.\d{1,2})?$"
+                    step="0.01" [(ngModel)]="model.TrustAccount" (keypress)="_keyPress($event)" #TrustAccount="ngModel" />
                   <label *ngIf="(caseForm.submitted || TrustAccount.dirty) && TrustAccount.errors && TrustAccount.errors['pattern']" class="err-label">
                     Enter Valid Trust Account</label>
                 </div>
@@ -370,7 +376,7 @@
               <div class="col-sm-6">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="IsClose" [(ngModel)]="model.IsClose" #IsClose="ngModel"> Is Close
+                    <input type="checkbox" name="IsClose" [(ngModel)]="model.IsClose" [disabled]="isViewModel" #IsClose="ngModel"> Is Close
                   </label>
                 </div>
               </div>
@@ -414,7 +420,7 @@
               <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
                 <i class="fa fa-times-circle mr5"></i> Cancel
               </a>
-              <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+              <button type="submit" [disabled]="isLoading" *ngIf="!isViewModel" class="btn btn-primary mr5">
                 <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
               </button>
               <!-- <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addCommunication()">Add Communication</button>

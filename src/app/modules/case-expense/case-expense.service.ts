@@ -136,4 +136,15 @@ export class CaseExpenseService {
       throw err;
     });
   }
+  getAllExpenseData() {
+    return this.httpService.get(`CaseExpense/GetAll/`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+    
+  }
 }

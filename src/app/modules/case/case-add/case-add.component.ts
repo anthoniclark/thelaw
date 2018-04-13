@@ -40,10 +40,14 @@ export class CaseAddComponent implements OnInit {
   taskTimeTrackingId: number;
   contactType: string;
   casePricingType: Array<DropDownModel> = CasePricingType;
+  isViewModel: boolean;
   constructor(private route: ActivatedRoute, private caseService: CaseService, private _notify: NotificationService,
     private contactService: ContactService, private _sanitizer: DomSanitizer, private router: Router, private modal: Modal) { }
 
   ngOnInit() {
+    this.route.url.subscribe(segment => {
+      this.isViewModel = segment.some(x => x.path.toLocaleLowerCase() === "view");
+    });
     this.model.CaseYear = new Date().getFullYear();
     this.settings = {
       singleSelection: false,
@@ -52,6 +56,7 @@ export class CaseAddComponent implements OnInit {
       unSelectAllText: 'UnSelect All',
       badgeShowLimit: 3,
       enableSearchFilter: true,
+      disabled: this.isViewModel === true
     }
     this.associatesSettings = {
       singleSelection: false,
@@ -60,6 +65,7 @@ export class CaseAddComponent implements OnInit {
       unSelectAllText: 'UnSelect All',
       badgeShowLimit: 3,
       enableSearchFilter: true,
+      disabled: this.isViewModel === true
     };
     this.route.params.subscribe(param => this.paramId = param["id"]);
     this.model.NotifyMe = true;

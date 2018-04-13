@@ -34,10 +34,14 @@ export class ContactDetailComponent implements OnInit {
   validFileType: boolean = true;
   CompanyId;
   isDisabled: boolean = false;
+  isViewMode: boolean = false;
   constructor(private route: ActivatedRoute, private contactService: ContactService, private router: Router,
     private _notify: NotificationService, private modalDialog: Modal, private _sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.route.url.subscribe(segment => {
+      this.isViewMode = segment.some(x => x.path.toLocaleLowerCase() === "view");
+    });
     this.model.ContactType = this.ContactTypeDropDown[0].Id;
     this.model.Title = this.TitleDropDown[0].Id;
     this.model.IsImportant = false;

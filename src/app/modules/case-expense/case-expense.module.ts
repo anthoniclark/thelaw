@@ -7,12 +7,13 @@ import { SharedModule } from 'app/shared/shared.module';
 import { CaseExpenseService } from './case-expense.service';
 import { CaseService } from '../case/case.service';
 import { ContactService } from '../contact/contact.service';
-
+import { DataTableModule } from 'primeng/datatable';
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
-    caseExpenseRouting
+    caseExpenseRouting,
+    DataTableModule
   ],
   declarations: [
     CaseExpenseListComponent,

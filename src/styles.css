@@ -138,3 +138,8 @@
 }
 .case-panel-header {min-height: 65px !important;}
 .global-search-input {width:30%;}
+input:read-only {border: none;}
+.expand-icon { width: 28px;}
+
+.nested-grid .ui-datatable-reflow .ui-datatable-data th .ui-column-title { display: block;}
+.nested-grid thead th {text-align: left !important;}

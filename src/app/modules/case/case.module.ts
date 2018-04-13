@@ -56,7 +56,7 @@ import { CalendarModule } from 'primeng/calendar';
     CaseEvidenceListComponent,
     CaseEvidenceDetailComponent,
     JudgeDetailComponent,
-    ContactQuickAddComponent
+    ContactQuickAddComponent,
   ],
   providers: [
     CaseService,

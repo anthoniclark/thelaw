@@ -26,7 +26,7 @@
       <input #gb type="text" class="form-control global-search-input" pInputText size="50" placeholder="Advance Search">
     </div>
     <p-dataTable [value]="rows" [globalFilter]="gb" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
-      loadingIcon="fa-spinner" #dt  [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
+      loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
       <!-- [rowsPerPageOptions]="[5,10,20]" let user select page  -->
       <!-- <p-header>List of Cars</p-header> -->
       <p-column field="CaseNo" [filter]="true" [sortable]="true" header="Case No"></p-column>
@@ -58,6 +58,11 @@
             </a>
             <ul class="dropdown-menu">
               <li>
+                <a href="javascript:void(0)" (click)="viewDetail(data.Id)">
+                  View
+                </a>
+              </li>
+              <li>
                 <a href="javascript:void(0)" (click)="editClick(data.Id)">
                   Edit
                 </a>
@@ -66,7 +71,7 @@
                 <a href="javascript:void(0)" (click)="deleteClick(data.Id)">Delete</a>
               </li>
               <li>
-                <a href="javascript:void(0)" (click)="changeStatus(data.Id)">Change Status</a>
+                <a href="javascript:void(0)" (click)="changeStatus(data)">Change Status</a>
               </li>
               <li>
                 <a href="javascript:void(0)" (click)="showCommunication(data.Id)">Communications</a>

@@ -9,8 +9,46 @@
     </div>
 
   </div>
-  <div class=panel-body>
-    <ngx-datatable class="material case-expense-list-grid" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+  <div class="panel-body nested-grid">
+    <p-dataTable [value]="rows" [responsive]="true" expandableRows="false" [loading]="loadingIndicator" loadingIcon="fa-spinner">
+      <p-column expander="true" styleClass="col-icon expand-icon">
+      </p-column>
+      <p-column field="CaseNo" header="Case No">
+      </p-column>
+      <ng-template let-data pTemplate="rowexpansion">
+        <p-dataTable [value]="data.Categories" [responsive]="true" expandableRows="false" [loading]="loadingIndicator" loadingIcon="fa-spinner">
+          <p-column expander="true" styleClass="col-icon expand-icon">
+          </p-column>
+          <p-column field="Category" header="Category">
+          </p-column>
+          <ng-template let-expenseDetail pTemplate="rowexpansion">
+            <p-dataTable [value]="expenseDetail.expenseDetails" [responsive]="true" expandableRows="false" [loading]="loadingIndicator"
+              loadingIcon="fa-spinner">
+              <p-column field="ExpenseName" header="Expense Name"> </p-column>
+              <p-column field="ExpenseDate" header="Expense Date"> </p-column>
+              <p-column field="Amount" header="Amount"> </p-column>
+              <p-column styleClass="col-button">
+                <ng-template pTemplate="header">
+                  Actions
+                </ng-template>
+                <ng-template let-data="rowData" pTemplate="body">
+                  <button (click)="editClick(data.Id)" title="Edit" md-icon-button>
+                    <i class="fa fa-edit" aria-hidden="true"></i>
+                  </button>
+                  <button (click)="deleteClick(data.Id)" title="delete" md-icon-button>
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </ng-template>
+              </p-column>
+            </p-dataTable>
+          </ng-template>
+        </p-dataTable>
+      </ng-template>
+
+    </p-dataTable>
+
+
+    <!-- <ngx-datatable class="material case-expense-list-grid" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
       [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="60" [footerHeight]="40"
       [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
       <ngx-datatable-column name="Case Number" sortable="true" prop="CaseNo">
@@ -73,6 +111,6 @@
           </button>
         </ng-template>
       </ngx-datatable-column>
-    </ngx-datatable>
+    </ngx-datatable> -->
   </div>
 </div>
