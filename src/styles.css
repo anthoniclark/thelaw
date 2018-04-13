@@ -4,6 +4,8 @@
 @import '~@swimlane/ngx-datatable/release/themes/bootstrap.css';
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
 @import '~sweetalert2/dist/sweetalert2.min.css';
+@import '~primeng/resources/themes/omega/theme.css';
+@import '~primeng/resources/primeng.min.css';
 .pb30 {
     padding-bottom: 30px;
 }
@@ -135,3 +137,4 @@
     cursor: pointer;
 }
 .case-panel-header {min-height: 65px !important;}
+.global-search-input {width:30%;}

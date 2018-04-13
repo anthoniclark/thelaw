@@ -7,6 +7,8 @@ import { CaseChangeStatusComponent } from '../case-change-status/case-change-sta
 import { overlayConfigFactory } from 'ngx-modialog';
 import { Page, Sorting, FilterModel } from 'app/models/page';
 import swal from 'sweetalert2';
+import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
+import { PageSize } from '../../../shared/constants';
 
 @Component({
   selector: 'app-case-list',
@@ -14,6 +16,7 @@ import swal from 'sweetalert2';
 })
 export class CaseListComponent implements OnInit {
   rows = [];
+  pageSize:number = PageSize;
   public page: Page = new Page();
   loadingIndicator: boolean = false;
   sorting: Sorting = new Sorting();
@@ -37,7 +40,7 @@ export class CaseListComponent implements OnInit {
   constructor(private caseService: CaseService, private router: Router, private route: ActivatedRoute, private _notify: NotificationService,
     private modal: Modal) {
     this.page.pageNumber = 0;
-    this.page.size = 5;
+    this.page.size = PageSize;
   }
 
   ngOnInit() {
@@ -45,12 +48,33 @@ export class CaseListComponent implements OnInit {
       this.contactId = data.contactId;
     })
     this.sorting = { columnName: "Id", dir: true };
-    this.setPage({ offset: 0 });
+    // this.setPage({ offset: 0 });
   }
 
-  setPage(pageInfo) {
-    this.page.pageNumber = pageInfo.offset;
-    this.getDataSource();
+  setPage(event: LazyLoadEvent) {
+    if (event.sortField) {
+      this.sorting = { columnName: event.sortField, dir: event.sortOrder === 1 };
+    } else {
+      this.sorting = { columnName: "Id", dir: true };
+    }
+    if (event.globalFilter) {
+      return this.advanceFilter(event.globalFilter);
+    }
+
+    let filterColumnString = "";
+    let searchValue = ""
+    if (event.filters) {
+      filterColumnString = 'columnName=';
+      searchValue = '&searchValue='
+      Object.keys(event.filters).forEach(key => {
+        filterColumnString += `${key},`;
+        searchValue += `${event.filters[key].value},`;
+      });
+      filterColumnString = filterColumnString.slice(0, -1);
+      searchValue = searchValue.slice(0, -1);
+    }
+    setTimeout(() => this.getDataSource(filterColumnString, searchValue), 0);
+
   }
 
   getDataSource(filterColumn?: string, filterValue?: string) {
@@ -127,7 +151,7 @@ export class CaseListComponent implements OnInit {
               this.loadingIndicator = false;
               this.page.totalElements = 0;
             } else {
-              this.setPage({ offset: pageNumber });
+              this.setPage({});
             }
           }, err => {
             this._notify.error(err.Result);
@@ -160,28 +184,37 @@ export class CaseListComponent implements OnInit {
     this.router.navigateByUrl(`/case/${rowData.Id}/document`);
   }
 
-  advanceFilter() {
-    if (this.advanceSearch.length) {
-      this.loadingIndicator = true;
-      this.searchApplied = true;
-      this.caseService.caseFullTextSearch(this.advanceSearch, this.contactId, this.page, this.sorting).subscribe(res => {
-        this.loadingIndicator = false;
-        this.page.totalElements = res.TotalNumberOfRecords;
-        this.page.totalPages = res.TotalNumberOfPages;
-        this.page.pageNumber = res.PageNumber;
-        this.rows = res.Results;
-      }, error => {
-        this._notify.error(error.detail);
-      });
+  paginate(event) {
+    if (!event.first) {
+      this.page.pageNumber = 0;
     } else {
-      this.searchApplied = false;
+      this.page.pageNumber = event.first / 5;
     }
   }
 
+  advanceFilter(searchTerm) {
+    this.searchApplied = true;
+    this.loadingIndicator = true;
+    this.caseService.caseFullTextSearch(searchTerm, this.contactId, this.page, this.sorting).subscribe(res => {
+      this.loadingIndicator = false;
+      this.page.totalElements = res.TotalNumberOfRecords;
+      this.page.totalPages = res.TotalNumberOfPages;
+      this.page.pageNumber = res.PageNumber;
+      this.rows = res.Results;
+    }, error => {
+      this._notify.error(error.detail);
+    });
+  }
+
+  filterStartDate(event, dt, col) {
+    const date = new Date(event);
+    const filterDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    dt.filter(filterDate, col.field, col.filterMatchMode);
+  }
   removeadvanceFilter() {
     this.searchApplied = false;
     this.advanceSearch = "";
-    this.setPage(this.page);
+    // this.setPage(this.page);
   }
 }
 

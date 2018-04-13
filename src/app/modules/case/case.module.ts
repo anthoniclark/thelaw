@@ -25,7 +25,8 @@ import { CaseEvidenceListComponent } from './case-evidence-list/case-evidence-li
 import { CaseEvidenceDetailComponent } from './case-evidence-detail/case-evidence-detail.component';
 import { JudgeDetailComponent } from './judge-detail/judge-detail.component';
 import { ContactQuickAddComponent } from './contact-quick-add/contact-quick-add.component';
-
+import { DataTableModule } from 'primeng/datatable';
+import { CalendarModule } from 'primeng/calendar';
 @NgModule({
   imports: [
     CommonModule,
@@ -33,7 +34,9 @@ import { ContactQuickAddComponent } from './contact-quick-add/contact-quick-add.
     caseRouting,
     AngularMultiSelectModule,
     BootstrapModalModule,
-    PopoverModule
+    PopoverModule,
+    DataTableModule,
+    CalendarModule
   ],
   declarations: [
     CaseListComponent,

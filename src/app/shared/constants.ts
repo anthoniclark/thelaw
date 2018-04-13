@@ -161,3 +161,5 @@ export const CasePricingType = [
     { Id: "Contract Based", Name: "Contract Based" },
     { Id: "Day wise", Name: "Day wise" },
 ]
+
+export const PageSize = 5;
