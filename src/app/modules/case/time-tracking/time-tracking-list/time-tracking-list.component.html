@@ -9,92 +9,35 @@
     </div>
   </div>
   <div class=panel-body>
-    <ngx-datatable class="material" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
-      [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="70" [footerHeight]="40"
-      [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
-      <ngx-datatable-column name="Contact Name" sortable="true" prop="ContactName">
-        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-          <div class="custom-sort">
-            <label class="column-filter-label" for="ContactName" (click)="sort()">Contact Name</label>
-            <br/>
-            <input type='text' id="id" name="ContactName" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value"
-              data-column-name="ContactName" placeholder='Filter...' (keyup)="filterData($event)" />
-          </div>
-        </ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{value }}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Task Category Name" sortable="true" prop="TaskCategoryName">
 
-        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-          <div class="custom-sort">
-            <label class="column-filter-label" for="TaskCategoryName" (click)="sort()">Task Category Name</label>
-            <br/>
-            <input type='text' id="TaskCategoryName" name="TaskCategoryName" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value"
-              data-column-name="TaskCategoryName"  placeholder='Filter...' (keyup)="filterData($event)" />
-          </div>
-        </ng-template>
 
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Worked Hours" sortable="true" prop="WorkedHours">
-        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-          <div class="custom-sort">
-            <label class="column-filter-label" for="WorkedHours" (click)="sort()">Worked Hours</label>
-            <br/>
-            <input type='text' id="WorkedHours" name="WorkedHours" class="column-filter-input form-control" [(ngModel)]="filterModel[2].value"
-              data-column-name="WorkedHours"  placeholder='Filter...' (keyup)="filterData($event)" />
-          </div>
-        </ng-template>
+    <p-dataTable [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
+      loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
+      <p-column field="ContactName" [filter]="true" [sortable]="true" header="Contact Name"></p-column>
 
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value}}
+      <p-column field="TaskCategoryName" [filter]="true" [sortable]="true" header="Task Category"></p-column>
+
+      <p-column field="WorkedHours" [filter]="true" [sortable]="true" header="Worked Hours"></p-column>
+
+      <p-column field="BilledHours" [filter]="true" [sortable]="true" header="Billed Hours"></p-column>
+
+      <p-column field="Rate" [filter]="true" [sortable]="true" header="Rate"></p-column>
+
+      <p-column field="DontBill" [filter]="true" [sortable]="true" header="Do not Bill">
+        <ng-template let-col let-data="rowData" pTemplate="body">
+          <span>{{data[col.field] ? 'true': 'false'}}</span>
         </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Billed Hours" sortable="true" prop="BilledHours">
-        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-          <div class="custom-sort">
-            <label class="column-filter-label" for="BilledHours" (click)="sort()">Billed Hours</label>
-            <br/>
-            <input type='text' id="BilledHours" name="BilledHours" class="column-filter-input form-control" [(ngModel)]="filterModel[3].value"
-              data-column-name="BilledHours"  placeholder='Filter...' (keyup)="filterData($event)" />
-          </div>
-        </ng-template>
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Rate" sortable="true" prop="Rate">
-        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-          <div class="custom-sort">
-            <label class="column-filter-label" for="Rate" (click)="sort()">Rate</label>
-            <br/>
-            <input type='text' id="Rate" name="Rate" class="column-filter-input form-control" [(ngModel)]="filterModel[4].value" data-column-name="Rate"
-               placeholder='Filter...' (keyup)="filterData($event)" />
-          </div>
-        </ng-template>
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Do not Bill" sortable="true" prop="DontBill">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value ? true : false}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <button (click)="editClick(value)" md-icon-button>
+      </p-column>
+      <p-column header="Actions">
+        <ng-template let-data="rowData" pTemplate="body">
+          <button (click)="editClick(data.Id)" md-icon-button>
             <i class="fa fa-edit"></i>
           </button>
-          <button (click)="deleteClick(value)" md-icon-button>
+          <button (click)="deleteClick(data.Id)" md-icon-button>
             <i class="fa fa-trash"></i>
           </button>
         </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
+      </p-column>
+    </p-dataTable>
   </div>
 </div>

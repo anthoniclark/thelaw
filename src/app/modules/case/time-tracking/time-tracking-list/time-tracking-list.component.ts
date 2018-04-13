@@ -6,12 +6,12 @@ import swal from 'sweetalert2';
 import { Case } from 'app/models/case';
 import { Sorting, Page, FilterModel } from 'app/models/page';
 import { DropDownModel } from 'app/models/dropDownModel';
+import { PageSize } from 'app/shared/constants';
 @Component({
   selector: 'app-time-tracking-list',
   templateUrl: './time-tracking-list.component.html'
 })
 export class TimeTrackingListComponent implements OnInit {
-
   rows = [];
   loadingIndicator: boolean = true;
   reorderable: boolean = true;
@@ -36,7 +36,7 @@ export class TimeTrackingListComponent implements OnInit {
     value: ''
   }];
   taskCategory: Array<DropDownModel> = [];
-
+  pageSize: number = PageSize;
   constructor(private route: ActivatedRoute, private caseService: CaseService,
     private router: Router,
     private _notify: NotificationService) {
@@ -53,13 +53,31 @@ export class TimeTrackingListComponent implements OnInit {
         this._notify.error(err.Result);
       });
     this.sorting = { columnName: "Id", dir: true };
-    this.setPage({ offset: 0 });
+
 
   }
 
-  setPage(pageInfo) {
-    this.page.pageNumber = pageInfo.offset;
-    this.getDataSource();
+  setPage(event) {
+    if (event.sortField) {
+      this.sorting = { columnName: event.sortField, dir: event.sortOrder === 1 };
+    } else {
+      this.sorting = { columnName: "Id", dir: true };
+    }
+    let filterColumnString = "";
+    let searchValue = ""
+    if (event.filters) {
+      filterColumnString = 'columnName=';
+      searchValue = '&searchValue=';
+      this.page.pageNumber = 0;
+
+      Object.keys(event.filters).forEach(key => {
+        filterColumnString += `${key},`;
+        searchValue += `${event.filters[key].value},`;
+      });
+      filterColumnString = filterColumnString.slice(0, -1);
+      searchValue = searchValue.slice(0, -1);
+    }
+    setTimeout(() => this.getDataSource(filterColumnString, searchValue), 0);
   }
 
   getDataSource(filterColumn?: string, filterValue?: string) {
@@ -144,5 +162,14 @@ export class TimeTrackingListComponent implements OnInit {
 
   createNewTimeTracking() {
     this.router.navigate([`/case/${this.CaseId}/time-tracking/new`]);
+  }
+
+
+  paginate(event) {
+    if (!event.first) {
+      this.page.pageNumber = 0;
+    } else {
+      this.page.pageNumber = event.first / this.pageSize;
+    }
   }
 }

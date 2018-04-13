@@ -10,59 +10,23 @@
 
   </div>
   <div class=panel-body>
-    <ngx-datatable class="material" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
-      [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="60" [footerHeight]="40"
-      [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
-      <ngx-datatable-column name="Document Name" sortable="true" prop="DocumentName">
-        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-          <div class="custom-sort">
-            <label class="column-filter-label" (click)="sort()">Document Name</label>
-            <br/>
-            <input type='text' name="company-name-filter" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value"
-              data-column-name="DocumentName" #DocumentName placeholder='Filter...' (keyup)="filterData($event)" />
-          </div>
-        </ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Document Category" sortable="true" prop="DocumentCategory">
-        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-          <div class="custom-sort">
-            <label class="column-filter-label" (click)="sort()">Document Category</label>
-            <br/>
-            <input type='text' name="company-name-filter" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value"
-              data-column-name="DocumentCategory" #DocumentCategory placeholder='Filter...' (keyup)="filterData($event)" />
-          </div>
-        </ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="File Type" sortable="true" prop="FileType">
-        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-          <div class="custom-sort">
-            <label class="column-filter-label" (click)="sort()">File Type</label>
-            <br/>
-            <input type='text' name="company-name-filter" class="column-filter-input form-control" [(ngModel)]="filterModel[2].value"
-              data-column-name="FileType" #FileType placeholder='Filter...' (keyup)="filterData($event)" />
-          </div>
-        </ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
 
-      <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <button (click)="editClick(value)" md-icon-button>
+    <p-dataTable [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
+      loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
+      <p-column field="DocumentName" [filter]="true" [sortable]="true" header="Document Name"></p-column>
+      <p-column field="DocumentCategory" [filter]="true" [sortable]="true" header="Document Category"></p-column>
+      <p-column field="FileType" [filter]="true" [sortable]="true" header="File Type"></p-column>
+      <p-column header="Actions">
+        <ng-template let-data="rowData" pTemplate="body">
+          <button (click)="editClick(data.Id)" md-icon-button>
             <i class="fa fa-edit"></i>
           </button>
-          <button (click)="deleteClick(value)" md-icon-button>
+          <button (click)="deleteClick(data.Id)" md-icon-button>
             <i class="fa fa-trash"></i>
           </button>
         </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
+
+      </p-column>
+    </p-dataTable>
   </div>
 </div>

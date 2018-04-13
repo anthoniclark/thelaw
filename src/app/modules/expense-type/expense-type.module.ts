@@ -7,14 +7,15 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2
 import { BootstrapModalModule, Modal } from 'ngx-modialog/plugins/bootstrap';
 import { ExpenseTypeDetailComponent } from './expense-type-detail/expense-type-detail.component';
 import { ExpenseTypeService } from './expense-type.service';
-
+import { DataTableModule } from 'primeng/datatable';
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     expenseRouting,
     AngularMultiSelectModule,
-    BootstrapModalModule
+    BootstrapModalModule,
+    DataTableModule
   ],
   declarations: [ExpenseTypeListComponent, ExpenseTypeDetailComponent],
   providers: [Modal, ExpenseTypeService]

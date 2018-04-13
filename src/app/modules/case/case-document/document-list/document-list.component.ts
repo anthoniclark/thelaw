@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { Page, Sorting, FilterModel } from 'app/models/page';
 import swal from 'sweetalert2';
+import { PageSize } from 'app/shared/constants';
 @Component({
   selector: 'app-document-list',
   templateUrl: './document-list.component.html'
@@ -14,7 +15,7 @@ export class DocumentListComponent implements OnInit {
   loadingIndicator: boolean = false;
   sorting: Sorting = new Sorting();
   CaseId: number;
-
+  pageSize: number = PageSize;
   filterModel: FilterModel[] = [{
     columnName: 'DocumentName',
     value: ''
@@ -35,17 +36,35 @@ export class DocumentListComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(param => this.CaseId = param['caseId']);
     this.sorting = { columnName: "Id", dir: true };
-    this.setPage({ offset: 0 });
   }
 
-  setPage(pageInfo) {
-    this.page.pageNumber = pageInfo.offset;
-    this.getDataSource();
+  setPage(event) {
+    if (event.sortField) {
+      this.sorting = { columnName: event.sortField, dir: event.sortOrder === 1 };
+    } else {
+      this.sorting = { columnName: "Id", dir: true };
+    }
+    let filterColumnString = "";
+    let searchValue = ""
+    if (event.filters) {
+      filterColumnString = 'columnName=';
+      searchValue = '&searchValue=';
+      this.page.pageNumber = 0;
+
+      Object.keys(event.filters).forEach(key => {
+        filterColumnString += `${key},`;
+        searchValue += `${event.filters[key].value},`;
+      });
+      filterColumnString = filterColumnString.slice(0, -1);
+      searchValue = searchValue.slice(0, -1);
+    }
+    setTimeout(() => this.getDataSource(filterColumnString, searchValue), 0);
   }
 
   getDataSource(filterColumn?: string, filterValue?: string) {
     this.loadingIndicator = true;
     this.caseService.getCaseDocumentsByCaseId(this.CaseId, this.page, this.sorting, filterColumn, filterValue).subscribe(pagedData => {
+      debugger
       this.loadingIndicator = false;
       this.page.totalElements = pagedData.TotalNumberOfRecords;
       this.page.totalPages = pagedData.TotalNumberOfPages;
@@ -107,5 +126,13 @@ export class DocumentListComponent implements OnInit {
 
   createNewDocument() {
     this.router.navigate([`case/${this.CaseId}/document/new`]);
+  }
+
+  paginate(event) {
+    if (!event.first) {
+      this.page.pageNumber = 0;
+    } else {
+      this.page.pageNumber = event.first / this.pageSize;
+    }
   }
 }

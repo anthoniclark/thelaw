@@ -8,7 +8,7 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2
 import { ModalModule } from 'ngx-modialog';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { ContactService } from '../contact/contact.service';
-
+import { DataTableModule } from 'primeng/datatable';
 
 @NgModule({
   imports: [
@@ -16,7 +16,8 @@ import { ContactService } from '../contact/contact.service';
     CompaniesRoutingModule,
     SharedModule,
     AngularMultiSelectModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    DataTableModule
   ],
   providers: [ContactService],
   declarations: [CompaniesListComponent, CompaniesDetailComponent, CompanyListComponent]

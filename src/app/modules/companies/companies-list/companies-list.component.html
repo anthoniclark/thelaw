@@ -10,78 +10,25 @@
 
   </div>
   <div class=panel-body>
-    <ngx-datatable class="material" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
-      [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="60" [footerHeight]="40"
-      [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
-      <ngx-datatable-column name="Company Name" sortable="true" prop="CompanyName">
-        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-          <div class="custom-sort">
-            <label class="column-filter-label" (click)="sort()">Company Name</label>
-            <br/>
-            <input type='text' name="company-name-filter" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value"
-              data-column-name="CompanyName" #CompanyName placeholder='Filter...' (keyup)="filterData($event)" />
-          </div>
-        </ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Insdustry Section" sortable="true" prop="InsdustrySection">
-        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-          <div class="custom-sort">
-            <label class="column-filter-label" (click)="sort()">Insdustry Section</label>
-            <br/>
-            <input type='text' name="insdustry-section" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value" data-column-name="InsdustrySection"
-              #InsdustrySection placeholder='Filter...' (keyup)="filterData($event)" />
-          </div>
-        </ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{ value }}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Category" sortable="true" prop="Category">
-        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-          <div class="custom-sort">
-            <label class="column-filter-label" (click)="sort()">Category</label>
-            <br/>
-            <input type='text' name="category" class="column-filter-input form-control" [(ngModel)]="filterModel[2].value" data-column-name="Category"
-              #Category placeholder='Filter...' (keyup)="filterData($event)" />
-          </div>
-        </ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
 
-      <ngx-datatable-column name="Website" sortable="true" prop="Website">
-        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-          <div class="custom-sort">
-            <label class="column-filter-label" (click)="sort()">Website</label>
-            <br/>
-            <input type='text' name="Website" class="column-filter-input form-control" [(ngModel)]="filterModel[3].value" data-column-name="Website"
-              #Category placeholder='Filter...' (keyup)="filterData($event)" />
-          </div>
-        </ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
-
-      <ngx-datatable-column name="Company Size" sortable="true" prop="CompanySize">
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <button (click)="editClick(value)" md-icon-button>
+    <p-dataTable [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
+      loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
+      <p-column field="CompanyName" [filter]="true" [sortable]="true" header="Company Name"></p-column>
+      <p-column field="InsdustrySection" [filter]="true" [sortable]="true" header="Insdustry Section"></p-column>
+      <p-column field="Category" [filter]="true" [sortable]="true" header="Category"></p-column>
+      <p-column field="Website" [filter]="true" [sortable]="true" header="Website"></p-column>
+      <p-column field="CompanySize" [filter]="true" [sortable]="true" header="CompanySize"></p-column>
+      <p-column header="Actions">
+        <ng-template let-data="rowData" pTemplate="body">
+          <button (click)="editClick(data.Id)" md-icon-button>
             <i class="fa fa-edit"></i>
           </button>
-          <button (click)="deleteClick(value)" md-icon-button>
+          <button (click)="deleteClick(data.Id)" md-icon-button>
             <i class="fa fa-trash"></i>
           </button>
         </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
+
+      </p-column>
+    </p-dataTable>
   </div>
 </div>

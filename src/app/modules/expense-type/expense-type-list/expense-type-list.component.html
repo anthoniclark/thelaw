@@ -10,28 +10,20 @@
 
   </div>
   <div class=panel-body>
-    <ngx-datatable class="material" [rows]="rows" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
-      [rowHeight]="'auto'" [columnMode]="'force'">
-      <ngx-datatable-column name="Expense Type Name" sortable="true" prop="ExpenseTypeName">
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Basic Price" sortable="true" prop="BasicPrice">
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <button title="Edit" (click)="editClick(value)" md-icon-button>
+
+    <p-dataTable [value]="rows" [responsive]="true" [loading]="loadingIndicator" loadingIcon="fa-spinner" #dt>
+      <p-column field="ExpenseTypeName" [filter]="true" [sortable]="true" header="Expense Type Name"></p-column>
+      <p-column field="BasicPrice" [filter]="true" [sortable]="true" header="Basic Price"></p-column>
+      <p-column header="Actions">
+        <ng-template let-data="rowData" pTemplate="body">
+          <button title="Edit" (click)="editClick(data.Id)" md-icon-button>
             <i class="fa fa-edit"></i>
           </button>
-          <button title="Delete" (click)="deleteClick(value)" md-icon-button>
+          <button title="Delete" (click)="deleteClick(data.Id)" md-icon-button>
             <i class="fa fa-trash"></i>
           </button>
         </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
+      </p-column>
+    </p-dataTable>
   </div>
 </div>

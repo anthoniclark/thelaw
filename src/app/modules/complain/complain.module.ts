@@ -7,13 +7,14 @@ import { complainRouting } from 'app/modules/complain/complain.routing';
 import { ComplainAddComponent } from './complain-add/complain-add.component';
 import { ContactService } from '../contact/contact.service';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
-
+import { DataTableModule } from 'primeng/datatable';
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     complainRouting,
-    AngularMultiSelectModule
+    AngularMultiSelectModule,
+    DataTableModule
   ],
   declarations: [
     ComplainListComponent,

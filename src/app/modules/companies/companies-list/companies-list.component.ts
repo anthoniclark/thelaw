@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { Page, Sorting, FilterModel } from '../../../models/page';
 import swal from 'sweetalert2';
+import { PageSize } from 'app/shared/constants';
 
 @Component({
   selector: 'app-companies-list',
@@ -32,6 +33,7 @@ export class CompaniesListComponent implements OnInit {
     value: ''
   }];
 
+  pageSize: number = PageSize;
   constructor(private companiesService: CompaniesService, private router: Router, private _notify: NotificationService) {
     this.page.pageNumber = 0;
     this.page.size = 5;
@@ -39,12 +41,30 @@ export class CompaniesListComponent implements OnInit {
 
   ngOnInit() {
     this.sorting = { columnName: "Id", dir: true };
-    this.setPage({ offset: 0 });
+
   }
 
-  setPage(pageInfo) {
-    this.page.pageNumber = pageInfo.offset;
-    this.getDataSource();
+  setPage(event) {
+    if (event.sortField) {
+      this.sorting = { columnName: event.sortField, dir: event.sortOrder === 1 };
+    } else {
+      this.sorting = { columnName: "Id", dir: true };
+    }
+    let filterColumnString = "";
+    let searchValue = ""
+    if (event.filters) {
+      filterColumnString = 'columnName=';
+      searchValue = '&searchValue=';
+      this.page.pageNumber = 0;
+
+      Object.keys(event.filters).forEach(key => {
+        filterColumnString += `${key},`;
+        searchValue += `${event.filters[key].value},`;
+      });
+      filterColumnString = filterColumnString.slice(0, -1);
+      searchValue = searchValue.slice(0, -1);
+    }
+    setTimeout(() => this.getDataSource(filterColumnString, searchValue), 0);
   }
 
   getDataSource(filterColumn?: string, filterValue?: string) {
@@ -73,7 +93,7 @@ export class CompaniesListComponent implements OnInit {
     return this.getDataSource();
   }
 
-  deleteClick(id) {
+  deleteClick(id, dt) {
     swal({
       title: 'Delete Company',
       text: "Are you sure want to delete this Company?",
@@ -96,7 +116,8 @@ export class CompaniesListComponent implements OnInit {
               this.loadingIndicator = false;
               this.page.totalElements = 0;
             } else {
-              this.setPage({ offset: pageNumber });
+              this.page.pageNumber = pageNumber;
+              dt.filter();
             }
             swal({
               position: 'top-end',
@@ -127,6 +148,14 @@ export class CompaniesListComponent implements OnInit {
       this.getDataSource(filterColumnString, searchValue);
     } else {
       this.getDataSource();
+    }
+  }
+
+  paginate(event) {
+    if (!event.first) {
+      this.page.pageNumber = 0;
+    } else {
+      this.page.pageNumber = event.first / this.pageSize;
     }
   }
 

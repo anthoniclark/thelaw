@@ -10,33 +10,20 @@
 
   </div>
   <div class=panel-body>
-    <ngx-datatable class="material" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
-      [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="70" [footerHeight]="40"
-      [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
-      <ngx-datatable-column name="Evidence Name" sortable="true" prop="EvidenceName">
-        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-          <div class="custom-sort">
-            <label class="case-no" (click)="sort()">Case Number</label>
-            <br/>
-            <input type='text' name="case-no" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value" data-column-name="EvidenceName"
-              #CaseNo placeholder='Filter...' (keyup)="filterData($event)" />
-          </div>
-        </ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
-
-      <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <button title="Edit" (click)="editClick(value)" md-icon-button>
+    <p-dataTable [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
+      loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)" #dt>
+      <p-column field="EvidenceName" [filter]="true" [sortable]="true" header="Case Number"></p-column>
+      <p-column header="Actions">
+        <ng-template let-data="rowData" pTemplate="body">
+          <button (click)="editClick(data.Id)" md-icon-button>
             <i class="fa fa-edit"></i>
           </button>
-          <button title="Delete" (click)="deleteClick(value)" md-icon-button>
+          <button (click)="deleteClick(data.Id, dt)" md-icon-button>
             <i class="fa fa-trash"></i>
           </button>
         </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
+
+      </p-column>
+    </p-dataTable>
   </div>
 </div>

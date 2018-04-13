@@ -6,6 +6,7 @@ import { NotificationService } from 'app/shared/services/notification.service';
 import swal from 'sweetalert2';
 import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
 import { Case } from 'app/models/case';
+import { PageSize } from 'app/shared/constants';
 
 @Component({
   selector: 'app-case-evidence-list',
@@ -24,6 +25,7 @@ export class CaseEvidenceListComponent implements OnInit {
     columnName: 'EvidenceName',
     value: ''
   }];
+  pageSize: number = PageSize;
   constructor(private caseService: CaseService, private router: Router, private _notify: NotificationService,
     private modal: Modal, private route: ActivatedRoute) {
     this.page.pageNumber = 0;
@@ -33,17 +35,34 @@ export class CaseEvidenceListComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(param => this.caseId = +param["caseId"]);
     this.sorting = { columnName: "Id", dir: true };
-    this.caseService.getCaseById(this.caseId).subscribe(res => {      
+    this.caseService.getCaseById(this.caseId).subscribe(res => {
       this.caseDetail = res;
     }, error => {
       this._notify.error(error.detail);
     });
-    this.setPage({ offset: 0 });
   }
 
-  setPage(pageInfo) {
-    this.page.pageNumber = pageInfo.offset;
-    this.getDataSource();
+  setPage(event) {
+    if (event.sortField) {
+      this.sorting = { columnName: event.sortField, dir: event.sortOrder === 1 };
+    } else {
+      this.sorting = { columnName: "Id", dir: true };
+    }
+    let filterColumnString = "";
+    let searchValue = ""
+    if (event.filters) {
+      filterColumnString = 'columnName=';
+      searchValue = '&searchValue=';
+      this.page.pageNumber = 0;
+
+      Object.keys(event.filters).forEach(key => {
+        filterColumnString += `${key},`;
+        searchValue += `${event.filters[key].value},`;
+      });
+      filterColumnString = filterColumnString.slice(0, -1);
+      searchValue = searchValue.slice(0, -1);
+    }
+    setTimeout(() => this.getDataSource(filterColumnString, searchValue), 0);
   }
 
 
@@ -92,7 +111,7 @@ export class CaseEvidenceListComponent implements OnInit {
     this.router.navigate([`/case/${this.caseId}/evidence/${id}`]);
   }
 
-  deleteClick(id) {
+  deleteClick(id, dt) {
     swal({
       title: 'Delete Case Evidence',
       text: "Are you sure want to delete this Case Evidence?",
@@ -122,7 +141,8 @@ export class CaseEvidenceListComponent implements OnInit {
               this.loadingIndicator = false;
               this.page.totalElements = 0;
             } else {
-              this.setPage({ offset: pageNumber });
+              this.page.pageNumber = pageNumber;
+              dt.filter();
             }
           }, err => {
             this._notify.error(err.Result);
@@ -135,6 +155,13 @@ export class CaseEvidenceListComponent implements OnInit {
     this.router.navigate([`/case/${this.caseId}/evidence/new`]);
   }
 
+  paginate(event) {
+    if (!event.first) {
+      this.page.pageNumber = 0;
+    } else {
+      this.page.pageNumber = event.first / this.pageSize;
+    }
+  }
 
 
 }

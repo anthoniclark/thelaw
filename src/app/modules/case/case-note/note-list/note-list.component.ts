@@ -4,6 +4,7 @@ import { CaseService } from 'app/modules/case/case.service';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { Case } from 'app/models/case';
 import { FilterModel, Sorting, Page } from 'app/models/page';
+import { PageSize } from 'app/shared/constants';
 
 @Component({
   selector: 'app-note-list',
@@ -25,6 +26,7 @@ export class NoteListComponent implements OnInit {
 
   CaseId: number;
   caseDetail: Case = new Case();
+  pageSize: number = PageSize;
   constructor(private route: ActivatedRoute, private caseService: CaseService,
     private router: Router,
     private _notify: NotificationService) {
@@ -39,20 +41,30 @@ export class NoteListComponent implements OnInit {
     }, error => {
 
     });
-    // this.caseService.getNoteByCaseId(this.CaseId).subscribe(
-    //   response => {
-    //     this.rows = response;
-    //     setTimeout(() => { this.loadingIndicator = false; });
-    //   }, err => {
-    //     this._notify.error(err.Result);
-    //   });
     this.sorting = { columnName: "Id", dir: true };
-    this.setPage({ offset: 0 });
   }
 
-  setPage(pageInfo) {
-    this.page.pageNumber = pageInfo.offset;
-    this.getDataSource();
+  setPage(event) {
+    if (event.sortField) {
+      this.sorting = { columnName: event.sortField, dir: event.sortOrder === 1 };
+    } else {
+      this.sorting = { columnName: "Id", dir: true };
+    }
+    let filterColumnString = "";
+    let searchValue = ""
+    if (event.filters) {
+      filterColumnString = 'columnName=';
+      searchValue = '&searchValue=';
+      this.page.pageNumber = 0;
+
+      Object.keys(event.filters).forEach(key => {
+        filterColumnString += `${key},`;
+        searchValue += `${event.filters[key].value},`;
+      });
+      filterColumnString = filterColumnString.slice(0, -1);
+      searchValue = searchValue.slice(0, -1);
+    }
+    setTimeout(() => this.getDataSource(filterColumnString, searchValue), 0);
   }
 
   getDataSource(filterColumn?: string, filterValue?: string) {
@@ -115,5 +127,13 @@ export class NoteListComponent implements OnInit {
 
   createNewNote() {
     this.router.navigate([`/case/${this.CaseId}/note/new`]);
+  }
+
+  paginate(event) {
+    if (!event.first) {
+      this.page.pageNumber = 0;
+    } else {
+      this.page.pageNumber = event.first / this.pageSize;
+    }
   }
 }

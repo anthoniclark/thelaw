@@ -40,7 +40,12 @@ export class CaseExpenseListComponent implements OnInit {
   ngOnInit() {
     this.sorting = { columnName: "Id", dir: true }
     // this.setPage({ offset: 0 });
+    this.getAllCaseExpense();
 
+  }
+
+  getAllCaseExpense() {
+    this.loadingIndicator = true;
     this.caseExpenseService.getAllExpenseData().subscribe(res => {
       this.loadingIndicator = false;
       this.rows = res;
@@ -83,6 +88,7 @@ export class CaseExpenseListComponent implements OnInit {
   }
 
   deleteClick(id) {
+    debugger
     swal({
       title: 'Delete Case Expense',
       text: "Are you sure want to delete this Case Expense?",
@@ -99,14 +105,15 @@ export class CaseExpenseListComponent implements OnInit {
         this.loadingIndicator = true;
         this.caseExpenseService.deleteCaseExpense(id).subscribe(
           response => {
-            const pageNumber = (this.rows.length === 1 ? this.page.pageNumber - 1 : this.page.pageNumber);
-            if (this.rows.length === 1 && this.page.pageNumber === 0) {
-              this.rows = this.rows.filter(x => x.Id !== id);
-              this.loadingIndicator = false;
-              this.page.totalElements = 0;
-            } else {
-              this.setPage({ offset: pageNumber });
-            }
+            // const pageNumber = (this.rows.length === 1 ? this.page.pageNumber - 1 : this.page.pageNumber);
+            // if (this.rows.length === 1 && this.page.pageNumber === 0) {
+            //   this.rows = this.rows.filter(x => x.Id !== id);
+            //   this.loadingIndicator = false;
+            //   this.page.totalElements = 0;
+            // } else {
+            //   //this.setPage({ offset: pageNumber });
+            // }
+            this.getAllCaseExpense()
             swal({
               position: 'top-end',
               type: 'success',

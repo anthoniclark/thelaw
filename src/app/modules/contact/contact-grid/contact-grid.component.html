@@ -1,5 +1,4 @@
-<!-- <ngx-datatable class="bootstrap" [rows]="_data" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
-  [rowHeight]="'auto'" [columnMode]="'force'"> -->
+
 <ngx-datatable class="material" [rows]="_data" [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
   [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="cType !== 'NewlyAdded'? 70: 40"
   [footerHeight]="40" [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
@@ -45,13 +44,11 @@
 
   <ngx-datatable-column name="Total Cases" sortable="true">
     <ng-template let-row="row" ngx-datatable-cell-template>
-      <!-- <i class="big-icon important-icon fa {{ row.IsImportant ? 'fa-star' : 'fa-star-o' }}" (click)="toggleImportant(row)" aria-hidden="true"></i> -->
       <a (click)="goTOCase(row.Id , row.TotalCases )">
         {{row.TotalCases || '0'}}
       </a>
     </ng-template>
   </ngx-datatable-column>
-
   <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
     <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
       <button (click)="viewDetail(value)" title="View" md-icon-button>
@@ -63,9 +60,6 @@
       <button (click)="deleteClick(value)" title="delete" md-icon-button>
         <i class="fa fa-trash"></i>
       </button>
-      <!-- <button (click)="goTOCase(value)" md-icon-button>
-        <i class="fa fa-trash"></i>
-      </button> -->
     </ng-template>
   </ngx-datatable-column>
 </ngx-datatable>

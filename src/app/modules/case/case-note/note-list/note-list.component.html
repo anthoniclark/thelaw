@@ -9,56 +9,32 @@
     </div>
   </div>
   <div class=panel-body>
-    <ngx-datatable class="material" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
-      [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="70" [footerHeight]="40"
-      [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
-      <ngx-datatable-column name="Note Date" sortable="true" prop="NoteDate">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value | date: 'dd/MM/yyyy'}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Notes By" sortable="true" prop="NotesByName">
-        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-          <div class="custom-sort">
-            <label class="NotesByName" (click)="sort()">Case Number</label>
-            <br/>
-            <input type='text' name="NotesByName" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value" data-column-name="NotesByName"
-              #CaseNo placeholder='Filter...' (keyup)="filterData($event)" />
-          </div>
-        </ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Subject" sortable="true" prop="Subject">
-        <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-          <div class="custom-sort">
-            <label class="Subject" (click)="sort()">Case Number</label>
-            <br/>
-            <input type='text' name="Subject" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value" data-column-name="Subject"
-              #CaseNo placeholder='Filter...' (keyup)="filterData($event)" />
-          </div>
-        </ng-template>
 
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value}}
+    <p-dataTable [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
+      loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
+      <p-column field="NoteDate" [sortable]="true" header="Note Date">
+        <ng-template let-col let-data="rowData" pTemplate="body">
+          <span>{{data[col.field] | date: 'dd/MM/yyyy'}}</span>
         </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Important Note" sortable="true" prop="IsImportant">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          <i class="big-icon fa {{ value ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"></i>
+      </p-column>
+      <p-column field="NotesByName" [filter]="true" [sortable]="true" header="Notes By"></p-column>
+      <p-column field="Subject" [filter]="true" [sortable]="true" header="Case Number"></p-column>
+      <p-column field="IsImportant" [filter]="true" [sortable]="true" header="Important Note">
+        <ng-template let-col let-data="rowData" pTemplate="body">
+          <i class="big-icon fa {{ data[col.field] ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"></i>
         </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <button (click)="editClick(value)" md-icon-button>
+      </p-column>
+      <p-column header="Actions">
+        <ng-template let-data="rowData" pTemplate="body">
+          <button (click)="editClick(data.Id)" md-icon-button>
             <i class="fa fa-edit"></i>
           </button>
-          <button (click)="deleteClick(value)" md-icon-button>
+          <button (click)="deleteClick(data.Id)" md-icon-button>
             <i class="fa fa-trash"></i>
           </button>
         </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
+
+      </p-column>
+    </p-dataTable>
   </div>
 </div>
