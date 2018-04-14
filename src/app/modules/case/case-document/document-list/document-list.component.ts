@@ -64,7 +64,6 @@ export class DocumentListComponent implements OnInit {
   getDataSource(filterColumn?: string, filterValue?: string) {
     this.loadingIndicator = true;
     this.caseService.getCaseDocumentsByCaseId(this.CaseId, this.page, this.sorting, filterColumn, filterValue).subscribe(pagedData => {
-      debugger
       this.loadingIndicator = false;
       this.page.totalElements = pagedData.TotalNumberOfRecords;
       this.page.totalPages = pagedData.TotalNumberOfPages;

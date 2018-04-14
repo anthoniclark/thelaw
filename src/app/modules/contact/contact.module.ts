@@ -11,13 +11,15 @@ import { ContactDashboardComponent } from './contact-dashboard/contact-dashboard
 import { ContactGridComponent } from './contact-grid/contact-grid.component';
 import { ModalModule } from 'ngx-modialog';
 import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
+import { DataTableModule } from 'primeng/datatable';
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     contactRouting,
     ModalModule.forRoot(),
-    BootstrapModalModule
+    BootstrapModalModule,
+    DataTableModule
   ],
   declarations: [
     ContactListComponent,

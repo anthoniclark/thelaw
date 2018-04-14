@@ -88,7 +88,6 @@ export class CaseExpenseListComponent implements OnInit {
   }
 
   deleteClick(id) {
-    debugger
     swal({
       title: 'Delete Case Expense',
       text: "Are you sure want to delete this Case Expense?",

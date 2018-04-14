@@ -1,5 +1,44 @@
+<p-dataTable [value]="_data" [globalFilter]="gb" [lazy]="true" [rows]="page.size" [paginator]="true" [responsive]="true"
+  [loading]="loadingIndicator" loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)"
+  (onPage)="paginate($event)">
+  <p-column field="ContactType" [filter]="true" [sortable]="true" header="Contact Type"></p-column>
+  <p-column field="Title" [filter]="true" [sortable]="true" header="Name">
 
-<ngx-datatable class="material" [rows]="_data" [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+    <ng-template let-col let-data="rowData" pTemplate="body">
+      <span>{{data['Title'] }} {{data['FirstName']}} {{data['LastName']}}</span>
+    </ng-template>
+  </p-column>
+  <p-column field="Designation" [filter]="true" [sortable]="true" header="Designation"></p-column>
+  <p-column header="Important Contact">
+    <ng-template let-row="rowData" pTemplate="body">
+      <i class="big-icon important-icon fa {{ row.IsImportant ? 'fa-star' : 'fa-star-o' }}" (click)="toggleImportant(row)" aria-hidden="true"></i>
+    </ng-template>
+  </p-column>
+  <p-column header="Total Cases">
+    <ng-template let-row="rowData" pTemplate="body">
+      <a (click)="goTOCase(row.Id , row.TotalCases )">
+        {{row.TotalCases || '0'}}
+      </a>
+    </ng-template>
+  </p-column>
+
+  <p-column header="Contact Type">
+    <ng-template let-row="rowData" pTemplate="body">
+      <button (click)="viewDetail(row.Id)" title="View" md-icon-button>
+        <i class="fa fa-eye" aria-hidden="true"></i>
+      </button>
+      <button (click)="editClick(row.Id)" title="edit" md-icon-button>
+        <i class="fa fa-edit"></i>
+      </button>
+      <button (click)="deleteClick(row.Id)" title="delete" md-icon-button>
+        <i class="fa fa-trash"></i>
+      </button>
+    </ng-template>
+  </p-column>
+
+</p-dataTable>
+
+<!-- <ngx-datatable class="material" [rows]="_data" [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
   [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="cType !== 'NewlyAdded'? 70: 40"
   [footerHeight]="40" [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
   <ngx-datatable-column *ngIf="cType === 'NewlyAdded' || cType === 'Other' " name="Contact Type" sortable="true" prop="ContactType">
@@ -62,4 +101,4 @@
       </button>
     </ng-template>
   </ngx-datatable-column>
-</ngx-datatable>
+</ngx-datatable> -->

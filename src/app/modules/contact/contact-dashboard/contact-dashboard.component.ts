@@ -38,13 +38,32 @@ export class ContactDashboardComponent implements OnInit {
       this._notify.error(err.Result);
     });
     this.sorting = { columnName: "Id", dir: true };
-    this.setPage({ offset: 0 });
+    // this.setPage({ offset: 0 });
   }
 
 
-  setPage(pageInfo) {
-    this.page.pageNumber = pageInfo.offset;
-    this.getDataSource();
+  setPage(event) {
+    if (event.sortField) {
+      this.sorting = { columnName: event.sortField, dir: event.sortOrder === 1 };
+    } else {
+      this.sorting = { columnName: "Id", dir: true };
+    }
+
+    let filterColumnString = "";
+    let searchValue = ""
+    if (event.filters) {
+      filterColumnString = 'columnName=';
+      searchValue = '&searchValue=';
+      this.page.pageNumber = 0;
+
+      Object.keys(event.filters).forEach(key => {
+        filterColumnString += `${key},`;
+        searchValue += `${event.filters[key].value},`;
+      });
+      filterColumnString = filterColumnString.slice(0, -1);
+      searchValue = searchValue.slice(0, -1);
+    }
+    setTimeout(() => this.getDataSource(filterColumnString, searchValue), 0);
   }
 
   onFilter($event) {

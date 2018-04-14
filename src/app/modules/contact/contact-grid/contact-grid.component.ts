@@ -55,7 +55,7 @@ export class ContactGridComponent implements OnInit {
     this.router.navigateByUrl('/contact/' + id);
   }
 
-  deleteClick(id) {
+  deleteClick(id, dt) {
     swal({
       title: 'Delete Contact',
       text: "Are you sure want to delete this Contact?",
@@ -85,7 +85,9 @@ export class ContactGridComponent implements OnInit {
               this.loadingIndicator = false;
               this.page.totalElements = 0;
             } else {
-              this.getPageData.emit({ offset: pageNumber });
+              this.page.pageNumber = pageNumber;
+              // this.getPageData.emit({ offset: pageNumber });
+              dt.dilter();
             }
           }, err => {
             this._notify.error(err.Result);
@@ -113,6 +115,14 @@ export class ContactGridComponent implements OnInit {
 
   viewDetail(id) {
     this.router.navigate([`contact/view/${id}`]);
+  }
+
+  paginate(event) {
+    if (!event.first) {
+      this.page.pageNumber = 0;
+    } else {
+      this.page.pageNumber = event.first / this.page.size;
+    }
   }
 
 }
