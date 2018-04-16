@@ -59,6 +59,10 @@ export class ContactDashboardComponent implements OnInit {
       Object.keys(event.filters).forEach(key => {
         filterColumnString += `${key},`;
         searchValue += `${event.filters[key].value},`;
+        if (key.toLocaleLowerCase() === "title") {
+          filterColumnString += `FirstName,LastName`;
+          searchValue += `${event.filters[key].value},${event.filters[key].value}`;
+        }
       });
       filterColumnString = filterColumnString.slice(0, -1);
       searchValue = searchValue.slice(0, -1);
@@ -143,7 +147,9 @@ export class ContactDashboardComponent implements OnInit {
     this.page.size = 5;
     this.sorting = { columnName: "Id", dir: true };
     this.contactType = contactDashboardTab[event];
-    this.setPage({ offset: 0 });
+    setTimeout(() => {
+      this.setPage({ offset: 0 });
+    }, 300);
   }
 
 }

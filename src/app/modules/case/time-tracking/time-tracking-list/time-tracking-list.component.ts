@@ -87,6 +87,18 @@ export class TimeTrackingListComponent implements OnInit {
       this.page.totalElements = pagedData.TotalNumberOfRecords;
       this.page.totalPages = pagedData.TotalNumberOfPages;
       this.page.pageNumber = pagedData.PageNumber;
+      
+      pagedData.Results.forEach(element => {
+        if (element.BilledHours) {
+          const billedHours = parseFloat(element.BilledHours);
+          element.BilledHours = (billedHours / 60).toString().split(".")[0].toString() +":";
+          element.BilledHours +=  (billedHours / 60).toString().split(".")[1] ? (billedHours / 60).toString().split(".")[1].substr(0, 2) : "00";
+
+          const WorkedHours = parseFloat(element.WorkedHours);
+          element.WorkedHours = (WorkedHours / 60).toString().split(".")[0].toString() +":";
+          element.WorkedHours +=  (WorkedHours / 60).toString().split(".")[1] ? (WorkedHours / 60).toString().split(".")[1].substr(0, 2) : "00";
+        }
+      });
       this.rows = pagedData.Results;
     });
   }

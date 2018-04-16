@@ -17,13 +17,13 @@
 
       <p-column field="TaskCategoryName" [filter]="true" [sortable]="true" header="Task Category"></p-column>
 
-      <p-column field="WorkedHours" [filter]="true" [sortable]="true" header="Worked Hours"></p-column>
+      <p-column field="WorkedHours"  [sortable]="true" header="Worked Hours"></p-column>
 
-      <p-column field="BilledHours" [filter]="true" [sortable]="true" header="Billed Hours"></p-column>
+      <p-column field="BilledHours"  [sortable]="true" header="Billed Hours"></p-column>
 
       <p-column field="Rate" [filter]="true" [sortable]="true" header="Rate"></p-column>
 
-      <p-column field="DontBill" [filter]="true" [sortable]="true" header="Do not Bill">
+      <p-column field="DontBill"  [sortable]="true" header="Do not Bill">
         <ng-template let-col let-data="rowData" pTemplate="body">
           <span>{{data[col.field] ? 'true': 'false'}}</span>
         </ng-template>

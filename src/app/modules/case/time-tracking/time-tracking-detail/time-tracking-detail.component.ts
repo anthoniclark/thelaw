@@ -83,6 +83,13 @@ export class TimeTrackingDetailComponent implements OnInit {
 
   save() {
     this.isLoading = true;
+    const date = new Date(this.model.BilledHours);
+    this.model.AssociateId = this.model.AssociateId["Id"];
+    this.model.BilledHours = (+date.getHours() * 60) + date.getMinutes();
+    const WorkedHours = new Date(this.model.WorkedHours);
+    this.model.CaseId = this.caseDetail.Id;
+    this.model.WorkedHours = (+WorkedHours.getHours() * 60) + WorkedHours.getMinutes();
+    this.model.TaskCategoryName = this.taskCategoryList.find(x=>x.Id.toString() === this.model.TaskCategory.toString()).Name;
     this.caseService.addOrUpdateTimeTracker(this.model).subscribe(
       response => {
         this.isLoading = false;
@@ -105,5 +112,9 @@ export class TimeTrackingDetailComponent implements OnInit {
 
   onCancelClick() {
     this.router.navigate(['/case/' + this.model.CaseId + '/time-tracking']);
+  }
+
+  preventInput($event) {
+    return false;
   }
 }

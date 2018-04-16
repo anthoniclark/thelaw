@@ -1,14 +1,15 @@
 <p-dataTable [value]="_data" [globalFilter]="gb" [lazy]="true" [rows]="page.size" [paginator]="true" [responsive]="true"
   [loading]="loadingIndicator" loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)"
   (onPage)="paginate($event)">
-  <p-column field="ContactType" [filter]="true" [sortable]="true" header="Contact Type"></p-column>
-  <p-column field="Title" [filter]="true" [sortable]="true" header="Name">
-
+  <p-column *ngIf="cType === 'NewlyAdded' || cType === 'Other' " field="ContactType" [filter]="cType !== 'NewlyAdded'" [sortable]="cType !== 'NewlyAdded'"
+    header="Contact Type">
+  </p-column>
+  <p-column field="Title" [filter]="cType !== 'NewlyAdded'" [sortable]="cType !== 'NewlyAdded'" header="Name">
     <ng-template let-col let-data="rowData" pTemplate="body">
       <span>{{data['Title'] }} {{data['FirstName']}} {{data['LastName']}}</span>
     </ng-template>
   </p-column>
-  <p-column field="Designation" [filter]="true" [sortable]="true" header="Designation"></p-column>
+  <p-column field="Designation" [filter]="cType !== 'NewlyAdded'" [sortable]="cType !== 'NewlyAdded'" header="Designation"></p-column>
   <p-column header="Important Contact">
     <ng-template let-row="rowData" pTemplate="body">
       <i class="big-icon important-icon fa {{ row.IsImportant ? 'fa-star' : 'fa-star-o' }}" (click)="toggleImportant(row)" aria-hidden="true"></i>
