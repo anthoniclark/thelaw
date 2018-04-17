@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <div class="col-md-3 pl25">
-      <section class="widget bg-brown text-center">
+      <section class="widget bg-brown text-center" href=#new data-toggle=tab (click)="getNewlyAddedData()">
         <div class="widget-details">
           <h2 class="no-margin bold">{{dashboardData.TotalContact}}</h2>
           <small class="text-uppercase">Total</small>
@@ -17,7 +17,7 @@
       </section>
     </div>
     <div class=col-md-2>
-      <section class="widget bg-success text-center">
+      <section class="widget bg-success text-center" data-toggle=tab href=#advocate (click)="tabSelect(2)">
         <div class="widget-details">
           <h2 class="no-margin bold">{{dashboardData.TotalAdvocate}}</h2>
           <small class="text-uppercase">Advocates</small>
@@ -28,7 +28,7 @@
       </section>
     </div>
     <div class=col-md-2>
-      <section class="widget bg-warning text-center">
+      <section class="widget bg-warning text-center" href=#client data-toggle=tab (click)="tabSelect(1)">
         <div class="widget-details">
           <h2 class="no-margin bold">{{dashboardData.TotalClient}}</h2>
           <small class="text-uppercase">Clients</small>
@@ -39,7 +39,7 @@
       </section>
     </div>
     <div class=col-md-2>
-      <section class="widget bg-lightgreen text-center">
+      <section class="widget bg-lightgreen text-center" href=#law data-toggle=tab (click)="tabSelect(3)">
         <div class="widget-details">
           <h2 class="no-margin bold">{{dashboardData.TotalLawFirm}}</h2>
           <small class="text-uppercase">Law Firms</small>
@@ -50,7 +50,7 @@
       </section>
     </div>
     <div class="col-md-3 pr25">
-      <section class="widget bg-lightblue text-center">
+      <section class="widget bg-lightblue text-center" href=#other data-toggle=tab (click)="tabSelect(4)">
         <div class="widget-details">
           <h2 class="no-margin bold">{{dashboardData.TotalOther}}</h2>
           <small class="text-uppercase">Others</small>
@@ -65,7 +65,7 @@
   <div class="row mb25">
     <div class=col-md-12>
       <div class="box-tab tab-backgroud">
-        <ul class="nav nav-tabs contact-dashboard-nav">
+        <!-- <ul class="nav nav-tabs contact-dashboard-nav">
           <li class=active>
             <a href=#new data-toggle=tab (click)="getNewlyAddedData()">Latest Contacts</a>
           </li>
@@ -81,7 +81,7 @@
           <li>
             <a href=#other data-toggle=tab (click)="tabSelect(4)">Other</a>
           </li>
-        </ul>
+        </ul> -->
         <div class=tab-content>
           <div class="tab-pane active in" *ngIf=" contactType=== 'NewlyAdded'" id='new'>
             <app-contact-grid class="p10" [page]="page" [loadingIndicator]="loadingIndicator" (onFilter)="onFilter($event)" [filterModel]="filterModel"

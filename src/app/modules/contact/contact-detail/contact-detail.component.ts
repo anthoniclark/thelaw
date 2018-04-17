@@ -289,7 +289,8 @@ export class ContactDetailComponent implements OnInit {
             State: address.State,
             PostCode: address.PostCode,
             AddressType: AddressType.Home,
-            ContactId: this.paramId === 'new' ? undefined : +this.paramId
+            ContactId: this.paramId === 'new' ? undefined : +this.paramId,
+            IsActive: true
           }
           if (address.City && address.State && address.Country) {
             this.model.Address.push(addressModel);
@@ -305,7 +306,8 @@ export class ContactDetailComponent implements OnInit {
           State: address.State,
           PostCode: address.PostCode,
           AddressType: AddressType.Home,
-          ContactId: this.paramId === 'new' ? undefined : +this.paramId
+          ContactId: this.paramId === 'new' ? undefined : +this.paramId,
+          IsActive: true
         }
         if (address.City && address.State && address.Country) {
           this.model.Address.push(addressModel);
@@ -326,7 +328,8 @@ export class ContactDetailComponent implements OnInit {
             State: address.State,
             PostCode: address.PostCode,
             AddressType: AddressType.Office,
-            ContactId: this.paramId === 'new' ? undefined : +this.paramId
+            ContactId: this.paramId === 'new' ? undefined : +this.paramId,
+            IsActive: true
           }
           if (address.City && address.State && address.Country) {
             this.model.Address.push(addressModel);
@@ -342,7 +345,8 @@ export class ContactDetailComponent implements OnInit {
           State: address.State,
           PostCode: address.PostCode,
           AddressType: AddressType.Office,
-          ContactId: this.paramId === 'new' ? undefined : +this.paramId
+          ContactId: this.paramId === 'new' ? undefined : +this.paramId,
+          IsActive: true
         }
         if (address.City && address.State && address.Country) {
           this.model.Address.push(addressModel);
@@ -359,7 +363,8 @@ export class ContactDetailComponent implements OnInit {
             MobileNumber: mobile.MobileNumber,
             IsPrimary: mobile.IsPrimary,
             MobileType: mobile.MobileType,
-            ContactId: this.paramId === 'new' ? undefined : +this.paramId
+            ContactId: this.paramId === 'new' ? undefined : +this.paramId,
+            IsActive: true
           }
           if (mobileModel.MobileNumber) {
             this.model.MobileNumbers.push(mobileModel);
@@ -371,7 +376,8 @@ export class ContactDetailComponent implements OnInit {
           MobileNumber: mobile.MobileNumber,
           IsPrimary: mobile.IsPrimary,
           MobileType: mobile.MobileType,
-          ContactId: this.paramId === 'new' ? undefined : +this.paramId
+          ContactId: this.paramId === 'new' ? undefined : +this.paramId,
+          IsActive: true
         }
         if (mobileModel.MobileNumber) {
           this.model.MobileNumbers.push(mobileModel);
@@ -388,7 +394,8 @@ export class ContactDetailComponent implements OnInit {
             Id: email.Id,
             EmailId: email.EmailId,
             IsPrimary: email.IsPrimary,
-            ContactId: this.paramId === 'new' ? undefined : +this.paramId
+            ContactId: this.paramId === 'new' ? undefined : +this.paramId,
+            IsActive: true
           }
           if (emailModel.EmailId) {
             this.model.EmailAddress.push(emailModel);
@@ -399,7 +406,8 @@ export class ContactDetailComponent implements OnInit {
           Id: undefined,
           EmailId: email.EmailId,
           IsPrimary: email.IsPrimary,
-          ContactId: this.paramId === 'new' ? undefined : +this.paramId
+          ContactId: this.paramId === 'new' ? undefined : +this.paramId,
+          IsActive: true
         }
         if (emailModel.EmailId) {
           this.model.EmailAddress.push(emailModel);

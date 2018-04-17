@@ -26,9 +26,9 @@ export class CompaniesDetailComponent implements OnInit {
   states: any[] = [];
   cities: any[] = [];
   settings = { enableSearchFilter: true };
-  emailSet = [{ Id: undefined, EmailId: '', IsPrimary: true, IsDeleted: false }];
-  mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false, isDisabled: false, tempId: 1, MobileType: "home" }];
-  addressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false, AddressType: "Home", ContactId: undefined }];
+  emailSet = [{ Id: undefined, EmailId: '', IsPrimary: true, IsDeleted: false, IsActive: true }];
+  mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false, isDisabled: false, tempId: 1, MobileType: "home", IsActive: true }];
+  addressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false, AddressType: "Home", ContactId: undefined, IsActive: true }];
   constructor(private conmapiesService: CompaniesService, private _notify: NotificationService,
     private activatedRoute: ActivatedRoute, private router: Router, private modalDialog: Modal, private contactService: ContactService) { }
 
@@ -63,7 +63,7 @@ export class CompaniesDetailComponent implements OnInit {
           response.MobileNumbers.forEach((element, index) => {
             this.mobileSet.push({
               Id: element.Id, IsDeleted: false, isDisabled: !element.IsPrimary, MobileNumber: element.MobileNumber, MobileType:
-                element.MobileType, IsPrimary: element.IsPrimary, tempId: index + 1
+                element.MobileType, IsPrimary: element.IsPrimary, tempId: index + 1, IsActive: true
             });
           });
         }
@@ -71,7 +71,10 @@ export class CompaniesDetailComponent implements OnInit {
         if (response.EmailAddress.length) {
           this.emailSet = [];
           response.EmailAddress.forEach((element, index) => {
-            this.emailSet.push({ Id: element.Id, IsDeleted: false, IsPrimary: element.IsPrimary, EmailId: element.EmailId });
+            this.emailSet.push({
+              Id: element.Id, IsDeleted: false, IsPrimary: element.IsPrimary,
+              EmailId: element.EmailId, IsActive: true
+            });
           });
         }
         if (response.Address.length) {
@@ -87,7 +90,8 @@ export class CompaniesDetailComponent implements OnInit {
               ContactId: element.ContactId,
               IsDeleted: false,
               Country: element.CountryId,
-              City: element.CityId
+              City: element.CityId,
+              IsActive: true
             });
           });
         }
@@ -122,7 +126,8 @@ export class CompaniesDetailComponent implements OnInit {
           IsPrimary: mobileset.IsPrimary,
           MobileType: mobileset.MobileType,
           ContactId: this.paramId === 'new' ? undefined : +this.paramId,
-          CompanyId: this.paramId === 'new' ? undefined : +this.paramId
+          CompanyId: this.paramId === 'new' ? undefined : +this.paramId,
+          IsActive: true
         }
         if (mobileModel.MobileNumber) {
           this.model.MobileNumbers.push(mobileModel);
@@ -139,7 +144,8 @@ export class CompaniesDetailComponent implements OnInit {
           Id: email.Id,
           EmailId: email.EmailId,
           IsPrimary: email.IsPrimary,
-          ContactId: this.paramId === 'new' ? undefined : +this.paramId
+          ContactId: this.paramId === 'new' ? undefined : +this.paramId,
+          IsActive: true
         }
         if (emailModel.EmailId) {
           this.model.EmailAddress.push(emailModel);
@@ -161,7 +167,8 @@ export class CompaniesDetailComponent implements OnInit {
           CityId: address.City,
           CountryId: address.Country,
           PostCode: address.PostCode,
-          ContactId: this.paramId === 'new' ? undefined : +this.paramId
+          ContactId: this.paramId === 'new' ? undefined : +this.paramId,
+          IsActive: true
         }
         this.model.Address.push(addressModel);
       }
@@ -258,7 +265,7 @@ export class CompaniesDetailComponent implements OnInit {
 
   addEmail() {
     if (this.validateEmail()) {
-      this.emailSet.push({ Id: undefined, EmailId: '', IsPrimary: false, IsDeleted: false });
+      this.emailSet.push({ Id: undefined, EmailId: '', IsPrimary: false, IsDeleted: false, IsActive: true });
     }
   }
 
@@ -281,7 +288,7 @@ export class CompaniesDetailComponent implements OnInit {
       const isPrimary = this.mobileSet.some(x => x.IsPrimary === true);
       this.mobileSet.push({
         Id: undefined, MobileNumber: '', IsPrimary: false, IsDeleted: false, isDisabled: isPrimary, tempId: this.mobileSet.length + 1,
-        MobileType: "home"
+        MobileType: "home", IsActive: true
       });
     }
   }
@@ -302,7 +309,10 @@ export class CompaniesDetailComponent implements OnInit {
 
   addAddress() {
     if (this.validateAddress()) {
-      this.addressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: false, IsDeleted: false, AddressType: "Home", ContactId: undefined });
+      this.addressSet.push({
+        Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '',
+        Country: undefined, IsPrimary: false, IsDeleted: false, AddressType: "Home", ContactId: undefined, IsActive: true
+      });
     } else {
 
     }

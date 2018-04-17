@@ -142,6 +142,7 @@ export class ContactDashboardComponent implements OnInit {
   }
 
   tabSelect(event) {
+    debugger;
     this.rows = [];
     this.page.pageNumber = 0;
     this.page.size = 5;

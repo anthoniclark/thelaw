@@ -28,6 +28,7 @@ export class Address {
     AddressType: string;
     IsPrimary: boolean;
     ContactId: number;
+    IsActive: boolean;
 }
 
 export class Mobile {
@@ -37,6 +38,7 @@ export class Mobile {
     MobileType: string;
     ContactId: number;
     CompanyId?: number;
+    IsActive: boolean;
 }
 
 export class Email {
@@ -44,4 +46,5 @@ export class Email {
     EmailId: string;
     IsPrimary: boolean;
     ContactId: number;
+    IsActive: boolean;
 }
