@@ -14,11 +14,15 @@
       </p-column>
       <p-column field="CaseNo" header="Case No">
       </p-column>
+      <p-column header="Total">
+      </p-column>
       <ng-template let-data pTemplate="rowexpansion">
         <p-dataTable [value]="data.Categories" [responsive]="true" expandableRows="false" [loading]="loadingIndicator" loadingIcon="fa-spinner">
           <p-column expander="true" styleClass="col-icon expand-icon">
           </p-column>
           <p-column field="Category" header="Category">
+          </p-column>
+          <p-column header="Total">
           </p-column>
           <ng-template let-expenseDetail pTemplate="rowexpansion">
             <p-dataTable [value]="expenseDetail.expenseDetails" [responsive]="true" expandableRows="false" [loading]="loadingIndicator"
