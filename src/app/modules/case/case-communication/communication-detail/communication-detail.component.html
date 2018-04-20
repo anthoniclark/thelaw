@@ -10,10 +10,12 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="CommunicateDate">Communicate Date <span class="req">*</span></label>
+                  <label for="CommunicateDate">Communicate Date
+                    <span class="req">*</span>
+                  </label>
                   <input class="form-control" [(ngModel)]="model.CommunicateDate" ngui-datetime-picker date-only="true" #CommunicateDate="ngModel"
-                    required name="CommunicateDate" id="CommunicateDate" (ngModelChange)="communicationDateChanged($event)" [class.inValidField]="communicationForm.submitted && !CommunicateDate.valid"
-                  />
+                    required name="CommunicateDate" id="CommunicateDate" (ngModelChange)="communicationDateChanged($event)"
+                    [class.inValidField]="communicationForm.submitted && !CommunicateDate.valid" />
                   <label *ngIf="communicationForm.submitted && !CommunicateDate.valid" class="err-label">
                     Please select Communicate Date.
                   </label>
@@ -34,7 +36,9 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="CommunicateFromId">Communicate From <span class="req">*</span></label>
+                  <label for="CommunicateFromId">Communicate From
+                    <span class="req">*</span>
+                  </label>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="CommunicateFromId" name="CommunicateFromId" [source]="contactSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectCommunicateFrom($event)"
                     value-property-name="Id" display-property-name="Name" [class.inValidField]="communicationForm.submitted && !CommunicateDate.CommunicateFromId"
@@ -46,7 +50,9 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="CommunicateToId">Communicate To <span class="req">*</span></label>
+                  <label for="CommunicateToId">Communicate To
+                    <span class="req">*</span>
+                  </label>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="CommunicateToId" name="CommunicateToId" [source]="contactSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectCommunicateTo($event)"
                     value-property-name="Id" display-property-name="Name" [class.inValidField]="communicationForm.submitted && !CommunicateDate.CommunicateToId"
@@ -62,8 +68,7 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Summary">Summary</label>
-                  <textarea type="text" id="Summary" name="Summary" maxlength="250" class="form-control" [(ngModel)]="model.Summary" #Summary="ngModel"
-                  ></textarea>
+                  <textarea type="text" id="Summary" name="Summary" maxlength="250" class="form-control" [(ngModel)]="model.Summary" #Summary="ngModel"></textarea>
                 </div>
               </div>
               <div class="col-sm-6">
@@ -81,6 +86,10 @@
               </a>
               <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
                 <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+              </button>
+              <button type="submit" [disabled]="communicationForm.invalid" (click)="communicationForm.valid && save(communicationForm,true)"
+                [disabled]="isLoading" class="btn btn-primary mr5">
+                <i class="fa fa-plus mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save and Add another' }}
               </button>
             </div>
           </form>

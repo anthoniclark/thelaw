@@ -77,7 +77,15 @@ export class CommunicationDetailComponent implements OnInit {
     }
   }
 
-  save() {
+  save(form, canAddAnother) {
+    if (canAddAnother) {
+      if (!form.valid) {
+        return false;
+      }
+    }
+    if (!this.CommunicateFromId || !this.CommunicateToId) {
+      return false;
+    }
     this.isLoading = true;
     this.caseService.addOrUpdateCommunication(this.model).subscribe(
       response => {
@@ -88,10 +96,23 @@ export class CommunicationDetailComponent implements OnInit {
           } else {
             this._notify.success('Communication updated successfully.');
           }
+          if (canAddAnother) {
+            setTimeout(() => {
+              const caseId = this.model.CaseId;
+              this.model = new CaseCommunication();
+              this.CommunicateFromId = undefined;
+              this.CommunicateToId = undefined;
+              if (this.paramId !== 'new') {
+                this.router.navigateByUrl(`/case/${caseId}/communication/new`);
+              } else {
+              }
+            });
+          } else {
+            setTimeout(() => {
+              this.router.navigateByUrl(`/case/${this.model.CaseId}/communication/dashboard`);
+            });
 
-          setTimeout(() => {
-            this.router.navigateByUrl(`/case/${this.model.CaseId}/communication/dashboard`);
-          });
+          }
         }
       }, err => {
         this.isLoading = false;
