@@ -53,8 +53,12 @@
     </div>
 
     <div class="row">
-      <button type="button" class="btn btn-default" (click)="closeClick()">Cancel</button>
-      <button type="submit" [disabled]="isLoading" class="btn btn-primary">{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
+      <a href=javascript:; (click)="closeClick()" class="btn btn-default btn-cancel mr5">
+        <i class="fa fa-times-circle mr5"></i> Cancel
+      </a>
+      <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+        <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+      </button>
     </div>
   </form>
   <div class="row custom-modal-footer">
