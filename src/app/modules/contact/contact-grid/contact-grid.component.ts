@@ -87,7 +87,7 @@ export class ContactGridComponent implements OnInit {
             } else {
               this.page.pageNumber = pageNumber;
               // this.getPageData.emit({ offset: pageNumber });
-              dt.dilter();
+              dt.filter();
             }
           }, err => {
             this._notify.error(err.Result);
