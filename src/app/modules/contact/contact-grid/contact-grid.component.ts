@@ -87,6 +87,7 @@ export class ContactGridComponent implements OnInit {
               this.page.totalElements = 0;
             } else {
               this.page.pageNumber = pageNumber;
+              this.contactService.sendDeleteNotification();
               // this.getPageData.emit({ offset: pageNumber });
               dt.filter();
             }

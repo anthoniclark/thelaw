@@ -325,12 +325,25 @@ export class ContactService {
     });
   }
 
-  getContactPageData(contactType: string, page: Page, sort: Sorting, filterColumn?: string, filterValue?: string) {
+  getContactPageData(contactType: string, page: Page, sort: Sorting, filterColumn?: string,
+    filterValue?: string, isImportant?: boolean) {
+    if (contactType === 'Importants') {
+      contactType = undefined;
+      isImportant = true;
+    }
+
     let filter = '';
     if (filterColumn) {
       filter += '&' + filterColumn + filterValue;
     }
-    return this.httpService.get(`Contact/GetAllFilter?type=${contactType}&page=${page.pageNumber}&pageSize=${page.size}&orderBy=${sort.columnName}&ascending=${sort.dir}${filter}`).map((res: any) => {
+    let url = `Contact/GetAllFilter?page=${page.pageNumber}&pageSize=${page.size}&orderBy=${sort.columnName}&ascending=${sort.dir}${filter}`;
+    if (contactType) {
+      url = url + `&type=${contactType}`;
+    }
+    if (isImportant) {
+      url = url + `&isImportant=true`;
+    }
+    return this.httpService.get(url).map((res: any) => {
       if (res.Success) {
         return res.Result;
       }

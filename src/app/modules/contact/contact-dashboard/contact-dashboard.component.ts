@@ -33,8 +33,22 @@ export class ContactDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.contactService.deleteNotification.subscribe(res => {
-      debugger;
-      this.dashboardData[this.contactType] = this.dashboardData[this.contactType] - 1;
+      if (this.contactType === 'Client') {
+        this.dashboardData['TotalClient'] = this.dashboardData['TotalClient'] - 1;
+        this.dashboardData['TotalContact'] = this.dashboardData['TotalContact'] - 1;
+      } else if (this.contactType === 'Advocate') {
+        this.dashboardData['TotalAdvocate'] = this.dashboardData['TotalAdvocate'] - 1;
+        this.dashboardData['TotalContact'] = this.dashboardData['TotalContact'] - 1;
+      } else if (this.contactType === 'LawFirm') {
+        this.dashboardData['TotalLawFirm'] = this.dashboardData['TotalLawFirm'] - 1;
+        this.dashboardData['TotalContact'] = this.dashboardData['TotalContact'] - 1;
+      } else if (this.contactType === 'Other') {
+        this.dashboardData['TotalOther'] = this.dashboardData['TotalOther'] - 1;
+        this.dashboardData['TotalContact'] = this.dashboardData['TotalContact'] - 1;
+      } else if (this.contactType === 'Importants') {
+        this.dashboardData['TotalImportants'] = this.dashboardData['TotalImportants'] - 1;
+        this.dashboardData['TotalContact'] = this.dashboardData['TotalContact'] - 1;
+      }
     });
     this.contactService.getDashboardData().subscribe(res => {
       this.dashboardData = res;

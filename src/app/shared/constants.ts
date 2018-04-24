@@ -35,7 +35,8 @@ export const contactDashboardTab = {
     1: 'Client',
     2: 'Advocate',
     3: 'LawFirm',
-    4: 'Other'
+    4: 'Other',
+    5: 'Importants'
 };
 
 export const CaseType = [

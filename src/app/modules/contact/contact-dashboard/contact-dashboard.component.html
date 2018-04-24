@@ -5,7 +5,7 @@
       <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
   </div>
   <div class="row">
-    <div class="col-md-3 pl25">
+    <div class="col-md-2 pl25">
       <section class="widget bg-brown text-center mouse-pointer" href=#new data-toggle=tab (click)="getNewlyAddedData()">
         <div class="widget-details">
           <h2 class="no-margin bold">{{dashboardData.TotalContact}}</h2>
@@ -49,7 +49,18 @@
         </div>
       </section>
     </div>
-    <div class="col-md-3 pr25">
+    <div class=col-md-2>
+      <section class="widget bg-lightgreen text-center mouse-pointer" href=#important data-toggle=tab (click)="tabSelect(5)">
+        <div class="widget-details">
+          <h2 class="no-margin bold">{{dashboardData.TotalImportants}}</h2>
+          <small class="text-uppercase">Importants</small>
+        </div>
+        <div class="widget-details">
+          <div class="fa fa-user fa-3x"></div>
+        </div>
+      </section>
+    </div>
+    <div class="col-md-2 pr25">
       <section class="widget bg-lightblue text-center mouse-pointer" href=#other data-toggle=tab (click)="tabSelect(4)">
         <div class="widget-details">
           <h2 class="no-margin bold">{{dashboardData.TotalOther}}</h2>
@@ -65,23 +76,6 @@
   <div class="row mb25">
     <div class=col-md-12>
       <div class="box-tab tab-backgroud">
-        <!-- <ul class="nav nav-tabs contact-dashboard-nav">
-          <li class=active>
-            <a href=#new data-toggle=tab (click)="getNewlyAddedData()">Latest Contacts</a>
-          </li>
-          <li>
-            <a href=#client data-toggle=tab (click)="tabSelect(1)">Client</a>
-          </li>
-          <li>
-            <a href=#advocate data-toggle=tab (click)="tabSelect(2)">Advocate</a>
-          </li>
-          <li>
-            <a href=#law data-toggle=tab (click)="tabSelect(3)">Law Firm</a>
-          </li>
-          <li>
-            <a href=#other data-toggle=tab (click)="tabSelect(4)">Other</a>
-          </li>
-        </ul> -->
         <div class=tab-content>
           <div class="tab-pane active in" *ngIf=" contactType=== 'NewlyAdded'" id='new'>
             <app-contact-grid class="p10" [page]="page" [loadingIndicator]="loadingIndicator" (onFilter)="onFilter($event)" [filterModel]="filterModel"
@@ -104,6 +98,11 @@
           </div>
           <div class=tab-pane id='other'>
             <app-contact-grid class="p10" [page]="page" [filterModel]="filterModel" *ngIf="contactType=== 'Other'" [loadingIndicator]="loadingIndicator"
+              (onSortChange)="onSort($event)" [cType]="contactType" (getPageData)="setPage($event)" (onFilter)="onFilter($event)"
+              [data]="rows" [showAction]="false"></app-contact-grid>
+          </div>
+          <div class=tab-pane id='important'>
+            <app-contact-grid class="p10" [page]="page" [filterModel]="filterModel" *ngIf="contactType=== 'Importants'" [loadingIndicator]="loadingIndicator"
               (onSortChange)="onSort($event)" [cType]="contactType" (getPageData)="setPage($event)" (onFilter)="onFilter($event)"
               [data]="rows" [showAction]="false"></app-contact-grid>
           </div>
