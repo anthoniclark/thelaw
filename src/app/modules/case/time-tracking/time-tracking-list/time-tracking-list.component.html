@@ -25,7 +25,7 @@
 
       <p-column field="DontBill"  [sortable]="true" header="Do not Bill">
         <ng-template let-col let-data="rowData" pTemplate="body">
-          <span>{{data[col.field] ? 'true': 'false'}}</span>
+          <span>{{data[col.field] ? 'Yes': 'No'}}</span>
         </ng-template>
       </p-column>
       <p-column header="Actions">

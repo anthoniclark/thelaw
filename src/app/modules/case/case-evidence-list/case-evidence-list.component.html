@@ -11,8 +11,17 @@
   </div>
   <div class=panel-body>
     <p-dataTable [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
-      loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)" #dt>
+      loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)"
+      #dt>
       <p-column field="EvidenceName" [filter]="true" [sortable]="true" header="Case Number"></p-column>
+      <p-column header="Evidence File">
+        <ng-template let-data="rowData" pTemplate="body">
+          <span class="pointer-cursor" (click)="data.FileName && downloadEvidence(data.Id)">
+            {{data.FileName}}
+          </span>
+        </ng-template>
+      </p-column>
+
       <p-column header="Actions">
         <ng-template let-data="rowData" pTemplate="body">
           <button (click)="editClick(data.Id)" md-icon-button>

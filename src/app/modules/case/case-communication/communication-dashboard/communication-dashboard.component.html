@@ -56,8 +56,10 @@
           <img [src]="url " alt=" " class="img-circle ">
         </a> -->
           <div class="profile-timeline-user-details ">
+            <b>{{communication.CommunicateFromName.replace(',',' ')}}:</b>
             <a href=javascript:; class="bold ">{{communication.Summary}}</a>
             <br>
+            <b>To: {{communication.CommunicateToName.replace(',',' ')}}  </b>
             <em class="text-success small ">{{communication.CommunicateDate | date: 'dd/MM/yyyy'}}</em>
           </div>
         </div>

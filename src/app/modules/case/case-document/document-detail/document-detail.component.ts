@@ -32,8 +32,9 @@ export class DocumentDetailComponent implements OnInit {
       this.caseService.getCaseDocumentById(this.paramId).subscribe(
         response => {
           this.model = <Document>response;
-          this.fileName = this.model.DocumentName;
-          if (this.model.FileName) {
+          this.fileName = null;
+          if (this.model.FileName && this.model.FileType) {
+            this.fileName = this.model.DocumentName;
             this.url = this.caseService.getCaseDocument(this.paramId);
           }
         }, err => {

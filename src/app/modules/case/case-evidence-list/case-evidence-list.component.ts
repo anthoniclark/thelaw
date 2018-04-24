@@ -164,4 +164,8 @@ export class CaseEvidenceListComponent implements OnInit {
   }
 
 
+  downloadEvidence(id) {
+    this.caseService.downloadCaseEvidenceFile(id);
+  }
+
 }
