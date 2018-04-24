@@ -215,7 +215,7 @@ export class ContactDetailComponent implements OnInit {
         MobileType: "home"
       });
     } else {
-      this._notify.error('Please fill all added mobile');
+      this._notify.error('Please fill all added contact number(s)');
     }
   }
 
@@ -237,7 +237,7 @@ export class ContactDetailComponent implements OnInit {
       }
     });
     if (isEmpty) {
-      this._notify.error('Please fill all added mobile');
+      this._notify.error('Please fill all added contact number(s)');
       return false;
     }
     this.emailSet.forEach(element => {

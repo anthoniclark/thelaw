@@ -168,29 +168,31 @@
             </div>
 
             <div class="panel-heading border">
-              <b>Mobile Numbers
+              <b>Contact Numbers
                 <span class="req">*</span>
               </b>
               <button class="btn btn-create pull-right" (click)="addMobile()" *ngIf="!isViewMode">
-                <i class="fa fa-plus" aria-hidden="true"></i> Add Mobile
+                <i class="fa fa-plus" aria-hidden="true"></i> Add Contact
               </button>
             </div>
             <div class="row pt15">
               <div class="col-sm-6" *ngFor="let mobileControl of mobileSet let i = index">
                 <div *ngIf="!mobileControl.IsDeleted">
                   <div class="form-group">
-                    <label for="MobileNumber{{i}}">Mobile number</label>
+                    <label for="MobileNumber{{i}}">Contact number</label>
                     <a *ngIf="!isViewMode && !mobileControl.IsPrimary" (click)="mobileControl.IsDeleted = true">
                       <i class="fa fa-times-circle pull-right"></i>
                     </a>
                     <select class="form-control pull-right mobile-type-select" [disabled]="isViewMode" name="MobileType{{i}}" [(ngModel)]="mobileControl.MobileType">
                       <option value="work">Work</option>
                       <option value="home">Home</option>
-                      <option value="office">Office</option>
+                      <option value="landline">LandLine</option>
+                      <option value="fax">Fax</option>
+                      <option value="mobile">Mobile</option>
                     </select>
                     <div class="pull-right mr20">
                       <input type="checkbox" [disabled]="isViewMode || mobileControl.isDisabled" (change)="changeIsPrimary(mobileControl)" [(ngModel)]="mobileControl.IsPrimary"
-                        name="mobileIsPrimary{{i}}"> Is Primary
+                        name="mobileIsPrimary{{i}}"> Registered Contact
                     </div>
                     <input type="text" (keypress)="_keyPress($event)" id="MobileNumber{{i}}" [readonly]="isViewMode" name="MobileNumber{{i}}"
                       maxlength="10" class="form-control" [(ngModel)]="mobileControl.MobileNumber" />
@@ -291,7 +293,8 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="Country{{i}}">Country</label>
-                      <select class="form-control" [(ngModel)]="control.Country" id="Country{{i}}" [disabled]="isViewMode" name="Country{{i}}" (ngModelChange)="CountryChanges($event)">
+                      <select class="form-control" [(ngModel)]="control.Country" id="Country{{i}}" [disabled]="isViewMode" name="Country{{i}}"
+                        (ngModelChange)="CountryChanges($event)">
                         <option [value]='undefined'>Select Country</option>
                         <option *ngFor="let country of countries" [value]='country.Id'>
                           {{country.CountryName}}

@@ -32,6 +32,10 @@ export class ContactDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.contactService.deleteNotification.subscribe(res => {
+      debugger;
+      this.dashboardData[this.contactType] = this.dashboardData[this.contactType] - 1;
+    });
     this.contactService.getDashboardData().subscribe(res => {
       this.dashboardData = res;
     }, err => {
@@ -142,7 +146,6 @@ export class ContactDashboardComponent implements OnInit {
   }
 
   tabSelect(event) {
-    debugger;
     this.rows = [];
     this.page.pageNumber = 0;
     this.page.size = 5;

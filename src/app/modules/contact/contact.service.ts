@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClientService } from 'app/lib/http/http-client.service';
 import { Contact, Address } from 'app/models/contact';
 import { Page, Sorting } from '../../models/page';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ContactService {
+  deleteNotification = new Subject<boolean>();
 
   constructor(private httpService: HttpClientService) { }
 
@@ -346,5 +348,12 @@ export class ContactService {
     }).catch((err: any) => {
       throw err;
     });
+  }
+  sendDeleteNotification() {
+    this.deleteNotification.next(true);
+  }
+
+  getDeleteNotification() {
+    return this.deleteNotification.asObservable();
   }
 }

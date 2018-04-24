@@ -82,6 +82,8 @@ export class ContactGridComponent implements OnInit {
             const pageNumber = (this._data.length === 1 ? this.page.pageNumber - 1 : this.page.pageNumber);
             if (this._data.length === 1 && this.page.pageNumber === 0) {
               this._data = this._data.filter(x => x.Id !== id);
+              debugger;
+              this.contactService.sendDeleteNotification();
               this.loadingIndicator = false;
               this.page.totalElements = 0;
             } else {
