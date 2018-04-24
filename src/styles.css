@@ -149,3 +149,22 @@ input:read-only {border: none;}
 .mouse-pointer{
     cursor: pointer;
 }
+
+.bg-brown.active {
+    background-color: #2d221f;
+}
+.bg-success.active {
+    background-color: #206f42;
+}
+.bg-warning.active {
+    background-color: #ad7510;
+}
+.bg-lightgreen.active {
+    background-color: #3b6906;
+}
+.bg-amber.active {
+    background-color: #92700b;
+}
+.bg-lightblue.active {
+    background-color: #0c5271;
+}
