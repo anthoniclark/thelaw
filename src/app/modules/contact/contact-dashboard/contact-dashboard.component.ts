@@ -85,7 +85,22 @@ export class ContactDashboardComponent implements OnInit {
       filterColumnString = filterColumnString.slice(0, -1);
       searchValue = searchValue.slice(0, -1);
     }
-    setTimeout(() => this.getDataSource(filterColumnString, searchValue), 0);
+    if (this.contactType === contactDashboardTab[0] && this.sorting.columnName !== "Id") {
+      const columnName = this.sorting.columnName.toLocaleLowerCase() === "title" ? "FirstName" : this.sorting.columnName;
+      let data = this.rows.sort((a, b) => {
+        if (this.sorting.dir === true)
+          return +(a[columnName] > b[columnName]);
+        else
+          return +(a[columnName] < b[columnName]);
+      });
+      this.rows = [];
+      setTimeout(() => {
+        this.rows = data;
+      }, 0);
+    }
+    else {
+      setTimeout(() => this.getDataSource(filterColumnString, searchValue), 0);
+    }
   }
 
   onFilter($event) {
