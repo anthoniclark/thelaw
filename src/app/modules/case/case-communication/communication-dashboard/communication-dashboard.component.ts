@@ -31,7 +31,6 @@ export class CommunicationDashboardComponent implements OnInit {
       this._notify.error(err.Result);
     });
     this.caseService.getCommunicationByCaseId(this.CaseId).subscribe(response => {
-      debugger
       this.caseCommunications = response;
     }, err => {
       this._notify.error(err.Result);
