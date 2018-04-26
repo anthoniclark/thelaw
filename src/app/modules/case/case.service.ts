@@ -539,6 +539,10 @@ export class CaseService {
     window.open(`${environment.origin}CaseEvidence/DownloadEvidenceFile/${id}`, '_blank');
   }
 
+  downloadDocument(id) {
+    window.open(`${environment.origin}Document/DownloadDocument/${id}`, '_blank');
+  }
+
   deleteCaseEvidenceFile(id) {
     return this.httpService.get(`CaseEvidence/DeleteEvidenceFile/${id}`).map((res: any) => {
       if (res.Success) {

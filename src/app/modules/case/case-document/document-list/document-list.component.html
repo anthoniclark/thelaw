@@ -16,6 +16,13 @@
     <p-dataTable [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
       loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
       <p-column field="DocumentName" [filter]="true" [sortable]="true" header="Document Name"></p-column>
+      <p-column header="Document File">
+        <ng-template let-data="rowData" pTemplate="body">
+          <span class="pointer-cursor" (click)="data.FileName && downloadFile(data.Id)">
+            <i class="fa fa-file" aria-hidden="true"></i>
+          </span>
+        </ng-template>
+      </p-column>
       <p-column field="DocumentCategory" [filter]="true" [sortable]="true" header="Document Category"></p-column>
       <p-column field="FileType" [filter]="true" [sortable]="true" header="File Type"></p-column>
       <p-column header="Actions">

@@ -127,6 +127,10 @@ export class DocumentListComponent implements OnInit {
     this.router.navigate([`case/${this.CaseId}/document/new`]);
   }
 
+  downloadFile(id) {
+    this.caseService.downloadDocument(id);
+  }
+
   paginate(event) {
     if (!event.first) {
       this.page.pageNumber = 0;
