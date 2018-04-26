@@ -64,7 +64,7 @@ export class ContactDashboardComponent implements OnInit {
     if (event.sortField) {
       this.sorting = { columnName: event.sortField, dir: event.sortOrder === 1 };
     } else {
-      this.sorting = { columnName: "Id", dir: true };
+      this.sorting = { columnName: "No", dir: false };
     }
 
     let filterColumnString = "";
