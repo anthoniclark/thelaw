@@ -6,6 +6,8 @@
     <div class="pb30">
       <button type="button" class="btn btn-create pull-right" kendoButton (click)="createNewTimeTracking()">
         <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+      <button type="button" class="btn btn-primary pull-right mr5" (click)="router.navigate(['/case'])">
+        <i class="fa fa-reply" aria-hidden="true"></i> Back to Case</button>
     </div>
   </div>
   <div class=panel-body>
@@ -17,13 +19,13 @@
 
       <p-column field="TaskCategoryName" [filter]="true" [sortable]="true" header="Task Category"></p-column>
 
-      <p-column field="WorkedHours"  [sortable]="true" header="Worked Hours"></p-column>
+      <p-column field="WorkedHours" [sortable]="true" header="Worked Hours"></p-column>
 
-      <p-column field="BilledHours"  [sortable]="true" header="Billed Hours"></p-column>
+      <p-column field="BilledHours" [sortable]="true" header="Billed Hours"></p-column>
 
       <p-column field="Rate" [filter]="true" [sortable]="true" header="Rate"></p-column>
 
-      <p-column field="DontBill"  [sortable]="true" header="Do not Bill">
+      <p-column field="DontBill" [sortable]="true" header="Do not Bill">
         <ng-template let-col let-data="rowData" pTemplate="body">
           <span>{{data[col.field] ? 'Yes': 'No'}}</span>
         </ng-template>
