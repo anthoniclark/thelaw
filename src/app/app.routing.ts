@@ -39,6 +39,10 @@ const routes: Routes = [
       {
         path: 'companies',
         loadChildren: './modules/companies/companies.module#CompaniesModule'
+      },
+      {
+        path: 'events',
+        loadChildren: './modules/events/events.module#EventsModule'
       }
     ]
   },
