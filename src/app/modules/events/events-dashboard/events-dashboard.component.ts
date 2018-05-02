@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { EventsService } from '../events.service';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { overlayConfigFactory, } from 'ngx-modialog';
+import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
+import { EventsDetailComponent } from '../events-detail/events-detail.component';
 @Component({
   selector: 'app-events-dashboard',
   templateUrl: './events-dashboard.component.html',
@@ -8,42 +12,33 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class EventsDashboardComponent implements OnInit {
   events: any[] = [];
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router,
+    private eventServices: EventsService, private _notify: NotificationService,
+    private modal: Modal) {
 
   }
 
   ngOnInit() {
-    this.events = [
-      {
-        "title": "All Day Event",
-        "start": "2018-04-29"
-      },
-      {
-        "title": "All Day Event",
-        "start": "2016-01-01"
-      },
-      {
-        "title": "Long Event",
-        "start": "2016-01-07",
-        "end": "2016-01-10"
-      },
-      {
-        "title": "Repeating Event",
-        "start": "2016-01-09T16:00:00"
-      },
-      {
-        "title": "Repeating Event",
-        "start": "2016-01-16T16:00:00"
-      },
-      {
-        "title": "Conference",
-        "start": "2016-01-11",
-        "end": "2016-01-13"
-      }
-    ];
+    this.eventServices.getAllEvents().subscribe((res: any) => {
+      this.events = res.map((element) => {
+        return {
+          id: element.EventTypeId,
+          title: element.EventTitle,
+          start: element.FromDateTime,
+          end: element.ToDateTime || null
+        }
+      });;
+    }, error => {
+      this._notify.error(error.ErrorMessage);
+    });
   }
 
   addNewEvent() {
-
+    const eventsModel = this.modal.open(EventsDetailComponent, overlayConfigFactory({}, BSModalContext));
+    eventsModel.result.then(res => {
+      debugger
+    }).catch(() => {
+      this._notify.error();
+    })
   }
 }

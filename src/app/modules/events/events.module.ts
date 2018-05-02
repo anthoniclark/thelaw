@@ -8,6 +8,8 @@ import { DataTableModule } from 'primeng/datatable';
 import { EventsService } from './events.service';
 import { EventsDashboardComponent } from './events-dashboard/events-dashboard.component';
 import { ScheduleModule } from 'primeng/schedule';
+import { EventsDetailComponent } from './events-detail/events-detail.component';
+import { BootstrapModalModule, Modal } from 'ngx-modialog/plugins/bootstrap';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,10 +18,12 @@ import { ScheduleModule } from 'primeng/schedule';
     AngularMultiSelectModule,
     ModalModule.forRoot(),
     DataTableModule,
-    ScheduleModule
+    ScheduleModule,
+    BootstrapModalModule
   ],
-  providers: [EventsService],
-  declarations: [EventsDashboardComponent]
+  providers: [EventsService, Modal],
+  declarations: [EventsDashboardComponent, EventsDetailComponent],
+  entryComponents: [EventsDetailComponent]
 })
 
 export class EventsModule { }
