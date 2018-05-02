@@ -1,57 +1,63 @@
-<div class=panel>
-  <div class="panel-heading border">
-    <span class="pull-left">
-      <b>Events</b>
-    </span>
-    <div class="pb30">
-      <button type="button" class="btn btn-create pull-right" (click)="router.navigate(['/case-expense/new'])">
-        <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
-    </div>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Case Expenses</h2>
   </div>
-  <div class="panel-body nested-grid">
-    <p-dataTable [value]="rows" [responsive]="true" expandableRows="false" [loading]="loadingIndicator" loadingIcon="fa-spinner">
-      <p-column expander="true" styleClass="col-icon expand-icon">
-      </p-column>
-      <p-column field="CaseNo" header="Case No">
-      </p-column>
-      <p-column header="Total">
-      </p-column>
-      <ng-template let-data pTemplate="rowexpansion">
-        <p-dataTable [value]="data.Categories" [responsive]="true" expandableRows="false" [loading]="loadingIndicator" loadingIcon="fa-spinner">
-          <p-column expander="true" styleClass="col-icon expand-icon">
-          </p-column>
-          <p-column field="Category" header="Category">
-          </p-column>
-          <p-column header="Total">
-          </p-column>
-          <ng-template let-expenseDetail pTemplate="rowexpansion">
-            <p-dataTable [value]="expenseDetail.expenseDetails" [responsive]="true" expandableRows="false" [loading]="loadingIndicator"
-              loadingIcon="fa-spinner">
-              <p-column field="ExpenseName" header="Expense Name"> </p-column>
-              <p-column field="ExpenseDate" header="Expense Date">
-                <ng-template let-col let-data="rowData" pTemplate="body">
-                  <span>{{data[col.field] | date: 'dd/MM/yyyy'}}</span>
+  <div class="col-lg-2">
+    <button type="button" class="btn btn-primary pull-right m-t-md" (click)='router.navigate(["/case-expense/new"])'>
+      <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
+          <p-dataTable [value]="rows" [responsive]="true" expandableRows="false" [loading]="loadingIndicator" loadingIcon="fa-spinner">
+            <p-column expander="true" styleClass="col-icon expand-icon">
+            </p-column>
+            <p-column field="CaseNo" header="Case No">
+            </p-column>
+            <p-column header="Total">
+            </p-column>
+            <ng-template let-data pTemplate="rowexpansion">
+              <p-dataTable [value]="data.Categories" [responsive]="true" expandableRows="false" [loading]="loadingIndicator" loadingIcon="fa-spinner">
+                <p-column expander="true" styleClass="col-icon expand-icon">
+                </p-column>
+                <p-column field="Category" header="Category">
+                </p-column>
+                <p-column header="Total">
+                </p-column>
+                <ng-template let-expenseDetail pTemplate="rowexpansion">
+                  <p-dataTable [value]="expenseDetail.expenseDetails" [responsive]="true" expandableRows="false" [loading]="loadingIndicator"
+                    loadingIcon="fa-spinner">
+                    <p-column field="ExpenseName" header="Expense Name"> </p-column>
+                    <p-column field="ExpenseDate" header="Expense Date">
+                      <ng-template let-col let-data="rowData" pTemplate="body">
+                        <span>{{data[col.field] | date: 'dd/MM/yyyy'}}</span>
+                      </ng-template>
+                    </p-column>
+                    <p-column field="Amount" header="Amount">
+                    </p-column>
+                    <p-column styleClass="col-button">
+                      <ng-template pTemplate="header">
+                        Actions
+                      </ng-template>
+                      <ng-template let-data="rowData" pTemplate="body">
+                        <button (click)="editClick(data.Id)" title="Edit" md-icon-button>
+                          <i class="fa fa-edit" aria-hidden="true"></i>
+                        </button>
+                        <button (click)="deleteClick(data)" title="delete" md-icon-button>
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </ng-template>
+                    </p-column>
+                  </p-dataTable>
                 </ng-template>
-              </p-column>
-              <p-column field="Amount" header="Amount">
-              </p-column>
-              <p-column styleClass="col-button">
-                <ng-template pTemplate="header">
-                  Actions
-                </ng-template>
-                <ng-template let-data="rowData" pTemplate="body">
-                  <button (click)="editClick(data.Id)" title="Edit" md-icon-button>
-                    <i class="fa fa-edit" aria-hidden="true"></i>
-                  </button>
-                  <button (click)="deleteClick(data)" title="delete" md-icon-button>
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </ng-template>
-              </p-column>
-            </p-dataTable>
-          </ng-template>
-        </p-dataTable>
-      </ng-template>
-    </p-dataTable>
+              </p-dataTable>
+            </ng-template>
+          </p-dataTable>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

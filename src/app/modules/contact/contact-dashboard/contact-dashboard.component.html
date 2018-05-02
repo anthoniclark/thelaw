@@ -1,117 +1,132 @@
-<div class=panel>
-  <div class="p10 pr15 clearfix">
-    <!-- <button type="button" class="btn btn-default pull-right ml5" kendoButton (click)='router.navigate(["/contact/list"])'>Goto List</button> -->
-    <button type="button" class="btn btn-create pull-right" (click)='router.navigate(["/contact/new"])'>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Contacts</h2>
+  </div>
+  <div class="col-lg-2">
+    <button type="button" class="btn btn-primary pull-right m-t-md" (click)='router.navigate(["/contact/new"])'>
       <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
   </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
-    <div class="col-md-2 pl25">
-      <section [class.active]="contactType==='NewlyAdded'" class="widget bg-brown text-center mouse-pointer" href=#new data-toggle=tab
-        (click)="getNewlyAddedData()">
-        <div class="widget-details">
-          <h2 class="no-margin bold">{{dashboardData.TotalContact}}</h2>
-          <small class="text-uppercase">Total</small>
+    <div class="col-md-2">
+      <div class="widget style1 black-bg mouse-pointer" [class.active]="contactType==='NewlyAdded'" href=#new data-toggle=tab (click)="getNewlyAddedData()">
+        <div class="row">
+          <div class="col-xs-4 text-center">
+            <i class="fa fa-trophy fa-3x"></i>
+          </div>
+          <div class="col-xs-8 text-right">
+            <span> Total </span>
+            <h2 class="font-bold">{{dashboardData.TotalContact}}</h2>
+          </div>
         </div>
-        <div class="widget-details">
-          <div class="fa fa-users fa-3x"></div>
-        </div>
-      </section>
-    </div>
-    <div class=col-md-2>
-      <section [class.active]="contactType==='Advocate'" class="widget bg-success text-center mouse-pointer" data-toggle=tab href=#advocate
-        (click)="tabSelect(2)">
-        <div class="widget-details">
-          <h2 class="no-margin bold">{{dashboardData.TotalAdvocate}}</h2>
-          <small class="text-uppercase">Advocates</small>
-        </div>
-        <div class="widget-details">
-          <div class="fa fa-user fa-3x"></div>
-        </div>
-      </section>
-    </div>
-    <div class=col-md-2>
-      <section [class.active]="contactType==='Client'" class="widget bg-warning text-center mouse-pointer" href=#client data-toggle=tab
-        (click)="tabSelect(1)">
-        <div class="widget-details">
-          <h2 class="no-margin bold">{{dashboardData.TotalClient}}</h2>
-          <small class="text-uppercase">Clients</small>
-        </div>
-        <div class="widget-details">
-          <div class="fa fa-user fa-3x"></div>
-        </div>
-      </section>
-    </div>
-    <div class=col-md-2>
-      <section [class.active]="contactType==='LawFirm'" class="widget bg-lightgreen text-center mouse-pointer" href=#law data-toggle=tab
-        (click)="tabSelect(3)">
-        <div class="widget-details">
-          <h2 class="no-margin bold">{{dashboardData.TotalLawFirm}}</h2>
-          <small class="text-uppercase">Law Firms</small>
-        </div>
-        <div class="widget-details">
-          <div class="fa fa-user fa-3x"></div>
-        </div>
-      </section>
-    </div>
-    <div class=col-md-2>
-      <section [class.active]="contactType==='Importants'" class="widget bg-amber text-center mouse-pointer" href=#important data-toggle=tab
-        (click)="tabSelect(5)">
-        <div class="widget-details">
-          <h2 class="no-margin bold">{{dashboardData.TotalImportants}}</h2>
-          <small class="text-uppercase">Importants</small>
-        </div>
-        <div class="widget-details">
-          <div class="fa fa-user fa-3x"></div>
-        </div>
-      </section>
-    </div>
-    <div class="col-md-2 pr25">
-      <section [class.active]="contactType==='Other'" class="widget bg-lightblue text-center mouse-pointer" href=#other data-toggle=tab
-        (click)="tabSelect(4)">
-        <div class="widget-details">
-          <h2 class="no-margin bold">{{dashboardData.TotalOther}}</h2>
-          <small class="text-uppercase">Others</small>
-        </div>
-        <div class="widget-details">
-          <div class="fa fa-user fa-3x"></div>
-        </div>
-      </section>
+      </div>
     </div>
 
+    <div class=col-md-2>
+      <div class="widget style1 navy-bg mouse-pointer" [class.active]="contactType==='Advocate'" href=#advocate data-toggle=tab
+        (click)="tabSelect(2)">
+        <div class="row">
+          <div class="col-xs-4 text-center">
+            <i class="fa fa-user fa-3x"></i>
+          </div>
+          <div class="col-xs-8 text-right">
+            <span> Advocates </span>
+            <h2 class="font-bold">{{dashboardData.TotalAdvocate}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class=col-md-2>
+      <div class="widget style1 lazur-bg mouse-pointer" [class.active]="contactType==='Client'" href=#client data-toggle=tab (click)="tabSelect(1)">
+        <div class="row">
+          <div class="col-xs-4 text-center">
+            <i class="fa fa-user fa-3x"></i>
+          </div>
+          <div class="col-xs-8 text-right">
+            <span> Clients </span>
+            <h2 class="font-bold">{{dashboardData.TotalClient}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class=col-md-2>
+      <div class="widget style1 yellow-bg mouse-pointer" [class.active]="contactType==='LawFirm'" href=#law data-toggle=tab (click)="tabSelect(3)">
+        <div class="row">
+          <div class="col-xs-4 text-center">
+            <i class="fa fa-user fa-3x"></i>
+          </div>
+          <div class="col-xs-8 text-right">
+            <span> Law Firms </span>
+            <h2 class="font-bold">{{dashboardData.TotalLawFirm}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class=col-md-2>
+      <div class="widget style1 red-bg mouse-pointer" [class.active]="contactType==='Importants'" href=#important data-toggle=tab
+        (click)="tabSelect(5)">
+        <div class="row">
+          <div class="col-xs-4 text-center">
+            <i class="fa fa-user fa-3x"></i>
+          </div>
+          <div class="col-xs-8 text-right">
+            <span> Importants </span>
+            <h2 class="font-bold">{{dashboardData.TotalImportants}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="widget style1 blue-bg mouse-pointer" [class.active]="contactType==='Other'" href=#other data-toggle=tab (click)="tabSelect(4)">
+        <div class="row">
+          <div class="col-xs-4 text-center">
+            <i class="fa fa-user fa-3x"></i>
+          </div>
+          <div class="col-xs-8 text-right">
+            <span> Others </span>
+            <h2 class="font-bold">{{dashboardData.TotalOther}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="row mb25">
-    <div class=col-md-12>
-      <div class="box-tab tab-backgroud">
-        <div class=tab-content>
-          <div class="tab-pane active in" *ngIf=" contactType=== 'NewlyAdded'" id='new'>
-            <app-contact-grid class="p10" [page]="page" [loadingIndicator]="loadingIndicator" (onFilter)="onFilter($event)" [filterModel]="filterModel"
-              (onSortChange)="onSort($event)" (getPageData)="setPage($event)" [cType]="contactType" [data]="rows" [showAction]="false"></app-contact-grid>
-          </div>
-          <div class=tab-pane id='client'>
-            <app-contact-grid class="p10" *ngIf="contactType=== 'Client'" [loadingIndicator]="loadingIndicator" (onSortChange)="onSort($event)"
-              [cType]="contactType" [filterModel]="filterModel" (onFilter)="onFilter($event)" [page]="page" (getPageData)="setPage($event)"
-              [data]="rows" [showAction]="false"></app-contact-grid>
-          </div>
-          <div class=tab-pane id='advocate'>
-            <app-contact-grid class="p10" [page]="page" (getPageData)="setPage($event)" [loadingIndicator]="loadingIndicator" (onSortChange)="onSort($event)"
-              [cType]="contactType" [filterModel]="filterModel" (onFilter)="onFilter($event)" *ngIf="contactType=== 'Advocate'"
-              [data]="rows" [showAction]="false"></app-contact-grid>
-          </div>
-          <div class=tab-pane id='law'>
-            <app-contact-grid class="p10" [page]="page" *ngIf="contactType=== 'LawFirm'" [loadingIndicator]="loadingIndicator" (onSortChange)="onSort($event)"
-              [cType]="contactType" [filterModel]="filterModel" (onFilter)="onFilter($event)" (getPageData)="setPage($event)"
-              [data]="rows" [showAction]="false"></app-contact-grid>
-          </div>
-          <div class=tab-pane id='other'>
-            <app-contact-grid class="p10" [page]="page" [filterModel]="filterModel" *ngIf="contactType=== 'Other'" [loadingIndicator]="loadingIndicator"
-              (onSortChange)="onSort($event)" [cType]="contactType" (getPageData)="setPage($event)" (onFilter)="onFilter($event)"
-              [data]="rows" [showAction]="false"></app-contact-grid>
-          </div>
-          <div class=tab-pane id='important'>
-            <app-contact-grid class="p10" [page]="page" [filterModel]="filterModel" *ngIf="contactType=== 'Importants'" [loadingIndicator]="loadingIndicator"
-              (onSortChange)="onSort($event)" [cType]="contactType" (getPageData)="setPage($event)" (onFilter)="onFilter($event)"
-              [data]="rows" [showAction]="false"></app-contact-grid>
-          </div>
+
+  <div class="row m-t-md">
+    <div class="col-lg-12">
+      <div class="ibox-content">
+        <div class="tab-pane active in" *ngIf=" contactType=== 'NewlyAdded'" id='new'>
+          <app-contact-grid class="p10" [page]="page" [loadingIndicator]="loadingIndicator" (onFilter)="onFilter($event)" [filterModel]="filterModel"
+            (onSortChange)="onSort($event)" (getPageData)="setPage($event)" [cType]="contactType" [data]="rows" [showAction]="false"></app-contact-grid>
+        </div>
+        <div class=tab-pane id='client'>
+          <app-contact-grid class="p10" *ngIf="contactType=== 'Client'" [loadingIndicator]="loadingIndicator" (onSortChange)="onSort($event)"
+            [cType]="contactType" [filterModel]="filterModel" (onFilter)="onFilter($event)" [page]="page" (getPageData)="setPage($event)"
+            [data]="rows" [showAction]="false"></app-contact-grid>
+        </div>
+        <div class=tab-pane id='advocate'>
+          <app-contact-grid class="p10" [page]="page" (getPageData)="setPage($event)" [loadingIndicator]="loadingIndicator" (onSortChange)="onSort($event)"
+            [cType]="contactType" [filterModel]="filterModel" (onFilter)="onFilter($event)" *ngIf="contactType=== 'Advocate'"
+            [data]="rows" [showAction]="false"></app-contact-grid>
+        </div>
+        <div class=tab-pane id='law'>
+          <app-contact-grid class="p10" [page]="page" *ngIf="contactType=== 'LawFirm'" [loadingIndicator]="loadingIndicator" (onSortChange)="onSort($event)"
+            [cType]="contactType" [filterModel]="filterModel" (onFilter)="onFilter($event)" (getPageData)="setPage($event)"
+            [data]="rows" [showAction]="false"></app-contact-grid>
+        </div>
+        <div class=tab-pane id='other'>
+          <app-contact-grid class="p10" [page]="page" [filterModel]="filterModel" *ngIf="contactType=== 'Other'" [loadingIndicator]="loadingIndicator"
+            (onSortChange)="onSort($event)" [cType]="contactType" (getPageData)="setPage($event)" (onFilter)="onFilter($event)"
+            [data]="rows" [showAction]="false"></app-contact-grid>
+        </div>
+        <div class=tab-pane id='important'>
+          <app-contact-grid class="p10" [page]="page" [filterModel]="filterModel" *ngIf="contactType=== 'Importants'" [loadingIndicator]="loadingIndicator"
+            (onSortChange)="onSort($event)" [cType]="contactType" (getPageData)="setPage($event)" (onFilter)="onFilter($event)"
+            [data]="rows" [showAction]="false"></app-contact-grid>
         </div>
       </div>
     </div>
