@@ -9,6 +9,8 @@ import { Events } from '../../../models/events';
 import { overlayConfigFactory, } from 'ngx-modialog';
 import swal from 'sweetalert2';
 import { EventTypesDetailComponent } from '../event-types-detail/event-types-detail.component';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-events-detail',
   templateUrl: './events-detail.component.html',
@@ -20,8 +22,10 @@ export class EventsDetailComponent implements OnInit {
   eventTypes: any[] = [];
   model: Events = new Events();
   id: string = "new";
+  caseDetail: any;
   constructor(public dialog: DialogRef<BSModalContext>, private eventsService: EventsService,
-    private _notify: NotificationService, private _bsModal: Modal) {
+    private _notify: NotificationService, private _bsModal: Modal,
+    private _sanitizer: DomSanitizer) {
     dialog.context.dialogClass = "modal-dialog modal-lg";
     this.dialogContext = dialog.context;
     this.id = this.dialogContext.id;
@@ -29,15 +33,17 @@ export class EventsDetailComponent implements OnInit {
 
 
   ngOnInit() {
-    this.eventsService.getAllCase().subscribe(res => {
-      this.cases = res;
-    }, error => {
-      this._notify.error(error.ErrorMessage);
-    });
     this.getAllEventTypes();
     if (this.id !== 'new') {
       this.eventsService.getEventById(this.id).subscribe(res => {
         this.model = res;
+        this.eventsService.getCaseById(this.model.CaseId).subscribe(result => {
+          this.caseDetail = {
+            "Name": result.CaseNo, "Id": result.Id
+          }
+        }, error => {
+          this._notify.error(error.ErrorMessage);
+        })
       }, error => {
         this._notify.error(error.ErrorMessage);
       });
@@ -55,6 +61,15 @@ export class EventsDetailComponent implements OnInit {
   closeDialoge(result) {
     this.dialog.close(result);
 
+  }
+
+  caseSearch(term: string): Observable<any[]> {
+    return this.eventsService.caseSearch(term);
+  }
+
+  autocompleListFormatter = (data: any) => {
+    let html = `<span>${data.Name} </span>`;
+    return this._sanitizer.bypassSecurityTrustHtml(html);
   }
 
   save() {
@@ -97,5 +112,9 @@ export class EventsDetailComponent implements OnInit {
       this.getAllEventTypes();
     }).catch(() => {
     });
+  }
+
+  onSelectCase(event) {
+    this.model.CaseId = event.Id;
   }
 }

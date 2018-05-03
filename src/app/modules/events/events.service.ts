@@ -73,4 +73,23 @@ export class EventsService {
       throw error;
     });
   }
+
+  caseSearch(term) {
+    return this.httpService.get(`Case/GetCases?search=${term}`).map((res: any) => {
+      return res.Result;
+    }, error => {
+      throw error;
+    });
+  }
+
+  getCaseById(id) {
+    return this.httpService.get('case/GetCaseById/' + id).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err.detail;
+    });
+  }
 }

@@ -11,13 +11,19 @@
           <label for="caseId">Case
             <span class="req">*</span>
           </label>
-          <select class="form-control" [(ngModel)]="model.caseId" required [class.inValidField]="eventsForm.submitted && !model.caseId"
+          <!-- <select class="form-control" [(ngModel)]="model.caseId" required [class.inValidField]="eventsForm.submitted && !model.caseId"
             id="caseId" name="caseId" #caseId="ngModel">
             <option [value]='undefined'>Select Case</option>
             <option *ngFor="let case of cases" value={{case.Id}}>
               {{case.CaseNo}}
             </option>
-          </select>
+          </select> -->
+
+
+          <input ngui-auto-complete class="form-control" [(ngModel)]="caseDetail" [class.inValidField]="eventsForm.submitted && !model.caseId"
+            name="AssociateContactId" [source]="caseSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter"
+            [accept-user-input]="false" (valueChanged)="onSelectCase($event)" value-property-name="Id" display-property-name="Name"
+          />
           <label *ngIf="eventsForm.submitted && !model.caseId" class="err-label">
             Please enter Case Number
           </label>
