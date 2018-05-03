@@ -43,10 +43,10 @@
                         Actions
                       </ng-template>
                       <ng-template let-data="rowData" pTemplate="body">
-                        <button (click)="editClick(data.Id)" title="Edit" md-icon-button>
+                        <button (click)="editClick(data.Id)" title="Edit" class="btn-white btn btn-xs">
                           <i class="fa fa-edit" aria-hidden="true"></i>
                         </button>
-                        <button (click)="deleteClick(data)" title="delete" md-icon-button>
+                        <button (click)="deleteClick(data)" title="delete" class="btn-white btn btn-xs">
                           <i class="fa fa-trash"></i>
                         </button>
                       </ng-template>

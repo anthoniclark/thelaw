@@ -29,10 +29,10 @@
             <p-column field="FileType" [filter]="true" [sortable]="true" header="File Type"></p-column>
             <p-column header="Actions">
               <ng-template let-data="rowData" pTemplate="body">
-                <button (click)="editClick(data.Id)" md-icon-button>
+                <button (click)="editClick(data.Id)" class="btn-white btn btn-xs">
                   <i class="fa fa-edit"></i>
                 </button>
-                <button (click)="deleteClick(data.Id)" md-icon-button>
+                <button (click)="deleteClick(data.Id)" class="btn-white btn btn-xs">
                   <i class="fa fa-trash"></i>
                 </button>
               </ng-template>

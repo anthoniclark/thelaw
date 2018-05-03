@@ -1,11 +1,16 @@
-<div>
-  <div class="panel mb25">
-    <div class="panel-heading border">
-      <b>{{ (paramId !='new') ? 'Modify':'Add' }} Case Expense</b>
-    </div>
-    <div class=panel-body>
-      <div class="row no-margin">
-        <div class=col-lg-12>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>{{ (paramId !='new') ? 'Modify':'Add' }} Case Expense</h2>
+  </div>
+  <div class="col-lg-2">
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
           <form name="caseExpenseForm" (ngSubmit)="caseExpenseForm.form.valid && save()" #caseExpenseForm="ngForm" novalidate>
             <div class="row">
               <div class="col-sm-6">
@@ -20,7 +25,7 @@
                       {{case.CaseNo}}
                     </option>
                   </select>
-                  <label *ngIf="caseExpenseForm.submitted && !model.CaseId" class="err-label">
+                  <label *ngIf="caseExpenseForm.submitted && !model.CaseId" class="error">
                     Please select case
                   </label>
                 </div>
@@ -33,7 +38,7 @@
                   <input type="text" maxlength="250" id="ExpenseName" [class.inValidField]="caseExpenseForm.submitted && !ExpenseName.valid"
                     name="ExpenseName" required class="form-control" [(ngModel)]="model.ExpenseName" #ExpenseName="ngModel"
                   />
-                  <label *ngIf="caseExpenseForm.submitted && !ExpenseName.valid" class="err-label">
+                  <label *ngIf="caseExpenseForm.submitted && !ExpenseName.valid" class="error">
                     Please enter Expense Name
                   </label>
                 </div>
@@ -48,7 +53,7 @@
                   <input class="form-control" [(ngModel)]="model.ExpenseDate" required ngui-datetime-picker date-only="true" name="ExpenseDate"
                     id="ExpenseDate" #OpenDate="ngModel" [class.inValidField]="caseExpenseForm.submitted && !model.ExpenseDate"
                   />
-                  <label *ngIf="caseExpenseForm.submitted && !model.ExpenseDate" class="err-label">
+                  <label *ngIf="caseExpenseForm.submitted && !model.ExpenseDate" class="error">
                     Please select expense date
                   </label>
                 </div>
@@ -64,7 +69,7 @@
                       {{category.ExpenseTypeName}}
                     </option>
                   </select>
-                  <label *ngIf="caseExpenseForm.submitted && !model.Category" class="err-label">
+                  <label *ngIf="caseExpenseForm.submitted && !model.Category" class="error">
                     Please select Category
                   </label>
                 </div>
@@ -86,9 +91,9 @@
                   <input class="form-control" type="number" [class.inValidField]="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors"
                     id="Amount" name="Amount" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.Amount" #Amount="ngModel"
                     required />
-                  <label *ngIf="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors && Amount.errors['required']" class="err-label">
+                  <label *ngIf="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors && Amount.errors['required']" class="error">
                     Please enter Amount</label>
-                  <label *ngIf="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors && Amount.errors['pattern']" class="err-label">
+                  <label *ngIf="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors && Amount.errors['pattern']" class="error">
                     Enter Valid Amount</label>
                 </div>
               </div>
@@ -115,13 +120,14 @@
                     <i class="fa fa-trash mr5" aria-hidden="true"></i>Delete</a>
                   <input type="file" class="fileUpload" #fileUpload style="display:none" accept=".doc, application/pdf, image/jpg, image/jpeg, image/png"
                     #fileUpload style="display:none" (change)="onFileChange($event)" />
-                  <div >
-                    <label *ngIf="!validFileType" class="err-label"> Invalid File Type </label>
-                    <label *ngIf="!validFileSize" class="err-label"> File size should less than 2 MB. </label>
+                  <div>
+                    <label *ngIf="!validFileType" class="error"> Invalid File Type </label>
+                    <label *ngIf="!validFileSize" class="error"> File size should less than 2 MB. </label>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="hr-line-dashed"></div>
             <div class="row">
               <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
                 <i class="fa fa-times-circle mr5"></i> Cancel
@@ -134,8 +140,5 @@
         </div>
       </div>
     </div>
-
-
   </div>
-  <div class="clr"></div>
 </div>

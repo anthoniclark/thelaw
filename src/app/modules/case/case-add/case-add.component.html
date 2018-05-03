@@ -28,7 +28,7 @@
                   </label>
                   <input type="text" maxlength="50" id="CaseNo" name="CaseNo" [readonly]="isViewModel" [class.inValidField]="caseForm.submitted && !CaseNo.valid"
                     required class="form-control" (change)="changeDoctNo()" [(ngModel)]="model.CaseNo" #CaseNo="ngModel" />
-                  <label *ngIf="caseForm.submitted && !CaseNo.valid" class="err-label">
+                  <label *ngIf="caseForm.submitted && !CaseNo.valid" class="error">
                     Please enter Case number
                   </label>
                 </div>
@@ -48,7 +48,7 @@
                     name="ClientId" [source]="contactSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter"
                     [accept-user-input]="false" (valueChanged)="onSelectClient($event)" value-property-name="Id" display-property-name="Name"
                   />
-                  <label *ngIf="caseForm.submitted && !model.ClientId" class="err-label">
+                  <label *ngIf="caseForm.submitted && !model.ClientId" class="error">
                     Please select valid Client
                   </label>
                 </div>
@@ -60,7 +60,7 @@
                   </label>
                   <input type="text" maxlength="100" id="NickName" name="NickName" class="form-control" [readonly]="isViewModel" [(ngModel)]="model.NickName"
                     #NickName="ngModel" [class.inValidField]="caseForm.submitted && !NickName.valid" required/>
-                  <label *ngIf="caseForm.submitted && !NickName.valid" class="err-label">
+                  <label *ngIf="caseForm.submitted && !NickName.valid" class="error">
                     Please select valid Client
                   </label>
                 </div>
@@ -79,7 +79,7 @@
                       {{caseType.Name}}
                     </option>
                   </select>
-                  <label *ngIf="caseForm.submitted && !model.CaseType" class="err-label">
+                  <label *ngIf="caseForm.submitted && !model.CaseType" class="error">
                     Please select Case Type
                   </label>
                 </div>
@@ -92,7 +92,7 @@
                   <input type="number" maxlength="4" name="CaseYear" id="CaseYear" [readonly]="isViewModel" class="form-control" [(ngModel)]="model.CaseYear"
                     #CaseYear="ngModel" [class.inValidField]="caseForm.submitted && !model.CaseYear" required (change)="changeDoctNo()"
                   />
-                  <label *ngIf="caseForm.submitted && !model.CaseYear" class="err-label">
+                  <label *ngIf="caseForm.submitted && !model.CaseYear" class="error">
                     Please enter Case Year
                   </label>
                 </div>
@@ -135,7 +135,7 @@
                       {{court.CourtName}}
                     </option>
                   </select>
-                  <label *ngIf="caseForm.submitted && !model.CourtId" class="err-label">
+                  <label *ngIf="caseForm.submitted && !model.CourtId" class="error">
                     Please select Court
                   </label>
                 </div>
@@ -201,7 +201,7 @@
                     name="OpponentContactId" [source]="contactSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter"
                     [accept-user-input]="false" (valueChanged)="onSelectOponent($event)" value-property-name="Id" display-property-name="Name"
                   />
-                  <label *ngIf="caseForm.submitted && !model.OpponentContactId" class="err-label">
+                  <label *ngIf="caseForm.submitted && !model.OpponentContactId" class="error">
                     Please select valid Opponent
                   </label>
                 </div>
@@ -316,7 +316,7 @@
                   <label for="AdvanceFees">Advance Fees</label>
                   <input class="form-control" type="number" id="AdvanceFees" [readonly]="isViewModel" name="AdvanceFees" pattern="^\d+(\.\d{1,2})?$"
                     step="0.01" [(ngModel)]="model.AdvanceFees" (keypress)="_keyPress($event)" #AdvanceFees="ngModel" />
-                  <label *ngIf="(caseForm.submitted || AdvanceFees.dirty) && AdvanceFees.errors && AdvanceFees.errors['pattern']" class="err-label">
+                  <label *ngIf="(caseForm.submitted || AdvanceFees.dirty) && AdvanceFees.errors && AdvanceFees.errors['pattern']" class="error">
                     Enter Valid Advance Fees</label>
                 </div>
               </div>
@@ -338,7 +338,7 @@
                   <label for="CourtFees">Court Fees</label>
                   <input class="form-control" type="number" id="CourtFees" name="CourtFees" [readonly]="isViewModel" pattern="^\d+(\.\d{1,2})?$"
                     step="0.01" [(ngModel)]="model.CourtFees" #CourtFees="ngModel" />
-                  <label *ngIf="(caseForm.submitted || CourtFees.dirty) && CourtFees.errors && CourtFees.errors['pattern']" class="err-label">
+                  <label *ngIf="(caseForm.submitted || CourtFees.dirty) && CourtFees.errors && CourtFees.errors['pattern']" class="error">
                     Enter Valid Court Fees</label>
                 </div>
               </div>
@@ -375,7 +375,7 @@
                   <label for="TrustAccount">Trust Account</label>
                   <input class="form-control" type="number" id="TrustAccount" [readonly]="isViewModel" name="TrustAccount" pattern="^\d+(\.\d{1,2})?$"
                     step="0.01" [(ngModel)]="model.TrustAccount" (keypress)="_keyPress($event)" #TrustAccount="ngModel" />
-                  <label *ngIf="(caseForm.submitted || TrustAccount.dirty) && TrustAccount.errors && TrustAccount.errors['pattern']" class="err-label">
+                  <label *ngIf="(caseForm.submitted || TrustAccount.dirty) && TrustAccount.errors && TrustAccount.errors['pattern']" class="error">
                     Enter Valid Trust Account</label>
                 </div>
               </div>
@@ -421,7 +421,7 @@
                 </div>
               </div>
             </div>
-
+            <div class="hr-line-dashed"></div>
             <div class="row">
               <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
                 <i class="fa fa-times-circle mr5"></i> Cancel

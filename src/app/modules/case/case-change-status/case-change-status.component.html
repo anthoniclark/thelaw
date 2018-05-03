@@ -4,6 +4,7 @@
       <h2 class="my-3">Change Case Status for case number {{dialogContext.caseRow.CaseNo}}</h2>
     </div>
   </div>
+  <div class="hr-line-dashed"></div>
   <form name="changeStatusForm" (ngSubmit)="changeStatusForm.form.valid && changeStatus()" #changeStatusForm='ngForm' novalidate>
     <div class="row">
       <div class="col-sm-6">
@@ -73,7 +74,7 @@
         </div>
       </div>
     </div>
-
+    <div class="hr-line-dashed"></div>
     <div class="row">
       <a href=javascript:; (click)="closeClick()" class="btn btn-default btn-cancel mr5">
         <i class="fa fa-times-circle mr5"></i> Cancel

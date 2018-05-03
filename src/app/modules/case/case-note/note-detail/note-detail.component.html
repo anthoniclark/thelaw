@@ -1,14 +1,16 @@
-<div>
-  <div class="panel mb25">
-    <div class="panel-heading border">
-      <b>{{ (paramId !='new') ? 'Modify':'Add' }} Note for case number {{caseModel.CaseId}}</b>
-      <span class="pull-right pointer-cursor" (click)="toggleIsImportant()">
-        <i class="big-icon fa {{ (model.IsImportant) ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"></i>
-      </span>
-    </div>
-    <div class=panel-body>
-      <div class="row no-margin">
-        <div class=col-lg-12>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>{{ (paramId !='new') ? 'Modify':'Add' }} Note for case number {{caseModel.CaseId}}</h2>
+  </div>
+  <div class="col-lg-2">
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
           <form name="noteForm" (ngSubmit)="noteForm.form.valid && save()" #noteForm="ngForm" novalidate>
             <div class="row">
               <div class="col-sm-6">
@@ -18,7 +20,7 @@
                   </label>
                   <input class="form-control" [(ngModel)]="model.NoteDate" ngui-datetime-picker date-only="true" #NoteDate="ngModel" required
                     name="NoteDate" id="NoteDate" [class.inValidField]="noteForm.submitted && !NoteDate.valid" />
-                  <label *ngIf="noteForm.submitted && !NoteDate.valid" class="err-label">
+                  <label *ngIf="noteForm.submitted && !NoteDate.valid" class="error">
                     Please select Note Date.
                   </label>
                 </div>
@@ -32,7 +34,7 @@
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectNotesBy($event)"
                     value-property-name="Id" display-property-name="Name" [class.inValidField]="noteForm.submitted && !model.NotesBy"
                   />
-                  <label *ngIf="noteForm.submitted && !model.NotesBy" class="err-label">
+                  <label *ngIf="noteForm.submitted && !model.NotesBy" class="error">
                     Please select valid Notes By.
                   </label>
                 </div>
@@ -55,6 +57,7 @@
                 </div>
               </div>
             </div>
+            <div class="hr-line-dashed"></div>
             <div class="row">
               <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
                 <i class="fa fa-times-circle mr5"></i> Cancel
@@ -67,7 +70,5 @@
         </div>
       </div>
     </div>
-
   </div>
-  <div class="clr"></div>
 </div>

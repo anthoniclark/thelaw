@@ -1,12 +1,16 @@
-<div>
-  <div class="panel mb25">
-    <div class="panel-heading border">
-      <b>{{ (paramId !='new') ? 'Modify':'Add' }} Company</b>
-    </div>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>{{ (paramId !='new') ? 'Modify':'Add' }} Company</h2>
+  </div>
+  <div class="col-lg-2">
+  </div>
+</div>
 
-    <div class=panel-body>
-      <div class="row no-margin">
-        <div class=col-lg-12>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
           <form name="companyForm" (ngSubmit)="companyForm.form.valid && save()" #companyForm="ngForm" novalidate>
 
             <div class="row">
@@ -19,7 +23,7 @@
                   </div>
                   <div>{{fileToUpload?.name || 'Select Image'}}</div>
                   <div *ngIf="!validFileType">
-                    <label class="err-label"> Invalid File Type </label>
+                    <label class="error"> Invalid File Type </label>
                   </div>
                   <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">
                     <i class="fa fa-upload mr5"></i> Upload</a>
@@ -35,7 +39,7 @@
                   </label>
                   <input type="text" maxlength="50" id="CompanyName" [class.inValidField]="companyForm.submitted && !companyForm.CaseId" name="CompanyName"
                     required class="form-control" [(ngModel)]="model.CompanyName" #CompanyName="ngModel" />
-                  <label *ngIf="companyForm.submitted && !CompanyName.valid" class="err-label">
+                  <label *ngIf="companyForm.submitted && !CompanyName.valid" class="error">
                     Please enter Company Name
                   </label>
                 </div>
@@ -47,7 +51,7 @@
                   </label>
                   <input type="text" maxlength="50" id="InsdustrySection" name="InsdustrySection" class="form-control" [class.inValidField]="companyForm.submitted && !InsdustrySection.valid"
                     [(ngModel)]="model.InsdustrySection" #InsdustrySection="ngModel" />
-                  <label *ngIf="companyForm.submitted && !InsdustrySection.valid" class="err-label">
+                  <label *ngIf="companyForm.submitted && !InsdustrySection.valid" class="error">
                     Please enter Insdustry Section
                   </label>
                 </div>
@@ -58,7 +62,7 @@
                   <label for="Category">Category</label>
                   <input type="text" maxlength="50" id="Category" name="Category" class="form-control" [(ngModel)]="model.Category" #Category="ngModel"
                   />
-                  <label *ngIf="companyForm.submitted && !Category.valid" class="err-label">
+                  <label *ngIf="companyForm.submitted && !Category.valid" class="error">
                     Please enter Category
                   </label>
                 </div>
@@ -73,7 +77,7 @@
                   <label for="CompanySize">Company Size</label>
                   <input type="number" pattern="^\d+(\.\d{1,2})?$" step="1" id="CompanySize" name="CompanySize" class="form-control" [(ngModel)]="model.CompanySize"
                     #CompanySize="ngModel" />
-                  <label *ngIf="companyForm.submitted && !CompanySize.valid" class="err-label">
+                  <label *ngIf="companyForm.submitted && !CompanySize.valid" class="error">
                     Please enter CompanySize
                   </label>
                 </div>
@@ -84,7 +88,7 @@
                   <label for="Website">Website</label>
                   <input type="text" maxlength="100" id="Website" name="Website" class="form-control" [(ngModel)]="model.Website" #Website="ngModel"
                   />
-                  <label *ngIf="companyForm.submitted && !Website.valid" class="err-label">
+                  <label *ngIf="companyForm.submitted && !Website.valid" class="error">
                     Please enter Website
                   </label>
                 </div>
@@ -103,15 +107,19 @@
               </div>
             </div>
 
-            <div class="panel-heading border">
-              <b>Email Addresses
-                <span class="req">*</span>
-              </b>
-              <button type="button" class="btn btn-create pull-right" (click)="addEmail()">
-                <i class="fa fa-plus" aria-hidden="true"></i> Add Email
-              </button>
-            </div>
+            <div class="hr-line-dashed"></div>
 
+            <div class="ibox-title custom-ibox-title">
+              <h5>
+                Email Addresses
+                <span class="req">*</span>
+              </h5>
+              <div class="ibox-tools">
+                <button class="btn btn-create pull-right custom-ibox-tool-btn" (click)="addEmail()" *ngIf="!isViewMode">
+                  <i class="fa fa-plus" aria-hidden="true"></i> Add Email
+                </button>
+              </div>
+            </div>
             <div class="row pt15">
               <div class="col-sm-6" *ngFor="let emailControl of emailSet let i = index; let j;">
                 <div *ngIf="!emailControl.IsDeleted">
@@ -127,105 +135,125 @@
               </div>
             </div>
 
-            <div class="panel-heading border">
-              <b>Mobile Numbers
-                <span class="req">*</span>
-              </b>
-              <button type="button" class="btn btn-create pull-right" (click)="addMobile()">
-                <i class="fa fa-plus" aria-hidden="true"></i> Add Mobile
-              </button>
-            </div>
+            <div class="hr-line-dashed"></div>
 
+            <div class="ibox-title custom-ibox-title">
+              <h5>Contact Numbers
+                <span class="req">*</span>
+              </h5>
+              <div class="ibox-tools">
+                <button class="btn btn-create pull-right custom-ibox-tool-btn" (click)="addMobile()" *ngIf="!isViewMode">
+                  <i class="fa fa-plus" aria-hidden="true"></i> Add Contact
+                </button>
+              </div>
+            </div>
             <div class="row pt15">
               <div class="col-sm-6" *ngFor="let mobileControl of mobileSet let i = index">
                 <div *ngIf="!mobileControl.IsDeleted">
                   <div class="form-group">
-                    <label for="MobileNumber{{i}}">Mobile number</label>
+                    <div>
+                      <label for="MobileNumber{{i}}">Contact number</label>
+                    </div>
                     <a *ngIf="!mobileControl.IsPrimary" (click)="mobileControl.IsDeleted = true">
                       <i class="fa fa-times-circle pull-right"></i>
                     </a>
-                    <select class="form-control pull-right mobile-type-select" name="MobileType{{i}}" [(ngModel)]="mobileControl.MobileType">
-                      <option value="work">Work</option>
-                      <option value="home">Home</option>
-                      <option value="office">Office</option>
-                    </select>
-                    <div class="pull-right mr20">
-                      <input type="checkbox" [disabled]="mobileControl.isDisabled" (change)="changeIsPrimary(mobileControl)" [(ngModel)]="mobileControl.IsPrimary"
-                        name="mobileIsPrimary{{i}}"> Is Primary
+                    <div class="form-group col-md-8 pl0">
+                      <select class="form-control pull-right mobile-type-select" name="MobileType{{i}}" [(ngModel)]="mobileControl.MobileType">
+                        <option value="work">Work</option>
+                        <option value="home">Home</option>
+                        <option value="office">Office</option>
+                        <option value="fax">Fax</option>
+                        <option value="mobile">Mobile</option>
+                      </select>
                     </div>
-                    <input type="text" (keypress)="_keyPress($event)" id="MobileNumber{{i}}" name="MobileNumber{{i}}" maxlength="10" class="form-control"
-                      [(ngModel)]="mobileControl.MobileNumber" />
+                    <div class="mr20 col-md-4">
+                      <div class="i-checks">
+                        <label>
+                          <input type="checkbox" [disabled]="mobileControl.isDisabled" (change)="changeIsPrimary(mobileControl)" [(ngModel)]="mobileControl.IsPrimary"
+                            name="mobileIsPrimary{{i}}">
+                          <i></i> Registered Contact
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-12 pl0">
+                      <input type="text" (keypress)="_keyPress($event)" id="MobileNumber{{i}}" name="MobileNumber{{i}}" maxlength="10" class="form-control"
+                        [(ngModel)]="mobileControl.MobileNumber" />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="panel-heading border mb20">
-              <b>Addresses
-                <span class="req">*</span>
-              </b>
-              <button type="button" class="btn btn-create pull-right" (click)="addAddress()">
-                <i class="fa fa-plus" aria-hidden="true"></i> Add Address
-              </button>
-            </div>
+            <div class="hr-line-dashed"></div>
 
-            <div class="row" *ngFor="let control of addressSet let i = index">
+            <div class="ibox-title custom-ibox-title">
+              <h5>
+                Addresses
+                <span class="req">*</span>
+              </h5>
+              <div class="ibox-tools">
+                <button class="btn btn-create pull-right custom-ibox-tool-btn" (click)="addAddress()">
+                  <i class="fa fa-plus" aria-hidden="true"></i> Add Address
+                </button>
+              </div>
+            </div>
+            <div class="row pt15" *ngFor="let control of addressSet let i = index">
               <div *ngIf="!control.IsDeleted">
                 <div class="row form-group text-right" style="margin: 0;">
                   <a *ngIf="!control.IsPrimary" (click)="control.IsDeleted = true">
                     <i class="fa fa-times-circle"></i>
                   </a>
                 </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="Address1{{i}}">Address</label>
-                      <input type="text" name="Address1{{i}}" maxlength="250" class="form-control" [(ngModel)]="control.Address1" />
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="Country{{i}}">Country</label>
-                      <select class="form-control" [(ngModel)]="control.Country" id="Country{{i}}" name="Country{{i}}" (ngModelChange)="CountryChanges($event)">
-                        <option [value]='undefined'>Select Country</option>
-                        <option *ngFor="let country of countries" [value]='country.Id'>
-                          {{country.CountryName}}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="State{{i}}">State</label>
-                      <select class="form-control" [(ngModel)]="control.State" id="State{{i}}" name="State{{i}}" (ngModelChange)="StateChanges($event)">
-                        <option [value]='undefined'>Select State</option>
-                        <option *ngFor="let state of states" [value]='state.Id'>
-                          {{state.StateName}}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="City{{i}}">City</label>
-                      <select class="form-control" [(ngModel)]="control.City" id="City{{i}}" name="City{{i}}">
-                        <option [value]='undefined'>Select City</option>
-                        <option *ngFor="let city of cities" [value]='city.Id'>
-                          {{city.CityName}}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="PostCode{{i}}">PostCode</label>
-                      <input type="text" name="PostCode{{i}}" maxlength="50" class="form-control" [(ngModel)]="control.PostCode" />
-                    </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="Address1{{i}}">Address</label>
+                    <input type="text" name="Address1{{i}}" maxlength="250" class="form-control" [(ngModel)]="control.Address1" />
                   </div>
                 </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="Country{{i}}">Country</label>
+                    <select class="form-control" [(ngModel)]="control.Country" id="Country{{i}}" name="Country{{i}}" (ngModelChange)="CountryChanges($event)">
+                      <option [value]='undefined'>Select Country</option>
+                      <option *ngFor="let country of countries" [value]='country.Id'>
+                        {{country.CountryName}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="State{{i}}">State</label>
+                    <select class="form-control" [(ngModel)]="control.State" id="State{{i}}" name="State{{i}}" (ngModelChange)="StateChanges($event)">
+                      <option [value]='undefined'>Select State</option>
+                      <option *ngFor="let state of states" [value]='state.Id'>
+                        {{state.StateName}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="City{{i}}">City</label>
+                    <select class="form-control" [(ngModel)]="control.City" id="City{{i}}" name="City{{i}}">
+                      <option [value]='undefined'>Select City</option>
+                      <option *ngFor="let city of cities" [value]='city.Id'>
+                        {{city.CityName}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="PostCode{{i}}">PostCode</label>
+                    <input type="text" name="PostCode{{i}}" maxlength="50" class="form-control" [(ngModel)]="control.PostCode" />
+                  </div>
+                </div>
+
               </div>
             </div>
-
+            <div class="hr-line-dashed"></div>
             <div class="row">
               <a href=javascript:; (click)="onCancleClick()" class="btn btn-default btn-cancel mr5">
                 <i class="fa fa-times-circle mr5"></i> Cancel

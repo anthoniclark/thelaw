@@ -1,35 +1,45 @@
-<div>
-  <div class="panel mb25">
-    <div class="panel-heading border">
-      <b>{{ (paramId !='new') ? 'Modify':'Add' }} Expense Type</b>
-    </div>
-    <div class=panel-body>
-      <div class="row no-margin">
-        <div class=col-lg-12>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>{{ (paramId !='new') ? 'Modify':'Add' }} Expense Type</h2>
+  </div>
+  <div class="col-lg-2">
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
           <form name="expenseTypeForm" (ngSubmit)="expenseTypeForm.form.valid && save()" #expenseTypeForm="ngForm" novalidate>
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="expenseType">Expense Type Name <span class="req">*</span></label>
+                  <label for="expenseType">Expense Type Name
+                    <span class="req">*</span>
+                  </label>
                   <input class="form-control" [(ngModel)]="model.ExpenseTypeName" type="text" [class.inValidField]="expenseTypeForm.submitted && !expenseType.valid"
                     #expenseType="ngModel" required name="expenseType" id="expenseType" />
-                  <label *ngIf="expenseTypeForm.submitted && !expenseType.valid" class="err-label">
+                  <label *ngIf="expenseTypeForm.submitted && !expenseType.valid" class="error">
                     Please enter Expense Type Name.
                   </label>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="basicPrice">Basic Price <span class="req">*</span></label>
+                  <label for="basicPrice">Basic Price
+                    <span class="req">*</span>
+                  </label>
                   <input class="form-control" [(ngModel)]="model.BasicPrice" type="number" pattern="^\d+(\.\d{1,2})?$" step="0.1" #basicPrice="ngModel"
                     required name="basicPrice" id="basicPrice" [class.inValidField]="expenseTypeForm.submitted && !basicPrice.valid"
                   />
-                  <label *ngIf="expenseTypeForm.submitted && !basicPrice.valid" class="err-label">
+                  <label *ngIf="expenseTypeForm.submitted && !basicPrice.valid" class="error">
                     Please enter Basic Price.
                   </label>
                 </div>
               </div>
             </div>
+            <div class="hr-line-dashed"></div>
             <div class="row">
               <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
                 <i class="fa fa-times-circle mr5"></i> Cancel
@@ -42,7 +52,5 @@
         </div>
       </div>
     </div>
-
   </div>
-  <div class="clr"></div>
 </div>

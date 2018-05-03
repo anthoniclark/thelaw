@@ -23,7 +23,7 @@
                   </div>
                   <div *ngIf="!isViewMode">{{fileToUpload?.name || 'Select Image'}}</div>
                   <div *ngIf="!validFileType">
-                    <label class="err-label"> Invalid File Type </label>
+                    <label class="error"> Invalid File Type </label>
                   </div>
                   <a href="javascript:void(0);" class="change btn btn-primary" *ngIf="!isViewMode" (click)="fileUpload.click()">
                     <i class="fa fa-upload mr5"></i> Upload</a>
@@ -50,7 +50,7 @@
                       {{title.Name}}
                     </option>
                   </select>
-                  <label *ngIf="contactForm.submitted && !Title.valid" class="err-label">
+                  <label *ngIf="contactForm.submitted && !Title.valid" class="error">
                     Please enter Title
                   </label>
                 </div>
@@ -63,7 +63,7 @@
                   <input type="text" maxlength="50" id="FirstName" name="FirstName" [class.inValidField]="contactForm.submitted && !FirstName.valid"
                     required class="form-control" [(ngModel)]="model.FirstName" [readonly]="isViewMode" #FirstName="ngModel"
                   />
-                  <label *ngIf="contactForm.submitted && !FirstName.valid" class="err-label">
+                  <label *ngIf="contactForm.submitted && !FirstName.valid" class="error">
                     Please enter First name
                   </label>
                 </div>
@@ -75,7 +75,7 @@
                   </label>
                   <input type="text" maxlength="50" name="LastName" [readonly]="isViewMode" [class.inValidField]="contactForm.submitted && !LastName.valid"
                     required class="form-control" [(ngModel)]="model.LastName" #LastName="ngModel" />
-                  <label *ngIf="contactForm.submitted && !LastName.valid" class="err-label">
+                  <label *ngIf="contactForm.submitted && !LastName.valid" class="error">
                     Please enter Last name
                   </label>
                 </div>
@@ -111,7 +111,7 @@
                   <label for="PriceRate">Price Rate</label>
                   <input class="form-control" type="number" id="PriceRate" [readonly]="isViewMode" name="PriceRate" pattern="^\d+(\.\d{1,2})?$"
                     step="0.01" [(ngModel)]="model.PriceRate" #PriceRate="ngModel" />
-                  <label *ngIf="(contactForm.submitted || PriceRate.dirty) && PriceRate.errors && PriceRate.errors['pattern']" class="err-label">
+                  <label *ngIf="(contactForm.submitted || PriceRate.dirty) && PriceRate.errors && PriceRate.errors['pattern']" class="error">
                     Enter Valid Price Rate</label>
                 </div>
               </div>
@@ -120,7 +120,7 @@
                   <label for="BasePrice">Base Price</label>
                   <input class="form-control" type="number" id="BasePrice" [readonly]="isViewMode" name="BasePrice" pattern="^\d+(\.\d{1,2})?$"
                     step="0.01" [(ngModel)]="model.BasePrice" #BasePrice="ngModel" />
-                  <label *ngIf="(contactForm.submitted || BasePrice.dirty) && BasePrice.errors && BasePrice.errors['pattern']" class="err-label">
+                  <label *ngIf="(contactForm.submitted || BasePrice.dirty) && BasePrice.errors && BasePrice.errors['pattern']" class="error">
                     Enter Valid Base Price</label>
                 </div>
               </div>
