@@ -65,4 +65,12 @@ export class EventsService {
       throw error;
     });
   }
+
+  createEventType(model) {
+    return this.httpService.post(`EventType/Create`, model).map((res: any) => {
+      return res.Result;
+    }, error => {
+      throw error;
+    });
+  }
 }

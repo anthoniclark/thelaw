@@ -10,6 +10,8 @@ import { EventsDashboardComponent } from './events-dashboard/events-dashboard.co
 import { ScheduleModule } from 'primeng/schedule';
 import { EventsDetailComponent } from './events-detail/events-detail.component';
 import { BootstrapModalModule, Modal } from 'ngx-modialog/plugins/bootstrap';
+import { EventTypesDetailComponent } from './event-types-detail/event-types-detail.component';
+import { ColorPickerModule } from 'primeng/colorpicker';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,11 +21,12 @@ import { BootstrapModalModule, Modal } from 'ngx-modialog/plugins/bootstrap';
     ModalModule.forRoot(),
     DataTableModule,
     ScheduleModule,
-    BootstrapModalModule
+    BootstrapModalModule,
+    ColorPickerModule
   ],
   providers: [EventsService, Modal],
-  declarations: [EventsDashboardComponent, EventsDetailComponent],
-  entryComponents: [EventsDetailComponent]
+  declarations: [EventsDashboardComponent, EventsDetailComponent, EventTypesDetailComponent],
+  entryComponents: [EventsDetailComponent, EventTypesDetailComponent]
 })
 
 export class EventsModule { }

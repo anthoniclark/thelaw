@@ -1,12 +1,14 @@
 
 import { Component, OnInit, OnDestroy, DebugElement } from '@angular/core';
 import { CloseGuard, ModalComponent, DialogRef } from 'ngx-modialog';
-import { BSModalContext } from 'ngx-modialog/plugins/bootstrap';
+import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
 import { CaseStatus } from 'app/models/case';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { EventsService } from '../events.service';
 import { Events } from '../../../models/events';
+import { overlayConfigFactory, } from 'ngx-modialog';
 import swal from 'sweetalert2';
+import { EventTypesDetailComponent } from '../event-types-detail/event-types-detail.component';
 @Component({
   selector: 'app-events-detail',
   templateUrl: './events-detail.component.html',
@@ -19,7 +21,7 @@ export class EventsDetailComponent implements OnInit {
   model: Events = new Events();
   id: string = "new";
   constructor(public dialog: DialogRef<BSModalContext>, private eventsService: EventsService,
-    private _notify: NotificationService) {
+    private _notify: NotificationService, private _bsModal: Modal) {
     dialog.context.dialogClass = "modal-dialog modal-lg";
     this.dialogContext = dialog.context;
     this.id = this.dialogContext.id;
@@ -32,11 +34,7 @@ export class EventsDetailComponent implements OnInit {
     }, error => {
       this._notify.error(error.ErrorMessage);
     });
-    this.eventsService.getAllEventTypes().subscribe(res => {
-      this.eventTypes = res;
-    }, error => {
-      this._notify.error(error.ErrorMessage);
-    });
+    this.getAllEventTypes();
     if (this.id !== 'new') {
       this.eventsService.getEventById(this.id).subscribe(res => {
         this.model = res;
@@ -46,6 +44,13 @@ export class EventsDetailComponent implements OnInit {
     }
   }
 
+  getAllEventTypes() {
+    this.eventsService.getAllEventTypes().subscribe(res => {
+      this.eventTypes = res;
+    }, error => {
+      this._notify.error(error.ErrorMessage);
+    });
+  }
 
   closeDialoge(result) {
     this.dialog.close(result);
@@ -84,5 +89,13 @@ export class EventsDetailComponent implements OnInit {
     }, error => {
     });
     // });
+  }
+
+  createEventType() {
+    const eventsModel = this._bsModal.open(EventTypesDetailComponent, overlayConfigFactory({}, BSModalContext));
+    eventsModel.result.then(res => {
+      this.getAllEventTypes();
+    }).catch(() => {
+    });
   }
 }

@@ -1,0 +1,56 @@
+<div class="container-fluid custom-modal-container" style="padding: 15px 30px;">
+  <div class="row custom-modal-header">
+    <div class="col">
+      <h2 class="my-3">Create Event Type</h2>
+    </div>
+  </div>
+
+  <!-- <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <p-colorPicker [(ngModel)]="color"></p-colorPicker>
+    </div>
+  </div> -->
+  <form name="eventsTypeForm" (ngSubmit)="eventsTypeForm.form.valid && save()" #eventsTypeForm='ngForm' novalidate>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="TypeName">Event Type Name
+            <span class="req">*</span>
+          </label>
+          <input type="text" class="form-control" [(ngModel)]="model.TypeName" required [class.inValidField]="eventsTypeForm.submitted && !model.TypeName"
+            id="TypeName" name="TypeName" #TypeName="ngModel" />
+          <label *ngIf="eventsTypeForm.submitted && !model.TypeName" class="err-label">
+            Please enter Event Type Name
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="Color">Event Color
+            <span class="req">*</span>
+          </label>
+          <br/>
+          <p-colorPicker name="Color" [(ngModel)]="model.Color"></p-colorPicker>
+          <br/>
+          <label *ngIf="eventsTypeForm.submitted && !model.Color" class="err-label">
+            Please select Event Color
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <a href=javascript:; (click)="closeDialoge(false)" class="btn btn-default btn-cancel mr5">
+        <i class="fa fa-times-circle mr5"></i> Cancel
+      </a>
+      <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+        <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+      </button>
+    </div>
+  </form>
+  <div class="row custom-modal-footer">
+    <div class="col-xs-12">
+    </div>
+  </div>
+</div>

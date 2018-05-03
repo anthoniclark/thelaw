@@ -8,3 +8,9 @@ export class Events {
     ToDateTime: string;
     Frquency: string;
 }
+
+export class EventTypes {
+    Id: number;
+    TypeName: string;
+    Color: string;
+}

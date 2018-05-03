@@ -34,9 +34,10 @@ export class EventsDashboardComponent implements OnInit {
           id: element.Id,
           title: element.EventTitle,
           start: element.FromDateTime,
-          end: element.ToDateTime || null
+          end: element.ToDateTime || null,
+          color: element.EventType.Color
         }
-      });;
+      });
     }, error => {
       this._notify.error(error.ErrorMessage);
     });
@@ -49,11 +50,11 @@ export class EventsDashboardComponent implements OnInit {
         this.getAllEvents();
       }
     }).catch(() => {
-      this._notify.error();
+      //this._notify.error();
     });
   }
 
   eventClicked(event) {
-   this.addNewEvent(event.calEvent.id);
+    this.addNewEvent(event.calEvent.id);
   }
 }

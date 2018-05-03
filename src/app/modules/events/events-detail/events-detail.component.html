@@ -43,6 +43,9 @@
           <label for="EventTypeId">EventType
             <span class="req">*</span>
           </label>
+          <a class="pull-right" (click)="createEventType()">
+            <i aria-hidden="true" class="fa fa-plus"></i> Create New
+          </a>
           <select class="form-control" [(ngModel)]="model.EventTypeId" required [class.inValidField]="eventsForm.submitted && !model.EventTypeId"
             id="EventTypeId" name="EventTypeId" #EventTypeId="ngModel">
             <option [value]='undefined'>Select Event Type</option>
