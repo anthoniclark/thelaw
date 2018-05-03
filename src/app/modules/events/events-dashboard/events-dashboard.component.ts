@@ -12,17 +12,26 @@ import { EventsDetailComponent } from '../events-detail/events-detail.component'
 })
 export class EventsDashboardComponent implements OnInit {
   events: any[] = [];
+  headerConfig: any;
   constructor(private route: ActivatedRoute, private router: Router,
     private eventServices: EventsService, private _notify: NotificationService,
     private modal: Modal) {
 
   }
-
   ngOnInit() {
+    this.headerConfig = {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
+    };
+    this.getAllEvents();
+  }
+
+  getAllEvents() {
     this.eventServices.getAllEvents().subscribe((res: any) => {
       this.events = res.map((element) => {
         return {
-          id: element.EventTypeId,
+          id: element.Id,
           title: element.EventTitle,
           start: element.FromDateTime,
           end: element.ToDateTime || null
@@ -33,12 +42,18 @@ export class EventsDashboardComponent implements OnInit {
     });
   }
 
-  addNewEvent() {
-    const eventsModel = this.modal.open(EventsDetailComponent, overlayConfigFactory({}, BSModalContext));
+  addNewEvent(id: string = "new") {
+    const eventsModel = this.modal.open(EventsDetailComponent, overlayConfigFactory({ id }, BSModalContext));
     eventsModel.result.then(res => {
-      debugger
+      if (res) {
+        this.getAllEvents();
+      }
     }).catch(() => {
       this._notify.error();
-    })
+    });
+  }
+
+  eventClicked(event) {
+   this.addNewEvent(event.calEvent.id);
   }
 }

@@ -9,6 +9,6 @@
     </div>
   </div>
   <div class="panel-body">
-    <p-schedule [events]="events" [droppable]="true"></p-schedule> 
+    <p-schedule [events]="events" [droppable]="true" [header]="headerConfig" (onEventClick)="eventClicked($event)"></p-schedule> 
   </div>
 </div>

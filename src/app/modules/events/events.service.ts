@@ -32,8 +32,34 @@ export class EventsService {
 
 
   addOrUpdateEvent(model) {
-    return this.httpService.post("Case/Create", model).map((res: any) => {
-      debugger
+    let url = "Events/Create";
+    if (model.Id && model.Id !== 'new') {
+      url = "Events/Update";
+      return this.httpService.put(url, model).map((res: any) => {
+        return res.Result;
+      }, error => {
+        throw error;
+      });
+    } else {
+      return this.httpService.post(url, model).map((res: any) => {
+        return res.Result;
+      }, error => {
+        throw error;
+      });
+    }
+
+  }
+
+  getEventById(id) {
+    return this.httpService.get(`Events/GetEventsById/${id}`).map((res: any) => {
+      return res.Result;
+    }, error => {
+      throw error;
+    });
+  }
+
+  deleteEventById(id) {
+    return this.httpService.delete(`Events/Delete/${id}`).map((res: any) => {
       return res.Result;
     }, error => {
       throw error;
