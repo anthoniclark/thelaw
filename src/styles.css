@@ -61,6 +61,19 @@
     color: #fff;
 }
 
+.inValidField {border-color: red;}
+.req {color: red;}
+
+.swal2-popup .swal2-styled.swal2-confirm{
+    background-color: #ce402f !important;
+}
+
+.empty-row {text-align: center !important; padding:15px !important; font-weight: bold;}
+
+.nested-grid .ui-datatable-reflow .ui-datatable-data th .ui-column-title { display: block;}
+.nested-grid thead th {text-align: left !important;}
+.time-tracking-form .form-group .ui-calendar { width: 100%;}
+.form-group .ui-calendar input:focus{ border-color:#0ac2ff; box-shadow: none;}
 /* label {
     display: inline-block;
     max-width: 100%;
@@ -98,7 +111,7 @@ label.error {
     padding-top: 15px;
 }
 
-.empty-row {text-align: center !important; padding:15px !important; font-weight: bold;}
+
 .big-icon { font-size:25px;}
 .pointer-cursor {cursor: pointer;}
 .contact-image-preview { height:150px; width: 110px;}
@@ -150,8 +163,7 @@ label.error {
     min-height: 50px;
     border-bottom: 2px solid #495469;
 }
-.inValidField {border-color: red;}
-.req {color: red;}
+
 .custom-sort ~ .sort-btn{ float: right !important; position: relative !important;  top: -48px !important; }
 .custom-sort label {
     cursor: pointer;
@@ -161,9 +173,7 @@ label.error {
     background: #e0e8f2;
 }
 
-.swal2-popup .swal2-styled.swal2-confirm{
-    background-color: #ce402f !important;
-}
+
 
 .btn-success::before{
     background-color: inherit !important;
@@ -207,10 +217,7 @@ label.error {
 input:read-only {border: none;}
 .expand-icon { width: 28px;}
 
-.nested-grid .ui-datatable-reflow .ui-datatable-data th .ui-column-title { display: block;}
-.nested-grid thead th {text-align: left !important;}
-.time-tracking-form .form-group .ui-calendar { width: 100%;}
-.form-group .ui-calendar input:focus{ border-color:#0ac2ff; box-shadow: none;}
+
 
 
 
