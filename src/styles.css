@@ -6,7 +6,75 @@
 @import '~sweetalert2/dist/sweetalert2.min.css';
 @import '~primeng/resources/themes/omega/theme.css';
 @import '~primeng/resources/primeng.min.css';
-.pb30 {
+
+#page-wrapper {
+    height: 100%;
+}
+
+.custom-ibox-title {
+    border: none !important;
+    padding-top: 0px !important;
+}
+
+.custom-ibox-tool-btn {
+    padding: 3px 5px;
+}
+
+.pl0 {
+    padding-left: 0px !important;
+}
+
+.big-icon { 
+    font-size:25px !important;
+}
+
+.important-icon {
+    cursor: pointer;
+}
+
+.mouse-pointer {
+    cursor: pointer;
+}
+
+.widget.active {
+    box-shadow: 3px 3px 3px rgba(33, 33, 33);
+}
+
+.btn-create{background: #09a287; color: #FFFFFF;}
+.btn-create:hover{background: #076d5a; color: #FFFFFF;}
+
+.mr5 {
+    margin-right: 5px;
+}
+
+.selected-list .c-btn{
+    box-shadow:none !important;
+    padding: 5px !important;
+}
+
+.btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover{
+    background-color: #1ab394 !important;
+    border-color: #1ab394 !important;
+}
+
+.ui-widget-content a{
+    color: #fff;
+}
+
+/* label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+label.error {
+    color: #cc5965;
+    display: inline-block;
+    margin-left: 5px;
+} */
+
+/* .pb30 {
     padding-bottom: 30px;
 }
 
@@ -14,9 +82,7 @@
     padding: 10px;
 }
 
-.err-label{
-    color: red !important;
-}
+
 
 .ml5 {
     margin-left: 5px;
@@ -146,9 +212,7 @@ input:read-only {border: none;}
 .time-tracking-form .form-group .ui-calendar { width: 100%;}
 .form-group .ui-calendar input:focus{ border-color:#0ac2ff; box-shadow: none;}
 
-.mouse-pointer{
-    cursor: pointer;
-}
+
 
 .bg-brown.active {
     background-color: #2d221f;
@@ -167,4 +231,4 @@ input:read-only {border: none;}
 }
 .bg-lightblue.active {
     background-color: #0c5271;
-}
+} */

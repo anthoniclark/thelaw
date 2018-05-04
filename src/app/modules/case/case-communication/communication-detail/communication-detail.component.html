@@ -1,11 +1,16 @@
-<div>
-  <div class="panel mb25">
-    <div class="panel-heading border">
-      <b>{{ (paramId !='new') ? 'Modify':'Add' }} Communication</b>
-    </div>
-    <div class=panel-body>
-      <div class="row no-margin">
-        <div class=col-lg-12>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>{{ (paramId !='new') ? 'Modify':'Add' }} Communication</h2>
+  </div>
+  <div class="col-lg-2">
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
           <form name="communicationForm" (ngSubmit)="communicationForm.form.valid && save()" #communicationForm="ngForm" novalidate>
             <div class="row">
               <div class="col-sm-6">
@@ -16,7 +21,7 @@
                   <input class="form-control" [(ngModel)]="model.CommunicateDate" ngui-datetime-picker date-only="true" #CommunicateDate="ngModel"
                     required name="CommunicateDate" id="CommunicateDate" (ngModelChange)="communicationDateChanged($event)"
                     [class.inValidField]="communicationForm.submitted && !CommunicateDate.valid" />
-                  <label *ngIf="communicationForm.submitted && !CommunicateDate.valid" class="err-label">
+                  <label *ngIf="communicationForm.submitted && !CommunicateDate.valid" class="error">
                     Please select Communicate Date.
                   </label>
                 </div>
@@ -43,7 +48,7 @@
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectCommunicateFrom($event)"
                     value-property-name="Id" display-property-name="Name" [class.inValidField]="communicationForm.submitted && !CommunicateDate.CommunicateFromId"
                   />
-                  <label *ngIf="communicationForm.submitted && !model.CommunicateFromId" class="err-label">
+                  <label *ngIf="communicationForm.submitted && !model.CommunicateFromId" class="error">
                     Please select valid Complain By.
                   </label>
                 </div>
@@ -57,7 +62,7 @@
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectCommunicateTo($event)"
                     value-property-name="Id" display-property-name="Name" [class.inValidField]="communicationForm.submitted && !CommunicateDate.CommunicateToId"
                   />
-                  <label *ngIf="communicationForm.submitted && !model.CommunicateToId" class="err-label">
+                  <label *ngIf="communicationForm.submitted && !model.CommunicateToId" class="error">
                     Please select valid Complain Of.
                   </label>
                 </div>
@@ -79,7 +84,7 @@
                 </div>
               </div>
             </div>
-
+            <div class="hr-line-dashed"></div>
             <div class="row">
               <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
                 <i class="fa fa-times-circle mr5"></i> Cancel
@@ -96,7 +101,5 @@
         </div>
       </div>
     </div>
-
   </div>
-  <div class="clr"></div>
 </div>

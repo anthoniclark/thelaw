@@ -1,33 +1,40 @@
-<div class=panel>
-  <div class="panel-heading border">
-    <span class="pull-left">
-      <b>Communication</b>
-    </span>
-    <div class="pb30">
-      <button type="button" class="btn btn-create pull-right" kendoButton (click)="addClick()">
-        <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
-    </div>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Communication</h2>
   </div>
-  <div class=panel-body>
-    <p-dataTable [value]="rows" [responsive]="true" [loading]="loadingIndicator" loadingIcon="fa-spinner">
-      <p-column field="CommunicateDate" [sortable]="true" header="Communicate Date">
-        <ng-template let-col let-data="rowData" pTemplate="body">
-          <span>{{data[col.field] | date: 'dd/MM/yyyy'}}</span>
-        </ng-template>
-      </p-column>
-      <p-column field="CommunicationType" [sortable]="true" header="Communication Type"></p-column>
-      <p-column field="CommunicateFromName" [sortable]="true" header="Communicate From"></p-column>
-      <p-column field="CommunicateToName" [sortable]="true" header="Communicate To"></p-column>
-      <p-column field="Id" [sortable]="false" header="Actions">
-        <ng-template let-data="rowData" pTemplate="body">
-          <button (click)="editClick(data.Id)" md-icon-button>
-            <i class="fa fa-edit"></i>
-          </button>
-          <button (click)="deleteClick(data.Id)" md-icon-button>
-            <i class="fa fa-trash"></i>
-          </button>
-        </ng-template>
-      </p-column>
-    </p-dataTable>
+  <div class="col-lg-2">
+    <button type="button" class="btn btn-primary pull-right m-t-md" (click)="addClick()">
+      <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
+          <p-dataTable [value]="rows" [responsive]="true" [loading]="loadingIndicator" loadingIcon="fa-spinner">
+            <p-column field="CommunicateDate" [sortable]="true" header="Communicate Date">
+              <ng-template let-col let-data="rowData" pTemplate="body">
+                <span>{{data[col.field] | date: 'dd/MM/yyyy'}}</span>
+              </ng-template>
+            </p-column>
+            <p-column field="CommunicationType" [sortable]="true" header="Communication Type"></p-column>
+            <p-column field="CommunicateFromName" [sortable]="true" header="Communicate From"></p-column>
+            <p-column field="CommunicateToName" [sortable]="true" header="Communicate To"></p-column>
+            <p-column field="Id" [sortable]="false" header="Actions">
+              <ng-template let-data="rowData" pTemplate="body">
+                <button (click)="editClick(data.Id)" class="btn-white btn btn-xs">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button (click)="deleteClick(data.Id)" class="btn-white btn btn-xs">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </ng-template>
+            </p-column>
+          </p-dataTable>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

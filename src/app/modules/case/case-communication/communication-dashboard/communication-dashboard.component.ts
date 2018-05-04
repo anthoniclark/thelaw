@@ -40,11 +40,11 @@ export class CommunicationDashboardComponent implements OnInit {
     this.router.navigate([`case/${this.CaseId}/communication/${id}`]);
   }
 
-  goTOListClick(){
-    this.router.navigate([`case`]);
+  goTOListClick() {
+    this.router.navigate([`case/${this.CaseId}/communication`]);
   }
 
   addClick() {
-    this.router.navigate([`case/${this.CaseId}/communication/new`]);    
+    this.router.navigate([`case/${this.CaseId}/communication/new`]);
   }
 }

@@ -1,34 +1,38 @@
-<div class=panel>
-  <div class="panel-heading border">
-    <span class="pull-left">
-      <b>Companies</b>
-    </span>
-    <div class="pb30">
-      <button type="button" class="btn btn-create pull-right" (click)="router.navigate(['/companies/new'])">
-        <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
-    </div>
-
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Companies</h2>
   </div>
-  <div class=panel-body>
+  <div class="col-lg-2">
+    <button type="button" class="btn btn-primary pull-right m-t-md" (click)='router.navigate(["/companies/new"])'>
+      <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+  </div>
+</div>
 
-    <p-dataTable [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
-      loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
-      <p-column field="CompanyName" [filter]="true" [sortable]="true" header="Company Name"></p-column>
-      <p-column field="InsdustrySection" [filter]="true" [sortable]="true" header="Insdustry Section"></p-column>
-      <p-column field="Category" [filter]="true" [sortable]="true" header="Category"></p-column>
-      <p-column field="Website" [filter]="true" [sortable]="true" header="Website"></p-column>
-      <p-column field="CompanySize" [filter]="true" [sortable]="true" header="CompanySize"></p-column>
-      <p-column header="Actions">
-        <ng-template let-data="rowData" pTemplate="body">
-          <button (click)="editClick(data.Id)" md-icon-button>
-            <i class="fa fa-edit"></i>
-          </button>
-          <button (click)="deleteClick(data.Id)" md-icon-button>
-            <i class="fa fa-trash"></i>
-          </button>
-        </ng-template>
-
-      </p-column>
-    </p-dataTable>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
+          <p-dataTable [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
+            loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
+            <p-column field="CompanyName" [filter]="true" [sortable]="true" header="Company Name"></p-column>
+            <p-column field="InsdustrySection" [filter]="true" [sortable]="true" header="Insdustry Section"></p-column>
+            <p-column field="Category" [filter]="true" [sortable]="true" header="Category"></p-column>
+            <p-column field="Website" [filter]="true" [sortable]="true" header="Website"></p-column>
+            <p-column field="CompanySize" [filter]="true" [sortable]="true" header="CompanySize"></p-column>
+            <p-column header="Actions">
+              <ng-template let-data="rowData" pTemplate="body">
+                <button (click)="editClick(data.Id)" class="btn-white btn btn-xs">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button (click)="deleteClick(data.Id)" class="btn-white btn btn-xs">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </ng-template>
+            </p-column>
+          </p-dataTable>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
