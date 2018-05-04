@@ -1,16 +1,11 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-lg-10">
-    <h2>{{ (paramId !='new') ? 'Modify':'Add' }} Case Evidence for Case number {{caseModel.CaseNo}}</h2>
-  </div>
-  <div class="col-lg-2">
-  </div>
-</div>
-
-<div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-content">
+<div>
+  <div class="panel mb25">
+    <div class="panel-heading border">
+      <b>{{ (paramId !='new') ? 'Modify':'Add' }} Case Evidence for Case number {{caseModel.CaseNo}}</b>
+    </div>
+    <div class=panel-body>
+      <div class="row no-margin">
+        <div class=col-lg-12>
           <form name="evidenceForm" (ngSubmit)="evidenceForm.form.valid && save()" #evidenceForm="ngForm" novalidate>
             <div class="row">
               <div class="col-sm-6">
@@ -20,7 +15,7 @@
                   </label>
                   <input type="text" class="form-control" [(ngModel)]="model.EvidenceName" [class.inValidField]="evidenceForm.submitted && !EvidenceName.valid"
                     id="CaseId" required name="EvidenceName" #EvidenceName="ngModel" />
-                  <label *ngIf="evidenceForm.submitted && !EvidenceName.valid" class="error">
+                  <label *ngIf="evidenceForm.submitted && !EvidenceName.valid" class="err-label">
                     Please enter Case Evidence Name
                   </label>
                 </div>
@@ -39,13 +34,13 @@
                   <input type="file" class="fileUpload" #fileUpload style="display:none" accept=".doc, application/pdf, image/jpg, image/jpeg, image/png"
                     #fileUpload style="display:none" (change)="onFileChange($event)" />
                   <div>
-                    <label *ngIf="!validFileType" class="error"> Invalid File Type </label>
-                    <label *ngIf="!validFileSize" class="error"> File size should less than 2 MB. </label>
+                    <label *ngIf="!validFileType" class="err-label"> Invalid File Type </label>
+                    <label *ngIf="!validFileSize" class="err-label"> File size should less than 2 MB. </label>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="hr-line-dashed"></div>
+
             <div class="row">
               <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
                 <i class="fa fa-times-circle mr5"></i> Cancel
@@ -58,5 +53,8 @@
         </div>
       </div>
     </div>
+
+
   </div>
+  <div class="clr"></div>
 </div>

@@ -13,7 +13,7 @@
                   <label for="CaseNumber">Case Number</label>
                   <input type="text" maxlength="50" id="CaseNumber" name="CaseNumber" required class="form-control" [(ngModel)]="model.CaseNumber"
                     #CaseNumber="ngModel" />
-                  <label *ngIf="caseForm.submitted && !CaseNumber.valid" class="error">
+                  <label *ngIf="caseForm.submitted && !CaseNumber.valid" class="err-label">
                     Please enter Case Number
                   </label>
                 </div>
@@ -23,7 +23,7 @@
                   <label for="Status">Status</label>
                   <input type="text" maxlength="50" id="Status" name="Status" required class="form-control" [(ngModel)]="model.Status" #Status="ngModel"
                   />
-                  <label *ngIf="caseForm.submitted && !Status.valid" class="error">
+                  <label *ngIf="caseForm.submitted && !Status.valid" class="err-label">
                     Please enter Status
                   </label>
                 </div>

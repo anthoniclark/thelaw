@@ -1,16 +1,11 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-lg-10">
-    <h2>{{ (paramId !='new') ? 'Modify':'Add' }} Time Spend on Case {{caseDetail.CaseNo}}</h2>
-  </div>
-  <div class="col-lg-2">
-  </div>
-</div>
-
-<div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-content">
+<div>
+  <div class="panel mb25">
+    <div class="panel-heading border">
+      <b>{{ (paramId !='new') ? 'Modify':'Add' }} Time Spend on Case {{caseDetail.CaseNo}}</b>
+    </div>
+    <div class=panel-body>
+      <div class="row no-margin">
+        <div class=col-lg-12>
           <form name="timeTrackingForm" class="time-tracking-form" (ngSubmit)="timeTrackingForm.form.valid && save()" #timeTrackingForm="ngForm"
             novalidate>
             <div class="row">
@@ -23,7 +18,7 @@
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" value-property-name="Id"
                     (valueChanged)="onSelectAssociateName($event)" display-property-name="Name" required #AssociateName="ngModel"
                     [class.inValidField]="timeTrackingForm.submitted && !AssociateName.valid" />
-                  <label *ngIf="timeTrackingForm.submitted && !AssociateName.valid" class="error">
+                  <label *ngIf="timeTrackingForm.submitted && !AssociateName.valid" class="err-label">
                     Please select Associate Name
                   </label>
                 </div>
@@ -36,7 +31,7 @@
                   </label>
                   <input class="form-control" [(ngModel)]="model.TaskDate" required ngui-datetime-picker date-only="true" name="date" id="date"
                     #TaskDate="ngModel" [class.inValidField]="timeTrackingForm.submitted && !model.TaskDate" />
-                  <label *ngIf="timeTrackingForm.submitted && !model.TaskDate" class="error">
+                  <label *ngIf="timeTrackingForm.submitted && !model.TaskDate" class="err-label">
                     Please select date
                   </label>
                 </div>
@@ -56,7 +51,7 @@
                       {{tc.Name}}
                     </option>
                   </select>
-                  <label *ngIf="timeTrackingForm.submitted && !model.TaskCategoryName" class="error">
+                  <label *ngIf="timeTrackingForm.submitted && !model.TaskCategoryName" class="err-label">
                     Please select Task Category
                   </label>
                 </div>
@@ -72,9 +67,9 @@
 
                   <p-calendar id="HoursSpend" [(ngModel)]="model.WorkedHours" #HoursSpend="ngModel" required name="HoursSpend" [class.inValidField]="timeTrackingForm.submitted && !HoursSpend.valid"
                     inputStyleClass="form-control" (keypress)="preventInput($event)" timeOnly="true"></p-calendar>
-                  <label *ngIf="(timeTrackingForm.submitted || HoursSpend.dirty) && HoursSpend.errors && !HoursSpend.valid" class="error">
+                  <label *ngIf="(timeTrackingForm.submitted || HoursSpend.dirty) && HoursSpend.errors && !HoursSpend.valid" class="err-label">
                     Please enter Hours spend</label>
-                  <!-- <label *ngIf="(timeTrackingForm.submitted || HoursSpend.dirty) && HoursSpend.errors && HoursSpend.errors['pattern']" class="error">
+                  <!-- <label *ngIf="(timeTrackingForm.submitted || HoursSpend.dirty) && HoursSpend.errors && HoursSpend.errors['pattern']" class="err-label">
                     Enter Valid Hours spend</label> -->
                 </div>
               </div>
@@ -91,9 +86,9 @@
                   /> -->
                   <p-calendar id="BilledHours" [(ngModel)]="model.BilledHours" #BilledHours="ngModel" required name="BilledHours" [class.inValidField]="timeTrackingForm.submitted && !BilledHours.valid"
                     inputStyleClass="form-control" (keypress)="preventInput($event)" timeOnly="true"></p-calendar>
-                  <label *ngIf="timeTrackingForm.submitted && !BilledHours.valid" class="error">
+                  <label *ngIf="timeTrackingForm.submitted && !BilledHours.valid" class="err-label">
                     Please enter Billed Hours</label>
-                  <!-- <label *ngIf="(timeTrackingForm.submitted || BilledHours.dirty) && BilledHours.errors && BilledHours.errors['pattern']" class="error">
+                  <!-- <label *ngIf="(timeTrackingForm.submitted || BilledHours.dirty) && BilledHours.errors && BilledHours.errors['pattern']" class="err-label">
                     Enter Valid Billed Hours</label> -->
                 </div>
               </div>
@@ -104,9 +99,9 @@
                   </label>
                   <input class="form-control" type="number" id="Rate" required name="Rate" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.Rate"
                     #Rate="ngModel" [class.inValidField]="timeTrackingForm.submitted && !Rate.valid" />
-                  <label *ngIf="(timeTrackingForm.submitted || Rate.dirty) && Rate.errors && Rate.errors['required']" class="error">
+                  <label *ngIf="(timeTrackingForm.submitted || Rate.dirty) && Rate.errors && Rate.errors['required']" class="err-label">
                     Please enter Rate</label>
-                  <label *ngIf="(timeTrackingForm.submitted || Rate.dirty) && Rate.errors && Rate.errors['pattern']" class="error">
+                  <label *ngIf="(timeTrackingForm.submitted || Rate.dirty) && Rate.errors && Rate.errors['pattern']" class="err-label">
                     Enter Valid Rate</label>
                 </div>
               </div>
@@ -128,7 +123,7 @@
                 </div>
               </div>
             </div>
-            <div class="hr-line-dashed"></div>
+
             <div class="row">
               <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
                 <i class="fa fa-times-circle mr5"></i> Cancel
@@ -141,5 +136,7 @@
         </div>
       </div>
     </div>
+
   </div>
+  <div class="clr"></div>
 </div>

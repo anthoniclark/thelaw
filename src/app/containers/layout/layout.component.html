@@ -1,23 +1,11 @@
-<!-- Wrapper-->
-<div id="wrapper">
-
-    <!-- Left navigation bar -->
-    <app-sidebar></app-sidebar>
-
-    <!-- Main page wrapper -->
-    <div id="page-wrapper" class="gray-bg">
-
-        <!-- Top navigation -->
-        <app-navbar></app-navbar>
-
-        <!-- Main view/routes wrapper-->
-        <router-outlet></router-outlet>
-
-        <!-- Footer -->
-        <footer></footer>
-
+<div class="app layout-fixed-header" #layoutMenu>
+    <app-sidebar [layoutMenu]="layoutMenu"></app-sidebar>
+    <div class=main-panel>
+        <header class="header navbar" [layoutMenu]="layoutMenu"></header>
+        <div class=main-content>
+            <router-outlet>
+            </router-outlet>
+        </div>
     </div>
-    <!-- End page wrapper-->
-
+    <footer class="content-footer"></footer>
 </div>
-<!-- End wrapper-->

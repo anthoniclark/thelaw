@@ -20,9 +20,7 @@
       "prefix": "app",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "../node_modules/font-awesome/css/font-awesome.css",
-        "../node_modules/animate.css/animate.min.css",
-        "./assets/styles/theme.css",
+        "./assets/theme.css",
         "styles.css",
         "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
         "../node_modules/primeng/resources/primeng.min.css",
@@ -30,9 +28,6 @@
       ],
       "scripts": [
         "../node_modules/jquery/jquery.min.js",
-        "../node_modules/metismenu/dist/metisMenu.js",
-        "../node_modules/jquery-sparkline/jquery.sparkline.js",
-        "../vendor/pace/pace.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.js",
         "../node_modules/moment/moment.js",
         "../node_modules/fullcalendar/dist/fullcalendar.js"

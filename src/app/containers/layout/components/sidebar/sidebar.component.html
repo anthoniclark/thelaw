@@ -1,4 +1,4 @@
-<!-- <div class="sidebar-panel offscreen-left">
+<div class="sidebar-panel offscreen-left">
   <div class=brand>
     <div class=brand-logo>
       LAWYER DIARY
@@ -60,89 +60,4 @@
     </perfect-scrollbar>
   </nav>
 
-</div> -->
-
-<nav class="navbar-default navbar-static-side" role="navigation">
-  <div class="sidebar-collapse">
-    <ul class="nav metismenu" id="side-menu">
-      <li class="nav-header">
-        <div class="profile-element" dropdown>
-          <img alt="image" class="img-circle" src="assets/images/profile_small.jpg">
-          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-            <span class="clear">
-              <span class="block m-t-xs">
-                <strong class="font-bold">David Williams</strong>
-              </span>
-              <span class="text-muted text-xs block">Art Director
-                <b class="caret"></b>
-              </span>
-            </span>
-          </a>
-          <ul class="dropdown-menu animated fadeInRight m-t-xs">
-            <li>
-              <a href="profile.html">Profile</a>
-            </li>
-            <li>
-              <a href="contacts.html">Contacts</a>
-            </li>
-            <li>
-              <a href="mailbox.html">Mailbox</a>
-            </li>
-            <li class="divider"></li>
-            <li>
-              <a href="login.html">Logout</a>
-            </li>
-          </ul>
-        </div>
-        <div class="logo-element">
-          IN+
-        </div>
-      </li>
-      <li [ngClass]="{active: activeRoute('contact')}">
-        <a [routerLink]="['/contact']">
-          <i class="fa fa-user"></i>
-          <span class="nav-label">Contact</span>
-        </a>
-      </li>
-      <li [ngClass]="{active: activeRoute('case')}">
-        <a [routerLink]="['/case']">
-          <i class="fa fa-briefcase"></i>
-          <span class="nav-label">Case</span>
-        </a>
-      </li>
-      <li [ngClass]="{active: activeRoute('case-expense')}">
-        <a [routerLink]="['/case-expense']">
-          <i class="fa fa-inr"></i>
-          <span class="nav-label">Case Expense</span>
-        </a>
-      </li>
-      <li [ngClass]="{active: activeRoute('complain')}">
-        <a [routerLink]="['/complain']">
-          <i class="fa fa-list-alt"></i>
-          <span class="nav-label">Complain</span>
-        </a>
-      </li>
-      <li [ngClass]="{active: activeRoute('expense-type')}">
-        <a [routerLink]="['/expense-type']">
-          <i class="fa fa-sitemap"></i>
-          <span class="nav-label">Expense Types</span>
-        </a>
-      </li>
-      <li [ngClass]="{active: activeRoute('companies')}">
-        <a [routerLink]="['/companies']">
-          <i class="fa fa-address-card"></i>
-          <span class="nav-label">Companies</span>
-        </a>
-      </li>
-
-
-      <li [ngClass]="{active: activeRoute('events')}">
-        <a [routerLink]="['/events']">
-          <i class="fa fa-user-plus"></i>
-          <span class="nav-label">Events</span>
-        </a>
-      </li>
-    </ul>
-
-  </div>
-</nav>
+</div>

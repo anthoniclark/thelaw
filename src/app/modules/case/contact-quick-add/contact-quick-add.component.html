@@ -4,7 +4,6 @@
       <h2 class="my-3">Add {{contactQuickAddModel.ContactType}}</h2>
     </div>
   </div>
-  <div class="hr-line-dashed"></div>
   <form name="contactQuickAdd" (ngSubmit)="contactQuickAdd.form.valid && createContact()" #contactQuickAdd='ngForm' novalidate>
     <div class="row">
       <div class="col-sm-6">
@@ -14,7 +13,7 @@
           </label>
           <input type="text" class="form-control" required name="firstName" [(ngModel)]="contactQuickAddModel.FirstName" #firstName="ngModel"
             [class.inValidField]="contactQuickAdd.submitted && !firstName.valid" />
-          <label class="error" *ngIf="contactQuickAdd.submitted && !firstName.valid">Please enter First Name</label>
+          <label class="err-label" *ngIf="contactQuickAdd.submitted && !firstName.valid">Please enter First Name</label>
         </div>
       </div>
 
@@ -25,7 +24,7 @@
           </label>
           <input type="text" class="form-control" required name="LastName" [(ngModel)]="contactQuickAddModel.LastName" #LastName="ngModel"
             [class.inValidField]="contactQuickAdd.submitted && !LastName.valid" />
-          <label class="error" *ngIf="contactQuickAdd.submitted && !LastName.valid">Please enter Last Name</label>
+          <label class="err-label" *ngIf="contactQuickAdd.submitted && !LastName.valid">Please enter Last Name</label>
         </div>
       </div>
     </div>
@@ -38,11 +37,11 @@
           </label>
           <input type="text" class="form-control" required name="Designation" [(ngModel)]="contactQuickAddModel.Designation" #Designation="ngModel"
             [class.inValidField]="contactQuickAdd.submitted && !Designation.valid" />
-          <label class="error" *ngIf="contactQuickAdd.submitted && !Designation.valid">Please enter Designation</label>
+          <label class="err-label" *ngIf="contactQuickAdd.submitted && !Designation.valid">Please enter Designation</label>
         </div>
       </div>
     </div>
-    <div class="hr-line-dashed"></div>
+
     <div class="row">
       <a href=javascript:; (click)="closeClick()" class="btn btn-default btn-cancel mr5">
         <i class="fa fa-times-circle mr5"></i> Cancel

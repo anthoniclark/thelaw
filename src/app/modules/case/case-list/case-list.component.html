@@ -1,92 +1,97 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-lg-10">
-    <h2>Cases</h2>
-  </div>
-  <div class="col-lg-2">
-    <button type="button" class="btn btn-primary pull-right m-t-md" (click)='router.navigate(["/case/new"])'>
-      <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
-  </div>
-</div>
+<div class=panel>
+  <div class="panel-heading border case-panel-header">
 
-<div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-content">
-          <div class="ui-widget-header form-group" style="padding:4px 10px;border-bottom: 0 none;margin-bottom:0">
-            <!-- <i class="fa fa-search" style="margin:4px 4px 0 0"></i> -->
-            <input #gb type="text" class="form-control global-search-input" pInputText size="50" placeholder="Advance Search">
+    <div>
+      <div class="case-header">
+        <b>Cases</b>
+        <button type="button" class="btn btn-create pull-right " kendoButton (click)="router.navigate(['/case/new'])">
+          <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+        <!-- <form class="form-inline case-advance-search-form pull-right mr20" (ngSubmit)="searchForm.form.valid && advanceFilter()"
+          #searchForm="ngForm">
+          <div class="form-group">
+            <input name="advanceSearch" class="form-control" placeholder="Advance Search" required id="advanceSearch" [(ngModel)]="advanceSearch"
+            />
           </div>
-          <p-dataTable [value]="rows" [globalFilter]="gb" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
-            loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
-            <!-- [rowsPerPageOptions]="[5,10,20]" let user select page  -->
-            <!-- <p-header>List of Cars</p-header> -->
-            <p-column field="CaseNo" [filter]="true" [sortable]="true" header="Case No"></p-column>
-            <p-column field="CaseType" [filter]="true" [sortable]="true" header="Case Type"></p-column>
-            <p-column field="OpenDate" [sortable]="true" header="Start Date">
-              <ng-template let-col let-data="rowData" pTemplate="body">
-                <span>{{data[col.field] | date: 'dd/MM/yyyy'}}</span>
-              </ng-template>
-              <!-- <ng-template pTemplate="filter" let-col>
-                    <p-calendar showButtonBar="true" dateFormat="yy-mm-dd" (onSelect)="filterStartDate($event,dt,col)"></p-calendar>
-                  </ng-template> -->
-            </p-column>
-            <p-column field="EndDate" [sortable]="true" header="End Date">
-              <ng-template let-col let-data="rowData" pTemplate="body">
-                <span>{{data[col.field] | date: 'dd/MM/yyyy'}}</span>
-              </ng-template>
-            </p-column>
-            <p-column field="RefferenceNumber" [sortable]="true" [filter]="true" header="Refference Number"></p-column>
-            <p-column field="CaseStatus" [sortable]="true" [filter]="true" header="Case Status"></p-column>
-            <p-column styleClass="col-button">
-              <ng-template pTemplate="header">
-                Actions
-              </ng-template>
-              <ng-template let-data="rowData" pTemplate="body">
-                <div class="btn-group text-center">
-                  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-                    Action
-                    <span class="caret"></span>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a href="javascript:void(0)" (click)="viewDetail(data.Id)">
-                        View
-                      </a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0)" (click)="editClick(data.Id)">
-                        Edit
-                      </a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0)" (click)="deleteClick(data.Id)">Delete</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0)" (click)="changeStatus(data)">Change Status</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0)" (click)="showCommunication(data.Id)">Communications</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0)" (click)="ShowTimeTracker(data.Id)">Time Tracker</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0)" (click)="ShowNotes(data.Id)">Notes</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0)" (click)="ShowDocuments(data.Id)">Document</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0)" (click)="ShowEvidence(data.Id)">Evidence</a>
-                    </li>
-                  </ul>
-                </div>
-              </ng-template>
-            </p-column>
-          </p-dataTable>
-        </div>
+          <button class="btn btn-primary" *ngIf="searchApplied" (click)="removeadvanceFilter()">
+            <i class="fa fa-eraser mr5"></i>Clear</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="fa fa-search mr5"></i>Search</button>
+        </form> -->
       </div>
     </div>
+  </div>
+  <div class=panel-body>
+    <div class="ui-widget-header form-group" style="padding:4px 10px;border-bottom: 0 none;margin-bottom:0">
+      <!-- <i class="fa fa-search" style="margin:4px 4px 0 0"></i> -->
+      <input #gb type="text" class="form-control global-search-input" pInputText size="50" placeholder="Advance Search">
+    </div>
+    <p-dataTable [value]="rows" [globalFilter]="gb" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
+      loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
+      <!-- [rowsPerPageOptions]="[5,10,20]" let user select page  -->
+      <!-- <p-header>List of Cars</p-header> -->
+      <p-column field="CaseNo" [filter]="true" [sortable]="true" header="Case No"></p-column>
+      <p-column field="CaseType" [filter]="true" [sortable]="true" header="Case Type"></p-column>
+      <p-column field="OpenDate" [sortable]="true" header="Start Date">
+        <ng-template let-col let-data="rowData" pTemplate="body">
+          <span>{{data[col.field] | date: 'dd/MM/yyyy'}}</span>
+        </ng-template>
+        <!-- <ng-template pTemplate="filter" let-col>
+          <p-calendar showButtonBar="true" dateFormat="yy-mm-dd" (onSelect)="filterStartDate($event,dt,col)"></p-calendar>
+        </ng-template> -->
+      </p-column>
+      <p-column field="EndDate" [sortable]="true" header="End Date">
+        <ng-template let-col let-data="rowData" pTemplate="body">
+          <span>{{data[col.field] | date: 'dd/MM/yyyy'}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="RefferenceNumber" [sortable]="true" [filter]="true" header="Refference Number"></p-column>
+      <p-column field="CaseStatus" [sortable]="true" [filter]="true" header="Case Status"></p-column>
+      <p-column styleClass="col-button">
+        <ng-template pTemplate="header">
+          Actions
+        </ng-template>
+        <ng-template let-data="rowData" pTemplate="body">
+          <div class="btn-group text-center">
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+              Action
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="javascript:void(0)" (click)="viewDetail(data.Id)">
+                  View
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="editClick(data.Id)">
+                  Edit
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="deleteClick(data.Id)">Delete</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="changeStatus(data)">Change Status</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="showCommunication(data.Id)">Communications</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="ShowTimeTracker(data.Id)">Time Tracker</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="ShowNotes(data.Id)">Notes</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="ShowDocuments(data.Id)">Document</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="ShowEvidence(data.Id)">Evidence</a>
+              </li>
+            </ul>
+          </div>
+        </ng-template>
+      </p-column>
+    </p-dataTable>
   </div>
 </div>

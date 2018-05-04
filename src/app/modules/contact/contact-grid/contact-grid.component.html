@@ -1,7 +1,8 @@
 <p-dataTable [value]="_data" [globalFilter]="gb" [lazy]="true" [rows]="page.size" [paginator]="true" [responsive]="true"
   [loading]="loadingIndicator" loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)"
   (onPage)="paginate($event)">
-  <p-column field="No" [sortable]="true" header="Row Number">
+  <p-column field="No" [sortable]="true"
+    header="Row Number">
   </p-column>
   <p-column *ngIf="cType === 'NewlyAdded' || cType === 'Other' " field="ContactType" [filter]="cType !== 'NewlyAdded'" [sortable]="true"
     header="Contact Type">
@@ -27,13 +28,13 @@
 
   <p-column header="Contact Type">
     <ng-template let-row="rowData" pTemplate="body">
-      <button (click)="viewDetail(row.Id)" title="View" class="btn-white btn btn-xs">
+      <button (click)="viewDetail(row.Id)" title="View" md-icon-button>
         <i class="fa fa-eye" aria-hidden="true"></i>
       </button>
-      <button (click)="editClick(row.Id)" title="edit" class="btn-white btn btn-xs">
+      <button (click)="editClick(row.Id)" title="edit" md-icon-button>
         <i class="fa fa-edit"></i>
       </button>
-      <button (click)="deleteClick(row.Id, dt)" title="delete" class="btn-white btn btn-xs">
+      <button (click)="deleteClick(row.Id, dt)" title="delete" md-icon-button>
         <i class="fa fa-trash"></i>
       </button>
     </ng-template>
@@ -93,13 +94,13 @@
   </ngx-datatable-column>
   <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
     <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-      <button (click)="viewDetail(value)" title="View" class="btn-white btn btn-xs">
+      <button (click)="viewDetail(value)" title="View" md-icon-button>
         <i class="fa fa-eye" aria-hidden="true"></i>
       </button>
-      <button (click)="editClick(value)" title="edit" class="btn-white btn btn-xs">
+      <button (click)="editClick(value)" title="edit" md-icon-button>
         <i class="fa fa-edit"></i>
       </button>
-      <button (click)="deleteClick(value)" title="delete" class="btn-white btn btn-xs">
+      <button (click)="deleteClick(value)" title="delete" md-icon-button>
         <i class="fa fa-trash"></i>
       </button>
     </ng-template>

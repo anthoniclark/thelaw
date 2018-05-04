@@ -57,7 +57,6 @@ export class ContactDashboardComponent implements OnInit {
     });
     this.sorting = { columnName: "Id", dir: true };
     // this.setPage({ offset: 0 });
-    this.getNewlyAddedData();
   }
 
 

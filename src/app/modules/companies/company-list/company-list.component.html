@@ -92,10 +92,10 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <button (click)="editClick(value)" class="btn-white btn btn-xs">
+          <button (click)="editClick(value)" md-icon-button>
             <i class="fa fa-edit"></i>
           </button>
-          <button (click)="deleteClick(value)" class="btn-white btn btn-xs">
+          <button (click)="deleteClick(value)" md-icon-button>
             <i class="fa fa-trash"></i>
           </button>
         </ng-template>

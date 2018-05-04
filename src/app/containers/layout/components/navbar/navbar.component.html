@@ -1,20 +1,27 @@
-<div class="row border-bottom">
-  <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-    <div class="navbar-header">
-      <a class="minimalize-styl-2 btn btn-primary " (click)="toggleNavigation()">
-        <i class="fa fa-bars"></i>
-      </a>
-      <form role="search" class="navbar-form-custom" method="post" action="#">
-        <div class="form-group">
-          <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-        </div>
-      </form>
-    </div>
-    <ul class="nav navbar-top-links navbar-right">
-      <li>
-        <a (click)="logout()">
-          <i class="fa fa-sign-out"></i> Log out
-        </a>
+<div class="u-position-relative u-overflow-hidden">
+  <div class="nav__shadow"></div>
+  <nav class="nav">
+    <ul class="nav__menu">
+      <li class="paragraph paragraph--smaller nav__menu-item nav__menu-item--active">
+        <a href="javascript:void(0)" class="nav__menu-link">Dashboard</a>
+      </li>
+      <li class="paragraph paragraph--smaller u-weight-lgt u-color-gray-alt-3 nav__menu-item">
+        <a href="javascript:void(0)" class="nav__menu-link">Energy Profiling</a>
+      </li>
+      <li class="paragraph paragraph--smaller u-weight-lgt u-color-gray-alt-3 nav__menu-item">
+        <a href="javascript:void(0)" class="nav__menu-link">Demand Response</a>
+      </li>
+      <li class="paragraph paragraph--smaller u-weight-lgt u-color-gray-alt-3 nav__menu-item">
+        <a href="javascript:void(0)" class="nav__menu-link">Sustainability</a>
+      </li>
+      <li class="paragraph paragraph--smaller u-weight-lgt u-color-gray-alt-3 nav__menu-item">
+        <a href="javascript:void(0)" class="nav__menu-link">Energy Efficiency</a>
+      </li>
+      <li class="paragraph paragraph--smaller u-weight-lgt u-color-gray-alt-3 nav__menu-item">
+        <a href="javascript:void(0)" class="nav__menu-link">Analytics</a>
+      </li>
+      <li class="paragraph paragraph--smaller u-weight-lgt u-color-gray-alt-3 nav__menu-item">
+        <a href="javascript:void(0)" class="nav__menu-link">Administration</a>
       </li>
     </ul>
   </nav>

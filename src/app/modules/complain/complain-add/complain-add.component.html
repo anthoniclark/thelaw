@@ -1,16 +1,11 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-lg-10">
-    <h2>{{ (paramId !='new') ? 'Modify':'Add' }} Complain</h2>
-  </div>
-  <div class="col-lg-2">
-  </div>
-</div>
-
-<div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-content">
+<div>
+  <div class="panel mb25">
+    <div class="panel-heading border">
+      <b>{{ (paramId !='new') ? 'Modify':'Add' }} Complain</b>
+    </div>
+    <div class=panel-body>
+      <div class="row no-margin">
+        <div class=col-lg-12>
           <form name="complainForm" (ngSubmit)="complainForm.form.valid && save()" #complainForm="ngForm" novalidate>
             <div class="row">
               <div class="col-sm-6">
@@ -21,7 +16,7 @@
                   <input class="form-control" [(ngModel)]="model.ComplainDate" ngui-datetime-picker date-only="true" #ComplainDate="ngModel"
                     required name="ComplainDate" id="ComplainDate" [class.inValidField]="complainForm.submitted && !ComplainDate.valid"
                   />
-                  <label *ngIf="complainForm.submitted && !ComplainDate.valid" class="error">
+                  <label *ngIf="complainForm.submitted && !ComplainDate.valid" class="err-label">
                     Please select Complain Date.
                   </label>
                 </div>
@@ -35,7 +30,7 @@
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectComplainBy($event)"
                     value-property-name="Id" display-property-name="Name" [class.inValidField]="complainForm.submitted && !model.ComplainBy"
                   />
-                  <label *ngIf="complainForm.submitted && !model.ComplainBy" class="error">
+                  <label *ngIf="complainForm.submitted && !model.ComplainBy" class="err-label">
                     Please select valid Complain By.
                   </label>
                 </div>
@@ -51,7 +46,7 @@
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectComplainOf($event)"
                     value-property-name="Id" display-property-name="Name" [class.inValidField]="complainForm.submitted && !model.ComplainOf"
                   />
-                  <label *ngIf="complainForm.submitted && !model.ComplainOf" class="error">
+                  <label *ngIf="complainForm.submitted && !model.ComplainOf" class="err-label">
                     Please select valid Complain Of.
                   </label>
                 </div>
@@ -79,7 +74,7 @@
                     class="form-control" [(ngModel)]="model.Description" required #Description="ngModel" /> -->
                   <textarea class="form-control" [class.inValidField]="complainForm.submitted && !model.Description" rows="3" id="Description"
                     name="Description" maxlength="250" [(ngModel)]="model.Description" #Description="ngModel" required></textarea>
-                  <label *ngIf="complainForm.submitted && !Description.valid" class="error">
+                  <label *ngIf="complainForm.submitted && !Description.valid" class="err-label">
                     Please enter Description.
                   </label>
                 </div>
@@ -87,7 +82,7 @@
               <div class="col-sm-6">
               </div>
             </div>
-            <div class="hr-line-dashed"></div>
+
             <div class="row">
               <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
                 <i class="fa fa-times-circle mr5"></i> Cancel
@@ -100,5 +95,7 @@
         </div>
       </div>
     </div>
+
   </div>
+  <div class="clr"></div>
 </div>

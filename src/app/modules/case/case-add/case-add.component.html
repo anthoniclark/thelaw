@@ -1,17 +1,11 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-lg-10">
-    <h2>{{ isViewModel ? 'View' : ((paramId !='new') ? 'Modify':'Add') }} Case</h2>
-  </div>
-  <div class="col-lg-2">
-
-  </div>
-</div>
-
-<div class="wrapper wrapper-content">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-content">
+<div>
+  <div class="panel mb25">
+    <div class="panel-heading border">
+      <b>{{ isViewModel ? 'View' : ((paramId !='new') ? 'Modify':'Add') }} Case</b>
+    </div>
+    <div class=panel-body>
+      <div class="row no-margin">
+        <div class=col-lg-12>
           <form name="caseForm" (ngSubmit)="!isViewModel && caseForm.form.valid && save()" #caseForm="ngForm" novalidate>
             <div class="row">
               <div class="col-sm-6">
@@ -28,7 +22,7 @@
                   </label>
                   <input type="text" maxlength="50" id="CaseNo" name="CaseNo" [readonly]="isViewModel" [class.inValidField]="caseForm.submitted && !CaseNo.valid"
                     required class="form-control" (change)="changeDoctNo()" [(ngModel)]="model.CaseNo" #CaseNo="ngModel" />
-                  <label *ngIf="caseForm.submitted && !CaseNo.valid" class="error">
+                  <label *ngIf="caseForm.submitted && !CaseNo.valid" class="err-label">
                     Please enter Case number
                   </label>
                 </div>
@@ -48,7 +42,7 @@
                     name="ClientId" [source]="contactSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter"
                     [accept-user-input]="false" (valueChanged)="onSelectClient($event)" value-property-name="Id" display-property-name="Name"
                   />
-                  <label *ngIf="caseForm.submitted && !model.ClientId" class="error">
+                  <label *ngIf="caseForm.submitted && !model.ClientId" class="err-label">
                     Please select valid Client
                   </label>
                 </div>
@@ -60,7 +54,7 @@
                   </label>
                   <input type="text" maxlength="100" id="NickName" name="NickName" class="form-control" [readonly]="isViewModel" [(ngModel)]="model.NickName"
                     #NickName="ngModel" [class.inValidField]="caseForm.submitted && !NickName.valid" required/>
-                  <label *ngIf="caseForm.submitted && !NickName.valid" class="error">
+                  <label *ngIf="caseForm.submitted && !NickName.valid" class="err-label">
                     Please select valid Client
                   </label>
                 </div>
@@ -79,7 +73,7 @@
                       {{caseType.Name}}
                     </option>
                   </select>
-                  <label *ngIf="caseForm.submitted && !model.CaseType" class="error">
+                  <label *ngIf="caseForm.submitted && !model.CaseType" class="err-label">
                     Please select Case Type
                   </label>
                 </div>
@@ -92,7 +86,7 @@
                   <input type="number" maxlength="4" name="CaseYear" id="CaseYear" [readonly]="isViewModel" class="form-control" [(ngModel)]="model.CaseYear"
                     #CaseYear="ngModel" [class.inValidField]="caseForm.submitted && !model.CaseYear" required (change)="changeDoctNo()"
                   />
-                  <label *ngIf="caseForm.submitted && !model.CaseYear" class="error">
+                  <label *ngIf="caseForm.submitted && !model.CaseYear" class="err-label">
                     Please enter Case Year
                   </label>
                 </div>
@@ -135,7 +129,7 @@
                       {{court.CourtName}}
                     </option>
                   </select>
-                  <label *ngIf="caseForm.submitted && !model.CourtId" class="error">
+                  <label *ngIf="caseForm.submitted && !model.CourtId" class="err-label">
                     Please select Court
                   </label>
                 </div>
@@ -147,11 +141,11 @@
                     <i aria-hidden="true" class="fa fa-plus"></i> Create New
                   </a>
                   <!-- <select class="form-control" [(ngModel)]="model.JudgeId" id="JudgeId" name="JudgeId" #JudgeId="ngModel">
-                        <option [value]='undefined'>Select Judge</option>
-                        <option *ngFor="let judge of judges" [value]='judge.Id'>
-                          {{judge.FirstName}} {{judge.LastName}}
-                        </option>
-                      </select> -->
+                    <option [value]='undefined'>Select Judge</option>
+                    <option *ngFor="let judge of judges" [value]='judge.Id'>
+                      {{judge.FirstName}} {{judge.LastName}}
+                    </option>
+                  </select> -->
                   <angular2-multiselect [data]="judges" [(ngModel)]="selectedJudges" [disabled]="isViewModel" [settings]="settings" class="form-control"
                     #JudgeId="ngModel" name="JudgeId" id="JudgeId" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
                   </angular2-multiselect>
@@ -201,7 +195,7 @@
                     name="OpponentContactId" [source]="contactSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter"
                     [accept-user-input]="false" (valueChanged)="onSelectOponent($event)" value-property-name="Id" display-property-name="Name"
                   />
-                  <label *ngIf="caseForm.submitted && !model.OpponentContactId" class="error">
+                  <label *ngIf="caseForm.submitted && !model.OpponentContactId" class="err-label">
                     Please select valid Opponent
                   </label>
                 </div>
@@ -316,7 +310,7 @@
                   <label for="AdvanceFees">Advance Fees</label>
                   <input class="form-control" type="number" id="AdvanceFees" [readonly]="isViewModel" name="AdvanceFees" pattern="^\d+(\.\d{1,2})?$"
                     step="0.01" [(ngModel)]="model.AdvanceFees" (keypress)="_keyPress($event)" #AdvanceFees="ngModel" />
-                  <label *ngIf="(caseForm.submitted || AdvanceFees.dirty) && AdvanceFees.errors && AdvanceFees.errors['pattern']" class="error">
+                  <label *ngIf="(caseForm.submitted || AdvanceFees.dirty) && AdvanceFees.errors && AdvanceFees.errors['pattern']" class="err-label">
                     Enter Valid Advance Fees</label>
                 </div>
               </div>
@@ -338,7 +332,7 @@
                   <label for="CourtFees">Court Fees</label>
                   <input class="form-control" type="number" id="CourtFees" name="CourtFees" [readonly]="isViewModel" pattern="^\d+(\.\d{1,2})?$"
                     step="0.01" [(ngModel)]="model.CourtFees" #CourtFees="ngModel" />
-                  <label *ngIf="(caseForm.submitted || CourtFees.dirty) && CourtFees.errors && CourtFees.errors['pattern']" class="error">
+                  <label *ngIf="(caseForm.submitted || CourtFees.dirty) && CourtFees.errors && CourtFees.errors['pattern']" class="err-label">
                     Enter Valid Court Fees</label>
                 </div>
               </div>
@@ -351,7 +345,7 @@
                 <div class="form-group">
                   <label for="BillingFrequency">Billing Frequency</label>
                   <!-- <input class="form-control" [(ngModel)]="model.BillingFrequency" name="BillingFrequency" id="BillingFrequency" #BillingFrequency="ngModel"
-                      /> -->
+                  /> -->
                   <select class="form-control" [(ngModel)]="model.BillingFrequency" [disabled]="isViewModel" id="BillingFrequency" name="BillingFrequency"
                     #BillingFrequency="ngModel">
                     <option *ngFor="let billFrq of BillingFrequencyDropDown" [value]='billFrq.Id'>
@@ -375,7 +369,7 @@
                   <label for="TrustAccount">Trust Account</label>
                   <input class="form-control" type="number" id="TrustAccount" [readonly]="isViewModel" name="TrustAccount" pattern="^\d+(\.\d{1,2})?$"
                     step="0.01" [(ngModel)]="model.TrustAccount" (keypress)="_keyPress($event)" #TrustAccount="ngModel" />
-                  <label *ngIf="(caseForm.submitted || TrustAccount.dirty) && TrustAccount.errors && TrustAccount.errors['pattern']" class="error">
+                  <label *ngIf="(caseForm.submitted || TrustAccount.dirty) && TrustAccount.errors && TrustAccount.errors['pattern']" class="err-label">
                     Enter Valid Trust Account</label>
                 </div>
               </div>
@@ -421,7 +415,7 @@
                 </div>
               </div>
             </div>
-            <div class="hr-line-dashed"></div>
+
             <div class="row">
               <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
                 <i class="fa fa-times-circle mr5"></i> Cancel
@@ -430,13 +424,16 @@
                 <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
               </button>
               <!-- <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addCommunication()">Add Communication</button>
-                  <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addTimeTrackingDetails()">Add Time</button>
-                  <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addNote()">Add Note</button>
-                  <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addDocument()">Add Document</button> -->
+              <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addTimeTrackingDetails()">Add Time</button>
+              <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addNote()">Add Note</button>
+              <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addDocument()">Add Document</button> -->
             </div>
           </form>
         </div>
       </div>
     </div>
+
+
   </div>
+  <div class="clr"></div>
 </div>
