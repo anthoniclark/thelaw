@@ -1,0 +1,170 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/themes/bootstrap.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+@import '~sweetalert2/dist/sweetalert2.min.css';
+@import '~primeng/resources/themes/omega/theme.css';
+@import '~primeng/resources/primeng.min.css';
+.pb30 {
+    padding-bottom: 30px;
+}
+
+.p10{
+    padding: 10px;
+}
+
+.err-label{
+    color: red !important;
+}
+
+.ml5 {
+    margin-left: 5px;
+}
+
+.mb20{
+    margin-bottom: 20px;
+}
+
+.bottom-border{
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    padding-bottom: 10px;
+    padding-top: 15px;
+}
+
+.empty-row {text-align: center !important; padding:15px !important; font-weight: bold;}
+.big-icon { font-size:25px;}
+.pointer-cursor {cursor: pointer;}
+.contact-image-preview { height:150px; width: 110px;}
+.img-wrap { width: 100px; position: relative;}
+.delete-photo-icon { 
+    background-image: url("/assets/images/close-cancel.png");
+    position: absolute; top: -12px; right: -13px; z-index: 100; height: 20px;width: 20px; background-size: 20px;
+    background-repeat: no-repeat; cursor: pointer;
+}
+
+.c-btn{
+    border-radius: 0px !important;
+}
+
+.selected-list .c-btn{
+    box-shadow:none !important;
+    padding: 4.5px !important;
+}
+
+.datatable-row-odd {background-color: rgba(0, 0, 0, 0.05)}
+.ngx-datatable.material .datatable-footer {background: #424242; color: #ededed;}
+.column-filter-input { width:100%;height:27px;border:1px solid gray; padding: 5px; border-radius: 4px;}
+.column-filter-label{height:10px;cursor:pointer;}
+.c-btn {box-shadow: none !important;}
+.important-icon {cursor: pointer;}
+.btn-create{background: #09a287; color: #FFFFFF;}
+.btn-create:hover{background: #076d5a; color: #FFFFFF;}
+
+.btn-cancel{
+    color: #fff !important;
+    background-color: rgb(117, 117, 117) !important;
+    border-color: rgb(117, 117, 117) !important;
+}
+.btn-cancel:hover{
+    background-color: rgb(68, 68, 68) !important;
+    border-color: rgb(68, 68, 68) !important;
+}
+.btn-default::before{
+    background-color: rgb(68, 68, 68) !important;
+    border-color: rgb(68, 68, 68) !important;
+}
+
+
+.pt15 {
+    padding-top: 15px;
+}
+
+.panel-heading.border { 
+    min-height: 50px;
+    border-bottom: 2px solid #495469;
+}
+.inValidField {border-color: red;}
+.req {color: red;}
+.custom-sort ~ .sort-btn{ float: right !important; position: relative !important;  top: -48px !important; }
+.custom-sort label {
+    cursor: pointer;
+}
+
+.tab-backgroud{
+    background: #e0e8f2;
+}
+
+.swal2-popup .swal2-styled.swal2-confirm{
+    background-color: #ce402f !important;
+}
+
+.btn-success::before{
+    background-color: inherit !important;
+}
+
+.btn-danger::before{
+    background-color: inherit !important;
+}
+.contact-dashboard-nav {background-color: #4cc3d9; color: #ffffff;}
+.profile-bio { padding-left: 15px;}
+.mb15 {margin-bottom: 15px;}
+.mb5 {margin-bottom: 5px;}
+.action-popover {width:20%}
+.pl25 {padding-left: 25px;}
+.pl15 {padding-left: 15px;}
+.pr25 {padding-right: 25px;}
+.pr15 {padding-right: 15px;}
+.fa-star {color: #03a9f4; }
+.mobile-type-select{ width: 20%; margin-bottom: 3px;}
+.mr20 {margin-right: 20px;}
+
+.datatable-body-cell {
+    overflow-x: visible !important;
+}
+
+.case-expense-list-grid 
+.datatable-header-cell,
+.case-expense-list-grid  .datatable-header {
+    overflow:visible !important;   
+}
+.case-expense-list-grid  .datatable-row-center{
+   z-index:11;
+}
+
+.case-advance-search-form {display: inline; padding-left: 20px;}
+.dropdown-menu li {
+    cursor: pointer;
+}
+.case-panel-header {min-height: 65px !important;}
+.global-search-input {width:30%;}
+input:read-only {border: none;}
+.expand-icon { width: 28px;}
+
+.nested-grid .ui-datatable-reflow .ui-datatable-data th .ui-column-title { display: block;}
+.nested-grid thead th {text-align: left !important;}
+.time-tracking-form .form-group .ui-calendar { width: 100%;}
+.form-group .ui-calendar input:focus{ border-color:#0ac2ff; box-shadow: none;}
+
+.mouse-pointer{
+    cursor: pointer;
+}
+
+.bg-brown.active {
+    background-color: #2d221f;
+}
+.bg-success.active {
+    background-color: #206f42;
+}
+.bg-warning.active {
+    background-color: #ad7510;
+}
+.bg-lightgreen.active {
+    background-color: #3b6906;
+}
+.bg-amber.active {
+    background-color: #92700b;
+}
+.bg-lightblue.active {
+    background-color: #0c5271;
+}
