@@ -1,14 +1,20 @@
-<div class=panel>
-  <div class="panel-heading border">
-    <span class="pull-left">
-      <b>Events</b>
-    </span>
-    <div class="pb30">
-      <button type="button" class="btn btn-create pull-right" (click)="addNewEvent()">
-        <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
-    </div>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Events</h2>
   </div>
-  <div class="panel-body">
-    <p-schedule [events]="events" [droppable]="true" [header]="headerConfig" (onEventClick)="eventClicked($event)"></p-schedule> 
+  <div class="col-lg-2">
+    <button type="button" class="btn btn-primary pull-right m-t-md" (click)="addNewEvent()">
+      <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
+          <p-schedule [events]="events" [droppable]="true" [header]="headerConfig" (onEventClick)="eventClicked($event)"></p-schedule>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -134,6 +134,14 @@
           <span class="nav-label">Companies</span>
         </a>
       </li>
+
+
+      <li [ngClass]="{active: activeRoute('events')}">
+        <a [routerLink]="['/events']">
+          <i class="fa fa-user-plus"></i>
+          <span class="nav-label">Events</span>
+        </a>
+      </li>
     </ul>
 
   </div>
