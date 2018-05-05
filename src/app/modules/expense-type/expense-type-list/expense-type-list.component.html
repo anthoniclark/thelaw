@@ -13,7 +13,7 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-content">
-          <p-dataTable [value]="rows" [responsive]="true" [loading]="loadingIndicator" loadingIcon="fa-spinner" #dt>
+          <p-dataTable [rowHover]="true" [value]="rows" [responsive]="true" [loading]="loadingIndicator" loadingIcon="fa-spinner" #dt>
             <p-column field="ExpenseTypeName" [filter]="true" [sortable]="true" header="Expense Type Name"></p-column>
             <p-column field="BasicPrice" [filter]="true" [sortable]="true" header="Basic Price"></p-column>
             <p-column header="Actions">

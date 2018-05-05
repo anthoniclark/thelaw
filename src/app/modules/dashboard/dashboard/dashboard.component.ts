@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'app/shared/services/auth.service';
+import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,13 +10,15 @@ import { AuthService } from 'app/shared/services/auth.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(@Inject(DOCUMENT) private document: Document, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
   }
 
-  clearToken() {
-    this.authService.setAuhToken('');
-    this.router.navigate(['/login']);
+  changeTheme(themeName) {
+    debugger;
+    this.document.body.classList.remove('skin-1');
+    this.document.body.classList.remove('skin-3');
+    this.document.body.classList.add(themeName);
   }
 }

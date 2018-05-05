@@ -12,7 +12,7 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-content">
-          <p-dataTable [value]="rows" [responsive]="true" expandableRows="false" [loading]="loadingIndicator" loadingIcon="fa-spinner">
+          <p-dataTable [rowHover]="true" [value]="rows" [responsive]="true" expandableRows="false" [loading]="loadingIndicator" loadingIcon="fa-spinner">
             <p-column expander="true" styleClass="col-icon expand-icon">
             </p-column>
             <p-column field="CaseNo" header="Case No">
@@ -23,7 +23,8 @@
               </ng-template>
             </p-column>
             <ng-template let-data pTemplate="rowexpansion">
-              <p-dataTable [value]="data.Categories" [responsive]="true" expandableRows="false" [loading]="loadingIndicator" loadingIcon="fa-spinner">
+              <p-dataTable [rowHover]="true" [value]="data.Categories" [responsive]="true" expandableRows="false" [loading]="loadingIndicator"
+                loadingIcon="fa-spinner">
                 <p-column expander="true" styleClass="col-icon expand-icon">
                 </p-column>
                 <p-column field="Category" header="Category">
@@ -34,7 +35,7 @@
                   </ng-template>
                 </p-column>
                 <ng-template let-expenseDetail pTemplate="rowexpansion">
-                  <p-dataTable [value]="expenseDetail.expenseDetails" [responsive]="true" expandableRows="false" [loading]="loadingIndicator"
+                  <p-dataTable [rowHover]="true" [value]="expenseDetail.expenseDetails" [responsive]="true" expandableRows="false" [loading]="loadingIndicator"
                     loadingIcon="fa-spinner">
                     <p-column field="ExpenseName" header="Expense Name"> </p-column>
                     <p-column field="ExpenseDate" header="Expense Date">

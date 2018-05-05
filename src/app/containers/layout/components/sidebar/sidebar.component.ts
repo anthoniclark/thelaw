@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import 'jquery-slimscroll';
+import { AuthService } from 'app/shared/services/auth.service';
 
 declare var jQuery: any;
 
@@ -11,7 +12,7 @@ declare var jQuery: any;
 export class SidebarComponent {
 
   @Input() layoutMenu: any;
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngAfterViewInit() {
     jQuery('#side-menu').metisMenu();
@@ -25,6 +26,11 @@ export class SidebarComponent {
 
   activeRoute(routename: string): boolean {
     return this.router.url.indexOf(routename) > -1;
+  }
+
+  logout() {
+    this.authService.setAuhToken('');
+    this.router.navigate(['/login']);
   }
 
 }

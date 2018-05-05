@@ -67,7 +67,7 @@
     <ul class="nav metismenu" id="side-menu">
       <li class="nav-header">
         <div class="profile-element" dropdown>
-          <img alt="image" class="img-circle" src="assets/images/profile_small.jpg">
+          <img alt="image" class="img-circle mouse-pointer" src="assets/images/profile_small.jpg" (click)="router.navigate(['/'])">
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
             <span class="clear">
               <span class="block m-t-xs">
@@ -80,62 +80,121 @@
           </a>
           <ul class="dropdown-menu animated fadeInRight m-t-xs">
             <li>
-              <a href="profile.html">Profile</a>
+              <a>Profile</a>
             </li>
             <li>
-              <a href="contacts.html">Contacts</a>
+              <a>Contacts</a>
             </li>
             <li>
-              <a href="mailbox.html">Mailbox</a>
+              <a>Mailbox</a>
             </li>
             <li class="divider"></li>
             <li>
-              <a href="login.html">Logout</a>
+              <a (click)="logout()">Logout</a>
             </li>
           </ul>
         </div>
-        <div class="logo-element">
-          IN+
+        <div class="logo-element mouse-pointer" (click)="router.navigate(['/'])">
+          LD+
         </div>
       </li>
-      <li [ngClass]="{active: activeRoute('contact')}">
-        <a [routerLink]="['/contact']">
+      <li [ngClass]="{active: activeRoute('contactcompanies')}">
+        <a>
           <i class="fa fa-user"></i>
-          <span class="nav-label">Contact</span>
+          <span class="nav-label">Contacts</span>
+          <span class="fa arrow"></span>
         </a>
+        <ul class="nav nav-second-level">
+          <li [ngClass]="{active: activeRoute('companies')}">
+            <a [routerLink]="['/companies']">
+              <i class="fa fa-address-card"></i>
+              <span class="nav-label">Company Contacts</span>
+            </a>
+          </li>
+          <li [ngClass]="{active: activeRoute('companies')}">
+            <a [routerLink]="['/contact']">
+              <i class="fa fa-user"></i>
+              <span class="nav-label">General Contacts</span>
+            </a>
+          </li>
+        </ul>
       </li>
       <li [ngClass]="{active: activeRoute('case')}">
-        <a [routerLink]="['/case']">
+        <a>
           <i class="fa fa-briefcase"></i>
           <span class="nav-label">Case</span>
+          <span class="fa arrow"></span>
         </a>
+        <ul class="nav nav-second-level">
+          <li [ngClass]="{active: activeRoute('case')}">
+            <a [routerLink]="['/case']">
+              <span class="nav-label">Case List</span>
+            </a>
+          </li>
+          <li [ngClass]="{active: activeRoute('case')}">
+            <a [routerLink]="['/case/new']">
+              <span class="nav-label">Add Case</span>
+            </a>
+          </li>
+        </ul>
       </li>
       <li [ngClass]="{active: activeRoute('case-expense')}">
-        <a [routerLink]="['/case-expense']">
+        <a>
           <i class="fa fa-inr"></i>
           <span class="nav-label">Case Expense</span>
+          <span class="fa arrow"></span>
         </a>
+        <ul class="nav nav-second-level">
+          <li [ngClass]="{active: activeRoute('case-expense')}">
+            <a [routerLink]="['/case-expense']">
+              <span class="nav-label">Case Expense List</span>
+            </a>
+          </li>
+          <li [ngClass]="{active: activeRoute('case-expense')}">
+            <a [routerLink]="['/case-expense/new']">
+              <span class="nav-label">Add Case Expense</span>
+            </a>
+          </li>
+        </ul>
       </li>
       <li [ngClass]="{active: activeRoute('complain')}">
-        <a [routerLink]="['/complain']">
+        <a>
           <i class="fa fa-list-alt"></i>
           <span class="nav-label">Complain</span>
+          <span class="fa arrow"></span>
         </a>
+        <ul class="nav nav-second-level">
+          <li [ngClass]="{active: activeRoute('complain')}">
+            <a [routerLink]="['/complain']">
+              <span class="nav-label">Complain List</span>
+            </a>
+          </li>
+          <li [ngClass]="{active: activeRoute('complain')}">
+            <a [routerLink]="['/complain/new']">
+              <span class="nav-label">Add Complain</span>
+            </a>
+          </li>
+        </ul>
       </li>
       <li [ngClass]="{active: activeRoute('expense-type')}">
-        <a [routerLink]="['/expense-type']">
+        <a>
           <i class="fa fa-sitemap"></i>
           <span class="nav-label">Expense Types</span>
+          <span class="fa arrow"></span>
         </a>
+        <ul class="nav nav-second-level">
+          <li [ngClass]="{active: activeRoute('expense-type')}">
+            <a [routerLink]="['/expense-type']">
+              <span class="nav-label">Expense Type List</span>
+            </a>
+          </li>
+          <li [ngClass]="{active: activeRoute('expense-type')}">
+            <a [routerLink]="['/expense-type/new']">
+              <span class="nav-label">Add Expense Type</span>
+            </a>
+          </li>
+        </ul>
       </li>
-      <li [ngClass]="{active: activeRoute('companies')}">
-        <a [routerLink]="['/companies']">
-          <i class="fa fa-address-card"></i>
-          <span class="nav-label">Companies</span>
-        </a>
-      </li>
-
-
       <li [ngClass]="{active: activeRoute('events')}">
         <a [routerLink]="['/events']">
           <i class="fa fa-user-plus"></i>

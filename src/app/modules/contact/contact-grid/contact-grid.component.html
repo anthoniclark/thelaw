@@ -1,4 +1,4 @@
-<p-dataTable [value]="_data" [globalFilter]="gb" [lazy]="true" [rows]="page.size" [paginator]="true" [responsive]="true"
+<p-dataTable [rowHover]="true" [value]="_data" [globalFilter]="gb" [lazy]="true" [rows]="page.size" [paginator]="true" [responsive]="true"
   [loading]="loadingIndicator" loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)"
   (onPage)="paginate($event)">
   <p-column field="No" [sortable]="true" header="No.">

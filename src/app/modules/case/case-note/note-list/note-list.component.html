@@ -15,7 +15,7 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-content">
-          <p-dataTable [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
+          <p-dataTable [rowHover]="true" [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
             loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
             <p-column field="NoteDate" [sortable]="true" header="Note Date">
               <ng-template let-col let-data="rowData" pTemplate="body">

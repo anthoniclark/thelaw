@@ -17,8 +17,9 @@
             <!-- <i class="fa fa-search" style="margin:4px 4px 0 0"></i> -->
             <input #gb type="text" class="form-control global-search-input" pInputText size="50" placeholder="Advance Search">
           </div>
-          <p-dataTable [value]="rows" [globalFilter]="gb" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
-            loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
+          <p-dataTable [rowHover]="true" [value]="rows" [globalFilter]="gb" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true"
+            [loading]="loadingIndicator" loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)"
+            (onPage)="paginate($event)">
             <!-- [rowsPerPageOptions]="[5,10,20]" let user select page  -->
             <!-- <p-header>List of Cars</p-header> -->
             <p-column field="CaseNo" [filter]="true" [sortable]="true" header="Case No"></p-column>
