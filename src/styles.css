@@ -74,6 +74,7 @@
 .nested-grid thead th {text-align: left !important;}
 .time-tracking-form .form-group .ui-calendar { width: 100%;}
 .form-group .ui-calendar input:focus{ border-color:#0ac2ff; box-shadow: none;}
+.ui-datepicker .fa {color: black;}
 /* label {
     display: inline-block;
     max-width: 100%;
