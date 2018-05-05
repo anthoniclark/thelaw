@@ -36,8 +36,16 @@
     cursor: pointer;
 }
 
-.widget.active {
-    box-shadow: 3px 3px 3px rgba(33, 33, 33);
+.widget {
+    border-radius: 5px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    opacity: 0.5;
+}
+.widget:hover, .widget.active {
+    box-shadow: 7px 10px 14px rgb(111, 105, 105);
+    opacity: 1;
 }
 
 .btn-create{background: #09a287; color: #FFFFFF;}
@@ -263,4 +271,8 @@ input:read-only {border: none;}
 .skin-1 .btn-create:hover, .skin-1 .btn-create:active:hover {
     background: #0d8ddb !important;
     border-color: #0d8ddb !important;
+}
+
+.navbar-static-side {
+    z-index: 1500 !important;
 }
