@@ -199,11 +199,11 @@
                       </select>
                     </div>
                     <div class="mr20 col-md-4">
-                      <div class="i-checks">
+                      <div class="checkbox">
+                        <input type="checkbox" [disabled]="isViewMode || mobileControl.isDisabled" (change)="changeIsPrimary(mobileControl)" [(ngModel)]="mobileControl.IsPrimary"
+                          name="mobileIsPrimary{{i}}">
                         <label>
-                          <input type="checkbox" [disabled]="isViewMode || mobileControl.isDisabled" (change)="changeIsPrimary(mobileControl)" [(ngModel)]="mobileControl.IsPrimary"
-                            name="mobileIsPrimary{{i}}">
-                          <i></i> Registered Contact
+                          Registered Contact
                         </label>
                       </div>
                     </div>

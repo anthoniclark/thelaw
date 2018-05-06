@@ -7,6 +7,13 @@ export class Events {
     FromDateTime: string;
     ToDateTime: string;
     Frquency: string;
+    ReminderAt: number;
+    StartTime: string;
+    EndTime: string;
+    RemindMeBeforeEvent: string;
+    AttendeesId: number[] = [];
+    Client: string;
+
 }
 
 export class EventTypes {

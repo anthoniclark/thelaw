@@ -12,9 +12,55 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-content">
-          <p-schedule [events]="events" [droppable]="true" [header]="headerConfig" (onEventClick)="eventClicked($event)"></p-schedule>
+          <p-schedule [events]="events" [droppable]="true" [header]="headerConfig" (onEventClick)="eventClicked($event,op3)"></p-schedule>
         </div>
       </div>
     </div>
   </div>
 </div>
+<p-overlayPanel [showCloseIcon]="true" [appendTo]="body" class="calander-overlay" #op3>
+  <!-- <img src="assets/showcase/images/demo/car/{{selectedCar.brand}}.png" *ngIf="selectedCar" /> -->
+  <div *ngIf="selectedEvent">
+    <div class="calander-popup-title">
+      <div class="pull-right action">
+        <i class="fa fa-trash"></i>
+      </div>
+      <div class="pull-right action" (click)="openEventDetail(op3)">
+        <i class="fa fa-edit"></i>
+      </div>
+      <h1>{{selectedEvent.EventTitle}}</h1>
+    </div>
+    <div>
+      <div class="calander-popup-details">
+        <div>Date :</div>
+        <div class="cal-popup-data">{{selectedEvent.FromDateTime | date: 'yyyy/MM/dd'}} To {{selectedEvent.ToDateTime | date: 'yyyy/MM/dd'}}</div>
+      </div>
+      <!-- <div class="calander-popup-details">
+        <div>To Date :</div>
+        <div class="cal-popup-data">{{selectedEvent.ToDateTime | date: 'yyyy/MM/dd'}}</div>
+      </div> -->
+      <div class="calander-popup-details">
+        <div>Event Detail :</div>
+        <div class="cal-popup-data">{{selectedEvent.EventDescription}}</div>
+      </div>
+
+      <div class="calander-popup-details">
+        <div>Time :</div>
+        <div class="cal-popup-data">{{selectedEvent.StartTime}} To {{selectedEvent.EndTime}}</div>
+      </div>
+      <div class="calander-popup-details">
+        <div>Case No :</div>
+        <div class="cal-popup-data">{{selectedEvent.EventDescription}}</div>
+      </div>
+
+      <div class="calander-popup-details">
+        <div>Attendees :</div>
+        <div class="cal-popup-data">
+          <span *ngFor="let attendees of selectedEvent.EventAttendy">
+            {{attendees.AttendyId}} ,
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-overlayPanel>

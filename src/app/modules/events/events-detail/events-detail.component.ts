@@ -22,7 +22,10 @@ export class EventsDetailComponent implements OnInit {
   eventTypes: any[] = [];
   model: Events = new Events();
   id: string = "new";
+  settings: {} = {};
   caseDetail: any;
+  selectedAttendees: any[] = [];
+  attendeesData: any[] = [];
   constructor(public dialog: DialogRef<BSModalContext>, private eventsService: EventsService,
     private _notify: NotificationService, private _bsModal: Modal,
     private _sanitizer: DomSanitizer) {
@@ -33,21 +36,58 @@ export class EventsDetailComponent implements OnInit {
 
 
   ngOnInit() {
+    this.settings = {
+      singleSelection: false,
+      text: "Select Attendees",
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      badgeShowLimit: 3,
+      enableSearchFilter: true,
+    }
+    this.selectedAttendees = [];
     this.getAllEventTypes();
-    if (this.id !== 'new') {
-      this.eventsService.getEventById(this.id).subscribe(res => {
-        this.model = res;
-        this.eventsService.getCaseById(this.model.CaseId).subscribe(result => {
-          this.caseDetail = {
-            "Name": result.CaseNo, "Id": result.Id
-          }
+    this.eventsService.getAllAttendees().subscribe(res => {
+      this.attendeesData = [];
+      res.forEach(element => {
+        this.attendeesData.push({ id: element.Id, itemName: element.FirstName + ' ' + element.LastName });
+      });
+
+      if (this.id !== 'new') {
+        this.eventsService.getEventById(this.id).subscribe(res => {
+          this.model = res;
+          this.selectedAttendees = [];
+          res.EventAttendy.forEach(element => {
+            const attendee = this.attendeesData.find(x => x.id === element.AttendyId);
+            if (attendee) {
+              this.selectedAttendees.push(attendee);
+            }
+          });
+          let startTime = res.StartTime.split(":");
+          let date = new Date();
+          date.setHours(startTime[0]);
+          date.setMinutes(startTime[1]);
+          this.model.StartTime = <any>date;
+          let endTime = res.EndTime.split(":");
+
+          let endDate = new Date();
+          endDate.setHours(endTime[0]);
+          endDate.setMinutes(endTime[1]);
+          this.model.EndTime = <any>endDate;
+          this.eventsService.getCaseById(this.model.CaseId).subscribe(result => {
+            this.getClient(result.ClientId);
+            this.caseDetail = {
+              "Name": result.CaseNo, "Id": result.Id
+            }
+          }, error => {
+            this._notify.error(error.ErrorMessage);
+          })
         }, error => {
           this._notify.error(error.ErrorMessage);
-        })
-      }, error => {
-        this._notify.error(error.ErrorMessage);
-      });
-    }
+        });
+      }
+    }, error => {
+      this._notify.error(error.ErrorMessage);
+    })
   }
 
   getAllEventTypes() {
@@ -73,6 +113,14 @@ export class EventsDetailComponent implements OnInit {
   }
 
   save() {
+    this.model.StartTime = (<any>this.model.StartTime).toLocaleTimeString().split(" ")[0];
+    this.model.EndTime = (<any>this.model.EndTime).toLocaleTimeString().split(" ")[0];
+    this.model.FromDateTime = new Date(this.model.FromDateTime).toLocaleDateString();
+    this.model.ToDateTime = new Date(this.model.ToDateTime).toLocaleDateString();
+    this.model.AttendeesId = [];
+    this.selectedAttendees.forEach(data => {
+      this.model.AttendeesId.push(data.id);
+    })
     this.eventsService.addOrUpdateEvent(this.model).subscribe(res => {
       setTimeout(() => {
         this._notify.success(`Event ${this.id.toString() === 'new' ? 'added' : 'updated'} successfully`);
@@ -115,6 +163,18 @@ export class EventsDetailComponent implements OnInit {
   }
 
   onSelectCase(event) {
+    this.eventsService.getCaseById(event.Id).subscribe(res => {
+      this.getClient(res.ClientId)
+    });
     this.model.CaseId = event.Id;
+  }
+
+
+  getClient(clientId) {
+    this.eventsService.getClientById(clientId).subscribe(result => {
+      this.model.Client = result.FirstName + " " + result.LastName;
+    }, error => {
+      this._notify.error();
+    });
   }
 }

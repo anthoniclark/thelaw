@@ -16,7 +16,6 @@ export class DashboardComponent implements OnInit {
   }
 
   changeTheme(themeName) {
-    debugger;
     this.document.body.classList.remove('skin-1');
     this.document.body.classList.remove('skin-3');
     this.document.body.classList.add(themeName);

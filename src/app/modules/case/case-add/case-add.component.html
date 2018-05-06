@@ -381,8 +381,9 @@
               </div>
               <div class="col-sm-6">
                 <div class="checkbox">
+                  <input type="checkbox" name="IsClose" [(ngModel)]="model.IsClose" [disabled]="isViewModel" #IsClose="ngModel">
                   <label>
-                    <input type="checkbox" name="IsClose" [(ngModel)]="model.IsClose" [disabled]="isViewModel" #IsClose="ngModel"> Is Close
+                      Is Close
                   </label>
                 </div>
               </div>
@@ -408,8 +409,9 @@
             <div class="row">
               <div class="col-sm-6" *ngIf="model.IsClose">
                 <div class="checkbox">
+                  <input type="checkbox" name="NotifyMe" [(ngModel)]="model.NotifyMe" #NotifyMe="ngModel">
                   <label>
-                    <input type="checkbox" name="NotifyMe" [(ngModel)]="model.NotifyMe" #NotifyMe="ngModel"> Notify Me
+                      Notify Me
                   </label>
                 </div>
               </div>

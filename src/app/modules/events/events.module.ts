@@ -12,6 +12,8 @@ import { EventsDetailComponent } from './events-detail/events-detail.component';
 import { BootstrapModalModule, Modal } from 'ngx-modialog/plugins/bootstrap';
 import { EventTypesDetailComponent } from './event-types-detail/event-types-detail.component';
 import { ColorPickerModule } from 'primeng/colorpicker';
+import { CalendarModule } from 'primeng/calendar';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 @NgModule({
   imports: [
     CommonModule,
@@ -22,7 +24,9 @@ import { ColorPickerModule } from 'primeng/colorpicker';
     DataTableModule,
     ScheduleModule,
     BootstrapModalModule,
-    ColorPickerModule
+    ColorPickerModule,
+    CalendarModule,
+    OverlayPanelModule
   ],
   providers: [EventsService, Modal],
   declarations: [EventsDashboardComponent, EventsDetailComponent, EventTypesDetailComponent],
