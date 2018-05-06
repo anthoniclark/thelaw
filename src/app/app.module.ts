@@ -50,6 +50,7 @@ import { NavbarComponent } from './containers/layout/components/navbar/navbar.co
 import { FooterComponent } from 'app/containers/layout/components/footer/footer.component';
 import { HeaderComponent } from 'app/containers/layout/components/header/header.component';
 import { SuggestionComponent } from './components/suggestion/suggestion.component';
+import { TenentGuard } from 'app/guards/tenent.guard';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { SuggestionComponent } from './components/suggestion/suggestion.componen
     },
     SkipLoginGuard,
     AuthGuard,
+    TenentGuard,
     NotificationService,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

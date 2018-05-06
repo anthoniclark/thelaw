@@ -10,15 +10,16 @@
         </div>
       </form>
     </div>
+    <img style="height: 50px;" *ngIf="imgBase64" [src]="imgBase64" />
     <ul class="nav navbar-top-links navbar-right">
       <li>
         <span class="m-r-sm text-muted welcome-message">Welcome to Law Diary</span>
       </li>
-      <li>
+      <!-- <li>
         <a (click)="logout()">
           <i class="fa fa-sign-out"></i> Log out
         </a>
-      </li>
+      </li> -->
     </ul>
   </nav>
 </div>

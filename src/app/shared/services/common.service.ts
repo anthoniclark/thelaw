@@ -18,4 +18,17 @@ export class CommonService {
       throw err;
     });
   }
+
+  getTenentLogo(tenent: any) {
+    return this.httpService.get(`Tenants/GetLogo?tenentId=${tenent}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      else {
+        throw 'We are facing some issue with server, Plesae try after some time.';
+      }
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
 }
