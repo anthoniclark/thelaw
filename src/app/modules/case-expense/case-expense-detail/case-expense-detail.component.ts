@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CaseExpense } from '../../../models/case-expense';
 import { DropDownModel } from 'app/models/dropDownModel';
 import { ExpenseCategory } from '../../../shared/constants';
@@ -26,6 +26,7 @@ export class CaseExpenseDetailComponent implements OnInit {
   fileName: string;
   validFileSize: boolean = true;
   validFileType: boolean = true;
+  @ViewChild('billDocument') billDocument: any;
   constructor(private route: ActivatedRoute, private caseExpenseService: CaseExpenseService, private _notify: NotificationService,
     private _sanitizer: DomSanitizer, private contactService: ContactService, private caseService: CaseService,
     private router: Router) { }
@@ -107,19 +108,21 @@ export class CaseExpenseDetailComponent implements OnInit {
   }
 
   onFileChange(event: any) {
-    const target = event.target || event.srcElement;
-    const files: FileList = target.files;
+    //const target = event.target || event.srcElement;
+    const files: FileList = event.files;
     if (files.length > 0) {
       let fileType: string = files[0].type.toString();
       if (fileType.toString() !== "application/msword" && fileType.toString() !== "application/pdf"
         && fileType.toString() !== "image/jpg" && fileType.toString() !== "image/jpeg" && fileType.toString() !== "image/png") {
-          this.validFileType = false;
+        this.validFileType = false;
+        this.billDocument.clear();
         return false;
-      } else if(files[0].size > 2097152) {
+      } else if (files[0].size > 2097152) {
         this.validFileSize = false;
+        this.billDocument.clear();
         return false;
       }
-      
+
       this.validFileSize = true;
       this.validFileType = true;
 
@@ -129,7 +132,7 @@ export class CaseExpenseDetailComponent implements OnInit {
       reader.onload = (event: any) => {
         this.url = event.target.result;
       }
-      reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(files[0]);
       if (this.paramId !== "new") {
         const formData = new FormData();
         formData.append("Caseexpense", this.fileToUpload);
@@ -158,6 +161,7 @@ export class CaseExpenseDetailComponent implements OnInit {
   }
 
   deleteDocument() {
+    debugger;
     if (this.paramId !== 'new') {
       this.caseExpenseService.deleteDocument(this.paramId).subscribe(response => {
         this._notify.success("Bill Document deleted successfully.");
@@ -166,6 +170,9 @@ export class CaseExpenseDetailComponent implements OnInit {
       }, error => {
         this._notify.error(error);
       });
+    } else {
+      this.fileToUpload = null;
+      this.fileName = null;
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DropDownModel } from 'app/models/dropDownModel';
 import { DocumentCategory } from '../../../../shared/constants';
@@ -20,6 +20,7 @@ export class DocumentDetailComponent implements OnInit {
   fileToUpload: File = null;
   validFileSize: boolean = true;
   validFileType: boolean = true;
+  @ViewChild('billDocument') billDocument: any;
   fileName: string;
   constructor(private route: ActivatedRoute, private _notify: NotificationService,
     private caseService: CaseService, private router: Router) { }
@@ -78,8 +79,8 @@ export class DocumentDetailComponent implements OnInit {
   }
 
   onFileChange(event: any) {
-    const target = event.target || event.srcElement;
-    const files: FileList = target.files;
+    //const target = event.target || event.srcElement;
+    const files: FileList = event.files;
     if (files.length > 0) {
       let fileType: string = files[0].type.toString();
       const type = files[0].name.substr(files[0].name.lastIndexOf(".") + 1);
@@ -88,10 +89,12 @@ export class DocumentDetailComponent implements OnInit {
         && type.toString() !== "xls" && type.toString() !== "xs" && type.toString() !== "txt" && type.toString() !== "rtf") {
         this.fileName = null;
         this.validFileType = false;
+        this.billDocument.clear();
         return false;
       } else if (files[0].size > 3145728) {
         this.fileName = null;
         this.validFileSize = false;
+        this.billDocument.clear();
         return false;
       }
       this.validFileType = this.validFileSize = true;
@@ -101,7 +104,7 @@ export class DocumentDetailComponent implements OnInit {
       reader.onload = (event: any) => {
         this.url = event.target.result;
       }
-      reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(files[0]);
       if (this.paramId !== "new") {
         const formData = new FormData();
         formData.append("Document", this.fileToUpload);
@@ -132,6 +135,9 @@ export class DocumentDetailComponent implements OnInit {
       }, error => {
         this._notify.error(error);
       });
+    } else {
+      this.fileToUpload = null;
+      this.fileName = null;
     }
   }
 }

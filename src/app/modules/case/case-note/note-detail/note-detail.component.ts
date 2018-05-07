@@ -17,7 +17,7 @@ export class NoteDetailComponent implements OnInit {
   model: CaseNote = new CaseNote();
   NotesById;
   isLoading: boolean = false;
-  caseModel :Case = new  Case();
+  caseModel: Case = new Case();
   constructor(private route: ActivatedRoute, private _notify: NotificationService,
     private _sanitizer: DomSanitizer, private router: Router, private caseService: CaseService,
     private contactService: ContactService) { }
@@ -87,7 +87,7 @@ export class NoteDetailComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.router.navigate(['/case/' + this.model.CaseId]);
+    this.router.navigate([`/case/${this.model.CaseId}/note`]);
   }
 
 }

@@ -18,7 +18,10 @@
                 <div class="form-group">
                   <label for="CaseId">Profile Image</label>
                   <div class="img-wrap">
-                    <span class="delete-photo-icon" *ngIf="!isViewMode" (click)="deletePhoto()"></span>
+                    <a *ngIf="!isViewMode" class="delete-photo-icon" (click)="deletePhoto()">
+                      <i class="fa fa-times-circle pull-right"></i>
+                    </a>
+                    <!-- <span class="delete-photo-icon"></span> -->
                     <img [src]="url" class="contact-image-preview">
                   </div>
                   <div *ngIf="!isViewMode">{{fileToUpload?.name || 'Select Image'}}</div>

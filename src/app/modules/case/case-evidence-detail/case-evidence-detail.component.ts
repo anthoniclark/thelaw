@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { CaseService } from 'app/modules/case/case.service';
@@ -17,6 +17,7 @@ export class CaseEvidenceDetailComponent implements OnInit {
   fileName: string;
   validFileSize: boolean = true;
   validFileType: boolean = true;
+  @ViewChild('billDocument') billDocument: any;
   paramId: any;
   caseId: number;
   model: CaseEvidence = new CaseEvidence();
@@ -82,16 +83,18 @@ export class CaseEvidenceDetailComponent implements OnInit {
   }
 
   onFileChange(event: any) {
-    const target = event.target || event.srcElement;
-    const files: FileList = target.files;
+    //const target = event.target || event.srcElement;
+    const files: FileList = event.files;
     if (files.length > 0) {
       let fileType: string = files[0].type.toString();
       if (fileType.toString() !== "application/msword" && fileType.toString() !== "application/pdf"
         && fileType.toString() !== "image/jpg" && fileType.toString() !== "image/jpeg" && fileType.toString() !== "image/png") {
         this.validFileType = false;
+        this.billDocument.clear();
         return false;
       } else if (files[0].size > 2097152) {
         this.validFileSize = false;
+        this.billDocument.clear();
         return false;
       }
 
@@ -104,7 +107,7 @@ export class CaseEvidenceDetailComponent implements OnInit {
       reader.onload = (event: any) => {
         this.url = event.target.result;
       }
-      reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(files[0]);
       if (this.paramId !== "new") {
         const formData = new FormData();
         formData.append("file", this.fileToUpload);
@@ -136,6 +139,9 @@ export class CaseEvidenceDetailComponent implements OnInit {
       }, error => {
         this._notify.error(error);
       });
+    } else {
+      this.fileToUpload = null;
+      this.fileName = null;
     }
   }
 

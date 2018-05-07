@@ -8,12 +8,15 @@ import { CaseExpenseService } from './case-expense.service';
 import { CaseService } from '../case/case.service';
 import { ContactService } from '../contact/contact.service';
 import { DataTableModule } from 'primeng/datatable';
+import { FileUploadModule } from 'primeng/fileupload';
+
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     caseExpenseRouting,
-    DataTableModule
+    DataTableModule,
+    FileUploadModule
   ],
   declarations: [
     CaseExpenseListComponent,

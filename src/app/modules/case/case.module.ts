@@ -27,6 +27,8 @@ import { JudgeDetailComponent } from './judge-detail/judge-detail.component';
 import { ContactQuickAddComponent } from './contact-quick-add/contact-quick-add.component';
 import { DataTableModule } from 'primeng/datatable';
 import { CalendarModule } from 'primeng/calendar';
+import { FileUploadModule } from 'primeng/fileupload';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { CalendarModule } from 'primeng/calendar';
     BootstrapModalModule,
     PopoverModule,
     DataTableModule,
-    CalendarModule
+    CalendarModule,
+    FileUploadModule
   ],
   declarations: [
     CaseListComponent,
