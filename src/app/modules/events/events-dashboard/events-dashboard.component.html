@@ -18,11 +18,10 @@
     </div>
   </div>
 </div>
-<p-overlayPanel [showCloseIcon]="true" [appendTo]="body" class="calander-overlay" #op3>
-  <!-- <img src="assets/showcase/images/demo/car/{{selectedCar.brand}}.png" *ngIf="selectedCar" /> -->
+<p-overlayPanel [showCloseIcon]="true" styleClass="calander-overlay" appendTo="body" class="calander-overlay" #op3>
   <div *ngIf="selectedEvent">
-    <div class="calander-popup-title">
-      <div class="pull-right action">
+    <div class="calander-popup-title ">
+      <div class="pull-right action" (click)="deleteEvent(op3)">
         <i class="fa fa-trash"></i>
       </div>
       <div class="pull-right action" (click)="openEventDetail(op3)">
@@ -35,29 +34,26 @@
         <div>Date :</div>
         <div class="cal-popup-data">{{selectedEvent.FromDateTime | date: 'yyyy/MM/dd'}} To {{selectedEvent.ToDateTime | date: 'yyyy/MM/dd'}}</div>
       </div>
-      <!-- <div class="calander-popup-details">
-        <div>To Date :</div>
-        <div class="cal-popup-data">{{selectedEvent.ToDateTime | date: 'yyyy/MM/dd'}}</div>
-      </div> -->
-      <div class="calander-popup-details">
-        <div>Event Detail :</div>
-        <div class="cal-popup-data">{{selectedEvent.EventDescription}}</div>
-      </div>
 
       <div class="calander-popup-details">
         <div>Time :</div>
         <div class="cal-popup-data">{{selectedEvent.StartTime}} To {{selectedEvent.EndTime}}</div>
       </div>
       <div class="calander-popup-details">
-        <div>Case No :</div>
+        <div>Event Detail :</div>
         <div class="cal-popup-data">{{selectedEvent.EventDescription}}</div>
+      </div>
+      <div class="calander-popup-details">
+        <div>Case No :</div>
+        <div class="cal-popup-data">{{selectedEvent.CaseNo}}</div>
       </div>
 
       <div class="calander-popup-details">
         <div>Attendees :</div>
         <div class="cal-popup-data">
-          <span *ngFor="let attendees of selectedEvent.EventAttendy">
-            {{attendees.AttendyId}} ,
+          <span *ngFor="let attendees of selectedEvent.EventAttendy; let last = last;">
+            {{attendees.AttendyName}}
+            <span *ngIf="!last">,</span>
           </span>
         </div>
       </div>

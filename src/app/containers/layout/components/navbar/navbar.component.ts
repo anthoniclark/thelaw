@@ -17,7 +17,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.commonService.getTenentLogo(5).subscribe(res => {
-      debugger;
       this.imgBase64 = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,'
         + res);
 

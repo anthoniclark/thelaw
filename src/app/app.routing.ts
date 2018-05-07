@@ -11,67 +11,58 @@ import { TenentGuard } from 'app/guards/tenent.guard';
 
 const routes: Routes = [
   {
-    path: ':tenent_id', canActivate: [TenentGuard],
+    path: '', component: LayoutComponent, canActivate: [AuthGuard],
     children: [
       {
-        path: '', component: LayoutComponent, canActivate: [AuthGuard],
-        children: [
-          {
-            path: '',
-            loadChildren: './modules/dashboard/dashboard.module#DashboardModule'
-          },
-          {
-            path: 'contact',
-            loadChildren: './modules/contact/contact.module#ContactModule'
-          },
-          {
-            path: 'case',
-            loadChildren: './modules/case/case.module#CaseModule'
-          },
-          {
-            path: 'case-expense',
-            loadChildren: './modules/case-expense/case-expense.module#CaseExpenseModule'
-          },
-          {
-            path: 'complain',
-            loadChildren: './modules/complain/complain.module#ComplainModule'
-          },
-          {
-            path: 'expense-type',
-            loadChildren: './modules/expense-type/expense-type.module#ExpenseTypeModule'
-          },
-          {
-            path: 'companies',
-            loadChildren: './modules/companies/companies.module#CompaniesModule'
-          },
-          {
-            path: 'events',
-            loadChildren: './modules/events/events.module#EventsModule'
-          }
-        ]
+        path: '',
+        loadChildren: './modules/dashboard/dashboard.module#DashboardModule'
       },
       {
-        path: '', component: BlankLayoutComponent, canActivate: [SkipLoginGuard],
-        children: [
-          {
-            path: '',
-            loadChildren: './modules/non-auth/non-auth.module#NonAuthModule'
-          }
-        ]
+        path: 'contact',
+        loadChildren: './modules/contact/contact.module#ContactModule'
       },
       {
-        component: NotFoundComponent,
-        path: '404',
+        path: 'case',
+        loadChildren: './modules/case/case.module#CaseModule'
       },
       {
-        path: '**',
-        redirectTo: '404'
+        path: 'case-expense',
+        loadChildren: './modules/case-expense/case-expense.module#CaseExpenseModule'
+      },
+      {
+        path: 'complain',
+        loadChildren: './modules/complain/complain.module#ComplainModule'
+      },
+      {
+        path: 'expense-type',
+        loadChildren: './modules/expense-type/expense-type.module#ExpenseTypeModule'
+      },
+      {
+        path: 'companies',
+        loadChildren: './modules/companies/companies.module#CompaniesModule'
+      },
+      {
+        path: 'events',
+        loadChildren: './modules/events/events.module#EventsModule'
       }
     ]
   },
   {
+    path: '', component: BlankLayoutComponent, canActivate: [SkipLoginGuard],
+    children: [
+      {
+        path: '',
+        loadChildren: './modules/non-auth/non-auth.module#NonAuthModule'
+      }
+    ]
+  },
+  {
+    component: NotFoundComponent,
+    path: '404',
+  },
+  {
     path: '**',
-    component: NotFoundComponent
+    redirectTo: '404'
   }
 ];
 

@@ -7,6 +7,7 @@ import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
 import { EventsDetailComponent } from '../events-detail/events-detail.component';
 import { deepValueGetter } from '@swimlane/ngx-datatable/release/utils';
 import { OverlayPanel } from 'primeng/overlaypanel';
+import swal from 'sweetalert2';
 @Component({
   selector: 'app-events-dashboard',
   templateUrl: './events-dashboard.component.html',
@@ -77,9 +78,28 @@ export class EventsDashboardComponent implements OnInit {
     this.selectedEvent = this.calanderData.find(x => x.Id === event.calEvent.id);
     op.toggle((event.jsEvent));
   }
-  // onViewRender($event) {
-  //   $event.element.bind("dblclick", (data) => {
-  //     debugger
-  //   });
-  // }
+  deleteEvent(op: OverlayPanel) {
+    swal({
+      title: 'Delete Event',
+      text: "Are you sure want to delete this Event?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: true,
+      reverseButtons: false,
+    }).then((result) => {
+      if (result.value) {
+        return this.eventServices.deleteEventById(this.selectedEvent.Id).subscribe(res => {
+          this.events = this.events.filter(x => x.id !== this.selectedEvent.Id);
+          setTimeout(() => {
+            this._notify.success(`Event deleted successfully`);
+          }, 300);
+        }, error => {
+        });
+      }
+    }).catch(() => { });
+  }
 }

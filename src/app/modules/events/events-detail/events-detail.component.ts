@@ -144,13 +144,13 @@ export class EventsDetailComponent implements OnInit {
     //   reverseButtons: false,
     // }).then((result) => {
     //   if (result.value) {
-    return this.eventsService.deleteEventById(this.id).subscribe(res => {
-      setTimeout(() => {
-        this._notify.success(`Event deleted successfully`);
-      }, 300);
-      this.closeDialoge(true);
-    }, error => {
-    });
+    // return this.eventsService.deleteEventById(this.id).subscribe(res => {
+    //   setTimeout(() => {
+    //     this._notify.success(`Event deleted successfully`);
+    //   }, 300);
+    //   this.closeDialoge(true);
+    // }, error => {
+    // });
     // });
   }
 

@@ -9,7 +9,6 @@ export class TenentGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    debugger;
 
     return true;
   }
