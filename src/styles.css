@@ -104,6 +104,11 @@ span.ui-calendar {width: 100%;}
 }
 .calander-popup-title .fa{ font-size: 15px;margin-right: 10px;}
 .calander-popup-title .action {cursor: pointer;}
+.comm-detail-icon {
+  width: 100%;
+  display: block;
+  height: auto;
+}
 /* label {
     display: inline-block;
     max-width: 100%;
