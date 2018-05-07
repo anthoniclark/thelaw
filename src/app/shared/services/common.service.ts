@@ -4,6 +4,8 @@ import { HttpClientService } from 'app/lib/http/http-client.service';
 @Injectable()
 export class CommonService {
 
+  private tenent_name: string;
+
   constructor(private httpService: HttpClientService) { }
 
   sendSuggestion(suggestionModel: any) {
@@ -30,5 +32,13 @@ export class CommonService {
     }).catch((err: any) => {
       throw err;
     });
+  }
+
+  getTenentName() {
+    return this.tenent_name;
+  }
+
+  setTenentName(name: string) {
+    this.tenent_name = name;
   }
 }
