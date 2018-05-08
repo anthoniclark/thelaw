@@ -7,6 +7,7 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class ContactService {
   deleteNotification = new Subject<boolean>();
+  impNotification = new Subject<boolean>();
 
   constructor(private httpService: HttpClientService) { }
 
@@ -368,5 +369,13 @@ export class ContactService {
 
   getDeleteNotification() {
     return this.deleteNotification.asObservable();
+  }
+
+  sendImpNotification(isImp) {
+    this.impNotification.next(isImp);
+  }
+
+  getImpNotification() {
+    return this.impNotification.asObservable();
   }
 }

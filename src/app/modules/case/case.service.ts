@@ -511,18 +511,32 @@ export class CaseService {
   }
 
   addOrUpdateCaseEvidence(caseEvidenceModel: CaseEvidence, caseId: number) {
+    let url = '';
     const model = {
       EvidenceName: caseEvidenceModel.EvidenceName,
       CaseId: caseId
     };
-    return this.httpService.post(`CaseEvidence/Create/`, model).map((res: any) => {
-      if (res.Success) {
-        return res.Result;
-      }
-      throw 'We are facing some issue with server, Plesae try after some time.';
-    }).catch((err: any) => {
-      throw err;
-    });
+    if (caseEvidenceModel.Id) {
+      url = 'CaseEvidence/update';
+      return this.httpService.post(url, model).map((res: any) => {
+        if (res.Success) {
+          return res.Result;
+        }
+        throw 'We are facing some issue with server, Plesae try after some time.';
+      }).catch((err: any) => {
+        throw err;
+      });
+    } else {
+      url = 'CaseEvidence/create';
+      return this.httpService.post(url, model).map((res: any) => {
+        if (res.Success) {
+          return res.Result;
+        }
+        throw 'We are facing some issue with server, Plesae try after some time.';
+      }).catch((err: any) => {
+        throw err;
+      });
+    }
   }
 
   uploadCaseEvidenceFile(id: number, caseId: number, formData: FormData) {

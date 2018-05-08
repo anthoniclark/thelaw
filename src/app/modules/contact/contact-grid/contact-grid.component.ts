@@ -86,8 +86,12 @@ export class ContactGridComponent implements OnInit {
               this.loadingIndicator = false;
               this.page.totalElements = 0;
             } else {
+              let deletedRecord = this._data.filter(x => x.Id !== id)[0];
               this.page.pageNumber = pageNumber;
               this.contactService.sendDeleteNotification();
+              if (deletedRecord.IsImportant) {
+                this.contactService.sendImpNotification(false);
+              }
               // this.getPageData.emit({ offset: pageNumber });
               dt.filter();
             }
@@ -101,6 +105,7 @@ export class ContactGridComponent implements OnInit {
     this.loadingIndicator = true;
     this.contactService.toggleImportant(row.Id).subscribe(response => {
       row.IsImportant = !row.IsImportant;
+      this.contactService.sendImpNotification(row.IsImportant);
       this.loadingIndicator = false;
     }, error => {
       this.loadingIndicator = false;

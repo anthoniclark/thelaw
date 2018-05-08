@@ -48,8 +48,18 @@ export class ContactDashboardComponent implements OnInit {
       } else if (this.contactType === 'Importants') {
         this.dashboardData['TotalImportants'] = this.dashboardData['TotalImportants'] - 1;
         this.dashboardData['TotalContact'] = this.dashboardData['TotalContact'] - 1;
+      } else {
+        this.dashboardData['TotalContact'] = this.dashboardData['TotalContact'] - 1;
       }
     });
+    this.contactService.impNotification.subscribe(res => {
+      if (res) {
+        this.dashboardData['TotalImportants'] = this.dashboardData['TotalImportants'] + 1;
+      } else {
+        this.dashboardData['TotalImportants'] = this.dashboardData['TotalImportants'] - 1;
+      }
+    });
+
     this.contactService.getDashboardData().subscribe(res => {
       this.dashboardData = res;
     }, err => {
