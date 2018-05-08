@@ -12,7 +12,7 @@ declare var jQuery: any;
 export class SidebarComponent {
 
   @Input() layoutMenu: any;
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(public router: Router, private authService: AuthService) { }
 
   ngAfterViewInit() {
     jQuery('#side-menu').metisMenu();
