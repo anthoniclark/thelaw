@@ -154,6 +154,11 @@
                       </select> -->
                   <angular2-multiselect [data]="judges" [(ngModel)]="selectedJudges" [disabled]="isViewModel" [settings]="settings" class="form-control"
                     #JudgeId="ngModel" name="JudgeId" id="JudgeId" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
+                    <c-badge>
+                      <ng-template let-item="item">
+                        <label class="mouse-pointer" (click)="redirectToContact(item.id)" style="margin: 0px;">{{item.itemName}}</label>
+                      </ng-template>
+                    </c-badge>
                   </angular2-multiselect>
                 </div>
               </div>
@@ -168,7 +173,11 @@
                   </a>
                   <angular2-multiselect [data]="associates" [(ngModel)]="selectedAssociates" [settings]="associatesSettings" class="form-control"
                     #associatesIds="ngModel" name="associates" id="associates">
-
+                    <c-badge>
+                      <ng-template let-item="item">
+                        <label class="mouse-pointer" (click)="redirectToContact(item.id)" style="margin: 0px;">{{item.itemName}}</label>
+                      </ng-template>
+                    </c-badge>
                   </angular2-multiselect>
                 </div>
               </div>
@@ -383,7 +392,7 @@
                 <div class="checkbox">
                   <input type="checkbox" name="IsClose" [(ngModel)]="model.IsClose" [disabled]="isViewModel" #IsClose="ngModel">
                   <label>
-                      Is Close
+                    Is Close
                   </label>
                 </div>
               </div>
@@ -411,7 +420,7 @@
                 <div class="checkbox">
                   <input type="checkbox" name="NotifyMe" [(ngModel)]="model.NotifyMe" #NotifyMe="ngModel">
                   <label>
-                      Notify Me
+                    Notify Me
                   </label>
                 </div>
               </div>

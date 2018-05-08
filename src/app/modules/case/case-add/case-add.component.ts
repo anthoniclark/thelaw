@@ -355,4 +355,8 @@ export class CaseAddComponent implements OnInit {
     this.model.DoctNumber = `${this.model.CaseNo}-${this.model.CaseYear}`;
   }
 
+  redirectToContact(id: number) {
+    this.router.navigate([`/contact/${id}`]);
+  }
+
 }

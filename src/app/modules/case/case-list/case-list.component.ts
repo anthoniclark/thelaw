@@ -37,7 +37,7 @@ export class CaseListComponent implements OnInit {
     value: ''
   }];
   contactId: any;
-  constructor(private caseService: CaseService, private router: Router, private route: ActivatedRoute, private _notify: NotificationService,
+  constructor(private caseService: CaseService, public router: Router, private route: ActivatedRoute, private _notify: NotificationService,
     private modal: Modal) {
     this.page.pageNumber = 0;
     this.page.size = PageSize;
