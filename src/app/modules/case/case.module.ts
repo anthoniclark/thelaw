@@ -59,7 +59,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     CaseEvidenceListComponent,
     CaseEvidenceDetailComponent,
     JudgeDetailComponent,
-    ContactQuickAddComponent,
+    ContactQuickAddComponent
   ],
   providers: [
     CaseService,

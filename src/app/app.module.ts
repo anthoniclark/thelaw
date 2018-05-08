@@ -34,6 +34,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 // Guard imports
 import { SkipLoginGuard } from 'app/guards/skip-login.guard';
 import { AuthGuard } from 'app/guards/auth.guard';
+import { TenentGuard } from 'app/guards/tenent.guard';
 
 // Module imports
 import { SharedModule } from 'app/shared/shared.module';
@@ -50,7 +51,6 @@ import { NavbarComponent } from './containers/layout/components/navbar/navbar.co
 import { FooterComponent } from 'app/containers/layout/components/footer/footer.component';
 import { HeaderComponent } from 'app/containers/layout/components/header/header.component';
 import { SuggestionComponent } from './components/suggestion/suggestion.component';
-import { TenentGuard } from 'app/guards/tenent.guard';
 
 @NgModule({
   declarations: [

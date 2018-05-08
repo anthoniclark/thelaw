@@ -161,7 +161,6 @@ export class CaseExpenseDetailComponent implements OnInit {
   }
 
   deleteDocument() {
-    debugger;
     if (this.paramId !== 'new') {
       this.caseExpenseService.deleteDocument(this.paramId).subscribe(response => {
         this._notify.success("Bill Document deleted successfully.");

@@ -6,6 +6,7 @@ import { OrderByPipe } from 'app/pipes/order-by.pipe';
 // import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
+import { TruncatePipe } from 'app/pipes/truncate.pipe';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
     NguiDatetimePickerModule
   ],
   declarations: [
-    OrderByPipe
+    OrderByPipe,
+    TruncatePipe
   ],
   exports: [
     FormsModule,
@@ -24,7 +26,8 @@ import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
     NgxDatatableModule,
     NguiAutoCompleteModule,
     NguiDatetimePickerModule,
-    OrderByPipe
+    OrderByPipe,
+    TruncatePipe
   ]
 })
 export class SharedModule { }
