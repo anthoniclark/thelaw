@@ -88,6 +88,7 @@ export class ComplainAddComponent implements OnInit {
           });
         }
       }, err => {
+        this.isLoading = false;
         this._notify.error(err.Result);
       });
   }

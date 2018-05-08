@@ -19,7 +19,7 @@
                     <span class="req">*</span>
                   </label>
                   <select class="form-control" [(ngModel)]="model.CaseId" [class.inValidField]="caseExpenseForm.submitted && !model.CaseId"
-                    id="CaseId" required name="CaseId" #CaseId="ngModel">
+                    id="CaseId" required name="CaseId" #CaseId="ngModel" (change)="caseSelectionChange()">
                     <option value="">Select Case</option>
                     <option *ngFor="let case of cases" value={{case.Id}}>
                       {{case.CaseNo}}
@@ -51,7 +51,7 @@
                     <span class="req">*</span>
                   </label>
                   <input class="form-control" [(ngModel)]="model.ExpenseDate" required ngui-datetime-picker date-only="true" name="ExpenseDate"
-                    id="ExpenseDate" #OpenDate="ngModel" [class.inValidField]="caseExpenseForm.submitted && !model.ExpenseDate"
+                    id="ExpenseDate" #OpenDate="ngModel" [max-date]="max_date" [class.inValidField]="caseExpenseForm.submitted && !model.ExpenseDate"
                   />
                   <label *ngIf="caseExpenseForm.submitted && !model.ExpenseDate" class="error">
                     Please select expense date

@@ -26,6 +26,7 @@ export class CaseExpenseDetailComponent implements OnInit {
   fileName: string;
   validFileSize: boolean = true;
   validFileType: boolean = true;
+  max_date = new Date();
   @ViewChild('billDocument') billDocument: any;
   constructor(private route: ActivatedRoute, private caseExpenseService: CaseExpenseService, private _notify: NotificationService,
     private _sanitizer: DomSanitizer, private contactService: ContactService, private caseService: CaseService,
@@ -45,6 +46,7 @@ export class CaseExpenseDetailComponent implements OnInit {
       this.caseExpenseService.getCaseExpenseById(this.paramId).subscribe(
         response => {
           this.model = <CaseExpense>response;
+          this.setMaxDate();
           this.AssociateContactId = response.AssociateContactName;
           if (this.model.BillDocument) {
             this.fileName = this.model.BillDocument.toString();
@@ -103,6 +105,7 @@ export class CaseExpenseDetailComponent implements OnInit {
           });
         }
       }, err => {
+        this.isLoading = false;
         this._notify.error(err.Result);
       });
   }
@@ -173,5 +176,13 @@ export class CaseExpenseDetailComponent implements OnInit {
       this.fileToUpload = null;
       this.fileName = null;
     }
+  }
+  caseSelectionChange() {
+    this.model.ExpenseDate = null;
+    this.setMaxDate();
+  }
+  setMaxDate() {
+    const selected_case: any = this.cases.find(x => x.Id === +this.model.CaseId)
+    this.max_date = new Date(selected_case.OpenDate);
   }
 }
