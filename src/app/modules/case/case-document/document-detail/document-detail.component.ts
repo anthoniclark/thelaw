@@ -61,6 +61,7 @@ export class DocumentDetailComponent implements OnInit {
                 });
               }
             }, error => {
+              this.isLoading = false;
               this._notify.error(error.Result);
             });
           } else if (this.paramId === 'new') {

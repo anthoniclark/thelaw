@@ -1,5 +1,5 @@
 <p-dataTable [rowHover]="true" [value]="_data" [globalFilter]="gb" [lazy]="true" [rows]="page.size" [paginator]="true" [responsive]="true"
-  [loading]="loadingIndicator" loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)"
+  [loading]="loadingIndicator" class="contact-grid" loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)"
   (onPage)="paginate($event)">
   <p-column field="No" [sortable]="true" header="No.">
   </p-column>
@@ -8,7 +8,7 @@
   </p-column>
   <p-column field="Title" [filter]="cType !== 'NewlyAdded'" [sortable]="true" header="Name">
     <ng-template let-col let-data="rowData" pTemplate="body">
-      <span class="pointer-cursor" (click)=viewDetail(data.Id)>{{data['Title'] }} {{data['FirstName']}} {{data['LastName']}}</span>
+      <a class="pointer-cursor" (click)=viewDetail(data.Id)>{{data['Title'] }} {{data['FirstName']}} {{data['LastName']}}</a>
     </ng-template>
   </p-column>
   <p-column field="Designation" [filter]="cType !== 'NewlyAdded'" [sortable]="true" header="Designation"></p-column>

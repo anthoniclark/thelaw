@@ -41,6 +41,7 @@ export class CaseAddComponent implements OnInit {
   contactType: string;
   casePricingType: Array<DropDownModel> = CasePricingType;
   isViewModel: boolean;
+  currentYear = new Date().getFullYear();
   constructor(private route: ActivatedRoute, private caseService: CaseService, private _notify: NotificationService,
     private contactService: ContactService, private _sanitizer: DomSanitizer, private router: Router, private modal: Modal) { }
 
@@ -230,6 +231,9 @@ export class CaseAddComponent implements OnInit {
   }
 
   save() {
+    if(this.model.CaseYear > this.currentYear) {
+      return false;
+    }
     this.isLoading = true;
     this.model.JudgeIds = [];
     this.model.AssociatesId = [];
@@ -351,7 +355,7 @@ export class CaseAddComponent implements OnInit {
     // });
   }
 
-  changeDoctNo() {
+  changeDoctNo(event) {
     this.model.DoctNumber = `${this.model.CaseNo}-${this.model.CaseYear}`;
   }
 

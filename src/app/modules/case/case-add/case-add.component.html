@@ -89,11 +89,14 @@
                   <label for="CaseYear">Case Year
                     <span class="req">*</span>
                   </label>
-                  <input type="number" maxlength="4" name="CaseYear" id="CaseYear" [readonly]="isViewModel" class="form-control" [(ngModel)]="model.CaseYear"
-                    #CaseYear="ngModel" [class.inValidField]="caseForm.submitted && !model.CaseYear" required (change)="changeDoctNo()"
+                  <input type="number" [maxlength]="4" [max]="currentYear" name="CaseYear" id="CaseYear" [readonly]="isViewModel" class="form-control" [(ngModel)]="model.CaseYear"
+                    #CaseYear="ngModel" [class.inValidField]="caseForm.submitted && (!model.CaseYear || model.CaseYear > currentYear)" required (change)="changeDoctNo()"
                   />
                   <label *ngIf="caseForm.submitted && !model.CaseYear" class="error">
                     Please enter Case Year
+                  </label>
+                  <label *ngIf="caseForm.submitted && model.CaseYear > currentYear" class="error">
+                    Case Year should not greater than current year. 
                   </label>
                 </div>
               </div>

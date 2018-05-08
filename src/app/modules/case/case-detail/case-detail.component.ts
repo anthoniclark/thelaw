@@ -44,6 +44,8 @@ export class CaseDetailComponent implements OnInit {
             this.router.navigate(['/case']);
           }, 1500);
         }
+      }, err => {
+        this.isLoading = false;
       });
   }
 

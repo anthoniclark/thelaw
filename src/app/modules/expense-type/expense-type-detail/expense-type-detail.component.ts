@@ -35,6 +35,7 @@ export class ExpenseTypeDetailComponent implements OnInit {
   }
 
   save() {
+    this.isLoading = true;
     this.expenseTypeService.addOrUpdateExpenseType(this.model).subscribe(response => {
       this.isLoading = false;
       if (this.paramId === 'new') {
@@ -46,6 +47,7 @@ export class ExpenseTypeDetailComponent implements OnInit {
         this.router.navigate(['/expense-type']);
       });
     }, error => {
+      this.isLoading = false;
       this._notify.error(error.Result);
     });
   }

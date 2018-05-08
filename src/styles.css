@@ -118,6 +118,18 @@ span.ui-calendar {width: 100%;}
   background-repeat: no-repeat; cursor: pointer;
 }
 
+.contact-grid a {color: blue;}
+
+form select:disabled {
+  -webkit-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+form select:disabled::-ms-expand {
+  display: none;
+}
+
 /* label {
     display: inline-block;
     max-width: 100%;
