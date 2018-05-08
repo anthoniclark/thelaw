@@ -154,11 +154,11 @@
                       </select> -->
                   <angular2-multiselect [data]="judges" [(ngModel)]="selectedJudges" [disabled]="isViewModel" [settings]="settings" class="form-control"
                     #JudgeId="ngModel" name="JudgeId" id="JudgeId" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
-                    <c-badge>
+                    <!-- <c-badge>
                       <ng-template let-item="item">
                         <label class="mouse-pointer" (click)="redirectToContact(item.id)" style="margin: 0px;">{{item.itemName}}</label>
                       </ng-template>
-                    </c-badge>
+                    </c-badge> -->
                   </angular2-multiselect>
                 </div>
               </div>
