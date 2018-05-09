@@ -23,7 +23,7 @@ export class ContactGridComponent implements OnInit {
   @Output() onFilter: EventEmitter<any> = new EventEmitter<any>();
   _data: any[];
 
-  constructor(private contactService: ContactService, private router: Router, private _notify: NotificationService,
+  constructor(private contactService: ContactService, public router: Router, private _notify: NotificationService,
     private modalDialog: Modal) { }
 
   ngOnChanges(changes: SimpleChanges) {

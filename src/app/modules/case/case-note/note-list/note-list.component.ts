@@ -28,7 +28,7 @@ export class NoteListComponent implements OnInit {
   caseDetail: Case = new Case();
   pageSize: number = PageSize;
   constructor(private route: ActivatedRoute, private caseService: CaseService,
-    private router: Router,
+    public router: Router,
     private _notify: NotificationService) {
     this.page.pageNumber = 0;
     this.page.size = 5;

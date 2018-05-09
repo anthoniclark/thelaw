@@ -26,7 +26,7 @@ export class CaseEvidenceListComponent implements OnInit {
     value: ''
   }];
   pageSize: number = PageSize;
-  constructor(private caseService: CaseService, private router: Router, private _notify: NotificationService,
+  constructor(private caseService: CaseService, public router: Router, private _notify: NotificationService,
     private modal: Modal, private route: ActivatedRoute) {
     this.page.pageNumber = 0;
     this.page.size = 5;

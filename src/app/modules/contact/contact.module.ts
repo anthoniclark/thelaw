@@ -5,7 +5,6 @@ import { ContactDetailComponent } from './contact-detail/contact-detail.componen
 import { ContactService } from './contact.service';
 import { contactRouting } from './contact.routing';
 import { SharedModule } from 'app/shared/shared.module';
-import { AddressComponent } from './address/address.component';
 import { ContactDashboardComponent } from './contact-dashboard/contact-dashboard.component';
 
 import { ContactGridComponent } from './contact-grid/contact-grid.component';
@@ -24,7 +23,6 @@ import { DataTableModule } from 'primeng/datatable';
   declarations: [
     ContactListComponent,
     ContactDetailComponent,
-    AddressComponent,
     ContactDashboardComponent,
     ContactGridComponent
   ],

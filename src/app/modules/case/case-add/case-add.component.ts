@@ -231,7 +231,7 @@ export class CaseAddComponent implements OnInit {
   }
 
   save() {
-    if(this.model.CaseYear > this.currentYear) {
+    if (this.model.CaseYear > this.currentYear) {
       return false;
     }
     this.isLoading = true;
@@ -355,7 +355,7 @@ export class CaseAddComponent implements OnInit {
     // });
   }
 
-  changeDoctNo(event) {
+  changeDoctNo() {
     this.model.DoctNumber = `${this.model.CaseNo}-${this.model.CaseYear}`;
   }
 

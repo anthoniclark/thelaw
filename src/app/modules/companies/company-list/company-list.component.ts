@@ -33,7 +33,7 @@ export class CompanyListComponent implements OnInit {
     value: ''
   }];
 
-  constructor(private companiesService: CompaniesService, private router: Router, private _notify: NotificationService) {
+  constructor(private companiesService: CompaniesService, public router: Router, private _notify: NotificationService) {
     this.page.pageNumber = 0;
     this.page.size = 5;
   }

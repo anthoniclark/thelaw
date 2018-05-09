@@ -27,7 +27,7 @@ export class DocumentListComponent implements OnInit {
     value: ''
   }];
 
-  constructor(private route: ActivatedRoute, private caseService: CaseService, private router: Router,
+  constructor(private route: ActivatedRoute, private caseService: CaseService, public router: Router,
     private _notify: NotificationService) {
     this.page.pageNumber = 0;
     this.page.size = 5;

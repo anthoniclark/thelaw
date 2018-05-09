@@ -12,6 +12,7 @@ import { CloseGuard, ModalComponent, DialogRef } from 'ngx-modialog';
 export class EventTypesDetailComponent implements OnInit {
   color: string;
   model: EventTypes = new EventTypes();
+  isLoading: boolean = false;
   constructor(public dialog: DialogRef<BSModalContext>, private eventServices: EventsService, private _notify: NotificationService) {
     dialog.context.dialogClass = "modal-dialog modal-lg";
   }
@@ -23,15 +24,18 @@ export class EventTypesDetailComponent implements OnInit {
   }
 
   save() {
-    if(!this.model.Color) {
+    if (!this.model.Color) {
       return false;
     }
+    this.isLoading = true;
     this.eventServices.createEventType(this.model).subscribe(res => {
       this.dialog.close(true);
       setTimeout(() => {
+        this.isLoading = false;
         this._notify.success("Event Type created successfully");
       }, 300);
     }, error => {
+      this.isLoading = false;
       this._notify.error();
     });
   }

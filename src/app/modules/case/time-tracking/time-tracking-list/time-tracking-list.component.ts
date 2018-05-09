@@ -38,7 +38,7 @@ export class TimeTrackingListComponent implements OnInit {
   taskCategory: Array<DropDownModel> = [];
   pageSize: number = PageSize;
   constructor(private route: ActivatedRoute, private caseService: CaseService,
-    private router: Router,
+    public router: Router,
     private _notify: NotificationService) {
     this.page.pageNumber = 0;
     this.page.size = 5;
@@ -87,16 +87,16 @@ export class TimeTrackingListComponent implements OnInit {
       this.page.totalElements = pagedData.TotalNumberOfRecords;
       this.page.totalPages = pagedData.TotalNumberOfPages;
       this.page.pageNumber = pagedData.PageNumber;
-      
+
       pagedData.Results.forEach(element => {
         if (element.BilledHours) {
           const billedHours = parseFloat(element.BilledHours);
-          element.BilledHours = (billedHours / 60).toString().split(".")[0].toString() +":";
-          element.BilledHours +=  (billedHours / 60).toString().split(".")[1] ? (billedHours / 60).toString().split(".")[1].substr(0, 2) : "00";
+          element.BilledHours = (billedHours / 60).toString().split(".")[0].toString() + ":";
+          element.BilledHours += (billedHours / 60).toString().split(".")[1] ? (billedHours / 60).toString().split(".")[1].substr(0, 2) : "00";
 
           const WorkedHours = parseFloat(element.WorkedHours);
-          element.WorkedHours = (WorkedHours / 60).toString().split(".")[0].toString() +":";
-          element.WorkedHours +=  (WorkedHours / 60).toString().split(".")[1] ? (WorkedHours / 60).toString().split(".")[1].substr(0, 2) : "00";
+          element.WorkedHours = (WorkedHours / 60).toString().split(".")[0].toString() + ":";
+          element.WorkedHours += (WorkedHours / 60).toString().split(".")[1] ? (WorkedHours / 60).toString().split(".")[1].substr(0, 2) : "00";
         }
       });
       this.rows = pagedData.Results;

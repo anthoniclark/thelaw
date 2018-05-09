@@ -26,6 +26,8 @@ export class EventsDetailComponent implements OnInit {
   caseDetail: any;
   selectedAttendees: any[] = [];
   attendeesData: any[] = [];
+  isLoading: boolean = false;
+
   constructor(public dialog: DialogRef<BSModalContext>, private eventsService: EventsService,
     private _notify: NotificationService, private _bsModal: Modal,
     private _sanitizer: DomSanitizer) {
@@ -113,6 +115,7 @@ export class EventsDetailComponent implements OnInit {
   }
 
   save() {
+    this.isLoading = true;
     this.model.StartTime = (<any>this.model.StartTime).toLocaleTimeString().split(" ")[0];
     this.model.EndTime = (<any>this.model.EndTime).toLocaleTimeString().split(" ")[0];
     this.model.FromDateTime = new Date(this.model.FromDateTime).toLocaleDateString();
@@ -123,10 +126,12 @@ export class EventsDetailComponent implements OnInit {
     })
     this.eventsService.addOrUpdateEvent(this.model).subscribe(res => {
       setTimeout(() => {
+        this.isLoading = false;
         this._notify.success(`Event ${this.id.toString() === 'new' ? 'added' : 'updated'} successfully`);
       }, 300);
       this.closeDialoge(true);
     }, error => {
+      this.isLoading = false;
     });
   }
 

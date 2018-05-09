@@ -3,54 +3,51 @@
   "project": {
     "name": "angular-demo"
   },
-  "apps": [
-    {
-      "root": "src",
-      "outDir": "dist",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
-      "index": "index.html",
-      "main": "main.ts",
-      "polyfills": "polyfills.ts",
-      "test": "test.ts",
-      "tsconfig": "tsconfig.app.json",
-      "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
-      "styles": [
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "../node_modules/font-awesome/css/font-awesome.css",
-        "../node_modules/animate.css/animate.min.css",
-        "./assets/styles/theme.css",
-        "styles.css",
-        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
-        "../node_modules/primeng/resources/primeng.min.css",
-        "../node_modules/fullcalendar/dist/fullcalendar.min.css"
-      ],
-      "scripts": [
-        "../node_modules/jquery/jquery.min.js",
-        "../node_modules/metismenu/dist/metisMenu.js",
-        "../node_modules/jquery-sparkline/jquery.sparkline.js",
-        "../vendor/pace/pace.min.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.js",
-        "../node_modules/moment/moment.js",
-        "../node_modules/fullcalendar/dist/fullcalendar.js"
-      ],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
+  "apps": [{
+    "root": "src",
+    "outDir": "dist",
+    "assets": [
+      "assets",
+      "favicon.ico"
+    ],
+    "index": "index.html",
+    "main": "main.ts",
+    "polyfills": "polyfills.ts",
+    "test": "test.ts",
+    "tsconfig": "tsconfig.app.json",
+    "testTsconfig": "tsconfig.spec.json",
+    "prefix": "app",
+    "styles": [
+      "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+      "../node_modules/font-awesome/css/font-awesome.css",
+      "../node_modules/animate.css/animate.min.css",
+      "./assets/styles/theme.css",
+      "styles.css",
+      "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
+      "../node_modules/primeng/resources/primeng.min.css",
+      "../node_modules/fullcalendar/dist/fullcalendar.min.css"
+    ],
+    "scripts": [
+      "../node_modules/jquery/dist/jquery.min.js",
+      "../node_modules/metismenu/dist/metisMenu.js",
+      "../node_modules/jquery-sparkline/jquery.sparkline.js",
+      "../vendor/pace/pace.min.js",
+      "../node_modules/bootstrap/dist/js/bootstrap.js",
+      "../node_modules/moment/moment.js",
+      "../node_modules/fullcalendar/dist/fullcalendar.js"
+    ],
+    "environmentSource": "environments/environment.ts",
+    "environments": {
+      "dev": "environments/environment.ts",
+      "prod": "environments/environment.prod.ts"
     }
-  ],
+  }],
   "e2e": {
     "protractor": {
       "config": "./protractor.conf.js"
     }
   },
-  "lint": [
-    {
+  "lint": [{
       "project": "src/tsconfig.app.json",
       "exclude": "**/node_modules/**"
     },

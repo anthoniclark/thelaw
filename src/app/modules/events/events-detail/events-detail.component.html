@@ -109,11 +109,11 @@
           <label for="caseId">Case No
             <span class="req">*</span>
           </label>
-          <input ngui-auto-complete class="form-control" [(ngModel)]="caseDetail" [class.inValidField]="eventsForm.submitted && !model.caseId"
+          <input ngui-auto-complete class="form-control" [(ngModel)]="caseDetail" [class.inValidField]="eventsForm.submitted && !model.CaseId"
             name="AssociateContactId" [source]="caseSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter"
             [accept-user-input]="false" (valueChanged)="onSelectCase($event)" value-property-name="Id" display-property-name="Name"
           />
-          <label *ngIf="eventsForm.submitted && !model.caseId" class="err-label">
+          <label *ngIf="eventsForm.submitted && !model.CaseId" class="err-label">
             Please enter Case Number
           </label>
         </div>
@@ -157,7 +157,7 @@
         <div class="form-group">
           <label for="Description">Start at</label>
           <p-calendar id="StartTime" [(ngModel)]="model.StartTime" #StartTime="ngModel" required name="StartTime" [class.inValidField]="eventsForm.submitted && !StartTime.valid"
-            inputStyleClass="form-control" (keypress)="preventInput($event)" timeOnly="true"></p-calendar>
+            inputStyleClass="form-control" timeOnly="true"></p-calendar>
           <label *ngIf="eventsForm.submitted && !model.StartTime" class="err-label">
             Please select Start Time
           </label>
@@ -168,7 +168,7 @@
         <div class="form-group">
           <label for="EndTime">End at</label>
           <p-calendar id="EndTime" [(ngModel)]="model.EndTime" #EndTime="ngModel" required name="EndTime" [class.inValidField]="eventsForm.submitted && !EndTime.valid"
-            inputStyleClass="form-control" (keypress)="preventInput($event)" timeOnly="true"></p-calendar>
+            inputStyleClass="form-control" timeOnly="true"></p-calendar>
           <label *ngIf="eventsForm.submitted && !model.EndTime" class="err-label">
             Please select End Time
           </label>

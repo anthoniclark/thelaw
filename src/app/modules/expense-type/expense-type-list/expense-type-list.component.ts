@@ -14,7 +14,7 @@ export class ExpenseTypeListComponent implements OnInit {
   loadingIndicator: boolean = true;
   reorderable: boolean = true;
   constructor(private route: ActivatedRoute, private expenseTypeService: ExpenseTypeService,
-    private router: Router, private _notify: NotificationService) { }
+    public router: Router, private _notify: NotificationService) { }
 
   ngOnInit() {
     this.expenseTypeService.getAllExpenseTypes().subscribe(response => {

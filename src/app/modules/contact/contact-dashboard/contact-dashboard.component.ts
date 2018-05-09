@@ -26,7 +26,7 @@ export class ContactDashboardComponent implements OnInit {
   contactType: string = contactDashboardTab[0];
   sorting: Sorting = new Sorting();
 
-  constructor(private contactService: ContactService, private _notify: NotificationService, private router: Router) {
+  constructor(private contactService: ContactService, private _notify: NotificationService, public router: Router) {
     this.page.pageNumber = 0;
     this.page.size = 10;
   }

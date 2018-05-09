@@ -12,7 +12,7 @@ export class ContactListComponent implements OnInit {
   loadingIndicator: boolean = true;
   reorderable: boolean = true;
 
-  constructor(private contactService: ContactService, private router: Router, private _notify: NotificationService) { }
+  constructor(private contactService: ContactService, public router: Router, private _notify: NotificationService) { }
 
   ngOnInit() {
     this.contactService.getContacts().subscribe(

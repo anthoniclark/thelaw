@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { ResponseInterceptor } from 'app/lib/http/response-interceptor';
 import { routing } from 'app/app.routing';
@@ -51,6 +52,7 @@ import { NavbarComponent } from './containers/layout/components/navbar/navbar.co
 import { FooterComponent } from 'app/containers/layout/components/footer/footer.component';
 import { HeaderComponent } from 'app/containers/layout/components/header/header.component';
 import { SuggestionComponent } from './components/suggestion/suggestion.component';
+import { environment } from 'environments/environment';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,8 @@ import { SuggestionComponent } from './components/suggestion/suggestion.componen
     PerfectScrollbarModule,
     NgxDatatableModule,
     ModalModule.forRoot(),
-    BootstrapModalModule
+    BootstrapModalModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     CommonService,

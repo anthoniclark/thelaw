@@ -28,7 +28,7 @@ export class ComplainListComponent implements OnInit {
   }];
   pageSize: number = PageSize;
   constructor(private complainService: ComplainService,
-    private router: Router,
+    public router: Router,
     private _notify: NotificationService) {
     this.page.pageNumber = 0;
     this.page.size = 5;
