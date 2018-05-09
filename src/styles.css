@@ -129,7 +129,9 @@ form select:disabled {
 form select:disabled::-ms-expand {
   display: none;
 }
-
+.b-r {
+  border-right: 1px solid black;
+} 
 /* label {
     display: inline-block;
     max-width: 100%;
