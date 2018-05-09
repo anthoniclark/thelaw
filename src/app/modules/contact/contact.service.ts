@@ -3,6 +3,7 @@ import { HttpClientService } from 'app/lib/http/http-client.service';
 import { Contact, Address } from 'app/models/contact';
 import { Page, Sorting } from '../../models/page';
 import { Subject } from 'rxjs/Subject';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class ContactService {
@@ -377,5 +378,20 @@ export class ContactService {
 
   getImpNotification() {
     return this.impNotification.asObservable();
+  }
+
+  importDocument(formData: FormData) {
+    return this.httpService.postFormData(`Contact/ImportContact`, formData).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  exportContacts() {
+    window.open(`${environment.origin}Contact/ExportContact`, '_blank');
   }
 }

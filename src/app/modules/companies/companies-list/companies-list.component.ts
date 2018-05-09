@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CompaniesService } from '../companies.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../../shared/services/notification.service';
@@ -34,6 +34,13 @@ export class CompaniesListComponent implements OnInit {
   }];
 
   pageSize: number = PageSize;
+
+  fileToUpload: File = null;
+  validFileSize: boolean = true;
+  validFileType: boolean = true;
+  @ViewChild('billDocument') billDocument: any;
+  fileName: string;
+
   constructor(private companiesService: CompaniesService, private router: Router, private _notify: NotificationService) {
     this.page.pageNumber = 0;
     this.page.size = 5;
@@ -157,6 +164,50 @@ export class CompaniesListComponent implements OnInit {
     } else {
       this.page.pageNumber = event.first / this.pageSize;
     }
+  }
+
+  onFileChange(event: any) {
+    //const target = event.target || event.srcElement;
+    const files: FileList = event.files;
+    if (files.length > 0) {
+      let fileType: string = files[0].type.toString();
+      const type = files[0].name.substr(files[0].name.lastIndexOf(".") + 1);
+      if (type.toString() !== "xls" && type.toString() !== "xlsx") {
+        this.fileName = null;
+        this.validFileType = false;
+        this.billDocument.clear();
+        return false;
+      } else if (files[0].size > 3145728) {
+        this.fileName = null;
+        this.validFileSize = false;
+        this.billDocument.clear();
+        return false;
+      }
+      this.validFileType = this.validFileSize = true;
+      this.fileToUpload = files[0];
+      this.fileName = this.fileToUpload.name;
+      var reader = new FileReader();
+      // reader.onload = (event: any) => {
+      //   this.url = event.target.result;
+      // }
+      reader.readAsDataURL(files[0]);
+      const formData = new FormData();
+      formData.append("Document", this.fileToUpload);
+      this.companiesService.importDocument(formData).subscribe(response => {
+        if (response) {
+          this._notify.success("Case Document uploaded successfully");
+        }
+      }, error => { this._notify.error(error.result); })
+    }
+  }
+
+  deleteDocument() {
+    this.fileToUpload = null;
+    this.fileName = null;
+  }
+
+  exportCompany() {
+    this.companiesService.exportCompanies();
   }
 
 }

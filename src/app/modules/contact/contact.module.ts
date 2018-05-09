@@ -12,6 +12,8 @@ import { ContactGridComponent } from './contact-grid/contact-grid.component';
 import { ModalModule } from 'ngx-modialog';
 import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
 import { DataTableModule } from 'primeng/datatable';
+import { FileUploadModule } from 'primeng/fileupload';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { DataTableModule } from 'primeng/datatable';
     contactRouting,
     ModalModule.forRoot(),
     BootstrapModalModule,
-    DataTableModule
+    DataTableModule,
+    FileUploadModule
   ],
   declarations: [
     ContactListComponent,

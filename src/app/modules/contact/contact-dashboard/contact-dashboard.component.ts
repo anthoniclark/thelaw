@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ContactService } from 'app/modules/contact/contact.service';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { contactDashboardTab } from 'app/shared/constants';
@@ -25,6 +25,12 @@ export class ContactDashboardComponent implements OnInit {
   loadingIndicator: boolean = false;
   contactType: string = contactDashboardTab[0];
   sorting: Sorting = new Sorting();
+
+  fileToUpload: File = null;
+  validFileSize: boolean = true;
+  validFileType: boolean = true;
+  @ViewChild('billDocument') billDocument: any;
+  fileName: string;
 
   constructor(private contactService: ContactService, private _notify: NotificationService, private router: Router) {
     this.page.pageNumber = 0;
@@ -196,4 +202,47 @@ export class ContactDashboardComponent implements OnInit {
     }, 300);
   }
 
+  onFileChange(event: any) {
+    //const target = event.target || event.srcElement;
+    const files: FileList = event.files;
+    if (files.length > 0) {
+      let fileType: string = files[0].type.toString();
+      const type = files[0].name.substr(files[0].name.lastIndexOf(".") + 1);
+      if (type.toString() !== "xls" && type.toString() !== "xlsx") {
+        this.fileName = null;
+        this.validFileType = false;
+        this.billDocument.clear();
+        return false;
+      } else if (files[0].size > 3145728) {
+        this.fileName = null;
+        this.validFileSize = false;
+        this.billDocument.clear();
+        return false;
+      }
+      this.validFileType = this.validFileSize = true;
+      this.fileToUpload = files[0];
+      this.fileName = this.fileToUpload.name;
+      var reader = new FileReader();
+      // reader.onload = (event: any) => {
+      //   this.url = event.target.result;
+      // }
+      reader.readAsDataURL(files[0]);
+      const formData = new FormData();
+      formData.append("Document", this.fileToUpload);
+      this.contactService.importDocument(formData).subscribe(response => {
+        if (response) {
+          this._notify.success("Case Document uploaded successfully");
+        }
+      }, error => { this._notify.error(error.result); })
+    }
+  }
+
+  deleteDocument() {
+    this.fileToUpload = null;
+    this.fileName = null;
+  }
+
+  exportContact() {
+    this.contactService.exportContacts();
+  }
 }
