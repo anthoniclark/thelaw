@@ -8,6 +8,7 @@ import { LayoutComponent } from 'app/containers/layout/layout.component';
 import { NotFoundComponent } from 'app/components/not-found/not-found.component';
 import { BlankLayoutComponent } from 'app/containers/blank-layout/blank-layout.component';
 import { TenentGuard } from 'app/guards/tenent.guard';
+import { ChangeThemeComponent } from './components/change-theme/change-theme.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: './modules/dashboard/dashboard.module#DashboardModule'
+      },
+      {
+        path: 'change-theme',
+        component: ChangeThemeComponent
       },
       {
         path: 'contact',

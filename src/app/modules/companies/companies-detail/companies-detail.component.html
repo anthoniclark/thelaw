@@ -99,13 +99,19 @@
             </div>
 
             <div class="row">
-
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="ContactIds">Contacts</label>
                   <angular2-multiselect [data]="contacts" [(ngModel)]="selectedContacts" [settings]="settings" class="form-control" #ContactIds="ngModel"
                     name="ContactIds" id="ContactIds">
                   </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="CINNumber">CIN Number</label>
+                  <input type="text" maxlength="100" id="CINNumber" name="CINNumber" class="form-control" [(ngModel)]="model.CINNumber" #CINNumber="ngModel"
+                  />
                 </div>
               </div>
             </div>

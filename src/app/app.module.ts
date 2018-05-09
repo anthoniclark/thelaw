@@ -51,6 +51,7 @@ import { NavbarComponent } from './containers/layout/components/navbar/navbar.co
 import { FooterComponent } from 'app/containers/layout/components/footer/footer.component';
 import { HeaderComponent } from 'app/containers/layout/components/header/header.component';
 import { SuggestionComponent } from './components/suggestion/suggestion.component';
+import { ChangeThemeComponent } from './components/change-theme/change-theme.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { SuggestionComponent } from './components/suggestion/suggestion.componen
     FooterComponent,
     SidebarComponent,
     NavbarComponent,
-    SuggestionComponent
+    SuggestionComponent,
+    ChangeThemeComponent
   ],
   imports: [
     BrowserModule,

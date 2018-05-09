@@ -4,6 +4,7 @@ export class Company {
     Id: number;
     CompanyName: string;
     InsdustrySection: string;
+    CINNumber: string;
     Category: string;
     CompanySize: number;
     IsActive: boolean;
