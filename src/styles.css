@@ -132,6 +132,7 @@ form select:disabled::-ms-expand {
 .b-r {
   border-right: 1px solid black;
 } 
+.m-b-10 {margin-bottom: 10px;}
 /* label {
     display: inline-block;
     max-width: 100%;

@@ -9,6 +9,7 @@ import { CaseService } from '../case/case.service';
 import { ContactService } from '../contact/contact.service';
 import { DataTableModule } from 'primeng/datatable';
 import { FileUploadModule } from 'primeng/fileupload';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     SharedModule,
     caseExpenseRouting,
     DataTableModule,
-    FileUploadModule
+    FileUploadModule,
+    CalendarModule
   ],
   declarations: [
     CaseExpenseListComponent,

@@ -17,6 +17,8 @@ export class CaseExpenseListComponent implements OnInit {
   @ViewChild('grid') grid: ElementRef;
   sorting: Sorting = new Sorting();
   allRows = [];
+  dateRange: any;
+  isFilterd: boolean = false;
   filterModel: FilterModel[] = [{
     columnName: 'ExpenseName',
     value: ''
@@ -53,7 +55,6 @@ export class CaseExpenseListComponent implements OnInit {
 
     });
   }
-
 
   setPage(pageInfo) {
     this.loadingIndicator = true;
@@ -156,6 +157,35 @@ export class CaseExpenseListComponent implements OnInit {
     }
   }
 
+  filterByDate() {
+    if (this.dateRange.length === 2) {
+      const startDate = new Date(this.dateRange[0]);
+      const endDate = new Date(this.dateRange[1]);
+      if (startDate.toString() !== "Invalid Date" && endDate.toString() !== "Invalid Date") {
+        this.isFilterd = true;
+        debugger
+        const sDate = this.getFullDate(startDate);
+        const eDate = this.getFullDate(endDate);
+        this.loadingIndicator = true;
+        this.caseExpenseService.getAllExpenseFilterdData(sDate, eDate).subscribe(res => {
+          this.loadingIndicator = false;
+          this.rows = res;
+        }, error => {
+
+        });
+      }
+    }
+  }
+
+  getFullDate(date: Date) {
+    return `${date.getFullYear()}-${(date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)}-${date.getDate() < 10 ? "0" + date.getDate() : date.getDate()}`;
+  }
+
+  resetFilter() {
+    this.isFilterd = false;
+    this.dateRange = [];
+    this.getAllCaseExpense()
+  }
   onFocus() {
 
   }

@@ -145,6 +145,18 @@ export class CaseExpenseService {
     }).catch((err: any) => {
       throw err;
     });
-    
+
   }
+
+  getAllExpenseFilterdData(startDate: string, endDate: string) {
+    return this.httpService.get(`CaseExpense/GetAll?startDate=${startDate}&endDate=${endDate}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
 }
