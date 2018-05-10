@@ -48,6 +48,7 @@ export class EventsDetailComponent implements OnInit {
     }
     this.selectedAttendees = [];
     this.getAllEventTypes();
+    this.model.Frquency = "Weekly";
     this.eventsService.getAllAttendees().subscribe(res => {
       this.attendeesData = [];
       res.forEach(element => {

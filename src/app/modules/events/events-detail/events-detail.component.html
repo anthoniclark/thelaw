@@ -312,11 +312,11 @@
           <label for="DefendantRemark">Frquency</label>
           <select class="form-control" [(ngModel)]="model.Frquency" [class.inValidField]="eventsForm.submitted && !model.Frquency"
             required id="Frquency" name="Frquency" #Frquency="ngModel">
-            <option value="Minutes" selected="selected">Hourly</option>
-            <option value="Hours">Daily</option>
-            <option value="Days">Weekly</option>
-            <option value="Days">Monthly</option>
-            <option value="Days">Yearly</option>
+            <option value="Hourly" selected="selected">Hourly</option>
+            <option value="Daily">Daily</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Yearly">Yearly</option>
           </select>
           <label *ngIf="eventsForm.submitted && !model.Frquency" class="err-label">
             Please select Frequency
