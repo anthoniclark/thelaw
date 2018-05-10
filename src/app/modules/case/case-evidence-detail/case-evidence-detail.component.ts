@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { CaseService } from 'app/modules/case/case.service';
 import { CaseEvidence, Case } from 'app/models/case';
+import { Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-case-evidence-detail',
@@ -17,6 +18,7 @@ export class CaseEvidenceDetailComponent implements OnInit {
   fileName: string;
   validFileSize: boolean = true;
   validFileType: boolean = true;
+  tagsList: string[]= [];
   @ViewChild('billDocument') billDocument: any;
   paramId: any;
   caseId: number;
@@ -40,6 +42,7 @@ export class CaseEvidenceDetailComponent implements OnInit {
       this.caseService.getCaseEvidenceById(this.paramId).subscribe(
         response => {
           this.model = <CaseEvidence>response;
+          this.tagsList = this.model.Tags ? this.model.Tags.split(",") : [];
           if (this.model.FileName) {
             this.fileName = this.model.FileName.toString();
           }
@@ -52,6 +55,15 @@ export class CaseEvidenceDetailComponent implements OnInit {
 
   save() {
     this.isLoading = true;
+    if (this.tagsList.length) {
+      this.model.Tags = "";
+      this.tagsList.forEach(element => {
+        this.model.Tags += `${element},`;
+      });
+      if (this.model.Tags) {
+        this.model.Tags = this.model.Tags.slice(0, -1)
+      }
+    }
     this.caseService.addOrUpdateCaseEvidence(this.model, this.caseId).subscribe(
       response => {
         this.isLoading = false;

@@ -18,7 +18,7 @@
           <p-dataTable [rowHover]="true" [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
             loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)"
             #dt>
-            <p-column field="EvidenceName" [filter]="true" [sortable]="true" header="Case Number"></p-column>
+            <p-column field="EvidenceName" [filter]="true" [sortable]="true" header="Evidence Name"></p-column>
             <p-column header="Evidence File">
               <ng-template let-data="rowData" pTemplate="body">
                 <span class="pointer-cursor" (click)="data.FileName && downloadEvidence(data.Id)">

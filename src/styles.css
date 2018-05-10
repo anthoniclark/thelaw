@@ -339,6 +339,18 @@ input:read-only {border: none;}
     z-index: 1500 !important;
 }
 
+.case-evidence-chips  ul{
+  min-height: 34px;
+
+}
+.case-evidence-chips  ul:focus{
+  background-color: #1ab394 !important;
+}
+
+.case-evidence-chips ul li{
+  margin-top: 5px;
+}
+
 /** checkbox style ***/
 
 .checkbox {

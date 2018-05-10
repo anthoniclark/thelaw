@@ -514,11 +514,13 @@ export class CaseService {
     let url = '';
     const model = {
       EvidenceName: caseEvidenceModel.EvidenceName,
-      CaseId: caseId
+      CaseId: caseId,
+      Tags: caseEvidenceModel.Tags,
+      Id: caseEvidenceModel.Id ? caseEvidenceModel.Id : null
     };
     if (caseEvidenceModel.Id) {
       url = 'CaseEvidence/update';
-      return this.httpService.post(url, model).map((res: any) => {
+      return this.httpService.put(url, model).map((res: any) => {
         if (res.Success) {
           return res.Result;
         }

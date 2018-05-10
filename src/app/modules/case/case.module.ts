@@ -27,7 +27,7 @@ import { ContactQuickAddComponent } from './contact-quick-add/contact-quick-add.
 import { DataTableModule } from 'primeng/datatable';
 import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
-
+import { ChipsModule } from 'primeng/chips';
 @NgModule({
   imports: [
     CommonModule,
@@ -38,7 +38,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     PopoverModule,
     DataTableModule,
     CalendarModule,
-    FileUploadModule
+    FileUploadModule,
+    ChipsModule
   ],
   declarations: [
     CaseListComponent,

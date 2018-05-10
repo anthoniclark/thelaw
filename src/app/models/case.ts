@@ -116,6 +116,7 @@ export class CaseEvidence {
     EvidenceName: string;
     FileType: string;
     FileName: string;
+    Tags:string;
 }
 
 export class Judge {
