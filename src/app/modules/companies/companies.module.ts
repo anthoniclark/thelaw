@@ -9,6 +9,7 @@ import { ModalModule } from 'ngx-modialog';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { ContactService } from '../contact/contact.service';
 import { DataTableModule } from 'primeng/datatable';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { DataTableModule } from 'primeng/datatable';
     SharedModule,
     AngularMultiSelectModule,
     ModalModule.forRoot(),
-    DataTableModule
+    DataTableModule,
+    FileUploadModule
   ],
   providers: [ContactService],
   declarations: [CompaniesListComponent, CompaniesDetailComponent, CompanyListComponent]

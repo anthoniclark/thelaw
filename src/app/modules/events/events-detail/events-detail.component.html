@@ -5,7 +5,7 @@
     </div>
   </div>
   <form name="eventsForm" (ngSubmit)="eventsForm.form.valid && save()" #eventsForm='ngForm' novalidate>
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-sm-4">
         <div class="form-group">
           <label for="EventTitle">Event Name
@@ -45,9 +45,6 @@
           <label for="EventTypeId">Attendees
             <span class="req">*</span>
           </label>
-          <!-- <input type="text" class="form-control" [(ngModel)]="model.EventTitle1" [class.inValidField]="eventsForm.submitted && !model.EventTitle1"
-            id="EventTitle1" name="EventTitle1" #EventTitle1="ngModel" /> -->
-
           <angular2-multiselect [data]="attendeesData" [(ngModel)]="selectedAttendees" [settings]="settings" class="form-control" #AttendeesId="ngModel"
             name="AttendeesId" id="AttendeesId">
           </angular2-multiselect>
@@ -185,7 +182,209 @@
           </label>
         </div>
       </div>
+    </div> -->
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 b-r">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6 ">
+            <div class="form-group">
+              <label for="EventTitle">Event Name
+                <span class="req">*</span>
+              </label>
+              <input type="text" class="form-control" [(ngModel)]="model.EventTitle" required [class.inValidField]="eventsForm.submitted && !model.EventTitle"
+                id="EventTitle" name="EventTitle" #EventTitle="ngModel" />
+              <label *ngIf="eventsForm.submitted && !model.EventTitle" class="err-label">
+                Please enter Event Title
+              </label>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 ">
+            <div class="form-group">
+              <label for="EventTypeId">Event Type
+                <span class="req">*</span>
+              </label>
+              <a class="pull-right" (click)="createEventType()">
+                <i aria-hidden="true" class="fa fa-plus"></i> Create New
+              </a>
+              <select class="form-control" [(ngModel)]="model.EventTypeId" required [class.inValidField]="eventsForm.submitted && !model.EventTypeId"
+                id="EventTypeId" name="EventTypeId" #EventTypeId="ngModel">
+                <option [value]='undefined'>Select Event Type</option>
+                <option *ngFor="let eveType of eventTypes" value={{eveType.Id}}>
+                  {{eveType.TypeName}}
+                </option>
+              </select>
+              <label *ngIf="eventsForm.submitted && !model.EventTypeId" class="err-label">
+                Please enter Event Type
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 ">
+        <div class="form-group">
+          <label for="EventTypeId">Attendees
+            <span class="req">*</span>
+          </label>
+          <angular2-multiselect [data]="attendeesData" [(ngModel)]="selectedAttendees" [settings]="settings" class="form-control" #AttendeesId="ngModel"
+            name="AttendeesId" id="AttendeesId">
+          </angular2-multiselect>
+          <label *ngIf="eventsForm.submitted && !model.EventTypeId" class="err-label">
+            Please select Attendees
+          </label>
+        </div>
+      </div>
     </div>
+
+
+
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 b-r">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6 ">
+            <div class="form-group">
+              <label for="HearingDate">From Date
+                <span class="req">*</span>
+              </label>
+              <input class="form-control" [(ngModel)]="model.FromDateTime" required [class.inValidField]="eventsForm.submitted && !model.FromDateTime"
+                ngui-datetime-picker date-only="true" name="FromDateTime" id="FromDateTime" #FromDateTime="ngModel" />
+              <label *ngIf="eventsForm.submitted && !model.FromDateTime" class="err-label">
+                Please enter From Date
+              </label>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 ">
+            <div class="form-group">
+              <label for="ToDateTime">To Date
+                <span class="req">*</span>
+              </label>
+              <input class="form-control" [(ngModel)]="model.ToDateTime" required [class.inValidField]="eventsForm.submitted && !model.ToDateTime"
+                ngui-datetime-picker date-only="true" name="ToDateTime" id="ToDateTime" #ToDateTime="ngModel" />
+              <label *ngIf="eventsForm.submitted && !model.ToDateTime" class="err-label">
+                Please enter To Date
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 ">
+        <div class="checkbox">
+          <input type="checkbox" required name="RemindMeBeforeEvent" [(ngModel)]="model.RemindMeBeforeEvent" #RemindMeBeforeEvent="ngModel">
+          <label>
+            Remind me before Event
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 b-r">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6 ">
+            <div class="form-group">
+              <label for="caseId">Case No
+                <span class="req">*</span>
+              </label>
+              <input ngui-auto-complete class="form-control" [(ngModel)]="caseDetail" [class.inValidField]="eventsForm.submitted && !model.caseId"
+                name="AssociateContactId" [source]="caseSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter"
+                [accept-user-input]="false" (valueChanged)="onSelectCase($event)" value-property-name="Id" display-property-name="Name"
+              />
+              <label *ngIf="eventsForm.submitted && !model.caseId" class="err-label">
+                Please enter Case Number
+              </label>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 ">
+            <div class="form-group">
+              <label for="caseId">Client
+                <span class="req">*</span>
+              </label>
+              <input class="form-control" readonly [(ngModel)]="model.Client" name="Client" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 ">
+        <div class="form-group">
+          <label for="DefendantRemark">Frquency</label>
+          <select class="form-control" [(ngModel)]="model.Frquency" [class.inValidField]="eventsForm.submitted && !model.Frquency"
+            required id="Frquency" name="Frquency" #Frquency="ngModel">
+            <option value="Minutes" selected="selected">Hourly</option>
+            <option value="Hours">Daily</option>
+            <option value="Days">Weekly</option>
+            <option value="Days">Monthly</option>
+            <option value="Days">Yearly</option>
+          </select>
+          <label *ngIf="eventsForm.submitted && !model.Frquency" class="err-label">
+            Please select Frequency
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 b-r">
+
+        <div class="form-group">
+          <label for="Description">Description</label>
+          <textarea class="form-control" rows="3" id="Description" name="Description" maxlength="250" [(ngModel)]="model.EventDescription"
+            #Description="ngModel"></textarea>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 ">
+        <div class="form-group">
+          <label for="ReminderAt">Remind on Every</label>
+          <select class="form-control" [(ngModel)]="model.ReminderAt" [class.inValidField]="eventsForm.submitted && !model.ReminderAt"
+            required id="ReminderAt" name="ReminderAt" #ReminderAt="ngModel">
+            <option value="1" selected="selected">Hourly</option>
+            <option value="2">Daily</option>
+            <option value="3">Weekly</option>
+            <option value="4">Monthly</option>
+            <option value="5">Yearly</option>
+          </select>
+          <label *ngIf="eventsForm.submitted && !model.ReminderAt" class="err-label">
+            Please select Remind At
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 b-r">
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 ">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6 ">
+            <div class="form-group">
+              <label for="Description">Start at</label>
+              <p-calendar id="StartTime" [(ngModel)]="model.StartTime" #StartTime="ngModel" required name="StartTime" [class.inValidField]="eventsForm.submitted && !StartTime.valid"
+                inputStyleClass="form-control" (keypress)="preventInput($event)" timeOnly="true"></p-calendar>
+              <label *ngIf="eventsForm.submitted && !model.StartTime" class="err-label">
+                Please select Start Time
+              </label>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 ">
+            <div class="form-group">
+              <label for="EndTime">End at</label>
+              <p-calendar id="EndTime" [(ngModel)]="model.EndTime" #EndTime="ngModel" required name="EndTime" [class.inValidField]="eventsForm.submitted && !EndTime.valid"
+                inputStyleClass="form-control" (keypress)="preventInput($event)" timeOnly="true"></p-calendar>
+              <label *ngIf="eventsForm.submitted && !model.EndTime" class="err-label">
+                Please select End Time
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 
     <div class="row">
       <a href=javascript:; (click)="closeDialoge(false)" class="btn btn-default btn-cancel mr5">

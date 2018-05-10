@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClientService } from '../../lib/http/http-client.service';
 import { Page, Sorting } from '../../models/page';
 import { Company } from '../../models/companies';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class CompaniesService {
@@ -121,4 +122,18 @@ export class CompaniesService {
 
   }
 
+  importDocument(formData: FormData) {
+    return this.httpClientService.postFormData(`Companies/ImportCompany`, formData).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  exportCompanies() {
+    window.open(`${environment.origin}Companies/ExportCompany`, '_blank');
+  }
 }

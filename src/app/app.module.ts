@@ -52,7 +52,11 @@ import { NavbarComponent } from './containers/layout/components/navbar/navbar.co
 import { FooterComponent } from 'app/containers/layout/components/footer/footer.component';
 import { HeaderComponent } from 'app/containers/layout/components/header/header.component';
 import { SuggestionComponent } from './components/suggestion/suggestion.component';
+<<<<<<< HEAD
 import { environment } from 'environments/environment';
+=======
+import { ChangeThemeComponent } from './components/change-theme/change-theme.component';
+>>>>>>> 09ccc05bbdb5ecfe1ac4a0af2316a2ba16de3356
 
 @NgModule({
   declarations: [
@@ -64,7 +68,8 @@ import { environment } from 'environments/environment';
     FooterComponent,
     SidebarComponent,
     NavbarComponent,
-    SuggestionComponent
+    SuggestionComponent,
+    ChangeThemeComponent
   ],
   imports: [
     BrowserModule,
