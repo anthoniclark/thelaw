@@ -10,7 +10,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(@Inject(DOCUMENT) private document: Document, private router: Router, private authService: AuthService) { }
+  constructor(@Inject(DOCUMENT) private document: Document, public router: Router, private authService: AuthService,) { }
 
   ngOnInit() {
   }
