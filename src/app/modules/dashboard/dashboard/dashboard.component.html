@@ -7,38 +7,134 @@
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
-  <!-- <div class="row">
-    <div class=col-md-12>
-      <h2>Choose your favorite theme</h2>
-    </div>
-    <div class=col-md-4>
-      <div class="widget style1 default-skin mouse-pointer setings-item" (click)="changeTheme('')">
-        <span class="skin-name">
-          <a class="s-skin-1">
-            Default
-          </a>
-        </span>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="widget style1 black-bg mouse-pointer" [class.active]="contactType==='NewlyAdded'" href=#new data-toggle=tab (click)="getNewlyAddedData()">
+        <div class="row">
+          <div class="col-xs-4 text-center">
+            <i class="fa fa-trophy fa-3x"></i>
+          </div>
+          <div class="col-xs-8 text-right">
+            <span> Total </span>
+            <!-- <h2 class="font-bold">{{dashboardData.TotalContact}}</h2> -->
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class=col-md-4>
-      <div class="widget style1 yellow-skin mouse-pointer setings-item" (click)="changeTheme('skin-3')">
-        <span class="skin-name">
-          <a class="s-skin-1">
-            Yellow/Purple
-          </a>
-        </span>
+    <div class=col-md-2>
+      <div class="widget style1 navy-bg mouse-pointer" [class.active]="contactType==='Advocate'" href=#advocate data-toggle=tab
+        (click)="tabSelect(2)">
+        <div class="row">
+          <div class="col-xs-4 text-center">
+            <i class="fa fa-user fa-3x"></i>
+          </div>
+          <div class="col-xs-8 text-right">
+            <span> Advocates </span>
+            <!-- <h2 class="font-bold">{{dashboardData.TotalAdvocate}}</h2> -->
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class=col-md-4>
-      <div class="widget style1 blue-skin mouse-pointer setings-item" (click)="changeTheme('skin-1')">
-        <span class="skin-name">
-          <a class="s-skin-1">
-            Blue light
-          </a>
-        </span>
+    <div class=col-md-2>
+      <div class="widget style1 lazur-bg mouse-pointer" [class.active]="contactType==='Client'" href=#client data-toggle=tab (click)="tabSelect(1)">
+        <div class="row">
+          <div class="col-xs-4 text-center">
+            <i class="fa fa-user fa-3x"></i>
+          </div>
+          <div class="col-xs-8 text-right">
+            <span> Clients </span>
+            <!-- <h2 class="font-bold">{{dashboardData.TotalClient}}</h2> -->
+          </div>
+        </div>
       </div>
     </div>
-  </div> -->
+
+    <div class=col-md-2>
+      <div class="widget style1 yellow-bg mouse-pointer" [class.active]="contactType==='LawFirm'" href=#law data-toggle=tab (click)="tabSelect(3)">
+        <div class="row">
+          <div class="col-xs-4 text-center">
+            <i class="fa fa-user fa-3x"></i>
+          </div>
+          <div class="col-xs-8 text-right">
+            <span> Law Firms </span>
+            <!-- <h2 class="font-bold">{{dashboardData.TotalLawFirm}}</h2> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class=col-md-2>
+      <div class="widget style1 red-bg mouse-pointer" [class.active]="contactType==='Importants'" href=#important data-toggle=tab
+        (click)="tabSelect(5)">
+        <div class="row">
+          <div class="col-xs-4 text-center">
+            <i class="fa fa-star fa-3x"></i>
+          </div>
+          <div class="col-xs-8 text-right">
+            <span> Importants </span>
+            <!-- <h2 class="font-bold">{{dashboardData.TotalImportants}}</h2> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="widget style1 blue-bg mouse-pointer" [class.active]="contactType==='Other'" href=#other data-toggle=tab (click)="tabSelect(4)">
+        <div class="row">
+          <div class="col-xs-4 text-center">
+            <i class="fa fa-user fa-3x"></i>
+          </div>
+          <div class="col-xs-8 text-right">
+            <span> Others </span>
+            <!-- <h2 class="font-bold">{{dashboardData.TotalOther}}</h2> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row m-t-md">
+    <div class="col-lg-12">
+      <div class="ibox-content">
+        <h3>Quick Create</h3>
+        <div class="row"></div>
+        <div class="row"></div>
+        <div class="quick-add-container">
+          <a class="quick-add-btn" (click)="router.navigate(['/contact/new'])">
+            <i class="fa fa-user"></i>
+            <div> New Contact </div>
+          </a>
+          <a class="quick-add-btn" (click)="router.navigate(['/companies/new'])">
+            <i class="fa fa-building"></i>
+            <div> New Company </div>
+          </a>
+          <a class="quick-add-btn" (click)="router.navigate(['/case/new'])">
+            <i class="fa fa-file"></i>
+            <div> New Case </div>
+          </a>
+          <a class="quick-add-btn" (click)="router.navigate(['/case-expense/new'])">
+            <i class="fa fa-money"></i>
+            <div> Add Expense </div>
+          </a>
+
+          <a class="quick-add-btn" (click)="router.navigate(['/expense-type/new'])">
+            <i class="fa fa-money"></i>
+            <div> Expense Type</div>
+          </a>
+          <a class="quick-add-btn" (click)="router.navigate(['/expense-type/new'])">
+            <i class="fa fa-exclamation"></i>
+            <div>Add Complain</div>
+          </a>
+
+          <a class="quick-add-btn" (click)="router.navigate(['/expense-type/new'])">
+            <i class="fa fa-clock-o"></i>
+            <div>Track Time</div>
+          </a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

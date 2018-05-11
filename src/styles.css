@@ -133,6 +133,41 @@ form select:disabled::-ms-expand {
   border-right: 1px solid black;
 } 
 .m-b-10 {margin-bottom: 10px;}
+.quick-add-btn {
+ 
+  -moz-box-shadow: none !important;
+  -moz-transition: all 0.3s ease !important;
+  -ms-transition: all 0.3s ease !important;
+  -o-transition: all 0.3s ease !important;
+  -webkit-box-shadow: none !important;
+  -webkit-transition: all 0.3s ease !important;
+  background-color: #fafafa !important;
+  background-image: none !important;
+  border: 1px solid #ddd;
+  box-shadow: none !important;
+  color: #646464 !important;
+  cursor: pointer;
+  display: inline-block !important;
+  filter: none !important;
+  margin: 5px 5px 0 0;
+  min-width: 80px;
+  position: relative;
+  text-align: center;
+  text-shadow: none !important;
+  transition: all 0.3s ease !important;
+  height: auto;
+  width: 100px;
+  padding: 12px 0px 8px 0px;
+  border-radius: 10px !Important;
+}
+.quick-add-btn i{
+ font-size: 40px;
+}
+.icon-btn div{
+  font-weight:400;
+}
+
+/* .quick-add-container {display: flex;} */
 /* label {
     display: inline-block;
     max-width: 100%;
