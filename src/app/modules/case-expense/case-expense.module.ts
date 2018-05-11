@@ -10,6 +10,7 @@ import { ContactService } from '../contact/contact.service';
 import { DataTableModule } from 'primeng/datatable';
 import { FileUploadModule } from 'primeng/fileupload';
 import { CalendarModule } from 'primeng/calendar';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { CalendarModule } from 'primeng/calendar';
     caseExpenseRouting,
     DataTableModule,
     FileUploadModule,
-    CalendarModule
+    CalendarModule,
+    InputSwitchModule
   ],
   declarations: [
     CaseExpenseListComponent,

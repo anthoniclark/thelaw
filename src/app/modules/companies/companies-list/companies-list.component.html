@@ -14,9 +14,11 @@
       <div class="ibox float-e-margins">
         <div class="ibox-content">
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-8">
               <div class="form-group">
-                <label for="CaseId">Import Companies (Accept file types .xls, .xs) less then 3 mb</label>
+                <label for="CaseId">Import Companies (Accept file types .xls, .xs) less then 3 mb
+                  <span class="color-blue">(Export file to Import)</span>
+                </label>
                 <p-fileUpload #billDocument customUpload="true" auto="auto" (uploadHandler)="onFileChange($event)" (onRemove)="deleteDocument()">
                   <ng-template pTemplate="file">
                     <div></div>
@@ -37,10 +39,10 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-6">
-              <div class="form-group">
+            <div class="col-sm-4">
+              <div class="form-group pull-right">
                 <button type="button" class="btn btn-primary" (click)="exportCompany()">
-                  Export Companies
+                  <i class="fa fa-download mr5"></i> Export Companies
                 </button>
               </div>
             </div>

@@ -10,4 +10,6 @@ export class CaseExpense {
     CaseId: number;
     UpdatedTime: Date;
     IsActive: boolean;
+    IsPaid: boolean;
+    Billable: boolean;
 }

@@ -605,3 +605,8 @@ input:read-only {border: none;}
   input[type="radio"] .styled:checked + label::after {
     color: #fff;
   }
+
+
+  .color-blue{
+    color: #337ab7;
+  }

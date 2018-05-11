@@ -107,23 +107,28 @@
                     value-property-name="Id" display-property-name="Name" />
                 </div>
               </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="Billable">Billable</label>
+                  <div>
+                    <p-inputSwitch onLabel="Yes" offLabel="No" name="Billable" [(ngModel)]="model.Billable"></p-inputSwitch>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="IsPaid">Is Paid</label>
+                  <div>
+                    <p-inputSwitch onLabel="Yes" offLabel="No" name="IsPaid" [(ngModel)]="model.IsPaid"></p-inputSwitch>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CaseId">Bill Document (Accept file types .doc,.pdf,.jpg,.jpeg,.png) less then 2 mb</label>
-                  <!-- <div>{{ fileName || 'Select File'}}
-                  </div>
-                  <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">
-                    <i class="fa fa-upload mr5"></i> Upload</a>
-                  <a href="javascript:void(0);" class="change btn btn-primary" *ngIf="fileName" (click)="downloadDocument()">
-                    <i class="fa fa-download mr5" aria-hidden="true"></i>Download</a>
-                  <a href="javascript:void(0);" class="change btn btn-primary" *ngIf="fileName" (click)="deleteDocument()">
-                    <i class="fa fa-trash mr5" aria-hidden="true"></i>Delete</a>
-                  <input type="file" class="fileUpload" #fileUpload style="display:none" accept=".doc, application/pdf, image/jpg, image/jpeg, image/png"
-                    #fileUpload style="display:none" (change)="onFileChange($event)" />
-                  <div>
-                    <label *ngIf="!validFileType" class="error"> Invalid File Type </label>
-                    <label *ngIf="!validFileSize" class="error"> File size should less than 2 MB. </label>
-                  </div> -->
                   <p-fileUpload #billDocument customUpload="true" auto="auto" (uploadHandler)="onFileChange($event)" (onRemove)="deleteDocument()">
                     <ng-template pTemplate="file">
                       <div></div>
