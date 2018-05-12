@@ -231,6 +231,7 @@ export class ContactDashboardComponent implements OnInit {
       formData.append("Document", this.fileToUpload);
       this.contactService.importDocument(formData).subscribe(response => {
         if (response) {
+          this.getDataSource();
           this._notify.success("Case Document uploaded successfully");
         }
       }, error => { this._notify.error(error.result); })

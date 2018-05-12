@@ -196,6 +196,7 @@ export class CompaniesListComponent implements OnInit {
       formData.append("Document", this.fileToUpload);
       this.companiesService.importDocument(formData).subscribe(response => {
         if (response) {
+          this.getDataSource();
           this._notify.success("Case Document uploaded successfully");
         }
       }, error => { this._notify.error(error.result); })
