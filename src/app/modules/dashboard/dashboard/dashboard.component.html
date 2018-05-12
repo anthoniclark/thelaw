@@ -9,7 +9,7 @@
 <div class="wrapper wrapper-content animated fadeInRight dashboard-widget-container">
   <div class="row">
     <div class="col-md-3">
-      <div class="widget style1 black-bg mouse-pointer" [class.active]="contactType==='NewlyAdded'" href=#new data-toggle=tab (click)="getNewlyAddedData()">
+      <div class="widget style1 black-bg mouse-pointer"  href=#new data-toggle=tab >
         <div class="row">
           <div class="col-xs-4 text-center">
             <i class="fa fa-trophy fa-3x"></i>
@@ -23,8 +23,8 @@
     </div>
 
     <div class=col-md-3>
-      <div class="widget style1 navy-bg mouse-pointer" [class.active]="contactType==='Advocate'" href=#advocate data-toggle=tab
-        (click)="tabSelect(2)">
+      <div class="widget style1 navy-bg mouse-pointer" [ href=#advocate data-toggle=tab
+        >
         <div class="row">
           <div class="col-xs-4 text-center">
             <i class="fa fa-user fa-3x"></i>
@@ -38,7 +38,7 @@
     </div>
 
     <div class=col-md-3>
-      <div class="widget style1 lazur-bg mouse-pointer" [class.active]="contactType==='Client'" href=#client data-toggle=tab (click)="tabSelect(1)">
+      <div class="widget style1 lazur-bg mouse-pointer"  href=#client data-toggle=tab >
         <div class="row">
           <div class="col-xs-4 text-center">
             <i class="fa fa-user fa-3x"></i>
@@ -52,7 +52,7 @@
     </div>
 
     <div class=col-md-3>
-      <div class="widget style1 yellow-bg mouse-pointer" [class.active]="contactType==='LawFirm'" href=#law data-toggle=tab (click)="tabSelect(3)">
+      <div class="widget style1 yellow-bg mouse-pointer" href=#law data-toggle=tab >
         <div class="row">
           <div class="col-xs-4 text-center">
             <i class="fa fa-user fa-3x"></i>
