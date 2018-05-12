@@ -21,6 +21,7 @@ export class CommunicationDetailComponent implements OnInit {
   isLoading: boolean = false;
   caseDetail: Case = new Case();
   selectedClient = {};
+  addCase: boolean = false;
   constructor(private route: ActivatedRoute, private _notify: NotificationService,
     private _sanitizer: DomSanitizer, private router: Router, private caseService: CaseService,
     private contactService: ContactService) { }
@@ -28,16 +29,21 @@ export class CommunicationDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(param => this.paramId = param['id']);
     this.route.params.subscribe(param => this.model.CaseId = param['caseId']);
-    this.caseService.getCaseById(this.model.CaseId).subscribe(res => {
-      this.caseDetail = res;
-      this.contactService.getContactById(res.ClientId).subscribe(result => {
-        this.selectedClient = result;
-      }, err => {
+    if (this.model.CaseId.toString() !== "undefined") {
+      this.caseService.getCaseById(this.model.CaseId).subscribe(res => {
+        this.caseDetail = res;
+        this.contactService.getContactById(res.ClientId).subscribe(result => {
+          this.selectedClient = result;
+        }, err => {
 
+        });
+      }, error => {
+        this._notify.error(error.detail);
       });
-    }, error => {
-      this._notify.error(error.detail);
-    });
+    } else {
+      this.model.CaseId = undefined;
+      this.addCase = true;
+    }
     if (this.paramId.toString() !== 'new') {
       this.caseService.getCommunicationById(this.paramId).subscribe(
         response => {
@@ -118,6 +124,29 @@ export class CommunicationDetailComponent implements OnInit {
         this.isLoading = false;
         this._notify.error(err.Result);
       });
+  }
+
+  caseAutocompleListFormatter = (data: any) => {
+    const html = `<span>${data.Name} </span>`;
+    return this._sanitizer.bypassSecurityTrustHtml(html);
+  }
+
+  caseNameSearch(term: string) {
+    return this.caseService.searchCase(term);
+  }
+
+  onSelectCaseName(caseName: DropDownModel) {
+    if (caseName.Id) {
+      this.model.CaseId = +caseName.Id;
+      this.caseDetail.Id = +caseName.Id;
+      this.caseDetail.CaseNo = caseName.Name;
+    }
+    else {
+      this.model.CaseId = undefined;
+      this.caseDetail.Id = undefined;
+      this.caseDetail.CaseNo = undefined;
+      return false;
+    }
   }
 
   communicationDateChanged(event) {

@@ -6,6 +6,7 @@ import { CaseService } from 'app/modules/case/case.service';
 import { ContactService } from 'app/modules/contact/contact.service';
 import { CaseNote, Case } from 'app/models/case';
 import { Observable } from 'rxjs/Observable';
+import { DropDownModel } from '../../../../models/dropDownModel';
 
 
 @Component({
@@ -15,9 +16,10 @@ import { Observable } from 'rxjs/Observable';
 export class NoteDetailComponent implements OnInit {
   public paramId: any;
   model: CaseNote = new CaseNote();
-  NotesById;
+  NotesByName;
   isLoading: boolean = false;
   caseModel: Case = new Case();
+  addCase: boolean = false;
   constructor(private route: ActivatedRoute, private _notify: NotificationService,
     private _sanitizer: DomSanitizer, private router: Router, private caseService: CaseService,
     private contactService: ContactService) { }
@@ -26,21 +28,50 @@ export class NoteDetailComponent implements OnInit {
     this.model.IsImportant = false;
     this.route.params.subscribe(param => this.paramId = param['id']);
     this.route.params.subscribe(param => this.model.CaseId = param['caseId']);
-    this.caseService.getCaseById(this.model.CaseId).subscribe(
-      response => {
-        this.caseModel = <Case>response;
-      }, err => {
-        this._notify.error(err.Result);
-      });
-    if (this.paramId.toString() !== 'new') {
-      this.caseService.getCommunicationById(this.paramId).subscribe(
+    if (this.model.CaseId.toString() !== "undefined") {
+      this.caseService.getCaseById(this.model.CaseId).subscribe(
         response => {
-          this.model = <CaseNote>response;
-          this.NotesById = response.CommunicateToName;
+          this.caseModel = <Case>response;
         }, err => {
           this._notify.error(err.Result);
         });
     }
+    else {
+      this.model.CaseId = undefined;
+      this.addCase = true;
+    }
+    if (this.paramId.toString() !== 'new') {
+      this.caseService.getNoteById(this.paramId).subscribe(
+        response => {
+          this.model = <CaseNote>response;
+          this.NotesByName = response.NotesByName;
+        }, err => {
+          this._notify.error(err.Result);
+        });
+    }
+  }
+
+  caseNameSearch(term: string) {
+    return this.caseService.searchCase(term);
+  }
+
+  onSelectCaseName(caseName: DropDownModel) {
+    if (caseName.Id) {
+      this.model.CaseId = +caseName.Id;
+      this.caseModel.Id = +caseName.Id;
+      this.caseModel.CaseNo = caseName.Name;
+    }
+    else {
+      this.model.CaseId = undefined;
+      this.caseModel.Id = undefined;
+      this.caseModel.CaseNo = undefined;
+      return false;
+    }
+  }
+
+  caseAutocompleListFormatter = (data: any) => {
+    const html = `<span>${data.Name} </span>`;
+    return this._sanitizer.bypassSecurityTrustHtml(html);
   }
 
   autocompleListFormatter = (data: any) => {
@@ -55,8 +86,10 @@ export class NoteDetailComponent implements OnInit {
   onSelectNotesBy(item: any) {
     if (item) {
       this.model.NotesBy = item.Id;
+      this.NotesByName = item.Name;
     } else {
       this.model.NotesBy = undefined;
+      this.NotesByName = undefined;
     }
   }
 
@@ -77,7 +110,7 @@ export class NoteDetailComponent implements OnInit {
           }
 
           setTimeout(() => {
-            this.router.navigate(['/case/' + this.model.CaseId]);
+            this.router.navigate(['/case/' + this.model.CaseId+'/note']);
           });
         }
       }, err => {

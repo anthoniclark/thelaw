@@ -5,6 +5,7 @@ import { DocumentCategory } from '../../../../shared/constants';
 import { Document } from '../../../../models/case';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { CaseService } from 'app/modules/case/case.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-document-detail',
@@ -20,15 +21,22 @@ export class DocumentDetailComponent implements OnInit {
   fileToUpload: File = null;
   validFileSize: boolean = true;
   validFileType: boolean = true;
+  addCase: boolean = false;
+  caseNo: string;
   @ViewChild('billDocument') billDocument: any;
   fileName: string;
   constructor(private route: ActivatedRoute, private _notify: NotificationService,
-    private caseService: CaseService, private router: Router) { }
+    private caseService: CaseService, private router: Router, private _sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.route.params.subscribe(param => this.paramId = param["id"]);
     this.route.params.subscribe(param => this.caseId = param["caseId"]);
-    this.model.CaseId = this.caseId;
+    if (this.caseId.toString() !== "undefined") {
+      this.model.CaseId = this.caseId;
+    } else {
+      this.model.CaseId = undefined;
+      this.addCase = true;
+    }
     if (this.paramId.toString() != "new") {
       this.caseService.getCaseDocumentById(this.paramId).subscribe(
         response => {
@@ -43,6 +51,30 @@ export class DocumentDetailComponent implements OnInit {
         });
     }
   }
+
+  caseNameSearch(term: string) {
+    return this.caseService.searchCase(term);
+  }
+
+  onSelectCaseName(caseName: DropDownModel) {
+    if (caseName.Id) {
+      this.model.CaseId = +caseName.Id;
+      this.caseId = +caseName.Id;
+      this.caseNo = caseName.Name;
+    }
+    else {
+      this.model.CaseId = undefined;
+      this.caseId = undefined;
+      this.caseNo = undefined;
+      return false;
+    }
+  }
+
+  caseAutocompleListFormatter = (data: any) => {
+    const html = `<span>${data.Name} </span>`;
+    return this._sanitizer.bypassSecurityTrustHtml(html);
+  }
+
 
   save() {
     this.isLoading = true;

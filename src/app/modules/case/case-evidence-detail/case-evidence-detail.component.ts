@@ -4,6 +4,8 @@ import { NotificationService } from 'app/shared/services/notification.service';
 import { CaseService } from 'app/modules/case/case.service';
 import { CaseEvidence, Case } from 'app/models/case';
 import { Subscriber } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
+import { DropDownModel } from '../../../models/dropDownModel';
 
 @Component({
   selector: 'app-case-evidence-detail',
@@ -18,26 +20,32 @@ export class CaseEvidenceDetailComponent implements OnInit {
   fileName: string;
   validFileSize: boolean = true;
   validFileType: boolean = true;
-  tagsList: string[]= [];
+  tagsList: string[] = [];
   @ViewChild('billDocument') billDocument: any;
   paramId: any;
   caseId: number;
   model: CaseEvidence = new CaseEvidence();
   caseModel: Case = new Case();
+  addCase: boolean = false;
   constructor(
     private route: ActivatedRoute, private _notify: NotificationService, private caseService: CaseService,
-    private router: Router
+    private router: Router, private _sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit() {
     this.route.params.subscribe(param => this.paramId = param["id"]);
-    this.route.params.subscribe(param => this.caseId = +param["caseId"]);
-    this.caseService.getCaseById(this.caseId).subscribe(
-      response => {
-        this.caseModel = <Case>response;
-      }, err => {
-        this._notify.error(err.Result);
-      });
+    this.route.params.subscribe(param => this.caseId = param["caseId"]);
+    if (this.caseId.toString() !== "undefined") {
+      this.caseService.getCaseById(this.caseId).subscribe(
+        response => {
+          this.caseModel = <Case>response;
+        }, err => {
+          this._notify.error(err.Result);
+        });
+    } else {
+      this.caseId = undefined;
+      this.addCase = true;
+    }
     if (this.paramId.toString() != "new") {
       this.caseService.getCaseEvidenceById(this.paramId).subscribe(
         response => {
@@ -52,6 +60,28 @@ export class CaseEvidenceDetailComponent implements OnInit {
     }
   }
 
+  caseAutocompleListFormatter = (data: any) => {
+    const html = `<span>${data.Name} </span>`;
+    return this._sanitizer.bypassSecurityTrustHtml(html);
+  }
+
+  caseNameSearch(term: string) {
+    return this.caseService.searchCase(term);
+  }
+
+  onSelectCaseName(caseName: DropDownModel) {
+    if (caseName.Id) {
+      this.caseId = +caseName.Id;
+      this.caseModel.Id = +caseName.Id;
+      this.caseModel.CaseNo = caseName.Name;
+    }
+    else {
+      this.caseId = undefined;
+      this.caseModel.Id = undefined;
+      this.caseModel.CaseNo = undefined;
+      return false;
+    }
+  }
 
   save() {
     this.isLoading = true;

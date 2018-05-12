@@ -85,6 +85,24 @@
                 </div>
               </div>
             </div>
+
+            <div class="row">
+              <div class="col-sm-6" *ngIf="addCase">
+                <div class="form-group">
+                  <label for="caseno">Case No.
+                    <span class="req">*</span>
+                  </label>
+                  <input ngui-auto-complete class="form-control" id="caseno" [(ngModel)]="caseDetail.CaseNo" name="caseno" [source]="caseNameSearch.bind(this)"
+                    min-chars="2" [list-formatter]="caseAutocompleListFormatter" [accept-user-input]="false" value-property-name="Id"
+                    (valueChanged)="onSelectCaseName($event)" required display-property-name="Name" #caseno="ngModel" [class.inValidField]="communicationForm.submitted && !caseno.valid"
+                  />
+                  <label *ngIf="communicationForm.submitted && !caseno.valid" class="error">
+                    Please select Case No
+                  </label>
+                </div>
+
+              </div>
+            </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
               <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">

@@ -30,6 +30,16 @@ export class CaseService {
       throw err;
     })
   }
+  searchCase(term: string) {
+    return this.httpService.get(`case/GetCases?search=${term}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
 
   addOrUpdate(caseModel: Case) {
     let url = ''
@@ -516,8 +526,12 @@ export class CaseService {
       EvidenceName: caseEvidenceModel.EvidenceName,
       CaseId: caseId,
       Tags: caseEvidenceModel.Tags,
-      Id: caseEvidenceModel.Id ? caseEvidenceModel.Id : null
+      Id: caseEvidenceModel.Id ? caseEvidenceModel.Id : null,
+      IsActive: true
     };
+    if (!model.Id) {
+      delete model.Id;
+    }
     if (caseEvidenceModel.Id) {
       url = 'CaseEvidence/update';
       return this.httpService.put(url, model).map((res: any) => {

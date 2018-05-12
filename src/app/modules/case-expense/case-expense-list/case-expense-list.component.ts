@@ -163,7 +163,6 @@ export class CaseExpenseListComponent implements OnInit {
       const endDate = new Date(this.dateRange[1]);
       if (startDate.toString() !== "Invalid Date" && endDate.toString() !== "Invalid Date") {
         this.isFilterd = true;
-        debugger
         const sDate = this.getFullDate(startDate);
         const eDate = this.getFullDate(endDate);
         this.loadingIndicator = true;

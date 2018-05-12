@@ -19,6 +19,9 @@ export class TimeTrackingDetailComponent implements OnInit {
   caseDetail: Case = new Case();
   AssociatesDropDown: Array<DropDownModel> = Associates;
   taskCategoryList: Array<DropDownModel> = [];
+  addCase: boolean = false;
+  billedHours: Date;
+  hoursSpend: Date;
   constructor(private route: ActivatedRoute, private _notify: NotificationService, private caseService: CaseService,
     private router: Router, private _sanitizer: DomSanitizer) { }
   autocompleListFormatter = (data: any) => {
@@ -36,15 +39,30 @@ export class TimeTrackingDetailComponent implements OnInit {
     }, err => {
       this._notify.error(err.detail);
     });
-    this.caseService.getCaseById(this.model.CaseId).subscribe(response => {
-      this.caseDetail = response;
-    }, error => {
-      this._notify.error(error.Result);
-    });
+    if (this.model.CaseId.toString() !== "undefined") {
+      this.caseService.getCaseById(this.model.CaseId).subscribe(response => {
+        this.caseDetail = response;
+      }, error => {
+        this._notify.error(error.Result);
+      });
+    } else {
+      this.model.CaseId = undefined;
+      this.addCase = true;
+    }
     if (this.paramId.toString() !== 'new') {
       this.caseService.getTaskTrackerById(+this.paramId).subscribe(
         response => {
           this.model = <TimeTracking>response;
+          let time = (this.model.BilledHours / 60).toString();
+          this.billedHours = new Date();
+          let arrTime = time.split(".");
+          this.billedHours.setHours(+arrTime[0]);
+          this.billedHours.setMinutes(+arrTime[1]);
+          time = (this.model.WorkedHours / 60).toString();
+          arrTime = time.split(".");
+          this.hoursSpend = new Date();
+          this.hoursSpend.setHours(+arrTime[0]);
+          this.hoursSpend.setMinutes(+arrTime[1]);
         }, err => {
           this._notify.error(err.Result);
         });
@@ -66,6 +84,9 @@ export class TimeTrackingDetailComponent implements OnInit {
       this.model.TaskCategoryName = undefined;
     }
   }
+  caseNameSearch(term: string) {
+    return this.caseService.searchCase(term);
+  }
 
   associateNameSearch(term: string) {
     return this.caseService.searchAssociateName(term);
@@ -81,15 +102,29 @@ export class TimeTrackingDetailComponent implements OnInit {
     }
   }
 
+  onSelectCaseName(caseName: DropDownModel) {
+    if (caseName.Id) {
+      this.model.CaseId = +caseName.Id;
+      this.caseDetail.Id = +caseName.Id;
+      this.caseDetail.CaseNo = caseName.Name;
+    }
+    else {
+      this.model.CaseId = undefined;
+      this.caseDetail.Id = undefined;
+      this.caseDetail.CaseNo = undefined;
+      return false;
+    }
+  }
+
   save() {
     this.isLoading = true;
-    const date = new Date(this.model.BilledHours);
+    const date = new Date(this.billedHours);
     this.model.AssociateId = this.model.AssociateId["Id"];
     this.model.BilledHours = (+date.getHours() * 60) + date.getMinutes();
-    const WorkedHours = new Date(this.model.WorkedHours);
+    const WorkedHours = new Date(this.hoursSpend);
     this.model.CaseId = this.caseDetail.Id;
     this.model.WorkedHours = (+WorkedHours.getHours() * 60) + WorkedHours.getMinutes();
-    this.model.TaskCategoryName = this.taskCategoryList.find(x=>x.Id.toString() === this.model.TaskCategory.toString()).Name;
+    this.model.TaskCategoryName = this.taskCategoryList.find(x => x.Id.toString() === this.model.TaskCategory.toString()).Name;
     this.caseService.addOrUpdateTimeTracker(this.model).subscribe(
       response => {
         this.isLoading = false;
