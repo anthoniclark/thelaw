@@ -32,12 +32,12 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label for="State{{i}}">State
+          <label for="State">State
             <span class="req">*</span>
           </label>
 
-          <select class="form-control" [(ngModel)]="courtModel.State" required id="State{{i}}" [class.inValidField]="courtForm.submitted && !courtModel.State"
-            name="State{{i}}" (ngModelChange)="StateChanges($event)">
+          <select class="form-control" [(ngModel)]="courtModel.State" required id="State" [class.inValidField]="courtForm.submitted && !courtModel.State"
+            name="State" (ngModelChange)="StateChanges($event)">
             <option [value]='undefined'>Select State</option>
             <option *ngFor="let state of states" [value]='state.StateName'>
               {{state.StateName}}
@@ -48,11 +48,11 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label for="City{{i}}">City
+          <label for="City">City
             <span class="req">*</span>
           </label>
           <select class="form-control" [(ngModel)]="courtModel.City" required [class.inValidField]="courtForm.submitted && !courtModel.City"
-            id="City{{i}}" name="City{{i}}">
+            id="City" name="City">
             <option [value]='undefined'>Select City</option>
             <option *ngFor="let city of cities" [value]='city.Id'>
               {{city.CityName}}

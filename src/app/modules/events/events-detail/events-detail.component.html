@@ -309,7 +309,9 @@
 
       <div class="col-sm-12 col-md-6 col-lg-6 ">
         <div class="form-group">
-          <label for="DefendantRemark">Frquency</label>
+          <label for="DefendantRemark">Frquency
+            <span class="req">*</span>
+          </label>
           <select class="form-control" [(ngModel)]="model.Frquency" [class.inValidField]="eventsForm.submitted && !model.Frquency"
             required id="Frquency" name="Frquency" #Frquency="ngModel">
             <option value="Hourly" selected="selected">Hourly</option>
@@ -338,7 +340,9 @@
 
       <div class="col-sm-12 col-md-6 col-lg-6 ">
         <div class="form-group">
-          <label for="ReminderAt">Remind on Every</label>
+          <label for="ReminderAt">Remind on Every
+            <span class="req">*</span>
+          </label>
           <select class="form-control" [(ngModel)]="model.ReminderAt" [class.inValidField]="eventsForm.submitted && !model.ReminderAt"
             required id="ReminderAt" name="ReminderAt" #ReminderAt="ngModel">
             <option value="1" selected="selected">Hourly</option>
@@ -362,7 +366,9 @@
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6 ">
             <div class="form-group">
-              <label for="Description">Start at</label>
+              <label for="Description">Start at 
+                <span class="req">*</span>
+              </label>
               <p-calendar id="StartTime" [(ngModel)]="model.StartTime" #StartTime="ngModel" required name="StartTime" [class.inValidField]="eventsForm.submitted && !StartTime.valid"
                 inputStyleClass="form-control" timeOnly="true"></p-calendar>
               <label *ngIf="eventsForm.submitted && !model.StartTime" class="err-label">
@@ -372,7 +378,9 @@
           </div>
           <div class="col-sm-12 col-md-6 col-lg-6 ">
             <div class="form-group">
-              <label for="EndTime">End at</label>
+              <label for="EndTime">End at 
+                <span class="req">*</span>
+              </label>
               <p-calendar id="EndTime" [(ngModel)]="model.EndTime" #EndTime="ngModel" required name="EndTime" [class.inValidField]="eventsForm.submitted && !EndTime.valid"
                 inputStyleClass="form-control" timeOnly="true"></p-calendar>
               <label *ngIf="eventsForm.submitted && !model.EndTime" class="err-label">
