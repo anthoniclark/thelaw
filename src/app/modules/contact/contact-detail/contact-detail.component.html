@@ -24,11 +24,11 @@
                     <!-- <span class="delete-photo-icon"></span> -->
                     <img [src]="url" class="contact-image-preview">
                   </div>
-                  <div *ngIf="!isViewMode">{{fileToUpload?.name || 'Select Image'}}</div>
+                  <div *ngIf="!isViewMode">{{fileToUpload?.name}}</div>
                   <div *ngIf="!validFileType">
                     <label class="error"> Invalid File Type </label>
                   </div>
-                  <a href="javascript:void(0);" class="change btn btn-primary" *ngIf="!isViewMode" (click)="fileUpload.click()">
+                  <a href="javascript:void(0);" class="change btn btn-primary mt5" *ngIf="!isViewMode" (click)="fileUpload.click()">
                     <i class="fa fa-upload mr5"></i> Upload</a>
                   <input type="file" class="fileUpload" accept="image/*" #fileUpload style="display:none" #fileUpload style="display:none"
                     (change)="onFileChange($event)" />

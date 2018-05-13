@@ -28,6 +28,7 @@ import { DataTableModule } from 'primeng/datatable';
 import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ChipsModule } from 'primeng/chips';
+import { CourtDetailComponent } from './court-detail/court-detail.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -58,13 +59,14 @@ import { ChipsModule } from 'primeng/chips';
     CaseEvidenceListComponent,
     CaseEvidenceDetailComponent,
     JudgeDetailComponent,
-    ContactQuickAddComponent
+    ContactQuickAddComponent,
+    CourtDetailComponent
   ],
   providers: [
     CaseService,
     ContactService,
     Modal
   ],
-  entryComponents: [CaseChangeStatusComponent, CaseAppealTypeDetailComponent, JudgeDetailComponent, ContactQuickAddComponent]
+  entryComponents: [CaseChangeStatusComponent, CaseAppealTypeDetailComponent, JudgeDetailComponent, ContactQuickAddComponent, CourtDetailComponent]
 })
 export class CaseModule { }

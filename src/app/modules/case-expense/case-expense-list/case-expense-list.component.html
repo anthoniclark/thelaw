@@ -18,9 +18,9 @@
               <p-calendar inputStyleClass="form-control" placeholder="Filter by date" dateFormat="yy-mm-dd" [(ngModel)]="dateRange" selectionMode="range"
                 readonlyInput="true"></p-calendar>
             </div>
-            <div class="col-sm-6 col-md-3 col-lg-3 col-xs-6">
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">
               <button class="btn btn-primary" (click)="filterByDate()">Filter</button>
-              <button class="btn btn-danger" *ngIf="isFilterd" (click)="resetFilter()">Reset Filter</button>
+              <button class="btn btn-danger" *ngIf="isFilterd" (click)="resetFilter()">Reset</button>
             </div>
           </div>
 

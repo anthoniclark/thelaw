@@ -116,7 +116,7 @@ export class CaseEvidence {
     EvidenceName: string;
     FileType: string;
     FileName: string;
-    Tags:string;
+    Tags: string;
 }
 
 export class Judge {
@@ -131,4 +131,12 @@ export class ContactQuickAdd {
     LastName: string;
     ContactType: string;
     Designation: string;
+}
+
+export class Court {
+    Id: number;
+    CourtType: string;
+    CourtName: string;
+    City: string;
+    State: string;
 }

@@ -681,5 +681,49 @@ export class CaseService {
       throw err;
     });
   }
+
+  getCities(stateId: number) {
+    return this.httpService.get('City/GetCityStateById/' + stateId).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  getAllCities() {
+    return this.httpService.get('City/GetAll').map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  getAllStates() {
+    return this.httpService.get('state/GetAll').map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  saveCourt(model) {
+    return this.httpService.post('Court/Create', model).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
 }
 

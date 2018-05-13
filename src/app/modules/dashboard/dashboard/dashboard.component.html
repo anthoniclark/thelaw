@@ -11,12 +11,12 @@
     <div class="col-md-3">
       <div class="widget style1 black-bg mouse-pointer" href=#new data-toggle=tab>
         <div class="row">
-          <div class="col-xs-4 text-center">
-            <i class="fa fa-trophy fa-3x"></i>
+          <div class="col-xs-3 text-center">
+            <i class="fa fa-usd fa-3x"></i>
           </div>
-          <div class="col-xs-8 text-right">
+          <div class="col-xs-8 text-left">
             <span> Trust </span>
-            <h2 class="font-bold">{{dashboardData.TotalTrust | currency :'USD':true:'2.2-4'}}</h2>
+            <h3 class="font-bold">{{dashboardData.TotalTrust | currency :'USD':true:'2.2-4'}}</h3>
           </div>
         </div>
       </div>
@@ -25,12 +25,12 @@
     <div class=col-md-3>
       <div class="widget style1 navy-bg mouse-pointer" href=#advocate data-toggle=tab>
         <div class="row">
-          <div class="col-xs-4 text-center">
-            <i class="fa fa-user fa-3x"></i>
+          <div class="col-xs-3 text-center">
+            <i class="fa fa-money fa-3x"></i>
           </div>
-          <div class="col-xs-8 text-right">
+          <div class="col-xs-8 text-left">
             <span> Paid </span>
-            <h2 class="font-bold">{{dashboardData.paid  | currency :'USD':true:'2.2-4'}}</h2>
+            <h3 class="font-bold">{{dashboardData.paid | currency :'USD':true:'2.2-4'}}</h3>
           </div>
         </div>
       </div>
@@ -39,12 +39,12 @@
     <div class=col-md-3>
       <div class="widget style1 lazur-bg mouse-pointer" href=#client data-toggle=tab>
         <div class="row">
-          <div class="col-xs-4 text-center">
-            <i class="fa fa-user fa-3x"></i>
+          <div class="col-xs-3 text-center">
+            <i class="fa fa-money fa-3x"></i>
           </div>
-          <div class="col-xs-8 text-right">
+          <div class="col-xs-8 text-left">
             <span> Due </span>
-            <h2 class="font-bold">{{dashboardData.unpaid | currency :'USD':true:'2.2-4'}}</h2>
+            <h3 class="font-bold">{{dashboardData.unpaid | currency :'USD':true:'2.2-4'}}</h3>
           </div>
         </div>
       </div>
@@ -53,12 +53,12 @@
     <div class=col-md-3>
       <div class="widget style1 yellow-bg mouse-pointer" href=#law data-toggle=tab>
         <div class="row">
-          <div class="col-xs-4 text-center">
-            <i class="fa fa-user fa-3x"></i>
+          <div class="col-xs-3 text-center">
+            <i class="fa fa-money fa-3x"></i>
           </div>
-          <div class="col-xs-8 text-right">
+          <div class="col-xs-8 text-left">
             <span> Billable </span>
-            <h2 class="font-bold">{{dashboardData.Balance | currency :'USD':true:'2.2-4'}}</h2>
+            <h3 class="font-bold">{{dashboardData.Balance | currency :'USD':true:'2.2-4'}}</h3>
           </div>
         </div>
       </div>
@@ -76,6 +76,7 @@
           <a class="quick-add-btn" (click)="router.navigate(['/contact/new'])">
             <i class="fa fa-user"></i>
             <div> New Contact </div>
+            <span class="badge badge-primary" >{{dashboardData.Clients}}</span>
           </a>
           <a class="quick-add-btn" (click)="router.navigate(['/companies/new'])">
             <i class="fa fa-building"></i>
@@ -84,6 +85,7 @@
           <a class="quick-add-btn" (click)="router.navigate(['/case/new'])">
             <i class="fa fa-file"></i>
             <div> New Case </div>
+            <span class="badge badge-primary" >{{dashboardData.casesTotal}}</span>
           </a>
           <a class="quick-add-btn" (click)="router.navigate(['/case-expense/new'])">
             <i class="fa fa-money"></i>

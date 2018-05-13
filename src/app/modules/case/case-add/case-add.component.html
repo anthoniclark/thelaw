@@ -89,14 +89,14 @@
                   <label for="CaseYear">Case Year
                     <span class="req">*</span>
                   </label>
-                  <input type="number" [maxlength]="4" [max]="currentYear" name="CaseYear" id="CaseYear" [readonly]="isViewModel" class="form-control" [(ngModel)]="model.CaseYear"
-                    #CaseYear="ngModel" [class.inValidField]="caseForm.submitted && (!model.CaseYear || model.CaseYear > currentYear)" required (change)="changeDoctNo()"
-                  />
+                  <input type="number" [maxlength]="4" [max]="currentYear" name="CaseYear" id="CaseYear" [readonly]="isViewModel" class="form-control"
+                    [(ngModel)]="model.CaseYear" #CaseYear="ngModel" [class.inValidField]="caseForm.submitted && (!model.CaseYear || model.CaseYear > currentYear)"
+                    required (change)="changeDoctNo()" />
                   <label *ngIf="caseForm.submitted && !model.CaseYear" class="error">
                     Please enter Case Year
                   </label>
                   <label *ngIf="caseForm.submitted && model.CaseYear > currentYear" class="error">
-                    Case Year should not greater than current year. 
+                    Case Year should not greater than current year.
                   </label>
                 </div>
               </div>
@@ -131,6 +131,9 @@
                   <label for="CourtId">Court
                     <span class="req">*</span>
                   </label>
+                  <a class="pull-right" (click)="addCourt()" *ngIf="!isViewModel">
+                    <i aria-hidden="true" class="fa fa-plus"></i> Create New
+                  </a>
                   <select class="form-control" required [(ngModel)]="model.CourtId" [disabled]="isViewModel" [class.inValidField]="caseForm.submitted && !model.CourtId"
                     id="CourtId" name="CourtId" #CourtId="ngModel">
                     <option [value]='undefined'>Select Court</option>

@@ -14,6 +14,7 @@ import { overlayConfigFactory } from 'ngx-modialog';
 import { CaseAppealTypeDetailComponent } from 'app/modules/case/case-appeal-type-detail/case-appeal-type-detail.component';
 import { JudgeDetailComponent } from 'app/modules/case/judge-detail/judge-detail.component';
 import { ContactQuickAddComponent } from 'app/modules/case/contact-quick-add/contact-quick-add.component';
+import { CourtDetailComponent } from '../court-detail/court-detail.component';
 
 @Component({
   selector: 'app-case-add',
@@ -304,11 +305,24 @@ export class CaseAddComponent implements OnInit {
     resul.result.then(res => {
       if (res) {
         this.judges = [];
-        this._notify.success("New Judge successfully!");
+        this._notify.success("New Judge added successfully!");
         this.caseService.getJudgesDD().subscribe(res => {
           res.forEach(element => {
             this.judges.push({ id: element.Id, itemName: element.FirstName + ' ' + element.LastName });
           });
+        });
+      }
+    });
+  }
+
+  addCourt() {
+    const resul = this.modal.open(CourtDetailComponent, overlayConfigFactory({ caseModel: this.model }, BSModalContext));
+    resul.result.then(res => {
+      if (res) {
+        this.courts = [];
+        this._notify.success("New Court added successfully!");
+        this.caseService.getCourtsDD().subscribe(res => {
+          this.courts = res;
         });
       }
     });

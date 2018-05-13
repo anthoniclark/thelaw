@@ -1,0 +1,79 @@
+<div class="container-fluid custom-modal-container" style="padding: 15px 30px;">
+  <div class="row custom-modal-header">
+    <div class="col">
+      <h2 class="my-3">Create Court</h2>
+    </div>
+  </div>
+  <div class="hr-line-dashed"></div>
+  <form name="courtForm" (ngSubmit)="courtForm.form.valid && createCourt()" #courtForm='ngForm' novalidate>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="form-label" for="CourtType">Court Type
+            <span class="req">*</span>
+          </label>
+          <input type="text" class="form-control" required name="CourtType" [(ngModel)]="courtModel.CourtType" #CourtType="ngModel"
+            [class.inValidField]="courtForm.submitted && !CourtType.valid" />
+          <label class="error" *ngIf="courtForm.submitted && !CourtType.valid">Please enter Court Type</label>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="form-label" for="CourtName">Court Name
+            <span class="req">*</span>
+          </label>
+          <input type="text" class="form-control" required name="CourtName" [(ngModel)]="courtModel.CourtName" #CourtName="ngModel"
+            [class.inValidField]="courtForm.submitted && !CourtName.valid" />
+          <label class="error" *ngIf="courtForm.submitted && !CourtName.valid">Please enter Court Name</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="State{{i}}">State
+            <span class="req">*</span>
+          </label>
+
+          <select class="form-control" [(ngModel)]="courtModel.State" required id="State{{i}}" [class.inValidField]="courtForm.submitted && !courtModel.State"
+            name="State{{i}}" (ngModelChange)="StateChanges($event)">
+            <option [value]='undefined'>Select State</option>
+            <option *ngFor="let state of states" [value]='state.StateName'>
+              {{state.StateName}}
+            </option>
+          </select>
+          <label class="error" *ngIf="courtForm.submitted && !courtModel.State">Please select State</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="City{{i}}">City
+            <span class="req">*</span>
+          </label>
+          <select class="form-control" [(ngModel)]="courtModel.City" required [class.inValidField]="courtForm.submitted && !courtModel.City"
+            id="City{{i}}" name="City{{i}}">
+            <option [value]='undefined'>Select City</option>
+            <option *ngFor="let city of cities" [value]='city.Id'>
+              {{city.CityName}}
+            </option>
+          </select>
+          <label class="error" *ngIf="courtForm.submitted && !courtModel.City">Please select City</label>
+        </div>
+      </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+    <div class="row">
+      <a href=javascript:; (click)="closeClick()" class="btn btn-default btn-cancel mr5">
+        <i class="fa fa-times-circle mr5"></i> Cancel
+      </a>
+      <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+        <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+      </button>
+    </div>
+  </form>
+  <div class="row custom-modal-footer">
+    <div class="col-xs-12">
+    </div>
+  </div>
+</div>
