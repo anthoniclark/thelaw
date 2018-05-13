@@ -11,6 +11,7 @@ import { PageSize } from 'app/shared/constants';
   templateUrl: './companies-list.component.html'
 })
 export class CompaniesListComponent implements OnInit {
+  isUoloading: boolean;
   public rows: any[];
   public page: Page = new Page();
   loadingIndicator: boolean = false;
@@ -194,12 +195,17 @@ export class CompaniesListComponent implements OnInit {
       reader.readAsDataURL(files[0]);
       const formData = new FormData();
       formData.append("Document", this.fileToUpload);
+      this.isUoloading = true;
       this.companiesService.importDocument(formData).subscribe(response => {
+        this.isUoloading = false;
         if (response) {
           this.getDataSource();
-          this._notify.success("Case Document uploaded successfully");
+          this._notify.success("Case Imported successfully");
         }
-      }, error => { this._notify.error(error.result); })
+      }, error => {
+        this.isUoloading = false;
+        this._notify.error(error.result);
+      })
     }
   }
 

@@ -166,7 +166,7 @@
                     <a *ngIf="!mobileControl.IsPrimary" (click)="mobileControl.IsDeleted = true">
                       <i class="fa fa-times-circle pull-right"></i>
                     </a>
-                    <div class="form-group col-md-8 pl0">
+                    <div class="form-group col-md-6 pl0">
                       <select class="form-control pull-right mobile-type-select" name="MobileType{{i}}" [(ngModel)]="mobileControl.MobileType">
                         <option value="work">Work</option>
                         <option value="home">Home</option>
@@ -175,7 +175,7 @@
                         <option value="mobile">Mobile</option>
                       </select>
                     </div>
-                    <div class="mr20 col-md-4">
+                    <div class="mr20 col-md-6">
                       <div class="checkbox">
                         <input type="checkbox" [disabled]="mobileControl.isDisabled" (change)="changeIsPrimary(mobileControl)" [(ngModel)]="mobileControl.IsPrimary"
                           name="mobileIsPrimary{{i}}">

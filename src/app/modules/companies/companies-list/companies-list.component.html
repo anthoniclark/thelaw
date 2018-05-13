@@ -27,6 +27,7 @@
                     <div>Drag & Drop file here</div>
                   </ng-template>
                 </p-fileUpload>
+                <span *ngIf="isUoloading">Uploading...</span>
                 <div class="m-t-sm">
                   <span *ngIf="fileName">{{fileName | limitTo: 35 }}</span>
                   <a href="javascript:void(0);" class="change btn btn-primary" *ngIf="fileName" (click)="deleteDocument()">
