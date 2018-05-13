@@ -170,7 +170,7 @@ form select:disabled::-ms-expand {
 }
 .dashboard-widget-container .widget {opacity: 1;}
 .ui-state-highlight {color: black}
-.quick-add-container .badge{top: -8px; position: absolute;right: -10px;};
+.quick-add-container .badge{top: -8px; position: absolute;right: -10px;}
 
 .expand-icon { width: 28px;}
 /* .quick-add-container {display: flex;} */
