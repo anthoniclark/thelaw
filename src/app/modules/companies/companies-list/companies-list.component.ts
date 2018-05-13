@@ -200,7 +200,7 @@ export class CompaniesListComponent implements OnInit {
         this.isUoloading = false;
         if (response) {
           this.getDataSource();
-          this._notify.success("Case Imported successfully");
+          this._notify.success("Companies imported successfully");
         }
       }, error => {
         this.isUoloading = false;

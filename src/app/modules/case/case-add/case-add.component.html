@@ -1,6 +1,17 @@
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
     <h2>{{ isViewModel ? 'View' : ((paramId !='new') ? 'Modify':'Add') }} Case</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a [routerLink]="['/']">Home</a>
+      </li>
+      <li>
+        <a [routerLink]="['/case']">Cases</a>
+      </li>
+      <li class="active">
+        <strong>{{ isViewModel ? 'View' : ((paramId !='new') ? 'Modify':'Add') }} Case</strong>
+      </li>
+    </ol>
   </div>
   <div class="col-lg-2">
 

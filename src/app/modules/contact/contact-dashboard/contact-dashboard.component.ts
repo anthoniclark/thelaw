@@ -232,7 +232,7 @@ export class ContactDashboardComponent implements OnInit {
       this.contactService.importDocument(formData).subscribe(response => {
         if (response) {
           this.getDataSource();
-          this._notify.success("Case Document uploaded successfully");
+          this._notify.success("Contacts imported successfully");
         }
       }, error => { this._notify.error(error.result); })
     }
