@@ -1,6 +1,20 @@
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
     <h2>{{ (paramId !='new') ? 'Modify':'Add' }} Case Evidence for Case number {{caseModel.CaseNo}}</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a [routerLink]="['/']">Home</a>
+      </li>
+      <li>
+        <a [routerLink]="['/case']">Case</a>
+      </li>
+      <li>
+        <a (click)="onCancelClick()">Evidence</a>
+      </li>
+      <li class="active">
+        <strong>{{ (paramId !='new') ? 'Modify':'Add' }} Case Evidence</strong>
+      </li>
+    </ol>
   </div>
   <div class="col-lg-2">
   </div>

@@ -1,6 +1,20 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>{{ (paramId !='new') ? 'Modify':'Add' }} Case Document</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a [routerLink]="['/']">Home</a>
+            </li>
+            <li>
+                <a [routerLink]="['/case']">Case</a>
+            </li>
+            <li>
+                <a (click)="onCancelClick()">Document</a>
+            </li>
+            <li class="active">
+                <strong>{{ (paramId !='new') ? 'Modify':'Add' }} Case Document</strong>
+            </li>
+        </ol>
     </div>
     <div class="col-lg-2">
     </div>
@@ -89,7 +103,8 @@
                                     <input ngui-auto-complete class="form-control" id="caseno" [(ngModel)]="caseNo" name="caseno" [source]="caseNameSearch.bind(this)"
                                         min-chars="2" [list-formatter]="caseAutocompleListFormatter" [accept-user-input]="false"
                                         value-property-name="Id" (valueChanged)="onSelectCaseName($event)" required display-property-name="Name"
-                                        #caseno="ngModel" [class.inValidField]="caseDocumentForm.submitted && !caseno.valid" />
+                                        #caseno="ngModel" [class.inValidField]="caseDocumentForm.submitted && !caseno.valid"
+                                    />
                                     <label *ngIf="caseDocumentForm.submitted && !caseno.valid" class="error">
                                         Please select Case No
                                     </label>
