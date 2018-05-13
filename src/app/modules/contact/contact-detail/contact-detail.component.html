@@ -212,7 +212,7 @@
                     </div>
                     <div class="col-md-12 pl0">
                       <input type="text" (keypress)="_keyPress($event)" id="MobileNumber{{i}}" [readonly]="isViewMode" name="MobileNumber{{i}}"
-                        maxlength="10" class="form-control" [(ngModel)]="mobileControl.MobileNumber" />
+                        maxlength="15" class="form-control" [(ngModel)]="mobileControl.MobileNumber" />
                     </div>
                   </div>
                 </div>
@@ -249,7 +249,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="Country{{i}}">Country</label>
-                    <select class="form-control" [(ngModel)]="control.Country" id="Country{{i}}" [disabled]="isViewMode"  name="Country{{i}}"
+                    <select class="form-control" [(ngModel)]="control.Country" id="Country{{i}}" [disabled]="isViewMode" name="Country{{i}}"
                       (ngModelChange)="CountryChanges($event)">
                       <option [value]='undefined'>Select Country</option>
                       <option *ngFor="let country of countries" [value]='country.Id'>

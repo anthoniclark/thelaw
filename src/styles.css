@@ -647,3 +647,7 @@ input:read-only {border: none;}
   .color-blue{
     color: #337ab7;
   }
+
+  .widget.style1 h2 {
+    font-size: 20px;
+  }
