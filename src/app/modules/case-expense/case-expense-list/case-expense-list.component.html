@@ -33,7 +33,7 @@
           </div>
 
           <p-dataTable [rowHover]="true" [value]="rows" [responsive]="true" expandableRows="false" [loading]="loadingIndicator" loadingIcon="fa-spinner">
-            <p-column expander="true" styleClass="col-icon expand-icon">
+            <p-column expander="true" [style]="{'width':'30px'}" styleClass="col-icon expand-icon">
             </p-column>
             <p-column field="CaseNo" header="Case No">
             </p-column>
@@ -45,7 +45,7 @@
             <ng-template let-data pTemplate="rowexpansion">
               <p-dataTable [rowHover]="true" [value]="data.Categories" [responsive]="true" expandableRows="false" [loading]="loadingIndicator"
                 loadingIcon="fa-spinner">
-                <p-column expander="true" styleClass="col-icon expand-icon">
+                <p-column expander="true" [style]="{'width':'30px'}" styleClass="col-icon expand-icon">
                 </p-column>
                 <p-column field="Category" header="Category">
                 </p-column>

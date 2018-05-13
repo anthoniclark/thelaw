@@ -62,7 +62,7 @@
                     <span class="req">*</span>
                   </label>
                   <input class="form-control" [(ngModel)]="model.ExpenseDate" required ngui-datetime-picker date-only="true" name="ExpenseDate"
-                    id="ExpenseDate" #OpenDate="ngModel" [max-date]="max_date" [class.inValidField]="caseExpenseForm.submitted && !model.ExpenseDate"
+                    id="ExpenseDate" #OpenDate="ngModel" [min-date]="max_date" [class.inValidField]="caseExpenseForm.submitted && !model.ExpenseDate"
                   />
                   <label *ngIf="caseExpenseForm.submitted && !model.ExpenseDate" class="error">
                     Please select expense date
@@ -116,7 +116,7 @@
                     <span class="req">*</span>
                   </label>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="AssociateContactId" name="AssociateContactId" [source]="contactSearch.bind(this)"
-                    min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectContact($event)"
+                    min-chars="2" [list-formatter]="autocompleListFormatter" [class.inValidField]="caseExpenseForm.submitted && !model.AssociateContactId" required [accept-user-input]="false" (valueChanged)="onSelectContact($event)"
                     value-property-name="Id" display-property-name="Name" />
                   <label *ngIf="caseExpenseForm.submitted && !model.AssociateContactId" class="error">
                     Please select valid Associate

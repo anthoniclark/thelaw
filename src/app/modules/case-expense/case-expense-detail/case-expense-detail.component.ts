@@ -76,7 +76,6 @@ export class CaseExpenseDetailComponent implements OnInit {
 
   save() {
     this.isLoading = true;
-    debugger;
     this.caseExpenseService.addOrUpdate(this.model).subscribe(
       response => {
         this.isLoading = false;
