@@ -112,10 +112,15 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="AssociateContactId">Associate Contact</label>
+                  <label for="AssociateContactId">Associate Contact
+                    <span class="req">*</span>
+                  </label>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="AssociateContactId" name="AssociateContactId" [source]="contactSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectContact($event)"
                     value-property-name="Id" display-property-name="Name" />
+                  <label *ngIf="caseExpenseForm.submitted && !model.AssociateContactId" class="error">
+                    Please select valid Associate
+                  </label>
                 </div>
               </div>
               <div class="col-sm-3">
