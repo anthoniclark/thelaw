@@ -182,7 +182,7 @@ form select:disabled::-ms-expand {
 .quick-add-container .badge{top: -8px; position: absolute;right: -10px;}
 
 .expand-icon { width: 28px;}
-.ui-datatable a {color: blue;}
+.ui-datatable a.view-detail {color: blue;}
 [class^="pp-icon-"], [class*="pp-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'practice-panther' !important;

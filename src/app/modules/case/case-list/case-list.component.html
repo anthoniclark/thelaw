@@ -32,7 +32,7 @@
             <!-- <p-header>List of Cars</p-header> -->
             <p-column field="CaseNo" [filter]="true" [sortable]="true" header="Case No">
               <ng-template let-col let-data="rowData" pTemplate="body">
-                <a (click)="viewDetail(data.Id)">{{data[col.field]}}</a>
+                <a class="view-detail" (click)="viewDetail(data.Id)">{{data[col.field]}}</a>
               </ng-template>
             </p-column>
             <p-column field="CaseType" [filter]="true" [sortable]="true" header="Case Type"></p-column>

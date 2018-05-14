@@ -27,20 +27,39 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CaseId">Case
-                    <span class="req">*</span>
+                    <!-- <span class="req">*</span> -->
                   </label>
-                  <select class="form-control" [(ngModel)]="model.CaseId" [class.inValidField]="caseExpenseForm.submitted && !model.CaseId"
-                    id="CaseId" required name="CaseId" #CaseId="ngModel" (change)="caseSelectionChange()">
+                  <!-- [class.inValidField]="caseExpenseForm.submitted && !model.CaseId" -->
+                  <select class="form-control" [(ngModel)]="model.CaseId" 
+                  
+                    id="CaseId" name="CaseId" #CaseId="ngModel" (change)="caseSelectionChange()">
                     <option value="">Select Case</option>
                     <option *ngFor="let case of cases" value={{case.Id}}>
                       {{case.CaseNo}}
                     </option>
                   </select>
-                  <label *ngIf="caseExpenseForm.submitted && !model.CaseId" class="error">
+                  <!-- <label *ngIf="caseExpenseForm.submitted && !model.CaseId" class="error">
                     Please select case
+                  </label> -->
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="AssociateContactId">Associate Contact
+                    <span class="req">*</span>
+                  </label>
+                  <input ngui-auto-complete class="form-control" [(ngModel)]="AssociateContactId" name="AssociateContactId" [source]="contactSearch.bind(this)"
+                    min-chars="2" [list-formatter]="autocompleListFormatter" [class.inValidField]="caseExpenseForm.submitted && !model.AssociateContactId"
+                    required [accept-user-input]="false" (valueChanged)="onSelectContact($event)" value-property-name="Id"
+                    display-property-name="Name" />
+                  <label *ngIf="caseExpenseForm.submitted && !model.AssociateContactId" class="error">
+                    Please select valid Associate
                   </label>
                 </div>
               </div>
+
+            </div>
+            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="ExpenseName">Expense Name
@@ -54,8 +73,6 @@
                   </label>
                 </div>
               </div>
-            </div>
-            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="ExpenseDate">Expense Date
@@ -69,6 +86,9 @@
                   </label>
                 </div>
               </div>
+
+            </div>
+            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Category">Category
@@ -85,8 +105,6 @@
                   </label>
                 </div>
               </div>
-            </div>
-            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Description">Description</label>
@@ -94,6 +112,11 @@
                     #Description="ngModel"></textarea>
                 </div>
               </div>
+
+            </div>
+            <div class="row">
+
+
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Amount">Amount
@@ -106,21 +129,6 @@
                     Please enter Amount</label>
                   <label *ngIf="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors && Amount.errors['pattern']" class="error">
                     Enter Valid Amount</label>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="AssociateContactId">Associate Contact
-                    <span class="req">*</span>
-                  </label>
-                  <input ngui-auto-complete class="form-control" [(ngModel)]="AssociateContactId" name="AssociateContactId" [source]="contactSearch.bind(this)"
-                    min-chars="2" [list-formatter]="autocompleListFormatter" [class.inValidField]="caseExpenseForm.submitted && !model.AssociateContactId" required [accept-user-input]="false" (valueChanged)="onSelectContact($event)"
-                    value-property-name="Id" display-property-name="Name" />
-                  <label *ngIf="caseExpenseForm.submitted && !model.AssociateContactId" class="error">
-                    Please select valid Associate
-                  </label>
                 </div>
               </div>
               <div class="col-sm-3">
