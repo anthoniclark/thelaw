@@ -53,8 +53,7 @@ export const CasePriority = [
 export const WorkedAs = [
     { Id: "Associate", Name: "Associate" },
     { Id: "Referral", Name: "Referral" },
-    { Id: "Consultant", Name: "Consultant" },
-    { Id: "FirstMeeting", Name: "First meeting" }
+    { Id: "Consultant", Name: "Consultant" }
 ];
 
 export const ExpenseCategory = [

@@ -15,7 +15,7 @@ export class Case {
     OppnentAdvocateId: number;
     WitnessContactId: number;
     OpenDate: Date;
-    EndDate: Date;
+    // EndDate: Date;
     Priority: string;
     WorkedAs: string;
     CaseStatus: string;

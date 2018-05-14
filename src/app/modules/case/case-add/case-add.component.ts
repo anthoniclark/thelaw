@@ -123,6 +123,7 @@ export class CaseAddComponent implements OnInit {
             this.contactService.getContactById(this.model.ClientId).subscribe(res => {
               this.ClientId = res.FirstName + ' ' + res.LastName;
             })
+            this.getOfficeAddresses(this.model.ClientId);
           }
         }, err => {
           this._notify.error(err.Result);
@@ -158,8 +159,8 @@ export class CaseAddComponent implements OnInit {
     return this.contactService.advocateSearch(term);
   }
 
-  getOfficeAddresses() {
-    this.contactService.getAddressByContactId(1).subscribe(res => {
+  getOfficeAddresses(contactId: number) {
+    this.contactService.getAddressByContactId(contactId).subscribe(res => {
       res.forEach(element => {
         if (element.AddressType === 'Office')
           this.offices.push(element);
@@ -170,12 +171,14 @@ export class CaseAddComponent implements OnInit {
   }
 
   onSelectClient(item: any) {
-    if (item && item.Id === this.OpponentContactId.Id || item.Id === this.OppnentAdvocateId.Id) {
+    if (item && ((this.OpponentContactId && item.Id === this.OpponentContactId.Id) ||
+      (this.OppnentAdvocateId && item.Id === this.OppnentAdvocateId.Id))) {
       this._notify.error("Client and Oppnent should not be same person!");
       this.ClientId = "";
       return;
     }
     if (item) {
+      this.getOfficeAddresses(item.Id);
       this.model.ClientId = item.Id;
     } else {
       this.model.ClientId = undefined;

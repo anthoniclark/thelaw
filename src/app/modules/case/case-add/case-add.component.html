@@ -27,7 +27,7 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="DoctNumber">Doct Number</label>
+                  <label for="DoctNumber">Docket Number</label>
                   <input type="text" readonly maxlength="100" id="DoctNumber" name="DoctNumber" class="form-control" [(ngModel)]="model.DoctNumber"
                     #DoctNumber="ngModel" />
                 </div>
@@ -67,13 +67,12 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="NickName">Nick Name
-                    <span class="req">*</span>
                   </label>
                   <input type="text" maxlength="100" id="NickName" name="NickName" class="form-control" [readonly]="isViewModel" [(ngModel)]="model.NickName"
-                    #NickName="ngModel" [class.inValidField]="caseForm.submitted && !NickName.valid" required/>
-                  <label *ngIf="caseForm.submitted && !NickName.valid" class="error">
+                    #NickName="ngModel" [class.inValidField]="caseForm.submitted && !NickName.valid" />
+                  <!-- <label *ngIf="caseForm.submitted && !NickName.valid" class="error">
                     Please select valid Client
-                  </label>
+                  </label> -->
                 </div>
               </div>
             </div>
@@ -200,16 +199,16 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="Description">Description</label>
-                  <textarea class="form-control" rows="3" id="Description" name="Description" [readonly]="isViewModel" maxlength="250" [(ngModel)]="model.Description"
-                    #Description="ngModel"></textarea>
+                  <label for="AppearedFor">Appeared For</label>
+                  <input type="text" id="AppearedFor" name="AppearedFor" maxlength="250" [readonly]="isViewModel" class="form-control" [(ngModel)]="model.AppearedFor"
+                    #AppearedFor="ngModel" />
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="AppearedFor">Appeared For</label>
-                  <input type="text" id="AppearedFor" name="AppearedFor" maxlength="250" [readonly]="isViewModel" class="form-control" [(ngModel)]="model.AppearedFor"
-                    #AppearedFor="ngModel" />
+                  <label for="Description">Description</label>
+                  <textarea class="form-control" rows="3" id="Description" name="Description" [readonly]="isViewModel" maxlength="250" [(ngModel)]="model.Description"
+                    #Description="ngModel"></textarea>
                 </div>
               </div>
             </div>
@@ -278,13 +277,13 @@
                     id="OpenDate" #OpenDate="ngModel" />
                 </div>
               </div>
-              <div class="col-sm-6">
+              <!-- <div class="col-sm-6">
                 <div class="form-group">
                   <label for="EndDate">End Date</label>
                   <input class="form-control" [(ngModel)]="model.EndDate" [disabled]="isViewModel" ngui-datetime-picker date-only="true" name="EndDate"
                     id="EndDate" #EndDate="ngModel" />
                 </div>
-              </div>
+              </div> -->
             </div>
 
             <div class="row">
