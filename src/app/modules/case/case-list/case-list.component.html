@@ -30,7 +30,11 @@
             (onPage)="paginate($event)">
             <!-- [rowsPerPageOptions]="[5,10,20]" let user select page  -->
             <!-- <p-header>List of Cars</p-header> -->
-            <p-column field="CaseNo" [filter]="true" [sortable]="true" header="Case No"></p-column>
+            <p-column field="CaseNo" [filter]="true" [sortable]="true" header="Case No">
+              <ng-template let-col let-data="rowData" pTemplate="body">
+                <a (click)="viewDetail(data.Id)">{{data[col.field]}}</a>
+              </ng-template>
+            </p-column>
             <p-column field="CaseType" [filter]="true" [sortable]="true" header="Case Type"></p-column>
             <p-column field="OpenDate" [sortable]="true" header="Start Date">
               <ng-template let-col let-data="rowData" pTemplate="body">
@@ -45,7 +49,7 @@
                 <span>{{data[col.field] | date: 'dd/MM/yyyy'}}</span>
               </ng-template>
             </p-column>
-            <p-column field="RefferenceNumber" [sortable]="true" [filter]="true" header="Refference Number"></p-column>
+            <p-column field="RefferenceNumber" [sortable]="true" [filter]="true" header="Ref No"></p-column>
             <p-column field="CaseStatus" [sortable]="true" [filter]="true" header="Case Status"></p-column>
             <p-column styleClass="col-button">
               <ng-template pTemplate="header">
