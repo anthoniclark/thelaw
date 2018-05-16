@@ -28,7 +28,6 @@ export class Case {
     JugmentFavourTo: number;
     FilledDate: Date;
     NotifyMe: boolean;
-    NotifyMeWhen: string;
     NotifyMeValue: number;
     AdvanceFees: number;
     PricingType: string;

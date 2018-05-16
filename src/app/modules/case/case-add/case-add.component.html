@@ -398,10 +398,27 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="TrustAccount">Trust Account</label>
-                  <input class="form-control" type="number" id="TrustAccount" [readonly]="isViewModel" name="TrustAccount" pattern="^\d+(\.\d{1,2})?$"
-                    step="0.01" [(ngModel)]="model.TrustAccount" (keypress)="_keyPress($event)" #TrustAccount="ngModel" />
+                  <input class="form-control" type="number" id="TrustAccount" name="TrustAccount" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.TrustAccount"
+                    (keypress)="_keyPress($event)" #TrustAccount="ngModel" />
                   <label *ngIf="(caseForm.submitted || TrustAccount.dirty) && TrustAccount.errors && TrustAccount.errors['pattern']" class="error">
                     Enter Valid Trust Account</label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="checkbox">
+                  <input type="checkbox" name="NotifyMe" [(ngModel)]="model.NotifyMe" #NotifyMe="ngModel">
+                  <label>
+                    Notify Me
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6" *ngIf="model.NotifyMe">
+                <div class="form-group">
+                  <label for="NotifyMeValue">NotifyMe When</label>
+                  <input type="number" class="form-control" [(ngModel)]="model.NotifyMeValue" name="NotifyMeValue" id="NotifyMeValue" #NotifyMeValue="ngModel"
+                    pattern="^\d+(\.\d{1,2})?$" (keypress)="_keyPress($event)" step="0.01" />
                 </div>
               </div>
               <div class="col-sm-6">
@@ -413,7 +430,6 @@
                 </div>
               </div>
             </div>
-
             <div class="row">
               <div class="col-sm-6" *ngIf="model.IsClose">
                 <div class="form-group">
@@ -428,23 +444,6 @@
                   <label for="CloseDate">Close Date</label>
                   <input class="form-control" [(ngModel)]="model.CloseDate" ngui-datetime-picker date-only="true" name="CloseDate" id="CloseDate"
                     #CloseDate="ngModel" />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6" *ngIf="model.IsClose">
-                <div class="checkbox">
-                  <input type="checkbox" name="NotifyMe" [(ngModel)]="model.NotifyMe" #NotifyMe="ngModel">
-                  <label>
-                    Notify Me
-                  </label>
-                </div>
-              </div>
-              <div class="col-sm-6" *ngIf="model.NotifyMe && model.IsClose">
-                <div class="form-group">
-                  <label for="NotifyMeWhen">NotifyMe When</label>
-                  <input class="form-control" [(ngModel)]="model.NotifyMeWhen" name="NotifyMeWhen" id="NotifyMeWhen" #NotifyMeWhen="ngModel"
-                  />
                 </div>
               </div>
             </div>
