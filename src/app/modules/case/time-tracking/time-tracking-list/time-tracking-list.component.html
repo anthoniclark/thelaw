@@ -28,7 +28,7 @@
         <div class="ibox-content">
           <p-dataTable [rowHover]="true" [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
             loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
-            <p-column field="ContactName" [filter]="true" [sortable]="true" header="Contact Name"></p-column>
+            <!-- <p-column field="ContactName" [filter]="true" [sortable]="true" header="Contact Name"></p-column> -->
 
             <p-column field="TaskCategoryName" [filter]="true" [sortable]="true" header="Task Category"></p-column>
 

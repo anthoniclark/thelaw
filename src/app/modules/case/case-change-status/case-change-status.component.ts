@@ -1,10 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CloseGuard, ModalComponent, DialogRef } from 'ngx-modialog';
 
-import { BSModalContext } from 'ngx-modialog/plugins/bootstrap';
+import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
+import { overlayConfigFactory } from 'ngx-modialog';
+
 import { CaseStatus } from 'app/models/case';
 import { CaseService } from '../case.service';
 import { NotificationService } from '../../../shared/services/notification.service';
+import { StageDetailComponent } from '../stage/stage-detail/stage-detail.component';
 
 @Component({
   selector: 'app-case-change-status',
@@ -19,7 +22,7 @@ export class CaseChangeStatusComponent implements OnInit, OnDestroy, CloseGuard,
   dialogContext: any;
 
   constructor(public dialog: DialogRef<BSModalContext>, private caseService: CaseService,
-    private _notify: NotificationService) {
+    private _notify: NotificationService, private modal: Modal) {
     dialog.context.dialogClass = "modal-dialog modal-lg";
     this.dialogContext = dialog.context;
 
@@ -52,6 +55,18 @@ export class CaseChangeStatusComponent implements OnInit, OnDestroy, CloseGuard,
       this.closeClick();
     }, err => {
       this._notify.error(err.Result);
+    });
+  }
+
+  addStage() {
+    const resul = this.modal.open(StageDetailComponent, overlayConfigFactory({ caseModel: this.model }, BSModalContext));
+    resul.result.then(res => {
+      if (res) {
+        this.caseService.getStages().subscribe(res => {
+          this._notify.success("New Task Category created successfully!");
+          this.stages = res;
+        });
+      }
     });
   }
 

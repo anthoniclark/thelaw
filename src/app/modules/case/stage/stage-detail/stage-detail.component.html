@@ -1,20 +1,20 @@
 <div class="container-fluid custom-modal-container" style="padding: 15px 30px;">
   <div class="row custom-modal-header">
     <div class="col">
-      <h2 class="my-3">Create Appeal Type </h2>
+      <h2 class="my-3">Create Stage </h2>
     </div>
   </div>
   <div class="hr-line-dashed"></div>
-  <form name="appealTypeForm" (ngSubmit)="appealTypeForm.form.valid && createAppealType()" #appealTypeForm='ngForm' novalidate>
+  <form name="stageForm" (ngSubmit)="stageForm.form.valid && createStage()" #stageForm='ngForm' novalidate>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label class="form-label" for="appealTypeName">Appeal Type Name
+          <label class="form-label" for="stageName">Stage Name
             <span class="req">*</span>
           </label>
-          <input type="text" class="form-control" required name="appealTypeName" [(ngModel)]="appealTypeModel.AppealTypeName" #appealTypeName="ngModel"
-            [class.inValidField]="appealTypeForm.submitted && !appealTypeName.valid" />
-          <label class="error" *ngIf="appealTypeForm.submitted && !appealTypeName.valid">Please enter Appeal Type Name</label>
+          <input type="text" class="form-control" required name="stageName" [(ngModel)]="stageModel.StageName" #stageName="ngModel"
+            [class.inValidField]="stageForm.submitted && !stageName.valid" />
+          <label class="error" *ngIf="stageForm.submitted && !stageName.valid">Please enter Stage Name</label>
         </div>
       </div>
     </div>

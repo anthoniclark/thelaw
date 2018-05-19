@@ -1,20 +1,21 @@
 <div class="container-fluid custom-modal-container" style="padding: 15px 30px;">
   <div class="row custom-modal-header">
     <div class="col">
-      <h2 class="my-3">Create Appeal Type </h2>
+      <h2 class="my-3">Create Task Category </h2>
     </div>
   </div>
   <div class="hr-line-dashed"></div>
-  <form name="appealTypeForm" (ngSubmit)="appealTypeForm.form.valid && createAppealType()" #appealTypeForm='ngForm' novalidate>
+  <form name="taskCategoryForm" (ngSubmit)="taskCategoryForm.form.valid && createTaskCategory()" #taskCategoryForm='ngForm'
+    novalidate>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label class="form-label" for="appealTypeName">Appeal Type Name
+          <label class="form-label" for="taskCategoryName">Task Category Name
             <span class="req">*</span>
           </label>
-          <input type="text" class="form-control" required name="appealTypeName" [(ngModel)]="appealTypeModel.AppealTypeName" #appealTypeName="ngModel"
-            [class.inValidField]="appealTypeForm.submitted && !appealTypeName.valid" />
-          <label class="error" *ngIf="appealTypeForm.submitted && !appealTypeName.valid">Please enter Appeal Type Name</label>
+          <input type="text" class="form-control" required name="taskCategoryName" [(ngModel)]="taskCategoryModel.TaskCategoryName"
+            #taskCategoryName="ngModel" [class.inValidField]="taskCategoryForm.submitted && !taskCategoryName.valid" />
+          <label class="error" *ngIf="taskCategoryForm.submitted && !taskCategoryName.valid">Please enter Task Category Name</label>
         </div>
       </div>
     </div>

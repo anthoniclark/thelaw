@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { TimeTracking, Case } from 'app/models/case';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Observable } from 'rxjs/Observable';
+import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
+import { overlayConfigFactory } from 'ngx-modialog';
+import { TimeTracking, Case } from 'app/models/case';
 import { TaskCategory, Associates } from 'app/shared/constants';
 import { DropDownModel } from 'app/models/dropDownModel';
-import { Observable } from 'rxjs/Observable';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { CaseService } from 'app/modules/case/case.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { TaskCategoryDetailComponent } from 'app/modules/case/task-category/task-category-detail/task-category-detail.component';
 
 @Component({
   selector: 'app-time-tracking-detail',
@@ -23,7 +26,7 @@ export class TimeTrackingDetailComponent implements OnInit {
   billedHours: Date;
   hoursSpend: Date;
   constructor(private route: ActivatedRoute, private _notify: NotificationService, private caseService: CaseService,
-    private router: Router, private _sanitizer: DomSanitizer) { }
+    private router: Router, private _sanitizer: DomSanitizer, private modal: Modal) { }
   autocompleListFormatter = (data: any) => {
     let html = `<span>${data.Name} </span>`;
     return this._sanitizer.bypassSecurityTrustHtml(html);
@@ -151,5 +154,17 @@ export class TimeTrackingDetailComponent implements OnInit {
 
   preventInput($event) {
     return false;
+  }
+
+  appTaskCategory() {
+    const resul = this.modal.open(TaskCategoryDetailComponent, overlayConfigFactory({ caseModel: this.model }, BSModalContext));
+    resul.result.then(res => {
+      if (res) {
+        this.caseService.getAllTaskCategories().subscribe(res => {
+          this._notify.success("New Task Category created successfully!");
+          this.taskCategoryList = res;
+        });
+      }
+    });
   }
 }

@@ -68,6 +68,10 @@
                   <section class="profile-timeline" *ngFor="let communication of caseCommunications | orderBy : 'CommunicateDate': true">
                     <div class="profile-timeline-header ">
                       <div class="profile-timeline-user-details ">
+                        <i class="fa" [ngClass]="{'fa-phone': communication.CommunicationType === 'Phone Call',
+                        'fa-envelope': communication.CommunicationType === 'Email', 
+                        'fa-fax': communication.CommunicationType === 'Fax',
+                        'fa-address-card': communication.CommunicationType === 'Message' }"></i>
                         <b>{{communication.CommunicateFromName.replace(',',' ')}}:</b>
                         <a href=javascript:; class="bold ">{{communication.Summary}}</a>
                         <br>
@@ -79,8 +83,8 @@
                       <p>
                         {{communication.CommunicationDetails}}
                       </p>
-                      <a class="mr15" href="javascript:;" (click)="editComment(communication.Id)">
-                        <i class="fa fa-edit mr5"></i>Edit </a>
+                      <!-- <a class="mr15" href="javascript:;" (click)="editComment(communication.Id)">
+                        <i class="fa fa-edit mr5"></i>Edit </a> -->
                     </div>
                   </section>
 

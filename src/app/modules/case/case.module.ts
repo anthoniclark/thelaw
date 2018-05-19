@@ -29,6 +29,9 @@ import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ChipsModule } from 'primeng/chips';
 import { CourtDetailComponent } from './court-detail/court-detail.component';
+import { TaskCategoryDetailComponent } from './task-category/task-category-detail/task-category-detail.component';
+import { StageDetailComponent } from './stage/stage-detail/stage-detail.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -60,13 +63,23 @@ import { CourtDetailComponent } from './court-detail/court-detail.component';
     CaseEvidenceDetailComponent,
     JudgeDetailComponent,
     ContactQuickAddComponent,
-    CourtDetailComponent
+    CourtDetailComponent,
+    TaskCategoryDetailComponent,
+    StageDetailComponent
   ],
   providers: [
     CaseService,
     ContactService,
     Modal
   ],
-  entryComponents: [CaseChangeStatusComponent, CaseAppealTypeDetailComponent, JudgeDetailComponent, ContactQuickAddComponent, CourtDetailComponent]
+  entryComponents: [
+    CaseChangeStatusComponent,
+    CaseAppealTypeDetailComponent,
+    JudgeDetailComponent,
+    ContactQuickAddComponent,
+    CourtDetailComponent,
+    TaskCategoryDetailComponent,
+    StageDetailComponent
+  ]
 })
 export class CaseModule { }

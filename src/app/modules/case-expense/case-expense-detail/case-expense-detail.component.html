@@ -30,9 +30,7 @@
                     <!-- <span class="req">*</span> -->
                   </label>
                   <!-- [class.inValidField]="caseExpenseForm.submitted && !model.CaseId" -->
-                  <select class="form-control" [(ngModel)]="model.CaseId" 
-                  
-                    id="CaseId" name="CaseId" #CaseId="ngModel" (change)="caseSelectionChange()">
+                  <select class="form-control" [(ngModel)]="model.CaseId" id="CaseId" name="CaseId" #CaseId="ngModel" (change)="caseSelectionChange()">
                     <option value="">Select Case</option>
                     <option *ngFor="let case of cases" value={{case.Id}}>
                       {{case.CaseNo}}
@@ -178,7 +176,7 @@
             <div class="hr-line-dashed"></div>
             <div class="row">
               <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
-                <i class="fa fa-times-circle mr5"></i> Cancel
+                <i class="fa fa-times-circle mr5"></i> Back
               </a>
               <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
                 <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}

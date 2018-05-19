@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from 'app/lib/http/http-client.service';
-import { Case, CaseStatus, CaseCommunication, TimeTracking, CaseNote, Document, AppealType, CaseEvidence, Judge, ContactQuickAdd } from 'app/models/case';
+import { Case, CaseStatus, CaseCommunication, TimeTracking, CaseNote, Document, AppealType, CaseEvidence, Judge, ContactQuickAdd, TaskCategory, Stage } from 'app/models/case';
 import { Page, Sorting } from 'app/models/page';
 import { environment } from 'environments/environment';
 
@@ -480,7 +480,28 @@ export class CaseService {
     }).catch((err: any) => {
       throw err;
     });
+  }
 
+  addTaskCategory(model: TaskCategory) {
+    return this.httpService.post(`TaskCategory/Create`, model).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  addStage(model: Stage) {
+    return this.httpService.post(`Stage/Create`, model).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
   }
 
   getCaseEvidencePageData(caseId: number, page: Page, sort: Sorting, filterColumn?: string, filterValue?: string) {

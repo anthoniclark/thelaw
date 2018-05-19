@@ -87,15 +87,16 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="Summary">Summary</label>
-                  <textarea type="text" id="Summary" name="Summary" maxlength="250" class="form-control" [(ngModel)]="model.Summary" #Summary="ngModel"></textarea>
+                  <label for="Summary">Title</label>
+                  <input type="text" id="Summary" name="Summary" maxlength="250" class="form-control" [(ngModel)]="model.Summary" #Summary="ngModel"
+                  />
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CommunicationDetails">Communication Details</label>
-                  <input type="text" id="CommunicationDetails" name="CommunicationDetails" maxlength="250" class="form-control" [(ngModel)]="model.CommunicationDetails"
-                    #CommunicationDetails="ngModel" />
+                  <textarea type="text" id="CommunicationDetails" name="CommunicationDetails" maxlength="250" class="form-control" [(ngModel)]="model.CommunicationDetails"
+                    #CommunicationDetails="ngModel"></textarea>
                 </div>
               </div>
             </div>
@@ -120,7 +121,7 @@
             <div class="hr-line-dashed"></div>
             <div class="row">
               <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
-                <i class="fa fa-times-circle mr5"></i> Cancel
+                <i class="fa fa-times-circle mr5"></i> Back
               </a>
               <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
                 <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}

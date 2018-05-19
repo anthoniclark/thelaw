@@ -776,3 +776,11 @@ input:read-only {border: none;}
   .widget.style1 h2 {
     font-size: 20px;
   }
+
+  .dropdown-menu {
+    min-width: 140px;
+  }
+
+  .mb0 {
+    margin-bottom: 0px !important;
+  }

@@ -110,6 +110,16 @@ export class AppealType {
     AppealTypeName: string;
 }
 
+export class TaskCategory {
+    Id: number;
+    TaskCategoryName: string;
+}
+
+export class Stage {
+    Id: number;
+    StageName: string;
+}
+
 export class CaseEvidence {
     Id: number;
     EvidenceName: string;

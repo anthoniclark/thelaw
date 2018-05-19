@@ -35,9 +35,9 @@
             <p-column field="CommunicateToName" [sortable]="true" header="Communicate To"></p-column>
             <p-column field="Id" [sortable]="false" header="Actions">
               <ng-template let-data="rowData" pTemplate="body">
-                <button (click)="editClick(data.Id)" class="btn-white btn btn-xs">
+                <!-- <button (click)="editClick(data.Id)" class="btn-white btn btn-xs">
                   <i class="fa fa-edit"></i>
-                </button>
+                </button> -->
                 <button (click)="deleteClick(data.Id)" class="btn-white btn btn-xs">
                   <i class="fa fa-trash"></i>
                 </button>
