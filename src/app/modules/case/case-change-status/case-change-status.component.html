@@ -10,7 +10,7 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="StageID">Stage</label>
-          <a class="pull-right" (click)="addStage()" *ngIf="!isViewModel">
+          <a class="pull-right" (click)="addStage()">
             <i aria-hidden="true" class="fa fa-plus"></i> Create New
           </a>
           <select class="form-control" [(ngModel)]="model.StageID" id="StageID" name="StageID" #StageID="ngModel">

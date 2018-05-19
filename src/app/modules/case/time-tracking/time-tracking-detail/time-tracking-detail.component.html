@@ -63,7 +63,7 @@
                   <label for="TaskCategory">Task Category
                     <span class="req">*</span>
                   </label>
-                  <a class="pull-right" (click)="appTaskCategory()" *ngIf="!isViewModel">
+                  <a class="pull-right" (click)="appTaskCategory()">
                     <i aria-hidden="true" class="fa fa-plus"></i> Create New
                   </a>
                   <select class="form-control" [(ngModel)]="model.TaskCategory" [class.inValidField]="timeTrackingForm.submitted && !model.TaskCategoryName"
