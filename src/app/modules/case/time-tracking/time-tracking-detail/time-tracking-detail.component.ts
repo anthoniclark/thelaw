@@ -24,7 +24,14 @@ export class TimeTrackingDetailComponent implements OnInit {
   taskCategoryList: Array<DropDownModel> = [];
   addCase: boolean = false;
   billedHours: Date;
-  hoursSpend: Date;
+  HoursSpend: string;
+
+  seconds: number = 0;
+  minutes: number = 0;
+  hours: number = 0;
+  running: boolean = false;
+  interval: any;
+
   constructor(private route: ActivatedRoute, private _notify: NotificationService, private caseService: CaseService,
     private router: Router, private _sanitizer: DomSanitizer, private modal: Modal) { }
   autocompleListFormatter = (data: any) => {
@@ -63,9 +70,9 @@ export class TimeTrackingDetailComponent implements OnInit {
           this.billedHours.setMinutes(+arrTime[1]);
           time = (this.model.WorkedHours / 60).toString();
           arrTime = time.split(".");
-          this.hoursSpend = new Date();
-          this.hoursSpend.setHours(+arrTime[0]);
-          this.hoursSpend.setMinutes(+arrTime[1]);
+          // this.hoursSpend = new Date();
+          // this.hoursSpend.setHours(+arrTime[0]);
+          // this.hoursSpend.setMinutes(+arrTime[1]);
         }, err => {
           this._notify.error(err.Result);
         });
@@ -124,9 +131,9 @@ export class TimeTrackingDetailComponent implements OnInit {
     const date = new Date(this.billedHours);
     this.model.AssociateId = this.model.AssociateId["Id"];
     this.model.BilledHours = (+date.getHours() * 60) + date.getMinutes();
-    const WorkedHours = new Date(this.hoursSpend);
+    //const WorkedHours = new Date(this.hoursSpend);
     this.model.CaseId = this.caseDetail.Id;
-    this.model.WorkedHours = (+WorkedHours.getHours() * 60) + WorkedHours.getMinutes();
+    //this.model.WorkedHours = (+WorkedHours.getHours() * 60) + WorkedHours.getMinutes();
     this.model.TaskCategoryName = this.taskCategoryList.find(x => x.Id.toString() === this.model.TaskCategory.toString()).Name;
     this.caseService.addOrUpdateTimeTracker(this.model).subscribe(
       response => {
@@ -166,5 +173,86 @@ export class TimeTrackingDetailComponent implements OnInit {
         });
       }
     });
+  }
+
+  toggleTimer() {
+    this.running = !this.running;
+    if (this.running) {
+      this.interval = setInterval(() => {
+        this.updateTime();
+      }, 1000);
+    } else {
+      clearInterval(this.interval);
+    }
+  }
+
+  updateTime() {
+    this.seconds++;
+    if (this.seconds === 60) {
+      this.seconds = 0;
+      this.minutes++;
+      if (this.minutes === 60) {
+        this.minutes = 0;
+        this.hours++;
+      }
+    }
+    this.updateWatch();
+  }
+
+  updateWatch() {
+    setTimeout(() => {
+      const hours = ((this.hours * 60) + this.minutes + (this.seconds / 60)) / 60;
+      this.HoursSpend = Math.round(hours * 100) / 100 + 'h';
+    });
+  }
+
+  changeHourSpend() {
+    debugger;
+  }
+
+  convertTextToDecimal(text) {
+    var whatsLeft = text;
+    var hours = 0;
+    var minutes = 0;
+    if (whatsLeft.indexOf("h") > 0) {
+      var arrHours = whatsLeft.split("h");
+      hours = parseFloat(arrHours[0]);
+      if (arrHours[1] != null) {
+        whatsLeft = arrHours[1];
+      }
+      else {
+        whatsLeft = "";
+      }
+    }
+    if (whatsLeft.indexOf("m") > 0) {
+      var arrMinutes = whatsLeft.split("m");
+      minutes = parseFloat(arrMinutes[0]);
+    }
+
+    if (whatsLeft.indexOf(":") > 0) {
+      var arrClock = whatsLeft.split(":");
+      hours = parseFloat(arrClock[0]);
+      minutes = parseFloat(arrClock[1]);
+    }
+
+    if (hours + minutes == 0 && parseFloat(whatsLeft) == NaN) {
+      hours = parseFloat(whatsLeft);
+    }
+
+    if (hours + minutes == 0 && parseFloat(whatsLeft) != NaN) {
+      hours = parseFloat(whatsLeft);
+    }
+
+    if (hours + minutes == 0) {
+      // $("#TimeEntry_Hours_TimeString").addClass("input-validation-error");
+      // $("#TimeEntry_Hours").val(null);
+    }
+    else {
+      //$("#TimeEntry_Hours_TimeString").removeClass("input-validation-error");
+    }
+
+    var value = { hours: hours, minutes: minutes, decimal: (hours + (minutes / 60)) };
+
+    return value;
   }
 }

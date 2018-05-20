@@ -83,16 +83,17 @@
                   <label for="HoursSpend">Hours spend - (Worked Hours)
                     <span class="req">*</span>
                   </label>
-                  <!-- <input class="form-control" type="number" id="HoursSpend" required name="HoursSpend" pattern="^\d+(\.\d{1,2})?$" step="1"
-                    [(ngModel)]="model.WorkedHours" #HoursSpend="ngModel" [class.inValidField]="timeTrackingForm.submitted && !HoursSpend.valid"
-                  /> -->
-
-                  <p-calendar id="HoursSpend" [(ngModel)]="hoursSpend" #HoursSpend="ngModel" required name="HoursSpend" [class.inValidField]="timeTrackingForm.submitted && !HoursSpend.valid"
-                    inputStyleClass="form-control" (keypress)="preventInput($event)" timeOnly="true"></p-calendar>
-                  <label *ngIf="(timeTrackingForm.submitted || HoursSpend.dirty) && HoursSpend.errors && !HoursSpend.valid" class="error">
+                  <!-- <p-calendar id="HoursSpend" [(ngModel)]="hoursSpend" #HoursSpend="ngModel" required name="HoursSpend" [class.inValidField]="timeTrackingForm.submitted && !HoursSpend.valid"
+                    inputStyleClass="form-control" (keypress)="preventInput($event)" timeOnly="true"></p-calendar> -->
+                  <input type="text" class="form-control" required name="HoursSpend" [(ngModel)]="HoursSpend" />
+                  <label *ngIf="(timeTrackingForm.submitted && !HoursSpend)" class="error">
                     Please enter Hours spend</label>
-                  <!-- <label *ngIf="(timeTrackingForm.submitted || HoursSpend.dirty) && HoursSpend.errors && HoursSpend.errors['pattern']" class="error">
-                    Enter Valid Hours spend</label> -->
+
+                  <button type="button" (click)="toggleTimer()" [disabled]="isLoading" class="btn btn-primary mr5">
+                    <i class="fa fa-clock mr5"></i> {{ running ? 'Stop' : 'Start' }} Timer
+                  </button>
+                  <div>{{hours | numberpad: 2}}:{{minutes | numberpad: 2}}:{{seconds | numberpad: 2}}</div>
+
                 </div>
               </div>
             </div>
@@ -128,8 +129,6 @@
                 </div>
               </div>
             </div>
-
-
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
@@ -150,15 +149,14 @@
               <div class="col-sm-6" *ngIf="addCase">
                 <div class="form-group">
                   <label for="caseno">Case No.
-                    <span class="req">*</span>
+                    <!-- <span class="req">*</span> -->
                   </label>
                   <input ngui-auto-complete class="form-control" id="caseno" [(ngModel)]="caseDetail.CaseNo" name="caseno" [source]="caseNameSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" value-property-name="Id"
-                    (valueChanged)="onSelectCaseName($event)" required display-property-name="Name" #caseno="ngModel" [class.inValidField]="timeTrackingForm.submitted && !caseno.valid"
-                  />
-                  <label *ngIf="timeTrackingForm.submitted && !caseno.valid" class="error">
+                    (valueChanged)="onSelectCaseName($event)" required display-property-name="Name" #caseno="ngModel" />
+                  <!-- <label *ngIf="timeTrackingForm.submitted && !caseno.valid" class="error">
                     Please select Case No
-                  </label>
+                  </label> -->
                 </div>
 
               </div>

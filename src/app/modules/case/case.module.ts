@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Debounce } from 'angular2-debounce';
 import { CaseListComponent } from './case-list/case-list.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { CaseService } from './case.service';
@@ -43,7 +44,8 @@ import { StageDetailComponent } from './stage/stage-detail/stage-detail.componen
     DataTableModule,
     CalendarModule,
     FileUploadModule,
-    ChipsModule
+    ChipsModule,
+    Debounce
   ],
   declarations: [
     CaseListComponent,
