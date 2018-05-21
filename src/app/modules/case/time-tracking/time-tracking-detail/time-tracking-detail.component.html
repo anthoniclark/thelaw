@@ -85,12 +85,13 @@
                   </label>
                   <!-- <p-calendar id="HoursSpend" [(ngModel)]="hoursSpend" #HoursSpend="ngModel" required name="HoursSpend" [class.inValidField]="timeTrackingForm.submitted && !HoursSpend.valid"
                     inputStyleClass="form-control" (keypress)="preventInput($event)" timeOnly="true"></p-calendar> -->
-                  <input type="text" class="form-control" required name="HoursSpend" [(ngModel)]="HoursSpend" />
+                  <input type="text" class="form-control" required name="HoursSpend" [(ngModel)]="HoursSpend" ng2-debounce [ng2dEvent]="'change'"
+                    (ng2dOnEvent)="changeHourSpend($event)" [ng2dDelay]="1500" [disabled]="running" />
                   <label *ngIf="(timeTrackingForm.submitted && !HoursSpend)" class="error">
                     Please enter Hours spend</label>
 
                   <button type="button" (click)="toggleTimer()" [disabled]="isLoading" class="btn btn-primary mr5">
-                    <i class="fa fa-clock mr5"></i> {{ running ? 'Stop' : 'Start' }} Timer
+                    <i class="fa fa-clock-o mr5"></i> {{ running ? 'Stop' : 'Start' }} Timer
                   </button>
                   <div>{{hours | numberpad: 2}}:{{minutes | numberpad: 2}}:{{seconds | numberpad: 2}}</div>
 

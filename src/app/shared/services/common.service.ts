@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from 'app/lib/http/http-client.service';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class CommonService {
 
   private tenent_name: string;
+  hourSpend: Subject<string> = new Subject<string>();
 
   constructor(private httpService: HttpClientService) { }
 

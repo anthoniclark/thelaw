@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
@@ -10,12 +10,14 @@ import { DropDownModel } from 'app/models/dropDownModel';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { CaseService } from 'app/modules/case/case.service';
 import { TaskCategoryDetailComponent } from 'app/modules/case/task-category/task-category-detail/task-category-detail.component';
+import { CommonService } from '../../../../shared/services/common.service';
 
 @Component({
   selector: 'app-time-tracking-detail',
   templateUrl: './time-tracking-detail.component.html'
 })
-export class TimeTrackingDetailComponent implements OnInit {
+export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
+
   model: TimeTracking = new TimeTracking();
   isLoading: boolean = false;
   paramId: string;
@@ -31,14 +33,30 @@ export class TimeTrackingDetailComponent implements OnInit {
   hours: number = 0;
   running: boolean = false;
   interval: any;
+  onehour: number = 3600000;
+  onemin: number = 60000;
+  onesec: number = 1000;
+  totalElapsed;
+  startTime;
 
   constructor(private route: ActivatedRoute, private _notify: NotificationService, private caseService: CaseService,
-    private router: Router, private _sanitizer: DomSanitizer, private modal: Modal) { }
+    private router: Router, private _sanitizer: DomSanitizer, private modal: Modal, private commonService: CommonService) { }
+
   autocompleListFormatter = (data: any) => {
     let html = `<span>${data.Name} </span>`;
     return this._sanitizer.bypassSecurityTrustHtml(html);
   }
+
+  ngOnDestroy(): void {
+    this.commonService.hourSpend.unsubscribe();
+  }
+
   ngOnInit() {
+    this.commonService.hourSpend.subscribe(res => {
+      debugger;
+      this.HoursSpend = res;
+      this.changeHourSpend(null);
+    });
     this.route.params.subscribe(param => this.paramId = param['id']);
     this.route.params.subscribe(param => this.model.CaseId = param['caseId']);
     this.caseService.getAllTaskCategories().subscribe(response => {
@@ -178,6 +196,7 @@ export class TimeTrackingDetailComponent implements OnInit {
   toggleTimer() {
     this.running = !this.running;
     if (this.running) {
+      this.startTime = (new Date).getTime();
       this.interval = setInterval(() => {
         this.updateTime();
       }, 1000);
@@ -206,8 +225,18 @@ export class TimeTrackingDetailComponent implements OnInit {
     });
   }
 
-  changeHourSpend() {
+  changeHourSpend(e) {
     debugger;
+    const timeValue = this.convertTextToDecimal(this.HoursSpend);
+    this.setElapsed(timeValue.hours, timeValue.minutes, 0);
+    setTimeout(() => {
+      let elapsed = this.getElapsed();
+      this.hours = elapsed.hours;
+      this.minutes = elapsed.minutes;
+      this.seconds = elapsed.seconds;
+      var hours = ((elapsed.hours * 60) + elapsed.minutes + (elapsed.seconds / 60)) / 60;
+      this.HoursSpend = Math.round(hours * 100) / 100 + "h";
+    }, 100);
   }
 
   convertTextToDecimal(text) {
@@ -254,5 +283,27 @@ export class TimeTrackingDetailComponent implements OnInit {
     var value = { hours: hours, minutes: minutes, decimal: (hours + (minutes / 60)) };
 
     return value;
+  }
+
+  setElapsed(n, t, i) {
+    this.totalElapsed = 0;
+    this.totalElapsed += n * this.onehour;
+    this.totalElapsed += t * this.onemin;
+    this.totalElapsed += i * this.onesec;
+    this.totalElapsed = Math.max(this.totalElapsed, 0)
+  }
+
+  getElapsed() {
+    var t: number = 0, i: number = 0, r: number = 0;
+    let n: number = 0, u;
+    return this.running && (n = (new Date).getTime() - this.startTime),
+      n += this.totalElapsed,
+      t = parseInt((n / this.onehour).toString()),
+      n %= this.onehour,
+      i = parseInt((n / this.onemin).toString()),
+      n %= this.onemin,
+      r = parseInt((n / this.onesec).toString()),
+      u = n % this.onesec,
+      { hours: t, minutes: i, seconds: r, milliseconds: u }
   }
 }

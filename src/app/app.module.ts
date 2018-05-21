@@ -54,6 +54,9 @@ import { HeaderComponent } from 'app/containers/layout/components/header/header.
 import { SuggestionComponent } from './components/suggestion/suggestion.component';
 import { environment } from 'environments/environment';
 import { ChangeThemeComponent } from './components/change-theme/change-theme.component';
+import { TimerComponent } from './containers/layout/components/timer/timer.component';
+
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,8 @@ import { ChangeThemeComponent } from './components/change-theme/change-theme.com
     SidebarComponent,
     NavbarComponent,
     SuggestionComponent,
-    ChangeThemeComponent
+    ChangeThemeComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +84,8 @@ import { ChangeThemeComponent } from './components/change-theme/change-theme.com
     NgxDatatableModule,
     ModalModule.forRoot(),
     BootstrapModalModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    OverlayPanelModule
   ],
   providers: [
     CommonService,
