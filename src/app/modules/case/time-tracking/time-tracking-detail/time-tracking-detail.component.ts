@@ -32,6 +32,7 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
   minutes: number = 0;
   hours: number = 0;
   running: boolean = false;
+  started: boolean = false;
   interval: any;
   onehour: number = 3600000;
   onemin: number = 60000;
@@ -194,6 +195,9 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
   }
 
   toggleTimer() {
+    if (!this.started) {
+      this.started = true;
+    }
     this.running = !this.running;
     if (this.running) {
       this.startTime = (new Date).getTime();

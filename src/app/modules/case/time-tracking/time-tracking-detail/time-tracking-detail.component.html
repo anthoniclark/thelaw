@@ -90,10 +90,10 @@
                   <label *ngIf="(timeTrackingForm.submitted && !HoursSpend)" class="error">
                     Please enter Hours spend</label>
 
-                  <button type="button" (click)="toggleTimer()" [disabled]="isLoading" class="btn btn-primary mr5">
+                  <button type="button" (click)="toggleTimer()" [disabled]="isLoading" class="btn btn-primary width100 m-t-sm">
                     <i class="fa fa-clock-o mr5"></i> {{ running ? 'Stop' : 'Start' }} Timer
                   </button>
-                  <div>{{hours | numberpad: 2}}:{{minutes | numberpad: 2}}:{{seconds | numberpad: 2}}</div>
+                  <div *ngIf="started" class="label-stopwatch text-center m-t-sm">{{hours | numberpad: 2}}:{{minutes | numberpad: 2}}:{{seconds | numberpad: 2}}</div>
 
                 </div>
               </div>

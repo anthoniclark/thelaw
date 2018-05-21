@@ -1,23 +1,28 @@
 <div (click)="timerClick($event, op3)">
-  <div *ngIf="started">{{hours | numberpad: 2}}:{{minutes | numberpad: 2}}:{{seconds | numberpad: 2}}</div>
-  <div *ngIf="!started">
+  <div class="btn btn-primary" *ngIf="started">{{hours | numberpad: 2}}:{{minutes | numberpad: 2}}:{{seconds | numberpad: 2}}</div>
+  <div class="btn btn-primary" *ngIf="!started">
     <i class="fa fa-clock-o mr5"></i>
     Start Timer
   </div>
 </div>
-<p-overlayPanel [showCloseIcon]="true" styleClass="calander-overlay" appendTo="body" class="calander-overlay" #op3>
+<p-overlayPanel [showCloseIcon]="true" styleClass="timer-overlay" appendTo="body" class="timer-overlay" #op3>
   <div>
-    <div class="calander-popup-title ">
+    <div class="text-center">
       <h3>Timer</h3>
     </div>
+
     <div>
-      <span (click)="toggleTimer()">
-        <i class="fa" [ngClass]="{'fa-play': !running, 'fa-pause':running}"></i>
-      </span>
-      <div>{{hours | numberpad: 2}}:{{minutes | numberpad: 2}}:{{seconds | numberpad: 2}}</div>
+      <div class="timer-inner">
+        <div class="timer-button  btn tooltips" (click)="toggleTimer()">
+          <i class="fa" [ngClass]="{'fa-play': !running, 'fa-pause':running}"></i>
+        </div>
+
+        <div id="timer-time" class="timer-time">
+          {{hours | numberpad: 2}}:{{minutes | numberpad: 2}}:{{seconds | numberpad: 2}}</div>
+      </div>
     </div>
-    <div>
-      <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
+    <div class="text-center">
+      <a style="color: #000" href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
         <i class="fa fa-times-circle mr5"></i> Cancel
       </a>
       <button type="button" (click)="SaveClick($event, op3)" class="btn btn-primary mr5">

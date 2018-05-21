@@ -784,3 +784,51 @@ input:read-only {border: none;}
   .mb0 {
     margin-bottom: 0px !important;
   }
+
+  .timer-inner {
+    padding-top: 4px;
+    padding-bottom: 0px;
+    text-align: center;
+}
+
+.timer-button {
+  color: #368ee0;
+  padding-bottom: 5px;
+  padding-top: 0px;
+  margin-bottom: 10px;
+  font-weight: 100;
+  padding-left: 3px;
+  padding-right: 3px;
+  border-radius: 0px !important;
+  font-size: 2em;
+}
+.timer-time {
+  font-size: 2.5em;
+  color: #A4A5A5;
+  display: inline;
+}
+
+.timer-overlay .ui-overlaypanel-content{
+  width: 250px;
+  max-width: 250px;
+  min-height: 150px;
+  max-height: 300px;
+  background-color:#fff;
+  color: #000;  
+}
+
+.label-stopwatch {
+  display: block;
+  font-size: 35px;
+  margin-top: 10px;
+  background-color: transparent !important;
+  color: #6b6b6b !important;
+}
+
+.width100{
+  width: 100%;
+}
+
+.pt10 {
+  padding-top: 10px;
+}
