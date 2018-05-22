@@ -27,7 +27,7 @@ export class ResponseInterceptor implements HttpInterceptor {
 
   addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
     if (token) {
-      return req.clone({ setHeaders: { Authorization: 'Bearer ' + token } });
+      return req.clone({ setHeaders: { Authorization: 'Basic ' + token } });
     } else {
       return req;
     }

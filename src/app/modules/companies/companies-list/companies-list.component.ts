@@ -88,7 +88,7 @@ export class CompaniesListComponent implements OnInit {
   }
 
   editClick(id) {
-    this.router.navigateByUrl('/companies/' + id);
+    this.router.navigateByUrl('companies/' + id);
   }
 
   onSort(sort: any) {

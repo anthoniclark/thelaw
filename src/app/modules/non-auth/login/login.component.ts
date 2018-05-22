@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { Login } from 'app/models/login';
 import { LoginService } from 'app/modules/non-auth/login/login.service';
+import { AuthService } from 'app/shared/services/auth.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   error: string;
   isLoading: boolean;
 
-  constructor(private router: Router, private loginService: LoginService) {
+  constructor(private router: Router, private loginService: LoginService, private authService: AuthService) {
     this.isLoading = false;
   }
 
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.model).subscribe(res => {
       this.isLoading = false;
       if (res) {
-        this.router.navigate(['/']);
+        const tenent = this.authService.getTenent();
+        this.router.navigateByUrl(`/${tenent}`);
       } else {
         this.error = 'Incorrect username/password';
       }

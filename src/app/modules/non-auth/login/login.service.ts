@@ -12,7 +12,7 @@ export class LoginService {
   login(loginModel: Login) {
     return Observable.create(observer => {
       if (loginModel.username === 'test' && loginModel.password === 'test') {
-        this.authService.setAuhToken('any-token-string');
+        this.authService.setAuhToken('156109970ff0481ebd2e4a3cb211456d');
         observer.next(true);
       } else {
         observer.next(false);

@@ -3,11 +3,15 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { IHttpOptions, IRequestOptions } from 'app/shared/interfaces/http-interface';
 import { environment } from 'environments/environment';
 import { RequestOptions } from '@angular/http';
+import { AuthService } from 'app/shared/services/auth.service';
 
 @Injectable()
 export class HttpClientService {
+  tenent_name: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) {
+    this.tenent_name = authService.getTenent();
+  }
 
   get(url: string, headers?: any, params?: any, options?: IHttpOptions) {
     url = this.updateUrl(url);
@@ -41,7 +45,7 @@ export class HttpClientService {
 
   private updateUrl(req: string) {
     if (req.indexOf('http://') == -1)
-      return environment.origin + req;
+    return `${environment.origin}${this.tenent_name}/${req}`;
     else
       return req;
   }

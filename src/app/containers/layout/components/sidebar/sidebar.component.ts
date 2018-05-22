@@ -29,8 +29,9 @@ export class SidebarComponent {
   }
 
   logout() {
+    const tenent = this.authService.getTenent();
     this.authService.setAuhToken('');
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl(`/${tenent}/login`);
   }
 
 }

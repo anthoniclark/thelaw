@@ -17,6 +17,14 @@ export class AuthService {
     localStorage.setItem('auth-token', token);
   }
 
+  getTenent() {
+    return localStorage.getItem('tenent_name') || null;
+  }
+
+  setTenent(tenent_name: string) {
+    localStorage.setItem('tenent_name', tenent_name);
+  }
+
   refreshToken(): Observable<string> {
     /*
         The call that goes in here will use the existing refresh token to call

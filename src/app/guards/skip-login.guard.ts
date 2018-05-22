@@ -12,7 +12,8 @@ export class SkipLoginGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
     const token = this.authService.getAuthToken();
     if (token) {
-      this.router.navigate(['/']);
+      const tenent = this.authService.getTenent();
+      this.router.navigateByUrl(`/${tenent}`);
       return false;
     } else {
       return true;
