@@ -87,10 +87,6 @@ export class CompaniesListComponent implements OnInit {
     });
   }
 
-  editClick(id) {
-    this.router.navigateByUrl('companies/' + id);
-  }
-
   onSort(sort: any) {
     this.loadingIndicator = true;
     if (sort && sort.sorts[0]) {
@@ -217,5 +213,4 @@ export class CompaniesListComponent implements OnInit {
   exportCompany() {
     this.companiesService.exportCompanies();
   }
-
 }

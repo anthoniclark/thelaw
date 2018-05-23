@@ -120,7 +120,7 @@ export class CaseListComponent implements OnInit {
   }
 
   editClick(id) {
-    this.router.navigateByUrl('/case/' + id);
+    this.router.navigate(['../../case/', id], { relativeTo: this.route });
   }
 
   deleteClick(id) {

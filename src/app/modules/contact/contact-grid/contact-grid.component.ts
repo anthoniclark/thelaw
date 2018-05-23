@@ -51,10 +51,6 @@ export class ContactGridComponent implements OnInit {
   ngOnInit() {
   }
 
-  editClick(id) {
-    this.router.navigateByUrl('/contact/' + id);
-  }
-
   deleteClick(id, dt) {
     swal({
       title: 'Delete Contact',
@@ -111,17 +107,6 @@ export class ContactGridComponent implements OnInit {
       this.loadingIndicator = false;
       this._notify.error(error.detail);
     });
-  }
-
-  goTOCase(id, totalCases) {
-    if (!totalCases) {
-      return false;
-    }
-    this.router.navigate([`case/contact/${id}`]);
-  }
-
-  viewDetail(id) {
-    this.router.navigate([`contact/view/${id}`]);
   }
 
   paginate(event) {

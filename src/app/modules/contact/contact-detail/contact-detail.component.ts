@@ -426,7 +426,7 @@ export class ContactDetailComponent implements OnInit {
               this._notify.success(` Contact ${this.paramId === 'new' ? 'added' : 'updated'} successfully.`);
               if (this.paramId !== "new") {
                 setTimeout(() => {
-                  this.router.navigate(['/contact']);
+                  this.router.navigate(['../../contact'], { relativeTo: this.route });
                 });
               }
             }, error => {
@@ -441,17 +441,13 @@ export class ContactDetailComponent implements OnInit {
           }
 
           setTimeout(() => {
-            this.router.navigate(['/contact']);
+            this.router.navigate(['../../contact'], { relativeTo: this.route });
           });
         }
       }, err => {
         this.isLoading = false;
         this._notify.error(err.Result);
       });
-  }
-
-  onCancleClick() {
-    this.router.navigate(['/contact']);
   }
 
   toggleIsImportant() {

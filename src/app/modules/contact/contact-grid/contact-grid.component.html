@@ -7,7 +7,7 @@
   </p-column>
   <p-column field="Title" [filter]="cType !== 'NewlyAdded'" [sortable]="true" header="Name">
     <ng-template let-col let-data="rowData" pTemplate="body">
-      <a class="pointer-cursor" (click)=viewDetail(data.Id)>{{data['Title'] }} {{data['FirstName']}} {{data['LastName']}}</a>
+      <a class="pointer-cursor" [routerLink]="['../../contact/view/', data.Id]">{{data['Title'] }} {{data['FirstName']}} {{data['LastName']}}</a>
     </ng-template>
   </p-column>
   <p-column field="Designation" [filter]="cType !== 'NewlyAdded'" [sortable]="true" header="Designation"></p-column>
@@ -18,7 +18,10 @@
   </p-column>
   <p-column header="Total Cases">
     <ng-template let-row="rowData" pTemplate="body">
-      <a (click)="goTOCase(row.Id , row.TotalCases )">
+      <a [routerLink]="['../../case/contact/', row.Id]" *ngIf="row.TotalCases">
+        {{row.TotalCases || '0'}}
+      </a>
+      <a *ngIf="!row.TotalCases">
         {{row.TotalCases || '0'}}
       </a>
     </ng-template>
@@ -26,10 +29,10 @@
 
   <p-column header="Contact Type">
     <ng-template let-row="rowData" pTemplate="body">
-      <button (click)="viewDetail(row.Id)" title="View" class="btn-white btn btn-xs">
+      <button [routerLink]="['../../contact/view/', row.Id]" title="View" class="btn-white btn btn-xs">
         <i class="fa fa-eye" aria-hidden="true"></i>
       </button>
-      <button (click)="editClick(row.Id)" title="edit" class="btn-white btn btn-xs">
+      <button [routerLink]="['../../contact/', row.Id]" title="edit" class="btn-white btn btn-xs">
         <i class="fa fa-edit"></i>
       </button>
       <button (click)="deleteClick(row.Id, dt)" title="delete" class="btn-white btn btn-xs">
@@ -37,70 +40,4 @@
       </button>
     </ng-template>
   </p-column>
-
 </p-dataTable>
-
-<!-- <ngx-datatable class="material" [rows]="_data" [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
-  [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="cType !== 'NewlyAdded'? 70: 40"
-  [footerHeight]="40" [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
-  <ngx-datatable-column *ngIf="cType === 'NewlyAdded' || cType === 'Other' " name="Contact Type" sortable="true" prop="ContactType">
-    <ng-template let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
-  <ngx-datatable-column name="Name" sortable="true" prop="Title">
-    <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-      <div class="custom-sort">
-        <label class="case-no" (click)="sort()">Name</label>
-        <br/>
-        <input type='text' name="case-no" *ngIf="cType !== 'NewlyAdded'" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value"
-          data-column-name="CaseNo" #CaseNo placeholder='Filter...' (keyup)="filterData($event)" />
-      </div>
-    </ng-template>
-
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.Title}} {{row.FirstName}} {{row.LastName}}
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column name="Name" sortable="true" prop="Designation">
-    <ng-template let-column="column" let-sort="sortFn" height="40" ngx-datatable-header-template>
-      <div class="custom-sort">
-        <label class="case-no" (click)="sort()">Designation</label>
-        <br/>
-        <input type='text' name="case-no" *ngIf="cType !== 'NewlyAdded'" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value"
-          data-column-name="Designation" #CaseNo placeholder='Filter...' (keyup)="filterData($event)" />
-      </div>
-    </ng-template>
-    <ng-template let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column name="Important Contact" sortable="true">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      <i class="big-icon important-icon fa {{ row.IsImportant ? 'fa-star' : 'fa-star-o' }}" (click)="toggleImportant(row)" aria-hidden="true"></i>
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column name="Total Cases" sortable="true">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      <a (click)="goTOCase(row.Id , row.TotalCases )">
-        {{row.TotalCases || '0'}}
-      </a>
-    </ng-template>
-  </ngx-datatable-column>
-  <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
-    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-      <button (click)="viewDetail(value)" title="View" class="btn-white btn btn-xs">
-        <i class="fa fa-eye" aria-hidden="true"></i>
-      </button>
-      <button (click)="editClick(value)" title="edit" class="btn-white btn btn-xs">
-        <i class="fa fa-edit"></i>
-      </button>
-      <button (click)="deleteClick(value)" title="delete" class="btn-white btn btn-xs">
-        <i class="fa fa-trash"></i>
-      </button>
-    </ng-template>
-  </ngx-datatable-column>
-</ngx-datatable> -->

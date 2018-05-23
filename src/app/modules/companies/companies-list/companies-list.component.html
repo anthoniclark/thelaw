@@ -3,7 +3,7 @@
     <h2>Companies</h2>
     <ol class="breadcrumb">
       <li>
-        <a [routerLink]="['/']">Home</a>
+        <a [routerLink]="['../../']">Home</a>
       </li>
       <li class="active">
         <strong>Companies</strong>
@@ -11,7 +11,7 @@
     </ol>
   </div>
   <div class="col-lg-2">
-    <button type="button" class="btn btn-primary pull-right m-t-md" (click)='router.navigate(["/companies/new"])'>
+    <button type="button" class="btn btn-primary pull-right m-t-md" [routerLink]="['../../companies/new']">
       <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
   </div>
 </div>
@@ -76,10 +76,10 @@
             <p-column field="CompanySize" [filter]="true" [sortable]="true" header="CompanySize"></p-column>
             <p-column header="Actions">
               <ng-template let-data="rowData" pTemplate="body">
-                <button (click)="editClick(data.Id)" class="btn-white btn btn-xs">
+                <button [routerLink]="['../../companies/', data.Id]" class="btn-white btn btn-xs">
                   <i class="fa fa-edit"></i>
                 </button>
-                <button (click)="deleteClick(data.Id)" class="btn-white btn btn-xs">
+                <button (click)="deleteClick(data.Id, dt)" class="btn-white btn btn-xs">
                   <i class="fa fa-trash"></i>
                 </button>
               </ng-template>

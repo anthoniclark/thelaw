@@ -3,10 +3,10 @@
     <h2>{{ isViewMode ? 'View' : (paramId !='new') ? 'Modify':'Add' }} Contact</h2>
     <ol class="breadcrumb">
       <li>
-        <a [routerLink]="['/']">Home</a>
+        <a [routerLink]="['../../']">Home</a>
       </li>
       <li>
-        <a [routerLink]="['/contact']">Contacts</a>
+        <a [routerLink]="['../../contact']">Contacts</a>
       </li>
       <li class="active">
         <strong>{{ isViewMode ? 'View' : (paramId !='new') ? 'Modify':'Add' }} Contact</strong>
@@ -377,7 +377,7 @@
 
             <div class="row">
               <div class="col-sm-4">
-                <a href=javascript:; (click)="onCancleClick()" class="btn btn-default btn-cancel mr5">
+                <a href=javascript:; [routerLink]="['../../contact']" class="btn btn-default btn-cancel mr5">
                   <i class="fa fa-times-circle mr5"></i> Back
                 </a>
                 <button type="submit" *ngIf="!isViewMode" [disabled]="isLoading" class="btn btn-primary mr5">

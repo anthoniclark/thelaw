@@ -201,16 +201,12 @@ export class CompaniesDetailComponent implements OnInit {
       }
     }, error => {
       this.isLoading = false;
-      if(error.status == 400) {
+      if (error.status == 400) {
         this._notify.error(error.error.ErrorMessage[0]);
-        return;  
+        return;
       }
       this._notify.error(error);
     });
-  }
-
-  onCancleClick() {
-    this.router.navigate(['/companies']);
   }
 
   onFileChange(event: any) {
