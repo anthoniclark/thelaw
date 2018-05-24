@@ -89,7 +89,7 @@ export class DocumentDetailComponent implements OnInit {
               this._notify.success(`Case Document  ${this.paramId === 'new' ? 'added' : 'updated'} successfully.`);
               if (this.paramId !== "new") {
                 setTimeout(() => {
-                  this.router.navigate(['/case/' + this.caseId + '/document']);
+                  this.router.navigate(['../../case/' + this.caseId + '/document'], { relativeTo: this.route });
                 });
               }
             }, error => {
@@ -103,7 +103,7 @@ export class DocumentDetailComponent implements OnInit {
             this._notify.success("Case Document updated successfully.");
           }
           setTimeout(() => {
-            this.router.navigate(['/case/' + this.caseId + '/document']);
+            this.router.navigate(['../../case/' + this.caseId + '/document'], { relativeTo: this.route });
           });
         }
       }, err => {
@@ -151,7 +151,7 @@ export class DocumentDetailComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.router.navigate(['/case/' + this.caseId + '/document']);
+    this.router.navigate([`../../case/${this.caseId}/document`], { relativeTo: this.route });
   }
 
   showDocument() {

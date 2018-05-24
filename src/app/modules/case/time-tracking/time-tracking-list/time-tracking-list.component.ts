@@ -134,7 +134,7 @@ export class TimeTrackingListComponent implements OnInit {
 
 
   editClick(id) {
-    this.router.navigateByUrl(`/case/${this.CaseId}/time-tracking/${id}`);
+    this.router.navigate([`../../case/${this.CaseId}/time-tracking/${id}`], { relativeTo: this.route });
   }
 
   deleteClick(id) {
@@ -173,7 +173,7 @@ export class TimeTrackingListComponent implements OnInit {
   }
 
   createNewTimeTracking() {
-    this.router.navigate([`/case/${this.CaseId}/time-tracking/new`]);
+    this.router.navigate([`../../case/${this.CaseId}/time-tracking/new`], { relativeTo: this.route });
   }
 
 

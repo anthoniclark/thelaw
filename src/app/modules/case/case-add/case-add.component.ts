@@ -260,7 +260,7 @@ export class CaseAddComponent implements OnInit {
           }
 
           setTimeout(() => {
-            this.router.navigate(['/case']);
+            this.router.navigate(['../../case'], { relativeTo: this.route });
           });
         }
       }, err => {
@@ -270,25 +270,7 @@ export class CaseAddComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.router.navigate(['/case']);
-  }
-
-  addCommunication() {
-    this.router.navigate([`/case/${this.paramId}/communication/new`]);
-  }
-
-  addTimeTrackingDetails() {
-    // this.router.navigate([`/case/${this.model.Id}/time-tracking/${this.taskTimeTrackingId || 'new'}`]);
-    this.router.navigate([`/case/${this.paramId}/time-tracking/new`]);
-  }
-
-  addNote() {
-    // this.router.navigate([`/case/${this.model.Id}/time-tracking/${this.taskTimeTrackingId || 'new'}`]);
-    this.router.navigate([`/case/${this.paramId}/note/new`]);
-  }
-
-  addDocument() {
-    this.router.navigate([`/case/${this.paramId}/document/new`]);
+    this.router.navigate(['../../case'], { relativeTo: this.route });
   }
 
   appAppealType() {
@@ -377,7 +359,7 @@ export class CaseAddComponent implements OnInit {
   }
 
   redirectToContact(id: number) {
-    this.router.navigate([`/contact/${id}`]);
+    this.router.navigate([`../../contact/${id}`], { relativeTo: this.route });
   }
 
 }

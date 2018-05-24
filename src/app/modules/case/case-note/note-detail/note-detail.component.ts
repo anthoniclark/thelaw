@@ -110,7 +110,7 @@ export class NoteDetailComponent implements OnInit {
           }
 
           setTimeout(() => {
-            this.router.navigate(['/case/' + this.model.CaseId+'/note']);
+            this.router.navigate([`../../case/${this.model.CaseId}/note`], { relativeTo: this.route });
           });
         }
       }, err => {
@@ -120,7 +120,7 @@ export class NoteDetailComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.router.navigate([`/case/${this.model.CaseId}/note`]);
+    this.router.navigate([`../../case/${this.model.CaseId}/note`], { relativeTo: this.route });
   }
 
 }

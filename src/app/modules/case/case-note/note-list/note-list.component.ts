@@ -109,7 +109,7 @@ export class NoteListComponent implements OnInit {
 
 
   editClick(id) {
-    this.router.navigateByUrl(`/case/${this.CaseId}/note/${id}`);
+    this.router.navigateByUrl(`../../case/${this.CaseId}/note/${id}`, { relativeTo: this.route });
   }
 
   deleteClick(id) {
@@ -126,7 +126,7 @@ export class NoteListComponent implements OnInit {
   }
 
   createNewNote() {
-    this.router.navigate([`/case/${this.CaseId}/note/new`]);
+    this.router.navigate([`../../case/${this.CaseId}/note/new`], { relativeTo: this.route });
   }
 
   paginate(event) {

@@ -29,11 +29,11 @@ export class CommunicationListComponent implements OnInit {
   }
 
   addClick() {
-    this.router.navigateByUrl(`/case/${this.CaseId}/communication/new`);
+    this.router.navigate([`../../case/${this.CaseId}/communication/new`], { relativeTo: this.route });
   }
 
   editClick(id) {
-    this.router.navigateByUrl(`/case/${this.CaseId}/communication/${id}`);
+    this.router.navigate([`/case/${this.CaseId}/communication/${id}`], { relativeTo: this.route });
   }
 
   deleteClick(id) {

@@ -73,7 +73,7 @@ export class DocumentListComponent implements OnInit {
   }
 
   editClick(id) {
-    this.router.navigateByUrl(`/case/${this.CaseId}/document/${id}`);
+    this.router.navigate([`../../case/${this.CaseId}/document/${id}`], { relativeTo: this.route });
   }
 
   onSort(sort: any) {
@@ -124,7 +124,7 @@ export class DocumentListComponent implements OnInit {
   }
 
   createNewDocument() {
-    this.router.navigate([`case/${this.CaseId}/document/new`]);
+    this.router.navigate([`../../case/${this.CaseId}/document/new`], { relativeTo: this.route });
   }
 
   downloadFile(id) {

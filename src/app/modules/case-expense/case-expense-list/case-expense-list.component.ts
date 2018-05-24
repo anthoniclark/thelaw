@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CaseExpenseService } from '../case-expense.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { Page, Sorting, FilterModel } from 'app/models/page';
 import swal from 'sweetalert2';
@@ -34,7 +34,7 @@ export class CaseExpenseListComponent implements OnInit {
   ];
   ds = [{ "caseNo": 1, "children": [{ "expenseType": "Copying", "children": [{ "name": "maulik" }] }, { "expenseType": "Printing", "children": [{ "name": "John" }] }] }, { "caseNo": 2, "children": [{ "expenseType": "Documentation", "children": [{ "name": "Nilay" }] }, { "expenseType": "Research", "children": [{ "name": "Nikolus" }] }] }];
 
-  constructor(private caseExpenseService: CaseExpenseService, public router: Router, private _notify: NotificationService) {
+  constructor(private route: ActivatedRoute, private caseExpenseService: CaseExpenseService, public router: Router, private _notify: NotificationService) {
     this.page.pageNumber = 0;
     this.page.size = 5;
   }
@@ -85,7 +85,7 @@ export class CaseExpenseListComponent implements OnInit {
   }
 
   editClick(id) {
-    this.router.navigateByUrl('/case-expense/' + id);
+    this.router.navigate([`../../case-expense/${id}`], { relativeTo: this.route });
   }
 
   deleteClick(id) {

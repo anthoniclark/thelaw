@@ -88,7 +88,7 @@ export class CaseExpenseDetailComponent implements OnInit {
               this._notify.success(`Case Expense  ${this.paramId === 'new' ? 'added' : 'updated'} successfully.`);
               if (this.paramId !== "new") {
                 setTimeout(() => {
-                  this.router.navigate(['/case-expense']);
+                  this.router.navigate(['../../case-expense'], { relativeTo: this.route });
                 });
               }
             }, error => {
@@ -101,7 +101,7 @@ export class CaseExpenseDetailComponent implements OnInit {
             this._notify.success("Case Expense updated successfully.");
           }
           setTimeout(() => {
-            this.router.navigate(['/case-expense']);
+            this.router.navigate(['../../case-expense'], { relativeTo: this.route });
           });
         }
       }, err => {
@@ -149,7 +149,7 @@ export class CaseExpenseDetailComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.router.navigate(['/case-expense']);
+    this.router.navigate(['../../case-expense'], { relativeTo: this.route });
   }
 
   showDocument() {

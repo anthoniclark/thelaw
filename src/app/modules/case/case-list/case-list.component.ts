@@ -167,23 +167,29 @@ export class CaseListComponent implements OnInit {
   }
 
   showCommunication(id: any) {
-    this.router.navigateByUrl('/case/' + id + '/communication/dashboard');
+    this.router.navigate([`../../case/${id}/communication/dashboard`], { relativeTo: this.route });
+    //this.router.navigateByUrl('/case/' + id + '/communication/dashboard');
   }
   ShowTimeTracker(id: any) {
-    this.router.navigateByUrl(`/case/${id}/time-tracking`);
+    this.router.navigate([`../../case/${id}/time-tracking`], { relativeTo: this.route });
+    //this.router.navigateByUrl();
   }
   ShowNotes(id: any) {
-    this.router.navigateByUrl(`/case/${id}/note`);
+    this.router.navigate([`../../case/${id}/note`], { relativeTo: this.route });
+    //this.router.navigateByUrl();
   }
   ShowCommunications(id: any) {
-    this.router.navigateByUrl(`/case/${id}/communication`);
+    this.router.navigate([`../../case/${id}/communication`], { relativeTo: this.route });
+    //this.router.navigateByUrl();
   }
   ShowEvidence(id: any) {
-    this.router.navigateByUrl(`/case/${id}/evidence`);
+    this.router.navigate([`../../case/${id}/evidence`], { relativeTo: this.route });
+    //this.router.navigateByUrl();
   }
 
   ShowDocuments(id: any) {
-    this.router.navigateByUrl(`/case/${id}/document`);
+    this.router.navigate([`../../case/${id}/document`], { relativeTo: this.route });
+    //this.router.navigateByUrl();
   }
 
   paginate(event) {
@@ -220,7 +226,8 @@ export class CaseListComponent implements OnInit {
   }
 
   viewDetail(id) {
-    this.router.navigateByUrl(`/case/view/${id}`);
+    this.router.navigate(['../../case/view/', id], { relativeTo: this.route });
+    //this.router.navigateByUrl(`/case/view/${id}`);
   }
 
 }

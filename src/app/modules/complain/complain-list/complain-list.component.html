@@ -3,7 +3,7 @@
     <h2>Complains</h2>
     <ol class="breadcrumb">
       <li>
-        <a [routerLink]="['/']">Home</a>
+        <a [routerLink]="['../../']">Home</a>
       </li>
       <li class="active">
         <strong>Complain</strong>
@@ -11,7 +11,7 @@
     </ol>
   </div>
   <div class="col-lg-2">
-    <button type="button" class="btn btn-primary pull-right m-t-md" (click)='router.navigate(["/complain/new"])'>
+    <button type="button" class="btn btn-primary pull-right m-t-md" [routerLink]="['../../complain/new']">
       <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
   </div>
 </div>

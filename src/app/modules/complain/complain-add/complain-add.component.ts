@@ -84,7 +84,7 @@ export class ComplainAddComponent implements OnInit {
           }
 
           setTimeout(() => {
-            this.router.navigate(['/complain']);
+            this.router.navigate(['../../complain'], { relativeTo: this.route });
           });
         }
       }, err => {
@@ -94,6 +94,6 @@ export class ComplainAddComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.router.navigate(['/complain']);
+    this.router.navigate(['../../complain'], { relativeTo: this.route });
   }
 }

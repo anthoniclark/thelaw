@@ -3,7 +3,7 @@
     <h2>Case Expenses</h2>
     <ol class="breadcrumb">
       <li>
-        <a [routerLink]="['/']">Home</a>
+        <a [routerLink]="['../../']">Home</a>
       </li>
       <li class="active">
         <strong>Case Expenses</strong>
@@ -11,7 +11,7 @@
     </ol>
   </div>
   <div class="col-lg-2">
-    <button type="button" class="btn btn-primary pull-right m-t-md" (click)='router.navigate(["/case-expense/new"])'>
+    <button type="button" class="btn btn-primary pull-right m-t-md" [routerLink]="['../../case-expense/new']">
       <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
   </div>
 </div>
@@ -33,7 +33,7 @@
           </div>
 
           <p-dataTable [rowHover]="true" [value]="rows" [responsive]="true" expandableRows="false" [loading]="loadingIndicator" loadingIcon="fa-spinner">
-            <p-column expander="true"  styleClass="col-icon expand-icon">
+            <p-column expander="true" styleClass="col-icon expand-icon">
             </p-column>
             <p-column field="CaseNo" header="Case No">
             </p-column>
@@ -45,7 +45,7 @@
             <ng-template let-data pTemplate="rowexpansion">
               <p-dataTable [rowHover]="true" [value]="data.Categories" [responsive]="true" expandableRows="false" [loading]="loadingIndicator"
                 loadingIcon="fa-spinner">
-                <p-column expander="true"  styleClass="col-icon expand-icon">
+                <p-column expander="true" styleClass="col-icon expand-icon">
                 </p-column>
                 <p-column field="Category" header="Category">
                 </p-column>

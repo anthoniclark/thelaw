@@ -37,14 +37,14 @@ export class CommunicationDashboardComponent implements OnInit {
     });
   }
   editComment(id) {
-    this.router.navigate([`case/${this.CaseId}/communication/${id}`]);
+    this.router.navigate([`../../case/${this.CaseId}/communication/${id}`], { relativeTo: this.route });
   }
 
   goTOListClick() {
-    this.router.navigate([`case/${this.CaseId}/communication`]);
+    this.router.navigate([`../../case/${this.CaseId}/communication`], { relativeTo: this.route });
   }
 
   addClick() {
-    this.router.navigate([`case/${this.CaseId}/communication/new`]);
+    this.router.navigate([`../../case/${this.CaseId}/communication/new`], { relativeTo: this.route });
   }
 }

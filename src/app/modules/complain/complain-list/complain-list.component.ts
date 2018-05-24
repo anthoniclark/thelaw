@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'app/shared/services/notification.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ComplainService } from 'app/modules/complain/complain.service';
 import { FilterModel, Page, Sorting } from 'app/models/page';
 import swal from 'sweetalert2';
@@ -28,7 +28,7 @@ export class ComplainListComponent implements OnInit {
   }];
   pageSize: number = PageSize;
   constructor(private complainService: ComplainService,
-    public router: Router,
+    public router: Router, private route: ActivatedRoute,
     private _notify: NotificationService) {
     this.page.pageNumber = 0;
     this.page.size = 5;
@@ -103,7 +103,7 @@ export class ComplainListComponent implements OnInit {
 
 
   editClick(id) {
-    this.router.navigateByUrl('/complain/' + id);
+    this.router.navigate([`../../complain/${id}`], { relativeTo: this.route });
   }
 
   deleteClick(id, dt) {

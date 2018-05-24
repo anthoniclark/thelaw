@@ -27,7 +27,7 @@ export class ExpenseTypeListComponent implements OnInit {
 
 
   editClick(id) {
-    this.router.navigateByUrl(`/expense-type/${id}`);
+    this.router.navigate([`../../expense-type/${id}`], { relativeTo: this.route });
   }
 
   deleteClick(id) {
