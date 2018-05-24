@@ -274,7 +274,7 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
       hours = parseFloat(whatsLeft);
     }
 
-    if (hours + minutes == 0 && !isNaN(parseFloat(whatsLeft)) {
+    if (hours + minutes == 0 && !isNaN(parseFloat(whatsLeft))) {
       hours = parseFloat(whatsLeft);
     }
     if (isNaN(hours)) {
