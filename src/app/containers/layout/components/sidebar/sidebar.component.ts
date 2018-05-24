@@ -28,6 +28,12 @@ export class SidebarComponent {
     return this.router.url.indexOf(routename) > -1;
   }
 
+  goToHome() {
+    debugger;
+    const tenent = this.authService.getTenent();
+    this.router.navigateByUrl(`/${tenent}`);
+  }
+
   logout() {
     const tenent = this.authService.getTenent();
     this.authService.setAuhToken('');

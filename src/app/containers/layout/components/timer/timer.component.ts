@@ -3,6 +3,7 @@ import { OverlayPanel } from 'primeng/overlaypanel';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../../shared/services/common.service';
 import swal from 'sweetalert2';
+import { AuthService } from 'app/shared/services/auth.service';
 
 @Component({
   selector: 'app-timer',
@@ -22,7 +23,7 @@ export class TimerComponent implements OnInit {
   startTime;
   HoursSpend: string;
 
-  constructor(public router: Router, private commonService: CommonService) { }
+  constructor(public router: Router, private commonService: CommonService, private authServiec: AuthService) { }
 
   ngOnInit() {
   }
@@ -65,7 +66,8 @@ export class TimerComponent implements OnInit {
       this.commonService.hourSpend.next(this.HoursSpend);
       this.HoursSpend = '';
     }, 500);
-    this.router.navigate(['/case/undefined/time-tracking/new']);
+    const tenent = this.authServiec.getTenent();
+    this.router.navigate([`${tenent}/case/undefined/time-tracking/new`]);
   }
 
   timerClick(e, op3: OverlayPanel) {

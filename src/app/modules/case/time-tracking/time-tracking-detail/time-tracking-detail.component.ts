@@ -11,13 +11,13 @@ import { NotificationService } from 'app/shared/services/notification.service';
 import { CaseService } from 'app/modules/case/case.service';
 import { TaskCategoryDetailComponent } from 'app/modules/case/task-category/task-category-detail/task-category-detail.component';
 import { CommonService } from '../../../../shared/services/common.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-time-tracking-detail',
   templateUrl: './time-tracking-detail.component.html'
 })
 export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
-
   model: TimeTracking = new TimeTracking();
   isLoading: boolean = false;
   paramId: string;
@@ -49,7 +49,9 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    //throw new Error("Method not implemented.");
     this.commonService.hourSpend.unsubscribe();
+    this.commonService.hourSpend = new Subject<string>();
   }
 
   ngOnInit() {
@@ -268,14 +270,16 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
       minutes = parseFloat(arrClock[1]);
     }
 
-    if (hours + minutes == 0 && parseFloat(whatsLeft) == NaN) {
+    if (hours + minutes == 0 && isNaN(parseFloat(whatsLeft))) {
       hours = parseFloat(whatsLeft);
     }
 
-    if (hours + minutes == 0 && parseFloat(whatsLeft) != NaN) {
+    if (hours + minutes == 0 && !isNaN(parseFloat(whatsLeft)) {
       hours = parseFloat(whatsLeft);
     }
-
+    if (isNaN(hours)) {
+      hours = 0;
+    }
     if (hours + minutes == 0) {
       // $("#TimeEntry_Hours_TimeString").addClass("input-validation-error");
       // $("#TimeEntry_Hours").val(null);

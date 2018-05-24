@@ -3,7 +3,7 @@
     <ul class="nav metismenu" id="side-menu">
       <li class="nav-header">
         <div class="profile-element" dropdown>
-          <img alt="image" class="img-circle mouse-pointer" src="assets/images/profile_small.jpg" (click)="router.navigate(['/'])">
+          <img alt="image" class="img-circle mouse-pointer" src="assets/images/profile_small.jpg" [routerLink]="['./']">
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
             <span class="clear">
               <span class="block m-t-xs">
@@ -30,7 +30,7 @@
             </li>
           </ul>
         </div>
-        <div class="logo-element mouse-pointer" (click)="router.navigate(['/'])">
+        <div class="logo-element mouse-pointer" (click)="goToHome()">
           LD+
         </div>
       </li>
