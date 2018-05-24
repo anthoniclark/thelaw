@@ -185,7 +185,7 @@ form select:disabled::-ms-expand {
 .ui-datatable a.view-detail {color: blue;}
 [class^="pp-icon-"], [class*="pp-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'practice-panther' !important;
+  font-family: 'pp-font' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
