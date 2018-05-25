@@ -15,10 +15,12 @@ export class LoginService {
       Username: loginModel.username,
       Password: loginModel.password
     };
-
-    return this.httpService.post('UserLogins/Login', model).map((res: any) => {
+    const tenentName = this.authService.getTenent();
+    return this.httpService.post('/UserLogins/Login', model).map((res: any) => {
       if (res.Result) {
-        this.authService.setAuhToken('156109970ff0481ebd2e4a3cb211456d');
+        if (res.Result.sessionId) {
+          this.authService.setAuhToken(res.Result.sessionId);
+        }
         return true;
       }
     });
