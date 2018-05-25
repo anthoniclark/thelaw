@@ -14,6 +14,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/finally';
+import { Router } from '@angular/router';
 
 
 @Injectable()
@@ -21,7 +22,7 @@ export class ResponseInterceptor implements HttpInterceptor {
   isRefreshingToken: boolean;
   tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.isRefreshingToken = false;
   }
 
@@ -41,11 +42,14 @@ export class ResponseInterceptor implements HttpInterceptor {
       }
     }).catch((err: any) => {
       if (err instanceof HttpErrorResponse) {
+        debugger;
         switch ((<HttpErrorResponse>err).status) {
           case 400:
             return this.handle400Error(err);
           case 401:
             return Observable.throw(err.error);
+          case 404:
+            return this.router.navigateByUrl('/');
           case 500:
             return Observable.throw(err.error);
         }
