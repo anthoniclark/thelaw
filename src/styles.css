@@ -372,9 +372,7 @@ label.error {
 }
 
 
-.pt15 {
-    padding-top: 15px;
-}
+
 
 .panel-heading.border { 
     min-height: 50px;
@@ -831,4 +829,12 @@ input:read-only {border: none;}
 
 .pt10 {
   padding-top: 10px;
+}
+
+.pt15 {
+  padding-top: 15px;
+}
+
+.pt8 {
+  padding-top: 8px;
 }
