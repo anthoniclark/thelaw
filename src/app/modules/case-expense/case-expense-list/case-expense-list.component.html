@@ -39,7 +39,7 @@
             </p-column>
             <p-column header="Total">
               <ng-template let-col let-data="rowData" pTemplate="body">
-                <span>{{data.Amount}}</span>
+                <b>{{data.Amount}}</b>
               </ng-template>
             </p-column>
             <ng-template let-data pTemplate="rowexpansion">
@@ -51,7 +51,7 @@
                 </p-column>
                 <p-column header="Total">
                   <ng-template let-col let-data="rowData" pTemplate="body">
-                    <span>{{data.Amount}}</span>
+                    <b>{{data.Amount}}</b>
                   </ng-template>
                 </p-column>
                 <ng-template let-expenseDetail pTemplate="rowexpansion">
