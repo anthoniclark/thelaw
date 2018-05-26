@@ -17,6 +17,7 @@ export class TenentGuard implements CanActivate {
       const body = { Tenant: next.params.tenent_id };
       const url = environment.origin + next.params.tenent_id + '/UserLogins/CheckTenant';
       return this.httpServices.post(url, body).map((res: any) => {
+        debugger;
         if (res.Result) {
           this.authService.setTenent(next.params.tenent_id);
           return true;

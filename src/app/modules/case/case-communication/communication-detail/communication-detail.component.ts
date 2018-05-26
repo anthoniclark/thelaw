@@ -29,7 +29,7 @@ export class CommunicationDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(param => this.paramId = param['id']);
     this.route.params.subscribe(param => this.model.CaseId = param['caseId']);
-    if (this.model.CaseId.toString() !== "undefined") {
+    if (this.model.CaseId.toString() != "0") {
       this.caseService.getCaseById(this.model.CaseId).subscribe(res => {
         this.caseDetail = res;
         this.contactService.getContactById(res.ClientId).subscribe(result => {

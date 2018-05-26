@@ -31,7 +31,7 @@ export class DocumentDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(param => this.paramId = param["id"]);
     this.route.params.subscribe(param => this.caseId = param["caseId"]);
-    if (this.caseId.toString() !== "undefined") {
+    if (this.caseId.toString() != "0") {
       this.model.CaseId = this.caseId;
     } else {
       this.model.CaseId = undefined;

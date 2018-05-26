@@ -35,7 +35,7 @@ export class CaseEvidenceDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(param => this.paramId = param["id"]);
     this.route.params.subscribe(param => this.caseId = param["caseId"]);
-    if (this.caseId.toString() !== "undefined") {
+    if (this.caseId.toString() != "0") {
       this.caseService.getCaseById(this.caseId).subscribe(
         response => {
           this.caseModel = <Case>response;

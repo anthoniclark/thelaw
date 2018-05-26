@@ -67,7 +67,7 @@ export class TimerComponent implements OnInit {
       this.HoursSpend = '';
     }, 500);
     const tenent = this.authServiec.getTenent();
-    this.router.navigate([`${tenent}/case/undefined/time-tracking/new`]);
+    this.router.navigate([`${tenent}/case/0/time-tracking/new`]);
   }
 
   timerClick(e, op3: OverlayPanel) {

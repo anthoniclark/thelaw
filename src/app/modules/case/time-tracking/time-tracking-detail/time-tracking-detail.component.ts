@@ -69,7 +69,7 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
     }, err => {
       this._notify.error(err.detail);
     });
-    if (this.model.CaseId.toString() !== "undefined") {
+    if (this.model.CaseId.toString() != "0") {
       this.caseService.getCaseById(this.model.CaseId).subscribe(response => {
         this.caseDetail = response;
       }, error => {

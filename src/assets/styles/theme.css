@@ -1412,7 +1412,8 @@ div.dt-button-info {
 
 /* CIRCLE */
 .img-circle {
-  border-radius: 50%; }
+  border-radius: 50%;
+  max-width: 50px; }
 
 .btn-circle {
   width: 30px;
