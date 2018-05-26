@@ -124,7 +124,6 @@ export class EventsDetailComponent implements OnInit, AfterViewInit {
   }
 
   save() {
-    this.isLoading = true;
     const sDate = new Date(this.model.StartTime);
     const eDate = new Date(this.model.EndTime);
     const fromDate = new Date(this.model.FromDateTime).getDate();
@@ -145,7 +144,8 @@ export class EventsDetailComponent implements OnInit, AfterViewInit {
     this.model.AttendeesId = [];
     this.selectedAttendees.forEach(data => {
       this.model.AttendeesId.push(data.id);
-    })
+    });
+    this.isLoading = true;
     this.eventsService.addOrUpdateEvent(this.model).subscribe(res => {
       setTimeout(() => {
         this.isLoading = false;
