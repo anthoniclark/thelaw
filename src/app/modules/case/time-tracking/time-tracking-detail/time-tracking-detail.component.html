@@ -33,15 +33,14 @@
                   <label for="AssociateName">Associate Name
                     <span class="req">*</span>
                   </label>
-                  <input ngui-auto-complete class="form-control" id="AssociateName" [(ngModel)]="model.AssociateId" name="AssociateName" [source]="associateNameSearch.bind(this)"
+                  <input ngui-auto-complete class="form-control" id="AssociateName" [(ngModel)]="associateName" name="AssociateName" [source]="associateNameSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" value-property-name="Id"
                     (valueChanged)="onSelectAssociateName($event)" display-property-name="Name" required #AssociateName="ngModel"
                     [class.inValidField]="timeTrackingForm.submitted && !AssociateName.valid" />
-                  <label *ngIf="timeTrackingForm.submitted && !AssociateName.valid" class="error">
+                  <label *ngIf="timeTrackingForm.submitted && !model.AssociateId" class="error">
                     Please select Associate Name
                   </label>
                 </div>
-
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
@@ -118,9 +117,8 @@
                 <div class="form-group">
                   <label for="BilledTotal">Total
                   </label>
-                  <input class="form-control" type="number" id="BilledTotal" required name="BilledTotal" pattern="^\d+(\.\d{1,2})?$" step="0.01"
-                    [(ngModel)]="model.BilledTotal" #BilledTotal="ngModel" [class.inValidField]="timeTrackingForm.submitted && !BilledTotal.valid"
-                    [disabled]="true" />
+                  <input class="form-control" type="number" id="BilledTotal" name="BilledTotal" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.BilledTotal"
+                    #BilledTotal="ngModel" [disabled]="true" />
                 </div>
               </div>
             </div>

@@ -22,10 +22,9 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   paramId: string;
   caseDetail: Case = new Case();
-  AssociatesDropDown: Array<DropDownModel> = Associates;
   taskCategoryList: Array<DropDownModel> = [];
   addCase: boolean = false;
-  billedHours: Date;
+  associateName: string;
   HoursSpend: string;
 
   seconds: number = 0;
@@ -83,7 +82,9 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
       this.caseService.getTaskTrackerById(+this.paramId).subscribe(
         response => {
           this.model = <TimeTracking>response;
-
+          this.associateName = `${response.Associated.FirstName} ${response.Associated.LastName}`;
+          this.HoursSpend = this.model.WorkedHours;
+          this.changeHourSpend(null);
         }, err => {
           this._notify.error(err.Result);
         });
@@ -115,11 +116,11 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
 
   onSelectAssociateName(associate: DropDownModel) {
     if (associate) {
-      this.model.TaskCategory = +associate.Id;
-      this.model.TaskCategoryName = associate.Name;
+      this.model.AssociateId = +associate.Id;
+      this.associateName = associate.Name;
     } else {
-      this.model.TaskCategory = undefined;
-      this.model.TaskCategoryName = undefined;
+      this.model.AssociateId = undefined;
+      this.associateName = undefined;
     }
   }
 
@@ -139,8 +140,10 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
 
   save() {
     this.isLoading = true;
-    const date = new Date(this.billedHours);
-    this.model.AssociateId = this.model.AssociateId["Id"];
+    //this.model.AssociateId = this.model.AssociateId["Id"];
+    if (!this.model.AssociateId) {
+      return;
+    }
     this.model.WorkedHours = this.HoursSpend;
     //const WorkedHours = new Date(this.hoursSpend);
     this.model.CaseId = this.caseDetail.Id;
@@ -234,6 +237,7 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
       this.seconds = elapsed.seconds;
       var hours = ((elapsed.hours * 60) + elapsed.minutes + (elapsed.seconds / 60)) / 60;
       this.HoursSpend = Math.round(hours * 100) / 100 + "h";
+      this.rateChanged();
     }, 100);
   }
 
