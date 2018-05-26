@@ -1,44 +1,52 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-lg-10">
-    <h2>Change Theme</h2>
-  </div>
-  <div class="col-lg-2">
-  </div>
-</div>
-
-<div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row">
-    <div class=col-md-12>
-      <h2>Choose your favorite theme</h2>
-    </div>
-    <div class=col-md-4>
-      <div class="widget style1 default-skin mouse-pointer setings-item" (click)="changeTheme('')">
-        <span class="skin-name">
-          <a class="s-skin-1">
-            Default
-          </a>
-        </span>
-      </div>
-    </div>
-
-    <div class=col-md-4>
-      <div class="widget style1 yellow-skin mouse-pointer setings-item" (click)="changeTheme('skin-3')">
-        <span class="skin-name">
-          <a class="s-skin-1">
-            Yellow/Purple
-          </a>
-        </span>
-      </div>
-    </div>
-
-    <div class=col-md-4>
-      <div class="widget style1 blue-skin mouse-pointer setings-item" (click)="changeTheme('skin-1')">
-        <span class="skin-name">
-          <a class="s-skin-1">
-            Blue light
-          </a>
-        </span>
-      </div>
+<div class="container-fluid custom-modal-container" style="padding: 15px 30px;">
+  <div class="row custom-modal-header">
+    <div class="col">
+      <h2 class="my-3">Change Theme</h2>
     </div>
   </div>
-</div>
+  <div class="hr-line-dashed"></div>
+
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class=col-md-12>
+        <h2>Choose your favorite theme</h2>
+      </div>
+      <div class=col-md-4>
+        <div class="widget style1 default-skin mouse-pointer setings-item" (click)="changeTheme('')">
+          <span class="skin-name">
+            <a class="s-skin-1">
+              Default
+            </a>
+          </span>
+        </div>
+      </div>
+
+      <div class=col-md-4>
+        <div class="widget style1 yellow-skin mouse-pointer setings-item" (click)="changeTheme('skin-3')">
+          <span class="skin-name">
+            <a class="s-skin-1">
+              Yellow/Purple
+            </a>
+          </span>
+        </div>
+      </div>
+
+      <div class=col-md-4>
+        <div class="widget style1 blue-skin mouse-pointer setings-item" (click)="changeTheme('skin-1')">
+          <span class="skin-name">
+            <a class="s-skin-1">
+              Blue light
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row custom-modal-footer">
+    <div class="col-xs-12">
+      <a href=javascript:; (click)="closeClick()" class="btn btn-default btn-cancel mr5">
+        <i class="fa fa-times-circle mr5"></i> Close
+      </a>
+    </div>
+  </div>

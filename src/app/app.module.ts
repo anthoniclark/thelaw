@@ -106,7 +106,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     },
     Modal
   ],
-  entryComponents: [SuggestionComponent],
+  entryComponents: [SuggestionComponent, ChangeThemeComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

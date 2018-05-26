@@ -1,7 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import 'jquery-slimscroll';
 import { AuthService } from 'app/shared/services/auth.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
+import { overlayConfigFactory } from 'ngx-modialog';
+import { ChangeThemeComponent } from '../../../../components/change-theme/change-theme.component';
 
 declare var jQuery: any;
 
@@ -9,15 +13,16 @@ declare var jQuery: any;
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html'
 })
-export class SidebarComponent {
+export class SidebarComponent implements AfterViewInit {
 
   @Input() layoutMenu: any;
-  constructor(public router: Router, private authService: AuthService) { }
+  constructor(public router: Router, private authService: AuthService,
+    private _sanitizer: DomSanitizer, private modal: Modal) { }
 
   ngAfterViewInit() {
     jQuery('#side-menu').metisMenu();
 
-    if (jQuery("body").hasClass('fixed-sidebar')) {
+    if (jQuery('body').hasClass('fixed-sidebar')) {
       jQuery('.sidebar-collapse').slimscroll({
         height: '100%'
       })
@@ -29,7 +34,6 @@ export class SidebarComponent {
   }
 
   goToHome() {
-    debugger;
     const tenent = this.authService.getTenent();
     this.router.navigateByUrl(`/${tenent}`);
   }
@@ -40,4 +44,11 @@ export class SidebarComponent {
     this.router.navigateByUrl(`/${tenent}/login`);
   }
 
+  changeTheme() {
+    const resul = this.modal.open(ChangeThemeComponent, overlayConfigFactory({}, BSModalContext));
+    resul.result.then(res => {
+      if (res) {
+      }
+    });
+  }
 }

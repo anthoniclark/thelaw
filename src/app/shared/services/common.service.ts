@@ -8,7 +8,9 @@ export class CommonService {
   private tenent_name: string;
   hourSpend: Subject<string> = new Subject<string>();
 
-  constructor(private httpService: HttpClientService) { }
+  constructor(private httpService: HttpClientService) {
+    console.log('in Common Services')
+   }
 
   sendSuggestion(suggestionModel: any) {
     return this.httpService.post('Utility/SendSuggestion', suggestionModel).map((res: any) => {
