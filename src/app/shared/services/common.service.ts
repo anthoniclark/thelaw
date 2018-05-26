@@ -10,7 +10,7 @@ export class CommonService {
 
   constructor(private httpService: HttpClientService) {
     console.log('in Common Services')
-   }
+  }
 
   sendSuggestion(suggestionModel: any) {
     return this.httpService.post('Utility/SendSuggestion', suggestionModel).map((res: any) => {
@@ -38,11 +38,16 @@ export class CommonService {
     });
   }
 
-  getTenentName() {
-    return this.tenent_name;
-  }
-
-  setTenentName(name: string) {
-    this.tenent_name = name;
+  ChangeTheme(themeId: number) {
+    return this.httpService.post(`UserLogins/ChangeTheme?ThemeId=${themeId}`, null).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      else {
+        throw 'We are facing some issue with server, Plesae try after some time.';
+      }
+    }).catch((err: any) => {
+      throw err;
+    });
   }
 }

@@ -4,6 +4,10 @@ import { DOCUMENT } from '@angular/platform-browser';
 import { NotificationService } from '../../shared/services/notification.service';
 import { CloseGuard, ModalComponent, DialogRef } from 'ngx-modialog';
 import { BSModalContext } from 'ngx-modialog/plugins/bootstrap';
+import { CommonService } from '../../shared/services/common.service';
+import { themes } from 'app/shared/constants';
+import { AuthService } from '../../shared/services/auth.service';
+
 @Component({
   selector: 'app-change-theme',
   templateUrl: './change-theme.component.html',
@@ -18,7 +22,8 @@ export class ChangeThemeComponent implements OnInit {
 
   constructor(@Inject(DOCUMENT) private document: Document,
     public router: Router, public dialog: DialogRef<BSModalContext>,
-    private _notify: NotificationService) {
+    private _notify: NotificationService, private commonService: CommonService,
+    private authService: AuthService) {
     dialog.context.dialogClass = 'modal-dialog modal-lg';
     this.dialogContext = dialog.context;
   }
@@ -46,9 +51,14 @@ export class ChangeThemeComponent implements OnInit {
 
 
   changeTheme(themeName) {
+    debugger;
     this.document.body.classList.remove('skin-1');
     this.document.body.classList.remove('skin-3');
     this.document.body.classList.add(themeName);
+    this.commonService.ChangeTheme(themes[themeName]).subscribe(res => {
+      debugger;
+      this.authService.setTheme(themeName);
+    });
   }
 
 }

@@ -25,6 +25,14 @@ export class AuthService {
     localStorage.setItem('tenent_name', tenent_name);
   }
 
+  setTheme(theme_name) {
+    localStorage.setItem('theme_name', theme_name);
+  }
+
+  getTheme() {
+    return localStorage.getItem('theme_name') || "";
+  }
+
   refreshToken(): Observable<string> {
     /*
         The call that goes in here will use the existing refresh token to call

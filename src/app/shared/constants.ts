@@ -8,6 +8,12 @@ export const httpResponseTypes = {
     ARRAYBUFFER: 'arraybuffer'
 };
 
+export const themes = {
+    "skin-1": 1,
+    "skin-3": 3,
+    "": 0
+};
+
 export const httpObserves = {
     RESPONSE: 'response',
     EVENT: 'event',
