@@ -75,7 +75,6 @@ export class EventsDashboardComponent implements OnInit {
 
   eventClicked(event, op: OverlayPanel) {
     // this.addNewEvent(event.calEvent.id);
-    debugger;
     this.selectedEvent = this.calanderData.find(x => x.Id === event.calEvent.id);
     op.toggle((event.jsEvent));
   }
