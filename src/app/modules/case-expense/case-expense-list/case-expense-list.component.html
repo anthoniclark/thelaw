@@ -35,9 +35,15 @@
           <p-dataTable [rowHover]="true" [value]="rows" [responsive]="true" expandableRows="false" [loading]="loadingIndicator" loadingIcon="fa-spinner">
             <p-column expander="true" styleClass="col-icon expand-icon">
             </p-column>
-            <p-column field="CaseNo" header="Case No">
+            <p-column field="CaseNo">
+              <ng-template let-col let-data="rowData" pTemplate="header">
+                <b>Case No</b>
+              </ng-template>
             </p-column>
-            <p-column header="Total">
+            <p-column>
+              <ng-template let-col let-data="rowData" pTemplate="header">
+                <b>Total</b>
+              </ng-template>
               <ng-template let-col let-data="rowData" pTemplate="body">
                 <b>{{data.Amount}}</b>
               </ng-template>
@@ -48,8 +54,14 @@
                 <p-column expander="true" styleClass="col-icon expand-icon">
                 </p-column>
                 <p-column field="Category" header="Category">
+                  <ng-template let-col let-data="rowData" pTemplate="header">
+                    <b>Category</b>
+                  </ng-template>
                 </p-column>
                 <p-column header="Total">
+                  <ng-template let-col let-data="rowData" pTemplate="header">
+                    <b>Total</b>
+                  </ng-template>
                   <ng-template let-col let-data="rowData" pTemplate="body">
                     <b>{{data.Amount}}</b>
                   </ng-template>
