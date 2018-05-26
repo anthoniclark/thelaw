@@ -35,37 +35,40 @@ export class EventsDashboardComponent implements OnInit {
     this.eventServices.getAllEvents().subscribe((res: any) => {
       this.calanderData = res;
       this.events = res.map((element) => {
-        let startTime = element.StartTime.split(":");
-        let startDate = new Date(element.FromDateTime);
+        const startTime = element.StartTime.split(':');
+        const startDate = new Date(element.FromDateTime);
         startDate.setHours(startTime[0]);
         startDate.setMinutes(startTime[1]);
 
-        let endTime = element.EndTime.split(":");
-        let endDate = new Date(element.ToDateTime);
+        const endTime = element.EndTime.split(':');
+        const endDate = new Date(element.ToDateTime);
+        let color = element.EventType.Color;
+        if (endDate < new Date()) {
+          color = 'Gray';
+        }
         endDate.setHours(endTime[0]);
         endDate.setMinutes(endTime[1]);
-
         return {
           id: element.Id,
           title: element.EventTitle,
           start: startDate,
           end: endDate,
-          color: element.EventType.Color
-        }
+          color
+        };
       });
     }, error => {
       this._notify.error(error.ErrorMessage);
     });
   }
 
-  addNewEvent(id: string = "new") {
+  addNewEvent(id: string = 'new') {
     const eventsModel = this.modal.open(EventsDetailComponent, overlayConfigFactory({ id }, BSModalContext));
     eventsModel.result.then(res => {
       if (res) {
         this.getAllEvents();
       }
     }).catch(() => {
-      //this._notify.error();
+      // this._notify.error();
     });
   }
   openEventDetail(op3: OverlayPanel) {
@@ -74,14 +77,13 @@ export class EventsDashboardComponent implements OnInit {
   }
 
   eventClicked(event, op: OverlayPanel) {
-    // this.addNewEvent(event.calEvent.id);
     this.selectedEvent = this.calanderData.find(x => x.Id === event.calEvent.id);
     op.toggle((event.jsEvent));
   }
   deleteEvent(op: OverlayPanel) {
     swal({
       title: 'Delete Event',
-      text: "Are you sure want to delete this Event?",
+      text: 'Are you sure want to delete this Event?',
       type: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes',
