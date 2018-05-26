@@ -108,7 +108,7 @@ export class CaseEvidenceListComponent implements OnInit {
   }
 
   editClick(id) {
-    this.router.navigate([`../../case/${this.caseId}/evidence/${id}`], { relativeTo: this.route });
+    this.router.navigate([`./${id}`], { relativeTo: this.route });
   }
 
   deleteClick(id, dt) {
@@ -152,7 +152,7 @@ export class CaseEvidenceListComponent implements OnInit {
   }
 
   createNewEvidence() {
-    this.router.navigate([`../../case/${this.caseId}/evidence/new`], { relativeTo: this.route });
+    this.router.navigate([`./new`], { relativeTo: this.route });
   }
 
   paginate(event) {

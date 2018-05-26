@@ -157,7 +157,7 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
           }
 
           setTimeout(() => {
-            this.router.navigate([`../../case/${this.model.CaseId}/time-tracking`], { relativeTo: this.route });
+            this.router.navigate([`../`], { relativeTo: this.route });
           });
         }
       }, err => {
@@ -167,7 +167,7 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
   }
 
   onCancelClick() {
-    this.router.navigate([`../../case/${this.model.CaseId}/time-tracking`], { relativeTo: this.route });
+    this.router.navigate([`../`], { relativeTo: this.route });
   }
 
   preventInput($event) {

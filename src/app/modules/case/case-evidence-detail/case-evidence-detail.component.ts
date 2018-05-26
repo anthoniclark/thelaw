@@ -104,7 +104,7 @@ export class CaseEvidenceDetailComponent implements OnInit {
             return this.caseService.uploadCaseEvidenceFile(response.Id, this.caseId, formData).subscribe(res => {
               this._notify.success(`Case Evidence  ${this.paramId === 'new' ? 'added' : 'updated'} successfully.`);
               setTimeout(() => {
-                this.router.navigate([`../../case/${this.caseId}/evidence`], { relativeTo: this.route });
+                this.router.navigate([`../`], { relativeTo: this.route });
               });
             }, error => {
               this._notify.error(error.Result);
@@ -116,7 +116,7 @@ export class CaseEvidenceDetailComponent implements OnInit {
             this._notify.success("Case Evidence updated successfully.");
           }
           setTimeout(() => {
-            this.router.navigate([`../../case/${this.caseId}/evidence`], { relativeTo: this.route });
+            this.router.navigate([`../`], { relativeTo: this.route });
           });
         }
       }, err => {
@@ -164,7 +164,7 @@ export class CaseEvidenceDetailComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.router.navigate([`../../case/${this.caseId}/evidence`], { relativeTo: this.route });
+    this.router.navigate([`../`], { relativeTo: this.route });
   }
 
   downloadDocument() {

@@ -109,13 +109,13 @@ export class CommunicationDetailComponent implements OnInit {
               this.CommunicateFromId = undefined;
               this.CommunicateToId = undefined;
               if (this.paramId !== 'new') {
-                this.router.navigateByUrl(`../../case/${caseId}/communication/new`, { relativeTo: this.route });
+                this.router.navigate([`../../../case/${caseId}/communication/new`], { relativeTo: this.route });
               } else {
               }
             });
           } else {
             setTimeout(() => {
-              this.router.navigateByUrl(`../../case/${this.model.CaseId}/communication/dashboard`, { relativeTo: this.route });
+              this.router.navigate([`../dashboard`], { relativeTo: this.route });
             });
 
           }
@@ -157,6 +157,6 @@ export class CommunicationDetailComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.router.navigate([`../../case/${this.model.CaseId}/communication/dashboard`], { relativeTo: this.route });
+    this.router.navigate([`../dashboard`], { relativeTo: this.route });
   }
 }

@@ -260,7 +260,7 @@ export class CaseAddComponent implements OnInit {
           }
 
           setTimeout(() => {
-            this.router.navigate(['../../case'], { relativeTo: this.route });
+            this.router.navigate(['../../'], { relativeTo: this.route });
           });
         }
       }, err => {
@@ -270,7 +270,7 @@ export class CaseAddComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.router.navigate(['../../case'], { relativeTo: this.route });
+    this.router.navigate(['../../'], { relativeTo: this.route });
   }
 
   appAppealType() {
