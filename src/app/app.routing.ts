@@ -1,5 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
 import { SkipLoginGuard } from 'app/guards/skip-login.guard';
 import { AuthGuard } from 'app/guards/auth.guard';
@@ -80,4 +80,4 @@ const routes: Routes = [
   }
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(routes);
+export const routing: ModuleWithProviders = RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules });
