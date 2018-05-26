@@ -838,3 +838,5 @@ input:read-only {border: none;}
 .pt8 {
   padding-top: 8px;
 }
+.fc-right .fc-button-group .ui-button{margin-right: 5px !important;}
+.fc-right .fc-button-group .ui-button.ui-state-active {opacity: .7 !important ;}

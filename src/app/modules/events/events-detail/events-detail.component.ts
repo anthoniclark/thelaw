@@ -1,5 +1,5 @@
 
-import { Component, OnInit, OnDestroy, DebugElement } from '@angular/core';
+import { Component, OnInit, OnDestroy, DebugElement, AfterViewInit, ViewChildren } from '@angular/core';
 import { CloseGuard, ModalComponent, DialogRef } from 'ngx-modialog';
 import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
 import { CaseStatus } from 'app/models/case';
@@ -11,12 +11,13 @@ import swal from 'sweetalert2';
 import { EventTypesDetailComponent } from '../event-types-detail/event-types-detail.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
+import { Calendar } from 'primeng/components/calendar/calendar';
 @Component({
   selector: 'app-events-detail',
   templateUrl: './events-detail.component.html',
   styleUrls: ['./events-detail.component.css']
 })
-export class EventsDetailComponent implements OnInit {
+export class EventsDetailComponent implements OnInit, AfterViewInit {
   dialogContext: any;
   cases: any[] = [];
   eventTypes: any[] = [];
@@ -27,7 +28,7 @@ export class EventsDetailComponent implements OnInit {
   selectedAttendees: any[] = [];
   attendeesData: any[] = [];
   isLoading: boolean = false;
-
+  @ViewChildren(Calendar) public cals: Calendar[];
   constructor(public dialog: DialogRef<BSModalContext>, private eventsService: EventsService,
     private _notify: NotificationService, private _bsModal: Modal,
     private _sanitizer: DomSanitizer) {
@@ -36,6 +37,13 @@ export class EventsDetailComponent implements OnInit {
     this.id = this.dialogContext.id;
   }
 
+
+  ngAfterViewInit() {
+    // this.cals.forEach(calendar => {
+    //   const elem = calendar.inputfieldViewChild.nativeElement;
+    //   calendar.hourFormat = "12";
+    // });
+  }
 
   ngOnInit() {
     this.settings = {
@@ -117,8 +125,21 @@ export class EventsDetailComponent implements OnInit {
 
   save() {
     this.isLoading = true;
-    this.model.StartTime = (<any>this.model.StartTime).toLocaleTimeString().split(" ")[0];
-    this.model.EndTime = (<any>this.model.EndTime).toLocaleTimeString().split(" ")[0];
+    const sDate = new Date(this.model.StartTime);
+    const eDate = new Date(this.model.EndTime);
+    const fromDate = new Date(this.model.FromDateTime).getDate();
+    const toDate = new Date(this.model.ToDateTime).getDate();
+    if (toDate < fromDate) {
+      this._notify.error('start date should less then end date');
+      return;
+    } else if (toDate === fromDate) {
+      if (eDate.getTime() < sDate.getTime()) {
+        this._notify.error('start time should less then end time');
+        return;
+      }
+    }
+    this.model.StartTime = sDate.getHours() + ':' + sDate.getMinutes();
+    this.model.EndTime = eDate.getHours() + ':' + eDate.getMinutes();
     this.model.FromDateTime = new Date(this.model.FromDateTime).toLocaleDateString();
     this.model.ToDateTime = new Date(this.model.ToDateTime).toLocaleDateString();
     this.model.AttendeesId = [];
