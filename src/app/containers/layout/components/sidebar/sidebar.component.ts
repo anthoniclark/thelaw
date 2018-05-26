@@ -15,13 +15,16 @@ declare var jQuery: any;
   templateUrl: './sidebar.component.html'
 })
 export class SidebarComponent implements OnInit, AfterViewInit {
+
   imgBase64: any;
 
   @Input() layoutMenu: any;
+  userName: string;
   constructor(public router: Router, private authService: AuthService,
     private _sanitizer: DomSanitizer, private modal: Modal, private commonService: CommonService) { }
 
   ngOnInit(): void {
+    this.userName = this.authService.getUserName();
     this.commonService.getTenentLogo(5).subscribe(res => {
       this.imgBase64 = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,'
         + res);
@@ -34,7 +37,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     if (jQuery('body').hasClass('fixed-sidebar')) {
       jQuery('.sidebar-collapse').slimscroll({
         height: '100%'
-      })
+      });
     }
   }
 
