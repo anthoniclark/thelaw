@@ -34,7 +34,10 @@ export class LoginComponent implements OnInit {
       }
     }, err => {
       this.isLoading = false;
-      this.error = err;
+      if (err.status === 400) {
+        this.error = err.error.ErrorMessage[1];
+      }
     });
+
   }
 }
