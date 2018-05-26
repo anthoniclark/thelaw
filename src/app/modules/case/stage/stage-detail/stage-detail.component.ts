@@ -47,7 +47,7 @@ export class StageDetailComponent implements OnInit {
         this.closeModelPopupClick();
       }
     }, error => {
-      this._notify.error(error.detail);
+      this._notify.error(error.error.ErrorMessage[1]);
     });
   }
 }
