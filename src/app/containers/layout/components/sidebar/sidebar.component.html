@@ -41,13 +41,13 @@
           <span class="fa arrow"></span>
         </a>
         <ul class="nav nav-second-level">
-          <li [ngClass]="{active: activeRoute('companies')}">
+          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
             <a [routerLink]="['companies']">
               <i class="fa fa-address-card"></i>
               <span class="nav-label">Company Contacts</span>
             </a>
           </li>
-          <li [ngClass]="{active: activeRoute('companies')}">
+          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
             <a [routerLink]="['contact']">
               <i class="fa fa-user"></i>
               <span class="nav-label">General Contacts</span>
@@ -55,83 +55,83 @@
           </li>
         </ul>
       </li>
-      <li [ngClass]="{active: activeRoute('case')}">
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
         <a>
           <i class="fa fa-briefcase"></i>
           <span class="nav-label">Case</span>
           <span class="fa arrow"></span>
         </a>
         <ul class="nav nav-second-level">
-          <li [ngClass]="{active: activeRoute('case')}">
+          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
             <a [routerLink]="['case']">
               <span class="nav-label">Case List</span>
             </a>
           </li>
-          <li [ngClass]="{active: activeRoute('case')}">
+          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
             <a [routerLink]="['case/new']">
               <span class="nav-label">Add Case</span>
             </a>
           </li>
         </ul>
       </li>
-      <li [ngClass]="{active: activeRoute('case-expense')}">
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
         <a>
           <i class="fa fa-inr"></i>
           <span class="nav-label">Case Expense</span>
           <span class="fa arrow"></span>
         </a>
         <ul class="nav nav-second-level">
-          <li [ngClass]="{active: activeRoute('case-expense')}">
+          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
             <a [routerLink]="['case-expense']">
               <span class="nav-label">Case Expense List</span>
             </a>
           </li>
-          <li [ngClass]="{active: activeRoute('case-expense')}">
+          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
             <a [routerLink]="['case-expense/new']">
               <span class="nav-label">Add Case Expense</span>
             </a>
           </li>
         </ul>
       </li>
-      <li [ngClass]="{active: activeRoute('complain')}">
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
         <a>
           <i class="fa fa-list-alt"></i>
           <span class="nav-label">Complain</span>
           <span class="fa arrow"></span>
         </a>
         <ul class="nav nav-second-level">
-          <li [ngClass]="{active: activeRoute('complain')}">
+          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
             <a [routerLink]="['complain']">
               <span class="nav-label">Complain List</span>
             </a>
           </li>
-          <li [ngClass]="{active: activeRoute('complain')}">
+          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
             <a [routerLink]="['complain/new']">
               <span class="nav-label">Add Complain</span>
             </a>
           </li>
         </ul>
       </li>
-      <li [ngClass]="{active: activeRoute('expense-type')}">
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
         <a>
           <i class="fa fa-sitemap"></i>
           <span class="nav-label">Expense Types</span>
           <span class="fa arrow"></span>
         </a>
         <ul class="nav nav-second-level">
-          <li [ngClass]="{active: activeRoute('expense-type')}">
+          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
             <a [routerLink]="['expense-type']">
               <span class="nav-label">Expense Type List</span>
             </a>
           </li>
-          <li [ngClass]="{active: activeRoute('expense-type')}">
+          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
             <a [routerLink]="['expense-type/new']">
               <span class="nav-label">Add Expense Type</span>
             </a>
           </li>
         </ul>
       </li>
-      <li [ngClass]="{active: activeRoute('events')}">
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
         <a [routerLink]="['events']">
           <i class="fa fa-user-plus"></i>
           <span class="nav-label">Events</span>
