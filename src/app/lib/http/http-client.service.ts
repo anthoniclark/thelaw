@@ -44,8 +44,12 @@ export class HttpClientService {
   }
 
   private updateUrl(req: string) {
-    if (req.indexOf('http://') == -1)
-    return `${environment.origin}${this.tenent_name}/${req}`;
+    if (req.indexOf('http://') == -1) {
+      if (!this.tenent_name) {
+        this.tenent_name = this.authService.getTenent();
+      }
+      return `${environment.origin}${this.tenent_name}/${req}`;
+    }
     else
       return req;
   }

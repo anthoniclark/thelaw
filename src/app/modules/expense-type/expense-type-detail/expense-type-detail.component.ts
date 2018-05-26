@@ -31,7 +31,7 @@ export class ExpenseTypeDetailComponent implements OnInit {
 
   onCancelClick() {
     this.isLoading = true;
-    this.router.navigate(['/expense-type'], { relativeTo: this.route });
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   save() {
@@ -44,7 +44,7 @@ export class ExpenseTypeDetailComponent implements OnInit {
         this._notify.success("Expense Type updated successfully.");
       }
       setTimeout(() => {
-        this.router.navigate(['/expense-type'], { relativeTo: this.route });
+        this.router.navigate(['../'], { relativeTo: this.route });
       });
     }, error => {
       this.isLoading = false;

@@ -8,7 +8,6 @@ import { environment } from 'environments/environment.prod';
 @Injectable()
 export class TenentGuard implements CanActivate {
   constructor(private router: Router, private authService: AuthService, private httpServices: HttpClientService) {
-    console.log('in Tenant')
   }
 
   canActivate(

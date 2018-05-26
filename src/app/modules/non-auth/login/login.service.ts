@@ -15,7 +15,7 @@ export class LoginService {
       Username: loginModel.username,
       Password: loginModel.password
     };
-    const tenentName = this.authService.getTenent();
+    //const tenentName = this.authService.getTenent();
     return this.httpService.post('/UserLogins/Login', model).map((res: any) => {
       if (res.Result) {
         if (res.Result.sessionId) {
