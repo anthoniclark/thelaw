@@ -17,6 +17,23 @@ export class AuthService {
     localStorage.setItem('auth-token', token);
   }
 
+  setUserName(username: string) {
+    localStorage.setItem('userName', username);
+  }
+
+  setThemeId(themeId: number) {
+    localStorage.setItem('themeId', themeId.toString());
+  }
+
+
+  getUserName() {
+    return localStorage.getItem('userName');
+  }
+
+  getThemeId() {
+    return localStorage.getItem('themeId');
+  }
+
   getTenent() {
     return localStorage.getItem('tenent_name') || null;
   }

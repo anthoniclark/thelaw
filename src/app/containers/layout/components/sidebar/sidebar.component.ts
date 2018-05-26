@@ -13,11 +13,16 @@ declare var jQuery: any;
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html'
 })
-export class SidebarComponent implements AfterViewInit {
+export class SidebarComponent implements OnInit, AfterViewInit {
 
   @Input() layoutMenu: any;
+  userName: string;
   constructor(public router: Router, private authService: AuthService,
     private _sanitizer: DomSanitizer, private modal: Modal) { }
+
+  ngOnInit() {
+    this.userName = this.authService.getUserName();
+  }
 
   ngAfterViewInit() {
     jQuery('#side-menu').metisMenu();
@@ -25,7 +30,7 @@ export class SidebarComponent implements AfterViewInit {
     if (jQuery('body').hasClass('fixed-sidebar')) {
       jQuery('.sidebar-collapse').slimscroll({
         height: '100%'
-      })
+      });
     }
   }
 

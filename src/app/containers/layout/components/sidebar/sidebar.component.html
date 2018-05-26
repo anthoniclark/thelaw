@@ -7,10 +7,11 @@
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
             <span class="clear">
               <span class="block m-t-xs">
-                <strong class="font-bold">David Williams</strong>
-              </span>
-              <span class="text-muted text-xs block">Art Director
+                <strong class="font-bold">{{userName}}</strong>
                 <b class="caret"></b>
+              </span>
+              <span class="text-muted text-xs block">
+
               </span>
             </span>
           </a>
@@ -47,7 +48,8 @@
               <span class="nav-label">Company Contacts</span>
             </a>
           </li>
-          <li [ngClass]="{active: activeRoute('companies')}">
+          <!-- <li [ngClass]="{active: activeRoute('companies')}"> -->
+          <!-- <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"> -->
             <a [routerLink]="['contact']">
               <i class="fa fa-user"></i>
               <span class="nav-label">General Contacts</span>
