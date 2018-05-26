@@ -29,6 +29,8 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.setAuhToken('');
+    this.authService.setUserName('');
+    this.authService.setTheme('');
     this.router.navigate(['/login']);
   }
 }
