@@ -16,9 +16,12 @@ export class LayoutComponent implements OnInit {
   constructor(@Inject(DOCUMENT) private document: Document, private authService: AuthService) { }
   public ngOnInit(): any {
     detectBody();
+    const theme_name = this.authService.getTheme();
     this.document.body.classList.remove('skin-1');
     this.document.body.classList.remove('skin-3');
-    this.document.body.classList.add(this.authService.getTheme());
+    if (theme_name) {
+      this.document.body.classList.add(theme_name);
+    }
   }
 
   public onResize() {
