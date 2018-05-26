@@ -73,8 +73,8 @@ export class TimeTracking {
     AssociateId: number
     TaskDate: string;
     TaskCategory: number;
-    WorkedHours: number;
-    BilledHours: number;
+    WorkedHours: string;
+    BilledTotal: number;
     Rate: number;
     Details: string;
     DontBill: boolean;

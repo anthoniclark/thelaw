@@ -71,7 +71,6 @@ export class TimerComponent implements OnInit {
   }
 
   timerClick(e, op3: OverlayPanel) {
-    debugger;
     if (this.started) {
       op3.toggle((e));
     } else {
@@ -113,7 +112,6 @@ export class TimerComponent implements OnInit {
   }
 
   changeHourSpend(e) {
-    debugger;
     const timeValue = this.convertTextToDecimal(this.HoursSpend);
     this.setElapsed(timeValue.hours, timeValue.minutes, 0);
     setTimeout(() => {

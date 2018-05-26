@@ -102,31 +102,25 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="BilledHours">Billed Hours
-                    <span class="req">*</span>
-                  </label>
-                  <!-- <input class="form-control" type="number" id="BilledHours" required name="BilledHours" pattern="^\d+(\.\d{1,2})?$" step="1"
-                    [(ngModel)]="model.BilledHours" #BilledHours="ngModel" [class.inValidField]="timeTrackingForm.submitted && !BilledHours.valid"
-                  /> -->
-                  <p-calendar id="BilledHours" [(ngModel)]="billedHours" #BilledHours="ngModel" required name="BilledHours" [class.inValidField]="timeTrackingForm.submitted && !BilledHours.valid"
-                    inputStyleClass="form-control" (keypress)="preventInput($event)" timeOnly="true"></p-calendar>
-                  <label *ngIf="timeTrackingForm.submitted && !BilledHours.valid" class="error">
-                    Please enter Billed Hours</label>
-                  <!-- <label *ngIf="(timeTrackingForm.submitted || BilledHours.dirty) && BilledHours.errors && BilledHours.errors['pattern']" class="error">
-                    Enter Valid Billed Hours</label> -->
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
                   <label for="Rate">Rate
                     <span class="req">*</span>
                   </label>
                   <input class="form-control" type="number" id="Rate" required name="Rate" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.Rate"
-                    #Rate="ngModel" [class.inValidField]="timeTrackingForm.submitted && !Rate.valid" />
+                    #Rate="ngModel" [class.inValidField]="timeTrackingForm.submitted && !Rate.valid" (change)="rateChanged()"
+                  />
                   <label *ngIf="(timeTrackingForm.submitted || Rate.dirty) && Rate.errors && Rate.errors['required']" class="error">
                     Please enter Rate</label>
                   <label *ngIf="(timeTrackingForm.submitted || Rate.dirty) && Rate.errors && Rate.errors['pattern']" class="error">
                     Enter Valid Rate</label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="BilledTotal">Total
+                  </label>
+                  <input class="form-control" type="number" id="BilledTotal" required name="BilledTotal" pattern="^\d+(\.\d{1,2})?$" step="0.01"
+                    [(ngModel)]="model.BilledTotal" #BilledTotal="ngModel" [class.inValidField]="timeTrackingForm.submitted && !BilledTotal.valid"
+                    [disabled]="true" />
                 </div>
               </div>
             </div>

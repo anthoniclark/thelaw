@@ -56,7 +56,6 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.commonService.hourSpend.subscribe(res => {
-      debugger;
       this.HoursSpend = res;
       this.changeHourSpend(null);
     });
@@ -84,16 +83,7 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
       this.caseService.getTaskTrackerById(+this.paramId).subscribe(
         response => {
           this.model = <TimeTracking>response;
-          let time = (this.model.BilledHours / 60).toString();
-          this.billedHours = new Date();
-          let arrTime = time.split(".");
-          this.billedHours.setHours(+arrTime[0]);
-          this.billedHours.setMinutes(+arrTime[1]);
-          time = (this.model.WorkedHours / 60).toString();
-          arrTime = time.split(".");
-          // this.hoursSpend = new Date();
-          // this.hoursSpend.setHours(+arrTime[0]);
-          // this.hoursSpend.setMinutes(+arrTime[1]);
+
         }, err => {
           this._notify.error(err.Result);
         });
@@ -151,7 +141,7 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     const date = new Date(this.billedHours);
     this.model.AssociateId = this.model.AssociateId["Id"];
-    this.model.BilledHours = (+date.getHours() * 60) + date.getMinutes();
+    this.model.WorkedHours = this.HoursSpend;
     //const WorkedHours = new Date(this.hoursSpend);
     this.model.CaseId = this.caseDetail.Id;
     //this.model.WorkedHours = (+WorkedHours.getHours() * 60) + WorkedHours.getMinutes();
@@ -227,12 +217,14 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
   updateWatch() {
     setTimeout(() => {
       const hours = ((this.hours * 60) + this.minutes + (this.seconds / 60)) / 60;
+      if (this.model.Rate) {
+        this.model.BilledTotal = this.model.Rate * (Math.round(hours * 100) / 100);
+      }
       this.HoursSpend = Math.round(hours * 100) / 100 + 'h';
     });
   }
 
   changeHourSpend(e) {
-    debugger;
     const timeValue = this.convertTextToDecimal(this.HoursSpend);
     this.setElapsed(timeValue.hours, timeValue.minutes, 0);
     setTimeout(() => {
@@ -313,5 +305,14 @@ export class TimeTrackingDetailComponent implements OnInit, OnDestroy {
       r = parseInt((n / this.onesec).toString()),
       u = n % this.onesec,
       { hours: t, minutes: i, seconds: r, milliseconds: u }
+  }
+
+  rateChanged() {
+    if (!this.model.Rate) {
+      this.model.BilledTotal = 0;
+    } else {
+      const hours = parseFloat(this.HoursSpend.slice(0, -1));
+      this.model.BilledTotal = hours * this.model.Rate;
+    }
   }
 }
