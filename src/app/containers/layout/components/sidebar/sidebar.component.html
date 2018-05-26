@@ -3,7 +3,7 @@
     <ul class="nav metismenu" id="side-menu">
       <li class="nav-header">
         <div class="profile-element" dropdown>
-          <img alt="image" class="img-circle mouse-pointer" src="assets/images/profile_small.jpg" [routerLink]="['./']">
+          <img class="img-circle mouse-pointer" alt="image" [routerLink]="['./']" *ngIf="imgBase64" [src]="imgBase64" />
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
             <span class="clear">
               <span class="block m-t-xs">
@@ -47,7 +47,7 @@
               <span class="nav-label">Company Contacts</span>
             </a>
           </li>
-          <li [ngClass]="{active: activeRoute('companies')}">
+          <li [ngClass]="{active: activeRoute('contact')}">
             <a [routerLink]="['contact']">
               <i class="fa fa-user"></i>
               <span class="nav-label">General Contacts</span>

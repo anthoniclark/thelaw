@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
 import { overlayConfigFactory } from 'ngx-modialog';
 import { ChangeThemeComponent } from '../../../../components/change-theme/change-theme.component';
+import { CommonService } from '../../../../shared/services/common.service';
 
 declare var jQuery: any;
 
@@ -13,11 +14,19 @@ declare var jQuery: any;
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html'
 })
-export class SidebarComponent implements AfterViewInit {
+export class SidebarComponent implements OnInit, AfterViewInit {
+  imgBase64: any;
 
   @Input() layoutMenu: any;
   constructor(public router: Router, private authService: AuthService,
-    private _sanitizer: DomSanitizer, private modal: Modal) { }
+    private _sanitizer: DomSanitizer, private modal: Modal, private commonService: CommonService) { }
+
+  ngOnInit(): void {
+    this.commonService.getTenentLogo(5).subscribe(res => {
+      this.imgBase64 = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,'
+        + res);
+    });
+  }
 
   ngAfterViewInit() {
     jQuery('#side-menu').metisMenu();

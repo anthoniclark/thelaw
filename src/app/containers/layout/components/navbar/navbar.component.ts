@@ -12,15 +12,7 @@ declare var jQuery: any;
   templateUrl: './navbar.component.html'
 })
 export class NavbarComponent implements OnInit {
-
-  imgBase64: any;
-
   ngOnInit(): void {
-    this.commonService.getTenentLogo(5).subscribe(res => {
-      this.imgBase64 = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,'
-        + res);
-
-    });
   }
   constructor(private router: Router, private authService: AuthService,
     private commonService: CommonService, private _sanitizer: DomSanitizer) { }

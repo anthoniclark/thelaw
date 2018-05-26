@@ -26,7 +26,7 @@ export class CommonService {
   }
 
   getTenentLogo(tenent: any) {
-    return this.httpService.get(`Tenants/GetLogo?tenentId=${tenent}`).map((res: any) => {
+    return this.httpService.get(`Tenants/GetLogo`).map((res: any) => {
       if (res.Success) {
         return res.Result;
       }

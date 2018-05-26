@@ -204,13 +204,6 @@
                     #AppearedFor="ngModel" />
                 </div>
               </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="Description">Description</label>
-                  <textarea class="form-control" rows="3" id="Description" name="Description" [readonly]="isViewModel" maxlength="250" [(ngModel)]="model.Description"
-                    #Description="ngModel"></textarea>
-                </div>
-              </div>
             </div>
 
             <div class="row">
@@ -371,7 +364,6 @@
             </div>
 
             <div class="row">
-
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="BillingFrequency">Billing Frequency</label>
@@ -444,6 +436,15 @@
                   <label for="CloseDate">Close Date</label>
                   <input class="form-control" [(ngModel)]="model.CloseDate" ngui-datetime-picker date-only="true" name="CloseDate" id="CloseDate"
                     #CloseDate="ngModel" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="Description">Description</label>
+                  <textarea class="form-control" rows="3" id="Description" name="Description" [readonly]="isViewModel" maxlength="250" [(ngModel)]="model.Description"
+                    #Description="ngModel"></textarea>
                 </div>
               </div>
             </div>
