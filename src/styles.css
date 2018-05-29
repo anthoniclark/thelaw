@@ -840,3 +840,4 @@ input:read-only {border: none;}
 }
 .fc-right .fc-button-group .ui-button{margin-right: 5px !important;}
 .fc-right .fc-button-group .ui-button.ui-state-active {opacity: .7 !important ;}
+.fc-day {cursor: pointer;}

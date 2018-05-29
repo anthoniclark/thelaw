@@ -361,7 +361,7 @@
               <label for="Description">Start at
                 <span class="req">*</span>
               </label>
-              <p-calendar id="StartTime" [(ngModel)]="model.StartTime" #StartTime="ngModel" required name="StartTime" [class.inValidField]="eventsForm.submitted && !StartTime.valid"
+              <p-calendar id="StartTime" [(ngModel)]="model.StartTime" #StartTime="ngModel" hourFormat="12" required name="StartTime" [class.inValidField]="eventsForm.submitted && !StartTime.valid"
                 inputStyleClass="form-control" timeOnly="true"></p-calendar>
               <label *ngIf="eventsForm.submitted && !model.StartTime" class="err-label">
                 Please select Start Time
@@ -373,7 +373,7 @@
               <label for="EndTime">End at
                 <span class="req">*</span>
               </label>
-              <p-calendar id="EndTime" [(ngModel)]="model.EndTime" #EndTime="ngModel" required name="EndTime" [class.inValidField]="eventsForm.submitted && !EndTime.valid"
+              <p-calendar id="EndTime" [(ngModel)]="model.EndTime" #EndTime="ngModel" hourFormat="12" required name="EndTime" [class.inValidField]="eventsForm.submitted && !EndTime.valid"
                 inputStyleClass="form-control" timeOnly="true"></p-calendar>
               <label *ngIf="eventsForm.submitted && !model.EndTime" class="err-label">
                 Please select End Time

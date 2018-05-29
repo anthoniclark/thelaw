@@ -61,8 +61,12 @@ export class EventsDashboardComponent implements OnInit {
     });
   }
 
-  addNewEvent(id: string = 'new') {
-    const eventsModel = this.modal.open(EventsDetailComponent, overlayConfigFactory({ id }, BSModalContext));
+  addNewEvent(event) {
+    this.openEventPopup('new', event.date._d);
+  }
+
+  openEventPopup(id: string = 'new', date?: string) {
+    const eventsModel = this.modal.open(EventsDetailComponent, overlayConfigFactory({ id, date: date || new Date() }, BSModalContext));
     eventsModel.result.then(res => {
       if (res) {
         this.getAllEvents();
@@ -71,9 +75,10 @@ export class EventsDashboardComponent implements OnInit {
       // this._notify.error();
     });
   }
+
   openEventDetail(op3: OverlayPanel) {
     op3.hide();
-    this.addNewEvent(this.selectedEvent.Id);
+    this.openEventPopup(this.selectedEvent.Id);
   }
 
   eventClicked(event, op: OverlayPanel) {

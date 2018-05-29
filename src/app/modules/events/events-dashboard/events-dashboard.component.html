@@ -10,17 +10,17 @@
       </li>
     </ol>
   </div>
-  <div class="col-lg-2">
+  <!-- <div class="col-lg-2">
     <button type="button" class="btn btn-primary pull-right m-t-md" (click)="addNewEvent()">
       <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
-  </div>
+  </div> -->
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-content">
-          <p-schedule [events]="events" [droppable]="true" [header]="headerConfig" (onEventClick)="eventClicked($event,op3)"></p-schedule>
+          <p-schedule [events]="events" (onDayClick)="addNewEvent($event)" [droppable]="true" [header]="headerConfig" (onEventClick)="eventClicked($event,op3)"></p-schedule>
         </div>
       </div>
     </div>
@@ -38,29 +38,30 @@
       <h1>{{selectedEvent.EventTitle}}</h1>
     </div>
     <div>
-      <div class="calander-popup-details">
-        <div>Date :</div>
-        <div class="cal-popup-data">{{selectedEvent.FromDateTime | date: 'yyyy/MM/dd'}} To {{selectedEvent.ToDateTime | date: 'yyyy/MM/dd'}}</div>
+      <div class="row">
+        <div class="col-md-3 col-lg-3 col-sm-3">Date</div>
+        <div class="col-md-9 col-lg-9 col-sm-9">: {{selectedEvent.FromDateTime | date: 'yyyy/MM/dd'}} To {{selectedEvent.ToDateTime | date: 'yyyy/MM/dd'}}</div>
       </div>
 
-      <div class="calander-popup-details">
-        <div>Time :</div>
-        <div class="cal-popup-data">{{selectedEvent.StartTime}} To {{selectedEvent.EndTime}}</div>
+      <div class="row">
+        <div class="col-md-3 col-lg-3 col-sm-3">Time</div>
+        <div class="col-md-9 col-lg-9 col-sm-9">: {{selectedEvent.StartTime.split(":").splice(0,2).join(":")}} To {{selectedEvent.EndTime.split(":").splice(0,2).join(":")}}</div>
       </div>
-      <div class="calander-popup-details">
-        <div>Event Detail :</div>
-        <div class="cal-popup-data">{{selectedEvent.EventDescription}}</div>
+      <div class="row">
+        <div class="col-md-3 col-lg-3 col-sm-3">Event Detail</div>
+        <div class="col-md-9 col-lg-9 col-sm-9">: {{selectedEvent.EventDescription}}</div>
       </div>
-      <div class="calander-popup-details">
-        <div>Case No :</div>
-        <div class="cal-popup-data">{{selectedEvent.CaseNo}}</div>
+      <div class="row" *ngIf='selectedEvent.CaseNo'>
+        <div class="col-md-3 col-lg-3 col-sm-3">Case No</div>
+        <div class="col-md-9 col-lg-9 col-sm-9">: {{selectedEvent.CaseNo}}</div>
       </div>
 
-      <div class="calander-popup-details">
-        <div>Attendees :</div>
-        <div class="cal-popup-data">
+      <div class="row">
+        <div class="col-md-3 col-lg-3 col-sm-3">Attendees</div>
+        <div class="col-md-9 col-lg-9 col-sm-9">
+          : 
           <span *ngFor="let attendees of selectedEvent.EventAttendy; let last = last;">
-            {{attendees.AttendyName}}
+            :{{attendees.AttendyName}}
             <span *ngIf="!last">,</span>
           </span>
         </div>

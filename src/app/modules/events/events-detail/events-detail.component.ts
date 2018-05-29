@@ -27,13 +27,14 @@ export class EventsDetailComponent implements OnInit, AfterViewInit {
   caseDetail: any;
   selectedAttendees: any[] = [];
   attendeesData: any[] = [];
-  isLoading: boolean = false;
+  isLoading = false;
   @ViewChildren(Calendar) public cals: Calendar[];
   constructor(public dialog: DialogRef<BSModalContext>, private eventsService: EventsService,
     private _notify: NotificationService, private _bsModal: Modal,
     private _sanitizer: DomSanitizer) {
     dialog.context.dialogClass = "modal-dialog modal-lg";
     this.dialogContext = dialog.context;
+    this.model.FromDateTime = this.model.ToDateTime = this.dialogContext.date;
     this.id = this.dialogContext.id;
   }
 
@@ -45,7 +46,7 @@ export class EventsDetailComponent implements OnInit, AfterViewInit {
     // });
   }
 
-  ngOnInit() {
+ ngOnInit() {
     this.settings = {
       singleSelection: false,
       text: "Select Attendees",
@@ -57,28 +58,30 @@ export class EventsDetailComponent implements OnInit, AfterViewInit {
     this.selectedAttendees = [];
     this.getAllEventTypes();
     this.model.Frquency = "Weekly";
-    this.eventsService.getAllAttendees().subscribe(res => {
+    return this.eventsService.getAllAttendees().subscribe(res => {
+      debugger
       this.attendeesData = [];
       res.forEach(element => {
         this.attendeesData.push({ id: element.Id, itemName: element.FirstName + ' ' + element.LastName });
       });
 
       if (this.id !== 'new') {
-        this.eventsService.getEventById(this.id).subscribe(res => {
-          this.model = res;
+        return this.eventsService.getEventById(this.id).subscribe(response => {
+          debugger
+          this.model = response;
           this.selectedAttendees = [];
-          res.EventAttendy.forEach(element => {
+          response.EventAttendy.forEach(element => {
             const attendee = this.attendeesData.find(x => x.id === element.AttendyId);
             if (attendee) {
               this.selectedAttendees.push(attendee);
             }
           });
-          let startTime = res.StartTime.split(":");
+          let startTime = response.StartTime.split(":");
           let date = new Date();
           date.setHours(startTime[0]);
           date.setMinutes(startTime[1]);
           this.model.StartTime = <any>date;
-          let endTime = res.EndTime.split(":");
+          let endTime = response.EndTime.split(":");
 
           let endDate = new Date();
           endDate.setHours(endTime[0]);
@@ -102,8 +105,8 @@ export class EventsDetailComponent implements OnInit, AfterViewInit {
   }
 
   getAllEventTypes() {
-    this.eventsService.getAllEventTypes().subscribe(res => {
-      this.eventTypes = res;
+    return this.eventsService.getAllEventTypes().subscribe(res => {
+      return this.eventTypes = res;
     }, error => {
       this._notify.error(error.ErrorMessage);
     });
