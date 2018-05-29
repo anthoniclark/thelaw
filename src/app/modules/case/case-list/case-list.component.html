@@ -44,11 +44,6 @@
                     <p-calendar showButtonBar="true" dateFormat="yy-mm-dd" (onSelect)="filterStartDate($event,dt,col)"></p-calendar>
                   </ng-template> -->
             </p-column>
-            <p-column field="EndDate" [sortable]="true" header="End Date">
-              <ng-template let-col let-data="rowData" pTemplate="body">
-                <span>{{data[col.field] | date: 'dd/MM/yyyy'}}</span>
-              </ng-template>
-            </p-column>
             <p-column field="RefferenceNumber" [sortable]="true" [filter]="true" header="Ref No"></p-column>
             <p-column field="CaseStatus" [sortable]="true" [filter]="true" header="Case Status"></p-column>
             <p-column styleClass="col-button">
