@@ -12,6 +12,7 @@ import { ModalModule } from 'ngx-modialog';
 import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
 import { DataTableModule } from 'primeng/datatable';
 import { FileUploadModule } from 'primeng/fileupload';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     ModalModule.forRoot(),
     BootstrapModalModule,
     DataTableModule,
-    FileUploadModule
+    FileUploadModule,
+    AccordionModule
   ],
   declarations: [
     ContactListComponent,

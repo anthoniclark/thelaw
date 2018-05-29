@@ -1,7 +1,9 @@
 <div class="container-fluid custom-modal-container" style="padding: 15px 30px;">
   <div class="row custom-modal-header">
     <div class="col">
-      <h2 class="my-3">Change Case Status for case number {{dialogContext.caseRow.CaseNo}}</h2>
+      <h2 class="my-3">Change Case Status for
+        <a [routerLink]="['../../view/',dialogContext.caseRow.Id]">{{dialogContext.caseRow.CaseNo}}</a>
+      </h2>
     </div>
   </div>
   <div class="hr-line-dashed"></div>

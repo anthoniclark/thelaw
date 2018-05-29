@@ -1,6 +1,8 @@
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-6">
-    <h2>Time Tracking for Case Number {{caseDetail.CaseNo}}</h2>
+    <h2>Time Tracking for
+      <a [routerLink]="['../../view/',caseDetail.Id]">{{caseDetail.CaseNo}}</a>
+    </h2>
     <ol class="breadcrumb">
       <li>
         <a [routerLink]="['../../../']">Home</a>

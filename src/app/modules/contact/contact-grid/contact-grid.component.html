@@ -11,11 +11,6 @@
     </ng-template>
   </p-column>
   <p-column field="Designation" [filter]="cType !== 'NewlyAdded'" [sortable]="true" header="Designation"></p-column>
-  <p-column header="Important Contact">
-    <ng-template let-row="rowData" pTemplate="body">
-      <i class="big-icon important-icon fa {{ row.IsImportant ? 'fa-star' : 'fa-star-o' }}" (click)="toggleImportant(row)" aria-hidden="true"></i>
-    </ng-template>
-  </p-column>
   <p-column header="Total Cases">
     <ng-template let-row="rowData" pTemplate="body">
       <a [routerLink]="['../../case/contact/', row.Id]" *ngIf="row.TotalCases">
@@ -27,7 +22,7 @@
     </ng-template>
   </p-column>
 
-  <p-column header="Contact Type">
+  <p-column header="Action">
     <ng-template let-row="rowData" pTemplate="body">
       <button [routerLink]="['../../contact/view/', row.Id]" title="View" class="btn-white btn btn-xs">
         <i class="fa fa-eye" aria-hidden="true"></i>
@@ -38,6 +33,8 @@
       <button (click)="deleteClick(row.Id, dt)" title="delete" class="btn-white btn btn-xs">
         <i class="fa fa-trash"></i>
       </button>
+      <i title="Is Important" class="big-icon important-icon fa {{ row.IsImportant ? 'fa-star' : 'fa-star-o' }}" (click)="toggleImportant(row)"
+        aria-hidden="true"></i>
     </ng-template>
   </p-column>
 </p-dataTable>

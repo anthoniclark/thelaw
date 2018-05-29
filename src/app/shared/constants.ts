@@ -33,8 +33,15 @@ export const ContactType = [
 
 export const AddressType = {
     Home: 'Home',
-    Office: 'Office'
+    Office: 'Office',
+    Branch: 'Branch'
 };
+
+export const AddressTypeDD = [
+    { Id: 'Home', Name: 'Home' },
+    { Id: 'Office', Name: 'Office' },
+    { Id: 'Branch', Name: 'Branch' }
+];
 
 export const contactDashboardTab = {
     0: 'NewlyAdded',

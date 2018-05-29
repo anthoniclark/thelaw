@@ -33,10 +33,6 @@
     padding-left: 0px !important;
 }
 
-.big-icon { 
-    font-size:25px !important;
-}
-
 .important-icon {
     cursor: pointer;
 }
@@ -841,3 +837,8 @@ input:read-only {border: none;}
 .fc-right .fc-button-group .ui-button{margin-right: 5px !important;}
 .fc-right .fc-button-group .ui-button.ui-state-active {opacity: .7 !important ;}
 .fc-day {cursor: pointer;}
+
+.big-icon {
+  color: #3796f5;
+  font-size: 20px !important;
+}
