@@ -32,6 +32,7 @@ import { ChipsModule } from 'primeng/chips';
 import { CourtDetailComponent } from './court-detail/court-detail.component';
 import { TaskCategoryDetailComponent } from './task-category/task-category-detail/task-category-detail.component';
 import { StageDetailComponent } from './stage/stage-detail/stage-detail.component';
+import { CaseHistoryComponent } from './case-history/case-history.component';
 
 @NgModule({
   imports: [
@@ -67,7 +68,8 @@ import { StageDetailComponent } from './stage/stage-detail/stage-detail.componen
     ContactQuickAddComponent,
     CourtDetailComponent,
     TaskCategoryDetailComponent,
-    StageDetailComponent
+    StageDetailComponent,
+    CaseHistoryComponent
   ],
   providers: [
     CaseService,

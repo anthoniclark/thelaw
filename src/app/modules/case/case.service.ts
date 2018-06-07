@@ -746,5 +746,39 @@ export class CaseService {
       throw err;
     });
   }
+
+  markCaseAsImportant(id, tenant) {
+    const model = { id, Tenant: tenant };
+    return this.httpService.post(`Case/MarkImportantCase/${id}`, model).map((res: any) => {
+      if (res) {
+        return res;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  exportCase() {
+    window.open(`${environment.origin}Case/ExportCase`, '_blank');
+  }
+
+
+  getCaseHistory(caseId: string, page: Page, sort: Sorting, filterColumn?: string, filterValue?: string) {
+    let filter = '';
+    if (filterColumn) {
+      filter += '&' + filterColumn + filterValue;
+    }
+    const link = ('caseId=' + caseId)
+      + '&' + `page=${page.pageNumber}&pageSize=${page.size}&orderBy=${sort.columnName}&ascending=${sort.dir}${filter}`;
+    return this.httpService.post(`CaseStatus/History?${link}`, {}).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
 }
 

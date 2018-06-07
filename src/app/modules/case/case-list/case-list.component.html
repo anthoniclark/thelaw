@@ -18,6 +18,16 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group pull-right">
+        <button type="button" class="btn btn-primary" (click)="exportCase()">
+          <i class="fa fa-download mr5"></i> Export Case
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-content">
@@ -46,6 +56,11 @@
             </p-column>
             <p-column field="RefferenceNumber" [sortable]="true" [filter]="true" header="Ref No"></p-column>
             <p-column field="CaseStatus" [sortable]="true" [filter]="true" header="Case Status"></p-column>
+            <p-column field="IsImportant" bodyStyleClass='important-case' header="Important Case">
+              <ng-template let-col let-data="rowData" pTemplate="body">
+                <i (click)="markImportant(data)" class="big-icon fa {{ data[col.field] ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"></i>
+              </ng-template>
+            </p-column>
             <p-column styleClass="col-button">
               <ng-template pTemplate="header">
                 Actions
@@ -87,6 +102,9 @@
                     </li>
                     <li>
                       <a href="javascript:void(0)" (click)="ShowEvidence(data.Id)">Evidence</a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0)" (click)="showHistory(data.Id)">History</a>
                     </li>
                   </ul>
                 </div>

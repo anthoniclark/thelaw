@@ -46,14 +46,16 @@ export class ResponseInterceptor implements HttpInterceptor {
           case 400:
             return this.handle400Error(err);
           case 401:
+            this.logoutUser();
             return Observable.throw(err.error);
           case 404:
             return this.router.navigateByUrl('/');
           case 500:
             return Observable.throw(err.error);
+          default:
+            return Observable.throw(err);
         }
       } else {
-        return Observable.throw(err);
       }
     });
   }
@@ -68,6 +70,8 @@ export class ResponseInterceptor implements HttpInterceptor {
 
   logoutUser() {
     // Route to the login page (implementation up to you)
+    this.authService.setAuhToken('');
+    this.router.navigate([`/${this.authService.getTenent()}/login`]);
     return Observable.throw('');
   }
 }

@@ -9,6 +9,7 @@ import { Page, Sorting, FilterModel } from 'app/models/page';
 import swal from 'sweetalert2';
 import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 import { PageSize } from '../../../shared/constants';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-case-list',
@@ -38,7 +39,7 @@ export class CaseListComponent implements OnInit {
   }];
   contactId: any;
   constructor(private caseService: CaseService, public router: Router, private route: ActivatedRoute, private _notify: NotificationService,
-    private modal: Modal) {
+    private modal: Modal, private authService: AuthService) {
     this.page.pageNumber = 0;
     this.page.size = PageSize;
   }
@@ -227,7 +228,32 @@ export class CaseListComponent implements OnInit {
 
   viewDetail(id) {
     this.router.navigate(['../../case/view/', id], { relativeTo: this.route });
-    //this.router.navigateByUrl(`/case/view/${id}`);
+  }
+
+  markImportant(data) {
+    this.caseService.markCaseAsImportant(data.Id, this.authService.getTenent()).subscribe(res => {
+      if (res) {
+        data.IsImportant = data.IsImportant ? false : true;
+      }
+    }, error => {
+      this._notify.error('Something went wrong, Please try again');
+    });
+  }
+
+  exportCase() {
+    this.caseService.exportCase();
+  }
+
+  showHistory(id) {
+    // this.router.navigate([`/${id}/history`]);
+    this.router.navigate([`../../case/${id}/history`], { relativeTo: this.route });
+    // this.caseService.getCaseHistory(id).subscribe(res => {
+    //   if (res) {
+    //     debugger
+    //   }
+    // }, error => {
+    //   this._notify.error('Something went wrong, Please try again');
+    // });
   }
 
 }

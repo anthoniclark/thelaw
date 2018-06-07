@@ -13,6 +13,7 @@ import { DocumentListComponent } from './case-document/document-list/document-li
 import { DocumentDetailComponent } from './case-document/document-detail/document-detail.component';
 import { CaseEvidenceListComponent } from 'app/modules/case/case-evidence-list/case-evidence-list.component';
 import { CaseEvidenceDetailComponent } from 'app/modules/case/case-evidence-detail/case-evidence-detail.component';
+import { CaseHistoryComponent } from './case-history/case-history.component';
 
 
 const routes: Routes = [
@@ -32,7 +33,7 @@ const routes: Routes = [
     { path: ':caseId/evidence', component: CaseEvidenceListComponent },
     { path: ':caseId/evidence/:id', component: CaseEvidenceDetailComponent },
     { path: ':caseId/evidence/:id', component: CaseEvidenceDetailComponent },
-
+    { path: ':caseId/history', component: CaseHistoryComponent },
 
 ];
 
