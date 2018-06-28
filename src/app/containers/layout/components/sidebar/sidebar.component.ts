@@ -63,4 +63,10 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  editProfile() {
+    const contectId = this.authService.getUserId();
+    const tenent = this.authService.getTenent();
+    this.router.navigateByUrl(`/${tenent}/contact/${contectId}`);
+  }
 }

@@ -21,10 +21,17 @@ export class AuthService {
     localStorage.setItem('userName', username);
   }
 
+  setUserId(userId: number) {
+    localStorage.setItem('userId', userId.toString());
+  }
+
+  getUserId() {
+    return localStorage.getItem('userId');
+  }
+
   setThemeId(themeId: number) {
     localStorage.setItem('themeId', themeId.toString());
   }
-
 
   getUserName() {
     return localStorage.getItem('userName');

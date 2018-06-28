@@ -21,6 +21,7 @@ export class LoginService {
         if (res.Result.sessionId) {
           this.authService.setAuhToken(res.Result.sessionId);
           this.authService.setUserName(res.Result.Name);
+          this.authService.setUserId(res.Result.ContactId);
           this.authService.setThemeId(res.Result.ThemeId);
         }
         return true;
