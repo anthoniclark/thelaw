@@ -48,7 +48,7 @@ export class ExpenseTypeDetailComponent implements OnInit {
       });
     }, error => {
       this.isLoading = false;
-      this._notify.error(error.Result);
+      this._notify.error(error.error.ErrorMessage[1]);
     });
   }
 
