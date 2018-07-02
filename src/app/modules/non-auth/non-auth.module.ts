@@ -5,6 +5,7 @@ import { LoginService } from 'app/modules/non-auth/login/login.service';
 import { NonAuthService } from 'app/modules/non-auth/non-auth.service';
 import { NonAuthRouting } from 'app/modules/non-auth/non-auth.routing';
 import { SharedModule } from '../../shared/shared.module';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { SharedModule } from '../../shared/shared.module';
     SharedModule
   ],
   declarations: [
-    LoginComponent
+    LoginComponent,
+    ForgotPasswordComponent
   ],
   providers: [
     LoginService,

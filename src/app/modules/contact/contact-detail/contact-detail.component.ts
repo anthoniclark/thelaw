@@ -80,7 +80,6 @@ export class ContactDetailComponent implements OnInit {
 
 
           this.model.Address.forEach(element => {
-            debugger;
             this.addressSet.push({
               Address1: element.Address1,
               Id: element.Id,

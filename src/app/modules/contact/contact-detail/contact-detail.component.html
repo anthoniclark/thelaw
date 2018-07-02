@@ -29,7 +29,7 @@
                 <div class="form-group">
                   <label for="CaseId">Profile Image</label>
                   <div class="img-wrap">
-                    <a *ngIf="!isViewMode" class="delete-photo-icon" (click)="deletePhoto()">
+                    <a *ngIf="!isViewMode && model.Photo" class="delete-photo-icon" (click)="deletePhoto()">
                       <i class="fa fa-times-circle pull-right"></i>
                     </a>
                     <!-- <span class="delete-photo-icon"></span> -->
@@ -58,20 +58,22 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="Title">Title</label>
+                  <label for="Title">Title
+                    <span class="req">*</span>
+                  </label>
                   <select class="form-control" required [(ngModel)]="model.Title" id="Title" [disabled]="isViewMode" name="Title" #Title="ngModel">
                     <option *ngFor="let title of TitleDropDown" value={{title.Id}}>
                       {{title.Name}}
                     </option>
                   </select>
                   <label *ngIf="contactForm.submitted && !Title.valid" class="error">
-                    Please enter Title
+                    Please select Title
                   </label>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="FirstName">First Name
+                  <label for="FirstName">FirstName
                     <span class="req">*</span>
                   </label>
                   <input type="text" maxlength="50" id="FirstName" name="FirstName" [class.inValidField]="contactForm.submitted && !FirstName.valid"
@@ -84,7 +86,7 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="">Last Name
+                  <label for="">LastName
                     <span class="req">*</span>
                   </label>
                   <input type="text" maxlength="50" name="LastName" [readonly]="isViewMode" [class.inValidField]="contactForm.submitted && !LastName.valid"
@@ -138,8 +140,6 @@
                     Enter Valid Base Price</label>
                 </div>
               </div>
-            </div>
-            <div class="row">
               <div class="col-sm-6" *ngIf="model.ContactType ==='Advocate' || model.ContactType ==='Associates'">
                 <div class="form-group">
                   <label for="DealOn">Deal On</label>
@@ -152,6 +152,9 @@
                 </div>
               </div>
             </div>
+            <!-- <div class="row">
+
+            </div> -->
 
             <div class="hr-line-dashed"></div>
 
@@ -204,7 +207,7 @@
                         <a *ngIf="!isViewMode && !mobileControl.IsPrimary" (click)="mobileControl.IsDeleted = true">
                           <i class="fa fa-times-circle pull-right"></i>
                         </a>
-                        <div class="form-group col-md-8 pl0">
+                        <div class="form-group col-md-7 pl0">
                           <select class="form-control mobile-type-select" [disabled]="isViewMode" name="MobileType{{i}}" [(ngModel)]="mobileControl.MobileType">
                             <option value="work">Work</option>
                             <option value="home">Home</option>
@@ -213,7 +216,7 @@
                             <option value="mobile">Mobile</option>
                           </select>
                         </div>
-                        <div class="mr20 col-md-4">
+                        <div class="mr20 col-md-5">
                           <div class="checkbox">
                             <input type="checkbox" [disabled]="isViewMode || mobileControl.isDisabled" (change)="changeIsPrimary(mobileControl)" [(ngModel)]="mobileControl.IsPrimary"
                               name="mobileIsPrimary{{i}}">
@@ -319,7 +322,10 @@
 
             <div class="row">
               <div class="col-sm-4">
-                <a href=javascript:; [routerLink]="['../../contact']" class="btn btn-default btn-cancel mr5">
+                <a href=javascript:; [routerLink]="['../../contact']" *ngIf="!isViewMode" class="btn btn-default btn-cancel mr5">
+                  <i class="fa fa-times-circle mr5"></i> Back
+                </a>
+                <a href=javascript:; [routerLink]="['../../../contact']" *ngIf="isViewMode" class="btn btn-default btn-cancel mr5">
                   <i class="fa fa-times-circle mr5"></i> Back
                 </a>
                 <button type="submit" *ngIf="!isViewMode" [disabled]="isLoading" class="btn btn-primary mr5">
