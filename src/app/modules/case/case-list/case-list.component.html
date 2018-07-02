@@ -56,7 +56,7 @@
             </p-column>
             <p-column field="RefferenceNumber" [sortable]="true" [filter]="true" header="Ref No"></p-column>
             <p-column field="CaseStatus" [sortable]="true" [filter]="true" header="Case Status"></p-column>
-            <p-column field="IsImportant" bodyStyleClass='important-case' header="Important Case">
+            <p-column field="IsImportant" bodyStyleClass='important-case' [sortable]="true" header="Important Case">
               <ng-template let-col let-data="rowData" pTemplate="body">
                 <i (click)="markImportant(data)" class="big-icon fa {{ data[col.field] ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"></i>
               </ng-template>
