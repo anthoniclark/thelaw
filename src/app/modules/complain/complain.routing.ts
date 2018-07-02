@@ -7,7 +7,8 @@ import { ComplainAddComponent } from './complain-add/complain-add.component';
 
 const routes: Routes = [
     { path: '', component: ComplainListComponent },
-    { path: ':id', component: ComplainAddComponent }
+    { path: ':id', component: ComplainAddComponent },
+    { path: 'view/:id', component: ComplainAddComponent }
 ];
 
 export const complainRouting: ModuleWithProviders = RouterModule.forChild(routes);

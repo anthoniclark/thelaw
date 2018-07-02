@@ -20,7 +20,7 @@ export class ComplainAddComponent implements OnInit {
   ComplainStatusDropDown: Array<DropDownModel> = ComplainStatus;
   ComplainById; ComplainOfId;
   isLoading: boolean = false;
-
+  isReadOnly = false;
   constructor(private route: ActivatedRoute,
     private complainService: ComplainService,
     private _notify: NotificationService,
@@ -29,6 +29,9 @@ export class ComplainAddComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.route.url.subscribe(segment => {
+      this.isReadOnly = segment.some(x => x.path.toLocaleLowerCase() === "view");
+    });
     this.route.params.subscribe(param => this.paramId = param['id']);
     this.model.IsActive = true;
 
@@ -94,6 +97,6 @@ export class ComplainAddComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.router.navigate(['../../complain'], { relativeTo: this.route });
+    this.router.navigate(['../../'], { relativeTo: this.route });
   }
 }

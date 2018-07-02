@@ -153,4 +153,7 @@ export class ComplainListComponent implements OnInit {
       this.page.pageNumber = event.first / this.pageSize;
     }
   }
+  viewComplain(data) {
+    this.router.navigate([`../../complain/view/${data.Id}`], { relativeTo: this.route });
+  }
 }

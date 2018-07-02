@@ -25,7 +25,7 @@
             loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
             <p-column field="ComplainDate" [sortable]="true" header="Complain Date">
               <ng-template let-col let-data="rowData" pTemplate="body">
-                <span>{{data[col.field] | date: 'dd/MM/yyyy'}}</span>
+                <span (click)="viewComplain(data)">{{data[col.field] | date: 'dd/MM/yyyy'}}</span>
               </ng-template>
             </p-column>
             <p-column field="ComplainByName" [filter]="true" [sortable]="true" header="Complain By Name"></p-column>
