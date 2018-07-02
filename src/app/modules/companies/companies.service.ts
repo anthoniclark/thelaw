@@ -3,11 +3,12 @@ import { HttpClientService } from '../../lib/http/http-client.service';
 import { Page, Sorting } from '../../models/page';
 import { Company } from '../../models/companies';
 import { environment } from 'environments/environment';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Injectable()
 export class CompaniesService {
 
-  constructor(private httpClientService: HttpClientService) {
+  constructor(private httpClientService: HttpClientService, private authService: AuthService) {
   }
   companiesPageData(page: Page, sort: Sorting, filterColumn?: string, filterValue?: string) {
     let filter = '';
@@ -134,6 +135,6 @@ export class CompaniesService {
   }
 
   exportCompanies() {
-    window.open(`${environment.origin}Companies/ExportCompany`, '_blank');
+    window.open(`${environment.origin}${this.authService.getTenent()}/Companies/ExportCompany`, '_blank');
   }
 }
