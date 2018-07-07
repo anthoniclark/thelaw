@@ -5,7 +5,5 @@
 
 export const environment = {
   production: false,
-  // origin: 'http://hardikrshahza-001-site1.ctempurl.com/api/'
-  origin:'http://ztoasamir-001-site1.atempurl.com/api/'
-  //origin: 'https://swapi.co/api/'
+  origin: 'http://spinfoweb-001-site1.ctempurl.com/api/'
 };

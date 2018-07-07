@@ -231,6 +231,10 @@ export class CaseListComponent implements OnInit {
     this.router.navigate(['../../case/view/', id], { relativeTo: this.route });
   }
 
+  viewClientDetail(id) {
+    this.router.navigate(['../../contact/view/', id], { relativeTo: this.route });
+  }
+
   markImportant(data) {
     this.caseService.markCaseAsImportant(data.Id, this.authService.getTenent()).subscribe(res => {
       if (res) {
