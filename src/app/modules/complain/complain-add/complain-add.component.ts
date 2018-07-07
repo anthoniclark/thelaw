@@ -97,6 +97,10 @@ export class ComplainAddComponent implements OnInit {
   }
 
   onCancelClick() {
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  onViewCancelClick() {
     this.router.navigate(['../../'], { relativeTo: this.route });
   }
 }

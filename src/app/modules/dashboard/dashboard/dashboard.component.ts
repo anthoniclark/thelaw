@@ -21,23 +21,5 @@ export class DashboardComponent implements OnInit {
     }, error => {
       this._notify.error();
     });
-    this.changeTheme(this.getThemeById(+this.authService.getThemeId()));
-  }
-
-  getThemeById(id: number) {
-    switch (id) {
-      case 1:
-        return '';
-      case 2:
-        return 'skin-1';
-      case 3:
-        return 'skin-3';
-    }
-  }
-
-  changeTheme(themeName) {
-    this.document.body.classList.remove('skin-1');
-    this.document.body.classList.remove('skin-3');
-    this.document.body.classList.add(themeName);
   }
 }

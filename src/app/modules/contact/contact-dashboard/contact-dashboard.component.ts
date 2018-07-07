@@ -22,7 +22,7 @@ export class ContactDashboardComponent implements OnInit {
     columnName: 'Designation',
     value: ''
   }];
-  loadingIndicator: boolean = false;
+  loadingIndicator: boolean = true;
   contactType: string = contactDashboardTab[0];
   sorting: Sorting = new Sorting();
 
@@ -177,6 +177,7 @@ export class ContactDashboardComponent implements OnInit {
 
   getNewlyAddedData() {
     this.rows = [];
+    this.loadingIndicator = true;
     this.contactType = contactDashboardTab[0];
     this.page.size = 10;
     this.page.totalElements = 10;

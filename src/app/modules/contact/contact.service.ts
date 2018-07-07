@@ -327,6 +327,19 @@ export class ContactService {
     });
   }
 
+  contactFullTextSearch(text: string, page: Page, sort: Sorting) {
+    const link = `page=${page.pageNumber}&pageSize=${page.size}&orderBy=${sort.columnName}&ascending=${sort.dir}
+    &searchValue=${text}`;
+    return this.httpService.get(`Contact/GetFullTextSearch?${link}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
   getContactPageData(contactType: string, page: Page, sort: Sorting, filterColumn?: string,
     filterValue?: string, isImportant?: boolean) {
     if (contactType === 'Importants') {

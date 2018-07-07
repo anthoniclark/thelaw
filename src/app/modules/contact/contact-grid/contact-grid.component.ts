@@ -23,6 +23,9 @@ export class ContactGridComponent implements OnInit {
   @Output() onFilter: EventEmitter<any> = new EventEmitter<any>();
   _data: any[];
 
+  advanceSearch: string;
+  searchApplied: boolean = false;
+
   constructor(private contactService: ContactService, public router: Router, private _notify: NotificationService,
     private modalDialog: Modal) { }
 
@@ -46,9 +49,45 @@ export class ContactGridComponent implements OnInit {
 
   setPage(event) {
     this.getPageData.emit(event);
+    if (event.globalFilter) {
+      return this.advanceFilter(event.globalFilter);
+    }
+  }
+
+  advanceFilter(searchTerm) {
+    debugger;
+    this.searchApplied = true;
+    this.loadingIndicator = true;
+    let sorting: Sorting = new Sorting();
+    sorting = { columnName: "Id", dir: true };
+    this.contactService.contactFullTextSearch(searchTerm, this.page, sorting).subscribe(res => {
+      this.loadingIndicator = false;
+      this.page.totalElements = res.TotalNumberOfRecords;
+      this.page.totalPages = res.TotalNumberOfPages;
+      this.page.pageNumber = res.PageNumber;
+      this._data = res.Results;
+    }, error => {
+      this._notify.error(error.detail);
+    });
+  }
+
+  removeadvanceFilter() {
+    this.searchApplied = false;
+    this.advanceSearch = "";
+    // this.setPage(this.page);
   }
 
   ngOnInit() {
+    // this.loadingIndicator = true;
+    // this.contactService.getContacts().subscribe(
+    //   response => {
+    //     debugger;
+    //     this.loadingIndicator = false;
+    //     this._data = response;
+    //   }, err => {
+    //     this.loadingIndicator = false;
+    //     this._notify.error(err.Result);
+    //   });
   }
 
   deleteClick(id, dt) {

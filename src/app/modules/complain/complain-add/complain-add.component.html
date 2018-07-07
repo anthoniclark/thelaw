@@ -29,8 +29,8 @@
                   <label for="ComplainDate">Complain Date
                     <span class="req">*</span>
                   </label>
-                  <input class="form-control" [disabled]='isReadOnly' [(ngModel)]="model.ComplainDate" ngui-datetime-picker date-only="true" #ComplainDate="ngModel"
-                    required name="ComplainDate" id="ComplainDate" [class.inValidField]="complainForm.submitted && !ComplainDate.valid"
+                  <input class="form-control" [disabled]='isReadOnly' [(ngModel)]="model.ComplainDate" ngui-datetime-picker date-only="true"
+                    #ComplainDate="ngModel" required name="ComplainDate" id="ComplainDate" [class.inValidField]="complainForm.submitted && !ComplainDate.valid"
                   />
                   <label *ngIf="complainForm.submitted && !ComplainDate.valid" class="error">
                     Please select Complain Date.
@@ -71,7 +71,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="ComplainStatus">Status</label>
-                  <select class="form-control" [disabled]='isReadOnly' [(ngModel)]="model.ComplainStatus" #ComplainStatus="ngModel" id="ComplainStatus" name="ComplainStatus">
+                  <select class="form-control" [disabled]='isReadOnly' [(ngModel)]="model.ComplainStatus" #ComplainStatus="ngModel" id="ComplainStatus"
+                    name="ComplainStatus">
                     <option *ngFor="let status of ComplainStatusDropDown" value={{status.Id}}>
                       {{status.Name}}
                     </option>
@@ -88,8 +89,9 @@
                   </label>
                   <!-- <input type="text" id="Description" name="Description" maxlength="250" [class.inValidField]="complainForm.submitted && !model.Description"
                     class="form-control" [(ngModel)]="model.Description" required #Description="ngModel" /> -->
-                  <textarea class="form-control" [disabled]='isReadOnly' [class.inValidField]="complainForm.submitted && !model.Description" rows="3" id="Description"
-                    name="Description" maxlength="250" [(ngModel)]="model.Description" #Description="ngModel" required></textarea>
+                  <textarea class="form-control" [disabled]='isReadOnly' [class.inValidField]="complainForm.submitted && !model.Description"
+                    rows="3" id="Description" name="Description" maxlength="250" [(ngModel)]="model.Description" #Description="ngModel"
+                    required></textarea>
                   <label *ngIf="complainForm.submitted && !Description.valid" class="error">
                     Please enter Description.
                   </label>
@@ -100,7 +102,10 @@
             </div>
             <div class="hr-line-dashed"></div>
             <div class="row">
-              <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
+              <a href=javascript:; *ngIf="isReadOnly" (click)="onViewCancelClick()" class="btn btn-default btn-cancel mr5">
+                <i class="fa fa-times-circle mr5"></i> Back
+              </a>
+              <a href=javascript:; *ngIf="!isReadOnly" (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
                 <i class="fa fa-times-circle mr5"></i> Back
               </a>
               <button type="submit" *ngIf="!isReadOnly" [disabled]="isLoading" class="btn btn-primary mr5">

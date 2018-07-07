@@ -17,6 +17,7 @@ declare var jQuery: any;
 export class SidebarComponent implements OnInit, AfterViewInit {
 
   imgBase64: any;
+  currentMenu: string;
 
   @Input() layoutMenu: any;
   userName: string;
@@ -42,7 +43,9 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   activeRoute(routename: string): boolean {
-    return this.router.url.indexOf(routename) > -1;
+    debugger;
+    return false;
+    //return this.router.url.indexOf(routename) > -1;
   }
 
   goToHome() {

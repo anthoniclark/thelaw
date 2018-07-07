@@ -30,11 +30,15 @@ export class ContactDetailComponent implements OnInit {
   addressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false, ContactId: undefined, AddressType: 'Home' }];
   emailSet = [{ Id: undefined, EmailId: '', IsPrimary: true, IsDeleted: false }];
   visibleEmail: number = 0;
-  mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false, isDisabled: false, tempId: 1, MobileType: "home" }];
+  mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false, isDisabled: true, tempId: 1, MobileType: "home" }];
   validFileType: boolean = true;
   CompanyId;
   isDisabled: boolean = false;
   isViewMode: boolean = false;
+  EmailError: string;
+  ContactError: string;
+  AddressError: string;
+
   constructor(private route: ActivatedRoute, private contactService: ContactService, private router: Router,
     private _notify: NotificationService, private modalDialog: Modal, private _sanitizer: DomSanitizer) { }
 
@@ -150,9 +154,11 @@ export class ContactDetailComponent implements OnInit {
       }
     });
     if (!isEmpty) {
+      this.AddressError = '';
       this.addressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: false, IsDeleted: false, ContactId: undefined, AddressType: 'Home' });
     } else {
-      this._notify.error('Please fill all added address');
+      // this._notify.error('Please fill all added address');
+      this.AddressError = 'Please fill all added address';
     }
   }
 
@@ -164,9 +170,11 @@ export class ContactDetailComponent implements OnInit {
       }
     });
     if (!isEmpty) {
+      this.EmailError = '';
       this.emailSet.push({ Id: undefined, EmailId: '', IsPrimary: false, IsDeleted: false });
     } else {
-      this._notify.error('Please fill all added email');
+      // this._notify.error('Please fill all added email');
+      this.EmailError = 'Please fill all added email';
     }
   }
 
@@ -178,13 +186,15 @@ export class ContactDetailComponent implements OnInit {
       }
     });
     if (!isEmpty) {
-      const isPrimary = this.mobileSet.some(x => x.IsPrimary === true);
+      this.ContactError = '';
+      // const isPrimary = this.mobileSet.some(x => x.IsPrimary === true);
       this.mobileSet.push({
-        Id: undefined, MobileNumber: '', IsPrimary: false, IsDeleted: false, isDisabled: isPrimary, tempId: this.mobileSet.length + 1,
+        Id: undefined, MobileNumber: '', IsPrimary: false, IsDeleted: false, isDisabled: false, tempId: this.mobileSet.length + 1,
         MobileType: "home"
       });
     } else {
-      this._notify.error('Please fill all added contact number(s)');
+      //this._notify.error('Please fill all added contact number(s)'); 
+      this.ContactError = 'Please fill all added contact number(s)';
     }
   }
 
@@ -447,11 +457,12 @@ export class ContactDetailComponent implements OnInit {
   }
 
   changeIsPrimary(data: any) {
-    if (!data.IsPrimary) {
-      this.mobileSet.forEach(x => x.isDisabled = false);
-    } else {
-      this.mobileSet.filter(x => x.tempId !== data.tempId).forEach(y => y.isDisabled = true);
-    }
+    data.isPrimary = !data.isPrimary;
+    // if (!data.IsPrimary) {
+    //   this.mobileSet.forEach(x => x.isDisabled = false);
+    // } else {
+    //   this.mobileSet.filter(x => x.tempId !== data.tempId).forEach(y => y.isDisabled = true);
+    // }
   }
 
 }

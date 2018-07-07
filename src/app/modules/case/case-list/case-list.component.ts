@@ -202,6 +202,7 @@ export class CaseListComponent implements OnInit {
   }
 
   advanceFilter(searchTerm) {
+    debugger;
     this.searchApplied = true;
     this.loadingIndicator = true;
     this.caseService.caseFullTextSearch(searchTerm, this.contactId, this.page, this.sorting).subscribe(res => {

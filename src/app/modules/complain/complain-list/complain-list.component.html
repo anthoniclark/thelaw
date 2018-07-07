@@ -34,6 +34,9 @@
 
             <p-column header="Actions">
               <ng-template let-data="rowData" pTemplate="body">
+                <button [routerLink]="['../../complain/view/', data.Id]" title="View" class="btn-white btn btn-xs">
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                </button>
                 <button (click)="editClick(data.Id)" class="btn-white btn btn-xs">
                   <i class="fa fa-edit"></i>
                 </button>

@@ -9,17 +9,17 @@ import { NotificationService } from 'app/shared/services/notification.service';
 })
 export class ContactListComponent implements OnInit {
   rows = [];
-  loadingIndicator: boolean = true;
+  loadingIndicator: boolean = false;
   reorderable: boolean = true;
 
   constructor(private contactService: ContactService, public router: Router, private _notify: NotificationService) { }
 
   ngOnInit() {
-    this.contactService.getContacts().subscribe(
-      response => {
-        this.rows = response;
-      }, err => {
-        this._notify.error(err.Result);
-      });
+    // this.contactService.getContacts().subscribe(
+    //   response => {
+    //     this.rows = response;
+    //   }, err => {
+    //     this._notify.error(err.Result);
+    //   });
   }
 }

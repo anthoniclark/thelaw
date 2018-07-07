@@ -184,6 +184,9 @@
                       </div>
                     </div>
                   </div>
+                  <label *ngIf="EmailError" class="error">
+                    {{EmailError}}
+                  </label>
                 </div>
               </div>
               <div class="col-md-6 col-sm-12">
@@ -204,7 +207,7 @@
                         <div>
                           <label for="MobileNumber{{i}}">Contact number</label>
                         </div>
-                        <a *ngIf="!isViewMode && !mobileControl.IsPrimary" (click)="mobileControl.IsDeleted = true">
+                        <a *ngIf="!isViewMode && !mobileControl.isDisabled" (click)="mobileControl.IsDeleted = true">
                           <i class="fa fa-times-circle pull-right"></i>
                         </a>
                         <div class="form-group col-md-7 pl0">
@@ -232,6 +235,9 @@
                       </div>
                     </div>
                   </div>
+                  <label *ngIf="ContactError" class="error">
+                    {{ContactError}}
+                  </label>
                 </div>
               </div>
             </div>
@@ -317,6 +323,9 @@
                 </div>
               </div>
             </div>
+            <label *ngIf="AddressError" class="error">
+              {{AddressError}}
+            </label>
 
             <div class="hr-line-dashed"></div>
 
