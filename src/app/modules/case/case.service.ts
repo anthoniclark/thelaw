@@ -116,6 +116,18 @@ export class CaseService {
     });
   }
 
+  getCaseStatusList() {
+    return this.httpService.get('Case/GetCaseStatus').map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+
   getStages() {
     return this.httpService.get('Stage/GetAll').map((res: any) => {
       if (res.Success) {

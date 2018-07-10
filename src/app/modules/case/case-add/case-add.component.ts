@@ -29,6 +29,7 @@ export class CaseAddComponent implements OnInit {
   selectedJudges: any[] = [];
   selectedAssociates: any[] = [];
   CaseAppealTypeDropDown: any[] = [];
+  CaseStatusDropDown: any[] = [];
   model: Case = new Case();
   CaseTypeDropDown: Array<DropDownModel> = CaseType;
   PriorityDropDown: Array<DropDownModel> = CasePriority;
@@ -40,6 +41,7 @@ export class CaseAddComponent implements OnInit {
   associatesSettings = {};
   taskTimeTrackingId: number;
   contactType: string;
+  otherCaseStatus: string;
   casePricingType: Array<DropDownModel> = CasePricingType;
   isViewModel: boolean;
   currentYear = new Date().getFullYear();
@@ -74,6 +76,9 @@ export class CaseAddComponent implements OnInit {
 
     this.caseService.getCaseAppealTypes().subscribe(res => {
       this.CaseAppealTypeDropDown = res;
+    });
+    this.caseService.getCaseStatusList().subscribe(res => {
+      this.CaseStatusDropDown = res;
     });
     this.caseService.getCourtsDD().subscribe(res => {
       this.courts = res;
@@ -122,8 +127,13 @@ export class CaseAddComponent implements OnInit {
           if (this.model.ClientId) {
             this.contactService.getContactById(this.model.ClientId).subscribe(res => {
               this.ClientId = res.FirstName + ' ' + res.LastName;
-            })
+            });
             this.getOfficeAddresses(this.model.ClientId);
+          }
+          this.otherCaseStatus = '';
+          if (this.model.CaseStatus.startsWith('Other')) {
+            this.otherCaseStatus = (this.model.CaseStatus.split('-')).length > 0 ? this.model.CaseStatus.split('-')[1] : '';
+            this.model.CaseStatus = 'Other';
           }
         }, err => {
           this._notify.error(err.Result);
@@ -244,7 +254,9 @@ export class CaseAddComponent implements OnInit {
     this.selectedAssociates.forEach(element => {
       this.model.AssociatesId.push(element.id);
     });
-
+    if (this.model.CaseStatus === 'Other' && this.otherCaseStatus.length > 0) {
+      this.model.CaseStatus = this.model.CaseStatus + '-' + this.otherCaseStatus;
+    }
     this.selectedJudges.forEach(element => {
       this.model.JudgeIds.push(element.id);
     });
