@@ -270,6 +270,13 @@
                     id="OpenDate" #OpenDate="ngModel" />
                 </div>
               </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="CaseStatus">Case Status</label>
+                  <input type="text" maxlength="250" id="CaseStatus" [readonly]="isViewModel" name="CaseStatus" class="form-control" [(ngModel)]="model.CaseStatus"
+                    #CaseStatus="ngModel" />
+                </div>
+              </div>
               <!-- <div class="col-sm-6">
                 <div class="form-group">
                   <label for="EndDate">End Date</label>
@@ -293,9 +300,9 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="CaseStatus">Case Status</label>
-                  <input type="text" maxlength="250" id="CaseStatus" [readonly]="isViewModel" name="CaseStatus" class="form-control" [(ngModel)]="model.CaseStatus"
-                    #CaseStatus="ngModel" />
+                  <label for="RefferenceNumber">Reference Number</label>
+                  <input type="text" maxlength="250" id="RefferenceNumber" [readonly]="isViewModel" name="RefferenceNumber" class="form-control"
+                    [(ngModel)]="model.RefferenceNumber" #RefferenceNumber="ngModel" />
                 </div>
               </div>
             </div>
@@ -315,9 +322,11 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="RefferenceNumber">Reference Number</label>
-                  <input type="text" maxlength="250" id="RefferenceNumber" [readonly]="isViewModel" name="RefferenceNumber" class="form-control"
-                    [(ngModel)]="model.RefferenceNumber" #RefferenceNumber="ngModel" />
+                  <label for="AdvanceFees">Advance Fees</label>
+                  <input class="form-control" type="number" id="AdvanceFees" [readonly]="isViewModel" name="AdvanceFees" pattern="^\d+(\.\d{1,2})?$"
+                    step="0.01" [(ngModel)]="model.AdvanceFees" (keypress)="_keyPress($event)" #AdvanceFees="ngModel" />
+                  <label *ngIf="(caseForm.submitted || AdvanceFees.dirty) && AdvanceFees.errors && AdvanceFees.errors['pattern']" class="error">
+                    Enter Valid Advance Fees</label>
                 </div>
               </div>
             </div>
@@ -331,11 +340,11 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="AdvanceFees">Advance Fees</label>
-                  <input class="form-control" type="number" id="AdvanceFees" [readonly]="isViewModel" name="AdvanceFees" pattern="^\d+(\.\d{1,2})?$"
-                    step="0.01" [(ngModel)]="model.AdvanceFees" (keypress)="_keyPress($event)" #AdvanceFees="ngModel" />
-                  <label *ngIf="(caseForm.submitted || AdvanceFees.dirty) && AdvanceFees.errors && AdvanceFees.errors['pattern']" class="error">
-                    Enter Valid Advance Fees</label>
+                  <label for="CourtFees">Court Fees</label>
+                  <input class="form-control" type="number" id="CourtFees" name="CourtFees" [readonly]="isViewModel" pattern="^\d+(\.\d{1,2})?$"
+                    step="0.01" [(ngModel)]="model.CourtFees" #CourtFees="ngModel" />
+                  <label *ngIf="(caseForm.submitted || CourtFees.dirty) && CourtFees.errors && CourtFees.errors['pattern']" class="error">
+                    Enter Valid Court Fees</label>
                 </div>
               </div>
             </div>
@@ -353,11 +362,11 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="CourtFees">Court Fees</label>
-                  <input class="form-control" type="number" id="CourtFees" name="CourtFees" [readonly]="isViewModel" pattern="^\d+(\.\d{1,2})?$"
-                    step="0.01" [(ngModel)]="model.CourtFees" #CourtFees="ngModel" />
-                  <label *ngIf="(caseForm.submitted || CourtFees.dirty) && CourtFees.errors && CourtFees.errors['pattern']" class="error">
-                    Enter Valid Court Fees</label>
+                  <label for="TrustAccount">Trust Account</label>
+                  <input class="form-control" type="number" id="TrustAccount" name="TrustAccount" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.TrustAccount"
+                    (keypress)="_keyPress($event)" #TrustAccount="ngModel" />
+                  <label *ngIf="(caseForm.submitted || TrustAccount.dirty) && TrustAccount.errors && TrustAccount.errors['pattern']" class="error">
+                    Enter Valid Trust Account</label>
                 </div>
               </div>
 
@@ -385,17 +394,17 @@
                 </div>
               </div>
             </div>
-
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-12">
                 <div class="form-group">
-                  <label for="TrustAccount">Trust Account</label>
-                  <input class="form-control" type="number" id="TrustAccount" name="TrustAccount" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.TrustAccount"
-                    (keypress)="_keyPress($event)" #TrustAccount="ngModel" />
-                  <label *ngIf="(caseForm.submitted || TrustAccount.dirty) && TrustAccount.errors && TrustAccount.errors['pattern']" class="error">
-                    Enter Valid Trust Account</label>
+                  <label for="Description">Description</label>
+                  <textarea class="form-control" rows="3" id="Description" name="Description" [readonly]="isViewModel" maxlength="250" [(ngModel)]="model.Description"
+                    #Description="ngModel"></textarea>
                 </div>
               </div>
+            </div>
+            <div class="row">
+              
               <div class="col-sm-6">
                 <div class="checkbox">
                   <input type="checkbox" name="NotifyMe" [(ngModel)]="model.NotifyMe" #NotifyMe="ngModel">
@@ -404,23 +413,24 @@
                   </label>
                 </div>
               </div>
+              <div class="col-sm-6" *ngIf="model.NotifyMe">
+                  <div class="form-group">
+                    <label for="NotifyMeValue">NotifyMe When</label>
+                    <input type="number" class="form-control" [(ngModel)]="model.NotifyMeValue" name="NotifyMeValue" id="NotifyMeValue" #NotifyMeValue="ngModel"
+                      pattern="^\d+(\.\d{1,2})?$" (keypress)="_keyPress($event)" step="0.01" />
+                  </div>
+                </div>
+             
             </div>
             <div class="row">
-              <div class="col-sm-6" *ngIf="model.NotifyMe">
-                <div class="form-group">
-                  <label for="NotifyMeValue">NotifyMe When</label>
-                  <input type="number" class="form-control" [(ngModel)]="model.NotifyMeValue" name="NotifyMeValue" id="NotifyMeValue" #NotifyMeValue="ngModel"
-                    pattern="^\d+(\.\d{1,2})?$" (keypress)="_keyPress($event)" step="0.01" />
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="checkbox">
-                  <input type="checkbox" name="IsClose" [(ngModel)]="model.IsClose" [disabled]="isViewModel" #IsClose="ngModel">
-                  <label>
-                    Is Close
-                  </label>
-                </div>
-              </div>
+                <div class="col-sm-6">
+                    <div class="checkbox">
+                      <input type="checkbox" name="IsClose" [(ngModel)]="model.IsClose" [disabled]="isViewModel" #IsClose="ngModel">
+                      <label>
+                        Is Close
+                      </label>
+                    </div>
+                  </div>
             </div>
             <div class="row">
               <div class="col-sm-6" *ngIf="model.IsClose">
@@ -439,15 +449,7 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="Description">Description</label>
-                  <textarea class="form-control" rows="3" id="Description" name="Description" [readonly]="isViewModel" maxlength="250" [(ngModel)]="model.Description"
-                    #Description="ngModel"></textarea>
-                </div>
-              </div>
-            </div>
+            
             <div class="hr-line-dashed"></div>
             <div class="row">
               <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">

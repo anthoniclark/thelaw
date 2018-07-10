@@ -6,7 +6,7 @@
         <a [routerLink]="['../../']">Home</a>
       </li>
       <li class="active">
-        <strong>Case</strong>
+        <strong>Case</strong> 
       </li>
     </ol>
   </div>
@@ -42,9 +42,20 @@
             <!-- <p-header>List of Cars</p-header> -->
             <p-column field="CaseNo" [filter]="true" [sortable]="true" header="Case No">
               <ng-template let-col let-data="rowData" pTemplate="body">
+                  <i (click)="markImportant(data)" class="big-icon fa {{ data.IsImportant ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"></i>
                 <a class="view-detail" (click)="viewDetail(data.Id)">{{data[col.field]}}</a>
               </ng-template>
             </p-column>
+            <!-- <p-column field="IsImportant" bodyStyleClass='important-case' [sortable]="true" header="Important Case">
+                <ng-template let-col let-data="rowData" pTemplate="body">
+                    <i (click)="markImportant(data)" class="big-icon fa {{ data[col.field] ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"></i>
+                </ng-template>
+              </p-column> -->
+            <p-column field="Client" [filter]="true" [sortable]="true" header="Client Name">
+                <ng-template let-col let-data="rowData" pTemplate="body">
+                  <a class="view-detail" (click)="viewClientDetail(data.ClientId)">{{data[col.field]}}</a>
+                </ng-template>
+              </p-column>
             <p-column field="CaseType" [filter]="true" [sortable]="true" header="Case Type"></p-column>
             <p-column field="OpenDate" [sortable]="true" header="Start Date">
               <ng-template let-col let-data="rowData" pTemplate="body">
@@ -54,18 +65,9 @@
                     <p-calendar showButtonBar="true" dateFormat="yy-mm-dd" (onSelect)="filterStartDate($event,dt,col)"></p-calendar>
                   </ng-template> -->
             </p-column>
-            <p-column field="Client" [filter]="true" [sortable]="true" header="Client Name">
-              <ng-template let-col let-data="rowData" pTemplate="body">
-                <a class="view-detail" (click)="viewClientDetail(data.ClientId)">{{data[col.field]}}</a>
-              </ng-template>
-            </p-column>
-            <p-column field="RefferenceNumber" [sortable]="true" [filter]="true" header="Ref No"></p-column>
+            <!-- <p-column field="RefferenceNumber" [sortable]="true" [filter]="true" header="Ref No"></p-column> -->
             <p-column field="CaseStatus" [sortable]="true" [filter]="true" header="Case Status"></p-column>
-            <p-column field="IsImportant" bodyStyleClass='important-case' [sortable]="true" header="Important Case">
-              <ng-template let-col let-data="rowData" pTemplate="body">
-                <i (click)="markImportant(data)" class="big-icon fa {{ data[col.field] ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"></i>
-              </ng-template>
-            </p-column>
+          
             <p-column styleClass="col-button">
               <ng-template pTemplate="header">
                 Actions
@@ -77,11 +79,11 @@
                     <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu">
-                    <li>
+                    <!-- <li>
                       <a href="javascript:void(0)" (click)="viewDetail(data.Id)">
                         View
                       </a>
-                    </li>
+                    </li> -->
                     <li>
                       <a href="javascript:void(0)" (click)="editClick(data.Id)">
                         Edit
