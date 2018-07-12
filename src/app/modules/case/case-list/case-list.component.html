@@ -1,5 +1,5 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-lg-10">
+  <div class="col-lg-8">
     <h2>Cases</h2>
     <ol class="breadcrumb">
       <li>
@@ -10,22 +10,24 @@
       </li>
     </ol>
   </div>
-  <div class="col-lg-2">
-    <button type="button" class="btn btn-primary pull-right m-t-md" [routerLink]="['../../case/edit/new']">
+  <div class="col-lg-4">
+      <button type="button" class="btn btn-primary pull-right m-t-md" (click)="exportCase()">
+          <i class="fa fa-download mr5"></i> Export Case
+        </button>
+    <button type="button" class="btn btn-primary pull-right m-t-md m-r-xs" [routerLink]="['../../case/edit/new']">
       <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+      
   </div>
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-sm-12">
       <div class="form-group pull-right">
-        <button type="button" class="btn btn-primary" (click)="exportCase()">
-          <i class="fa fa-download mr5"></i> Export Case
-        </button>
+       
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="row">
     <div class="col-lg-12">
@@ -78,7 +80,7 @@
                     Action
                     <span class="caret"></span>
                   </a>
-                  <ul class="dropdown-menu">
+                  <ul class="dropdown-menu dropdown-menu-right">
                     <!-- <li>
                       <a href="javascript:void(0)" (click)="viewDetail(data.Id)">
                         View

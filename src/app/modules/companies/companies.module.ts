@@ -10,6 +10,7 @@ import { CompanyListComponent } from './company-list/company-list.component';
 import { ContactService } from '../contact/contact.service';
 import { DataTableModule } from 'primeng/datatable';
 import { FileUploadModule } from 'primeng/fileupload';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     AngularMultiSelectModule,
     ModalModule.forRoot(),
     DataTableModule,
-    FileUploadModule
+    FileUploadModule,
+    AccordionModule
   ],
   providers: [ContactService],
   declarations: [CompaniesListComponent, CompaniesDetailComponent, CompanyListComponent]

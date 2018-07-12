@@ -101,9 +101,9 @@
                 <div class="form-group">
                   <label for="Website">Website</label>
                   <input type="text" maxlength="100" id="Website" name="Website" class="form-control" [(ngModel)]="model.Website" #Website="ngModel"
-                  />
+                  pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$" placeholder="http://www.domain.com"/>
                   <label *ngIf="companyForm.submitted && !Website.valid" class="error">
-                    Please enter Website
+                    Please enter valid Website
                   </label>
                 </div>
               </div>

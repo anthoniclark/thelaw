@@ -29,7 +29,7 @@ export class CompaniesDetailComponent implements OnInit {
   emailSet = [{ Id: undefined, EmailId: '', IsPrimary: true, IsDeleted: false, IsActive: true }];
   mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false, isDisabled: false, tempId: 1, MobileType: "home", IsActive: true }];
   addressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false, AddressType: "Home", ContactId: undefined, IsActive: true }];
-  constructor(private conmapiesService: CompaniesService, private _notify: NotificationService,
+  constructor(private route: ActivatedRoute,private conmapiesService: CompaniesService, private _notify: NotificationService,
     private activatedRoute: ActivatedRoute, private router: Router, private modalDialog: Modal, private contactService: ContactService) { }
 
   ngOnInit() {
@@ -187,7 +187,8 @@ export class CompaniesDetailComponent implements OnInit {
           this._notify.success(`Company ${this.paramId ? 'updated' : 'added'} successfully`);
           this.isLoading = false;
           setTimeout(() => {
-            this.router.navigate(['/companies']);
+           // this.router.navigate(['../../../companies']);
+           this.router.navigate(['../../companies'], { relativeTo: this.route });
           }, 0);
         }, err => {
           this._notify.error(err);
@@ -196,7 +197,8 @@ export class CompaniesDetailComponent implements OnInit {
         setTimeout(() => {
           this.isLoading = false;
           this._notify.success(`Company ${this.paramId ? 'updated' : 'added'} successfully`);
-          this.router.navigate(['/companies']);
+         // this.router.navigate(['../../../companies']);
+          this.router.navigate(['../../companies'], { relativeTo: this.route });
         }, 0);
       }
     }, error => {

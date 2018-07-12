@@ -3285,7 +3285,10 @@ video {
   padding: 0 20px; }
 
 .wrapper-content {
-  padding: 20px 10px 40px; }
+  padding: 20px 10px 40px;
+overflow-y: auto;
+overflow-x: hidden; 
+}
 
 #page-wrapper {
   padding: 0 15px;
@@ -3319,7 +3322,7 @@ ul.unstyled, ol.unstyled {
   bottom: 0;
   left: 0;
   padding: 10px 20px;
-  /* position: absolute; */
+  position: absolute;
   right: 0; }
 
 .footer.fixed_full {

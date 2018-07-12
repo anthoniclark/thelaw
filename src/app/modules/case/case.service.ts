@@ -3,11 +3,12 @@ import { HttpClientService } from 'app/lib/http/http-client.service';
 import { Case, CaseStatus, CaseCommunication, TimeTracking, CaseNote, Document, AppealType, CaseEvidence, Judge, ContactQuickAdd, TaskCategory, Stage } from 'app/models/case';
 import { Page, Sorting } from 'app/models/page';
 import { environment } from 'environments/environment';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Injectable()
 export class CaseService {
 
-  constructor(private httpService: HttpClientService) { }
+  constructor(private httpService: HttpClientService,private authService: AuthService) { }
 
   getCaseById(id: number) {
     return this.httpService.get('case/GetCaseById/' + id).map((res: any) => {
@@ -772,7 +773,8 @@ export class CaseService {
   }
 
   exportCase() {
-    window.open(`${environment.origin}Case/ExportCase`, '_blank');
+    window.open(`${environment.origin}${this.authService.getTenent()}/Case/ExportCase`, '_blank');
+    //window.open(`${environment.origin}Case/ExportCase`, '_blank');
   }
 
 

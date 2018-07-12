@@ -28,10 +28,10 @@ export class CaseListComponent implements OnInit {
     columnName: 'CaseNo',
     value: ''
   }, {
-    columnName: 'CaseType',
+    columnName: 'Client',
     value: ''
   }, {
-    columnName: 'RefferenceNumber',
+    columnName: 'CaseType',
     value: ''
   }, {
     columnName: 'CaseStatus',
