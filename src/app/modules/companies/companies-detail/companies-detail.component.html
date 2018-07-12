@@ -89,7 +89,7 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CompanySize">Company Size</label>
-                  <input type="number" pattern="^\d+(\.\d{1,2})?$" step="1" id="CompanySize" name="CompanySize" class="form-control" [(ngModel)]="model.CompanySize"
+                  <input type="number" pattern="\d*" maxlength="15" step="1" id="CompanySize" name="CompanySize" class="form-control" [(ngModel)]="model.CompanySize"
                     #CompanySize="ngModel" />
                   <label *ngIf="companyForm.submitted && !CompanySize.valid" class="error">
                     Please enter CompanySize

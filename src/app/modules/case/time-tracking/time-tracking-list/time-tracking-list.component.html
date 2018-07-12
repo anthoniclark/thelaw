@@ -29,7 +29,7 @@
       <div class="ibox float-e-margins">
         <div class="ibox-content">
           <p-dataTable [rowHover]="true" [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
-            loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
+            loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)" [rowsPerPageOptions]="[5,10,20,30]">
             <!-- <p-column field="ContactName" [filter]="true" [sortable]="true" header="Contact Name"></p-column> -->
 
             <p-column field="TaskCategoryName" [filter]="true" [sortable]="true" header="Task Category"></p-column>

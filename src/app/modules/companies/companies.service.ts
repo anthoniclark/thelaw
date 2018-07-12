@@ -4,7 +4,7 @@ import { Page, Sorting } from '../../models/page';
 import { Company } from '../../models/companies';
 import { environment } from 'environments/environment';
 import { AuthService } from '../../shared/services/auth.service';
-
+import { PageSize } from 'app/shared/constants';
 @Injectable()
 export class CompaniesService {
 

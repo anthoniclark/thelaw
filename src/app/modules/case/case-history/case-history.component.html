@@ -22,7 +22,7 @@
       <div class="ibox float-e-margins">
         <div class="ibox-content">
           <p-dataTable [rowHover]="true" [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
-            loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
+            loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)" [rowsPerPageOptions]="[5,10,20,30]">
             <p-column field="NextActivity" header="NextActivity"> </p-column>
             <p-column field="HearingDate" header="Hearing Date">
               <ng-template let-col let-data="rowData" pTemplate="body">

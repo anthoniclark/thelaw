@@ -130,10 +130,11 @@ export class NoteListComponent implements OnInit {
   }
 
   paginate(event) {
+    this.page.size = event.rows;
     if (!event.first) {
       this.page.pageNumber = 0;
     } else {
-      this.page.pageNumber = event.first / this.pageSize;
+      this.page.pageNumber = event.first / this.page.size;
     }
   }
 }

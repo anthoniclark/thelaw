@@ -5,7 +5,7 @@
 
 <p-dataTable [rowHover]="true" [value]="_data" [globalFilter]="gb" [lazy]="true" [rows]="page.size" [paginator]="true" [responsive]="true"
   [loading]="loadingIndicator" class="contact-grid" loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)"
-  (onPage)="paginate($event)">
+  (onPage)="paginate($event)" [rowsPerPageOptions]="[5,10,20,30]">
   <!-- <p-column field="No" [sortable]="true" header="No.">
   </p-column> -->
   <p-column *ngIf="cType === 'NewlyAdded' || cType === 'Other' " field="ContactType" [filter]="cType !== 'NewlyAdded'" [sortable]="true"

@@ -4,7 +4,7 @@ import { Contact, Address } from 'app/models/contact';
 import { Page, Sorting } from '../../models/page';
 import { Subject } from 'rxjs/Subject';
 import { environment } from 'environments/environment';
-
+import { PageSize } from 'app/shared/constants';
 @Injectable()
 export class ContactService {
   deleteNotification = new Subject<boolean>();

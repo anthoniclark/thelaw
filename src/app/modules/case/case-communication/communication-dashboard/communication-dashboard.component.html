@@ -18,8 +18,8 @@
   <div class="col-lg-4">
     <button type="button" class="btn btn-create pull-right m-t-md m-r-md" kendoButton (click)="addClick()">
       <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
-    <button type="button" class="btn btn-create pull-right m-t-md m-r-md" kendoButton (click)="goTOListClick()">
-      <i class="fa fa-list-ul" aria-hidden="true"></i> Go to List</button>
+     <!-- <button type="button" class="btn btn-create pull-right m-t-md m-r-md" kendoButton (click)="goTOListClick()">
+      <i class="fa fa-list-ul" aria-hidden="true"></i> Go to List</button>  -->
   </div>
 </div>
 
@@ -79,14 +79,18 @@
                         <br>
                         <b>To: {{communication.CommunicateToName.replace(',',' ')}} </b>
                         <em class="text-success small ">{{communication.CommunicateDate | date: 'dd/MM/yyyy'}}</em>
+                            <a class="mr15 fltright" href="javascript:;" (click)="deleteClick(communication.Id)">
+                                <i class="fa fa-trash mr5 "></i>Delete </a>
+                                <a class="mr15 fltright m-r-md" href="javascript:;" (click)="editComment(communication.Id)">
+                                    <i class="fa fa-edit mr5 "></i>Edit </a>
                       </div>
+                     
                     </div>
                     <div class="profile-timeline-content ">
                       <p>
                         {{communication.CommunicationDetails}}
                       </p>
-                      <!-- <a class="mr15" href="javascript:;" (click)="editComment(communication.Id)">
-                        <i class="fa fa-edit mr5"></i>Edit </a> -->
+                     
                     </div>
                   </section>
 

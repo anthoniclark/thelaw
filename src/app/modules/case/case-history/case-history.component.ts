@@ -65,10 +65,11 @@ export class CaseHistoryComponent implements OnInit {
 
 
   paginate(event) {
+    this.page.size = event.rows;
     if (!event.first) {
       this.page.pageNumber = 0;
     } else {
-      this.page.pageNumber = event.first / 5;
+      this.page.pageNumber = event.first / this.page.size;
     }
   }
   ngOnInit() {

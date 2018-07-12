@@ -15,7 +15,7 @@
       <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
   </div>
 </div>
-<div class="wrapper wrapper-content animated fadeInRight" style="padding-bottom: 0px;">
+<div class="animated fadeInRight" style="padding-bottom: 0px;">
   <p-accordion>
     <p-accordionTab header="Company Import/Export">
       <div class="row">
@@ -72,7 +72,7 @@
       <div class="ibox float-e-margins">
         <div class="ibox-content">
           <p-dataTable [rowHover]="true" [value]="rows" [lazy]="true" [rows]="pageSize" [paginator]="true" [responsive]="true" [loading]="loadingIndicator"
-            loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)">
+            loadingIcon="fa-spinner" #dt [totalRecords]="page.totalElements" (onLazyLoad)="setPage($event)" (onPage)="paginate($event)" [rowsPerPageOptions]="[5,10,20,30]">
             <p-column field="CompanyName" [filter]="true" [sortable]="true" header="Company Name"></p-column>
             <p-column field="InsdustrySection" [filter]="true" [sortable]="true" header="Insdustry Section"></p-column>
             <p-column field="Category" [filter]="true" [sortable]="true" header="Category"></p-column>

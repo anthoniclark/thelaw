@@ -147,6 +147,7 @@ export class ComplainListComponent implements OnInit {
     });
   }
   paginate(event) {
+    this.pageSize = event.rows;
     if (!event.first) {
       this.page.pageNumber = 0;
     } else {

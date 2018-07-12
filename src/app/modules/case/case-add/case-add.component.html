@@ -427,7 +427,7 @@
                   <div class="form-group">
                     <label for="NotifyMeValue">NotifyMe When</label>
                     <input type="number" class="form-control" [(ngModel)]="model.NotifyMeValue" name="NotifyMeValue" id="NotifyMeValue" #NotifyMeValue="ngModel"
-                      pattern="^\d+(\.\d{1,2})?$" (keypress)="_keyPress($event)" step="0.01" />
+                      pattern="^\d+(\.\d{1,2})?$" (keypress)="_keyPress($event)" step="1" />
                   </div>
                 </div>
              

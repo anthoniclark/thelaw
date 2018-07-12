@@ -3288,6 +3288,7 @@ video {
   padding: 20px 10px 40px;
 overflow-y: auto;
 overflow-x: hidden; 
+min-height:450px;
 }
 
 #page-wrapper {
@@ -7826,3 +7827,12 @@ body.md-skin {
     overflow: visible !important; }
   #page-wrapper {
     margin: 0; } }
+
+  .fltright
+  {
+    float:right;
+  }
+  .fltleft
+  {
+    float:left;
+  }
