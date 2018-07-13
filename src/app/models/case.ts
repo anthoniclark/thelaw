@@ -149,3 +149,13 @@ export class Court {
     City: string;
     State: string;
 }
+
+export class CaseDashboard
+{
+    TotalCaseCount: number;
+    TotalOpenCase:number;
+    TotalCloseCase:number;
+    TotalInactiveCase:number;
+    TotalOther:number;
+    TotalImportants:number;
+}

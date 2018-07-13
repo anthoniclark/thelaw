@@ -18,6 +18,7 @@ import { AuthService } from '../../../shared/services/auth.service';
 export class CaseListComponent implements OnInit {
   rows = [];
   pageSize: number = PageSize;
+  dashboardData: any = {};
   public page: Page = new Page();
   loadingIndicator: boolean = false;
   sorting: Sorting = new Sorting();
@@ -43,6 +44,7 @@ export class CaseListComponent implements OnInit {
     this.page.pageNumber = 0;
     this.page.size = PageSize;
   }
+  
 
   ngOnInit() {
     this.route.params.subscribe((data) => {
@@ -50,6 +52,11 @@ export class CaseListComponent implements OnInit {
     })
     this.sorting = { columnName: "Id", dir: true };
     // this.setPage({ offset: 0 });
+    this.caseService.getAllDashboardData().subscribe(res => {
+      this.dashboardData = res;
+    }, err => {
+      this._notify.error(err.Result);
+    });
   }
 
   setPage(event: LazyLoadEvent) {

@@ -3,11 +3,12 @@ import { HttpClientService } from 'app/lib/http/http-client.service';
 import { Case, CaseStatus, CaseCommunication, TimeTracking, CaseNote, Document, AppealType, CaseEvidence, Judge, ContactQuickAdd, TaskCategory, Stage } from 'app/models/case';
 import { Page, Sorting } from 'app/models/page';
 import { environment } from 'environments/environment';
+import { Subject } from 'rxjs/Subject';
 import { AuthService } from '../../shared/services/auth.service';
 
 @Injectable()
 export class CaseService {
-
+  deleteNotification = new Subject<boolean>();
   constructor(private httpService: HttpClientService,private authService: AuthService) { }
 
   getCaseById(id: number) {
@@ -19,6 +20,12 @@ export class CaseService {
     }).catch((err: any) => {
       throw err.detail;
     });
+  }
+  sendDeleteNotification() {
+    this.deleteNotification.next(true);
+  }
+  getDeleteNotification() {
+    return this.deleteNotification.asObservable();
   }
 
   getCases() {
@@ -793,6 +800,17 @@ export class CaseService {
     }).catch((err: any) => {
       throw err;
     });
+  }
+
+  getAllDashboardData() {
+    return this.httpService.get('Case/GetCaseDashboardData').map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    })
   }
 }
 
