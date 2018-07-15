@@ -6,7 +6,7 @@
         <a [routerLink]="['../../']">Home</a>
       </li>
       <li>
-        <a [routerLink]="['../../contact']">Contacts</a>
+        <a [routerLink]="['../../../contact']">Contacts</a>
       </li>
       <li class="active">
         <strong>{{ isViewMode ? 'View' : (paramId !='new') ? 'Modify':'Add' }} Contact</strong>
@@ -28,6 +28,7 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CaseId">Profile Image</label>
+                  <i id="setmeimportant" class="{{isImportant ? 'fa fa-star-o' :  'fa fa-star'}}" aria-hidden="true" style="height: 25px;cursor:pointer" (click)="setimportantcontact();" title="Mark as an Important"></i>
                   <div class="img-wrap">
                     <a *ngIf="!isViewMode && model.Photo" class="delete-photo-icon" (click)="deletePhoto()">
                       <i class="fa fa-times-circle pull-right"></i>
@@ -44,6 +45,7 @@
                   <input type="file" class="fileUpload" accept="image/*" #fileUpload style="display:none" #fileUpload style="display:none"
                     (change)="onFileChange($event)" />
                 </div>
+
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
@@ -73,26 +75,26 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="FirstName">FirstName
+                  <label for="FirstName">First Name (Vakalatnama)
                     <span class="req">*</span>
                   </label>
                   <input type="text" maxlength="50" id="FirstName" name="FirstName" [class.inValidField]="contactForm.submitted && !FirstName.valid"
                     required class="form-control" [(ngModel)]="model.FirstName" [readonly]="isViewMode" #FirstName="ngModel"
                   />
                   <label *ngIf="contactForm.submitted && !FirstName.valid" class="error">
-                    Please enter First name
+                    Please enter First name (Vakalatnama)
                   </label>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="">LastName
+                  <label for="">Last Name (Vakalatnama)
                     <span class="req">*</span>
                   </label>
                   <input type="text" maxlength="50" name="LastName" [readonly]="isViewMode" [class.inValidField]="contactForm.submitted && !LastName.valid"
                     required class="form-control" [(ngModel)]="model.LastName" #LastName="ngModel" />
                   <label *ngIf="contactForm.submitted && !LastName.valid" class="error">
-                    Please enter Last name
+                    Please enter Last name (Vakalatnama)
                   </label>
                 </div>
               </div>
@@ -101,6 +103,9 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CompanyId">Company</label>
+                  <a class="pull-right" (click)="addCompany()" *ngIf="!isViewModel">
+                    <i aria-hidden="true" class="fa fa-plus"></i> Create New
+                  </a>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="CompanyId" [disabled]="isViewMode" name="CompanyId" [source]="companySearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectCompany($event)"
                     value-property-name="Id" display-property-name="CompanyName" />
@@ -162,7 +167,7 @@
               <div class="col-md-6 col-sm-12">
                 <div class="ibox-title custom-ibox-title">
                   <h5>
-                    Email Addresses
+                    Email Address(es)
                     <span class="req">*</span>
                   </h5>
                   <div class="ibox-tools">
@@ -191,7 +196,7 @@
               </div>
               <div class="col-md-6 col-sm-12">
                 <div class="ibox-title custom-ibox-title">
-                  <h5>Contact Numbers
+                  <h5>Contact Number
                     <span class="req">*</span>
                   </h5>
                   <div class="ibox-tools">
@@ -316,7 +321,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="PostCode{{i}}">PostCode</label>
+                    <label for="PostCode{{i}}">Post Code</label>
                     <input type="text" name="PostCode{{i}}" maxlength="50" class="form-control" [readonly]="isViewMode" [(ngModel)]="control.PostCode"
                       maxlength="6" />
                   </div>

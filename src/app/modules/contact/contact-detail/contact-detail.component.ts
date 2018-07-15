@@ -38,13 +38,17 @@ export class ContactDetailComponent implements OnInit {
   EmailError: string;
   ContactError: string;
   AddressError: string;
-
+  isImportant: boolean = false;
   constructor(private route: ActivatedRoute, private contactService: ContactService, private router: Router,
     private _notify: NotificationService, private modalDialog: Modal, private _sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.route.url.subscribe(segment => {
       this.isViewMode = segment.some(x => x.path.toLocaleLowerCase() === "view");
+      if(segment.some(x => x.path.toLocaleLowerCase() !== "new"))
+      {
+        this.addressSet.pop();
+      }
     });
     this.model.ContactType = this.ContactTypeDropDown[0].Id;
     this.model.Title = this.TitleDropDown[0].Id;
@@ -240,13 +244,22 @@ export class ContactDetailComponent implements OnInit {
     return true;
   }
 
+  addCompany()
+  {
+    alert(1);
+  }
+  setimportantcontact()
+  {
+    this.isImportant = !this.isImportant;
+  }
+
   save() {
     if (!this.validations()) {
       return;
     }
     this.isLoading = true;
     this.addressSet.forEach(address => {
-      if (address.Id) {
+      if (address.Id) { 
         if (address.IsDeleted) {
           this.contactService.deleteAddress(address.Id).subscribe(res => { });
         } else {
