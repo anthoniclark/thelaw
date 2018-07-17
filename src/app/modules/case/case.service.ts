@@ -9,9 +9,10 @@ import { AuthService } from '../../shared/services/auth.service';
 @Injectable()
 export class CaseService {
   deleteNotification = new Subject<boolean>();
+  impNotification = new Subject<boolean>();
   constructor(private httpService: HttpClientService,private authService: AuthService) { }
 
-  getCaseById(id: number) {
+  getCaseById(id: number) {[]
     return this.httpService.get('case/GetCaseById/' + id).map((res: any) => {
       if (res.Success) {
         return res.Result;
@@ -777,6 +778,14 @@ export class CaseService {
     }).catch((err: any) => {
       throw err;
     });
+  }
+
+  sendImpNotification(isImp) {
+    this.impNotification.next(isImp);
+  }
+
+  getImpNotification() {
+    return this.impNotification.asObservable();
   }
 
   exportCase() {

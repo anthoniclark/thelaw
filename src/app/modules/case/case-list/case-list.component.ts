@@ -52,6 +52,24 @@ export class CaseListComponent implements OnInit {
     })
     this.sorting = { columnName: "Id", dir: true };
     // this.setPage({ offset: 0 });
+    this.caseService.deleteNotification.subscribe(res => {
+      
+        this.dashboardData['TotalCaseCount'] = this.dashboardData['TotalCaseCount'] - 1;
+        this.dashboardData['TotalOpenCase'] = this.dashboardData['TotalOpenCase'] - 1;
+        this.dashboardData['TotalCloseCase'] = this.dashboardData['TotalCloseCase'] - 1;
+        this.dashboardData['TotalInactiveCase'] = this.dashboardData['TotalInactiveCase'] - 1;
+        this.dashboardData['TotalOther'] = this.dashboardData['TotalOther'] - 1;
+
+  
+    });
+    this.caseService.impNotification.subscribe(res => {
+      if (res) {
+        this.dashboardData['TotalImportants'] = this.dashboardData['TotalImportants'] + 1;
+      } else {
+        this.dashboardData['TotalImportants'] = this.dashboardData['TotalImportants'] - 1;
+      }
+    });
+
     this.caseService.getAllDashboardData().subscribe(res => {
       this.dashboardData = res;
     }, err => {
@@ -158,6 +176,7 @@ export class CaseListComponent implements OnInit {
             const pageNumber = (this.rows.length === 1 ? this.page.pageNumber - 1 : this.page.pageNumber);
             if (this.rows.length === 1 && this.page.pageNumber === 0) {
               this.rows = this.rows.filter(x => x.Id !== id);
+              this.caseService.sendDeleteNotification();
               this.loadingIndicator = false;
               this.page.totalElements = 0;
             } else {
@@ -244,11 +263,16 @@ export class CaseListComponent implements OnInit {
   }
 
   markImportant(data) {
+    this.loadingIndicator = true;
     this.caseService.markCaseAsImportant(data.Id, this.authService.getTenent()).subscribe(res => {
       if (res) {
-        data.IsImportant = data.IsImportant ? false : true;
+        //data.IsImportant = data.IsImportant ? false : true;
+        data.IsImportant = !data.IsImportant;
+        this.caseService.sendImpNotification(data.IsImportant);
+        this.loadingIndicator = false;
       }
     }, error => {
+      this.loadingIndicator = false;
       this._notify.error('Something went wrong, Please try again');
     });
   }
