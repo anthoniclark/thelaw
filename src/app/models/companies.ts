@@ -17,6 +17,7 @@ export class Company {
     Address: Address[] = [];
     MobileNumbers: Mobile[] = [];
     EmailAddress: Email[] = [];
+    IsImportant: boolean;
 }
 
 export class Contacts {

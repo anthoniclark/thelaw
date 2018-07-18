@@ -31,6 +31,9 @@ export class CompanyListComponent implements OnInit {
   }, {
     columnName: 'CompanySize',
     value: ''
+  }, {
+    columnName: 'IsImportant',
+    value: ''
   }];
 
   constructor(private companiesService: CompaniesService, public router: Router, private _notify: NotificationService) {

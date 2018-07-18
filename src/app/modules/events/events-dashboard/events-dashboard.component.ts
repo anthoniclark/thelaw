@@ -42,7 +42,7 @@ export class EventsDashboardComponent implements OnInit {
 
         const endTime = element.EndTime.split(':');
         const endDate = new Date(element.ToDateTime);
-        let color = element.EventType.Color;
+        let color =(element.EventTypeId!=null && element.EventType.Color!=null)?element.EventType.Color:'Green';
         if (endDate < new Date()) {
           color = 'Gray';
         }

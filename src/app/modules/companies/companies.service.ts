@@ -137,4 +137,15 @@ export class CompaniesService {
   exportCompanies() {
     window.open(`${environment.origin}${this.authService.getTenent()}/Companies/ExportCompany`, '_blank');
   }
+
+  toggleImportant(id) {
+    return this.httpClientService.post(`Companies/MarkImportantCompany/${id}`, {}).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
 }

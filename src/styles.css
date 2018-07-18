@@ -101,8 +101,8 @@ span.ui-calendar {width: 100%;}
 }
 .calander-popup-details {display: flex;}
 .calander-popup-title {
-  min-height: 80px;
-  max-height: 80px;
+   min-height: 30px;
+  /*max-height: 80px; */
 }
 .cal-popup-data {
   margin-left:15px; 
@@ -846,3 +846,15 @@ input:read-only {border: none;}
 
 .important-case {text-align: center;}
 .mt--50 {margin-top: -50px;}
+.fltright
+  {
+    float:right;
+  }
+  .fltleft
+  {
+    float:left;
+  }
+  .eventpopup div.row
+  {
+     padding-bottom:10px;
+  }

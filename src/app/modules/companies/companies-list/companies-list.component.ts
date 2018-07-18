@@ -32,6 +32,9 @@ export class CompaniesListComponent implements OnInit {
   }, {
     columnName: 'CompanySize',
     value: ''
+  }, {
+    columnName: 'IsImportant',
+    value: ''
   }];
 
   pageSize: number = PageSize;
@@ -213,5 +216,16 @@ export class CompaniesListComponent implements OnInit {
 
   exportCompany() {
     this.companiesService.exportCompanies();
+  }
+
+  toggleImportant(row) {
+    this.loadingIndicator = true;
+    this.companiesService.toggleImportant(row.Id).subscribe(response => {
+      row.IsImportant = !row.IsImportant;
+      this.loadingIndicator = false;
+    }, error => {
+      this.loadingIndicator = false;
+      this._notify.error(error.detail);
+    });
   }
 }

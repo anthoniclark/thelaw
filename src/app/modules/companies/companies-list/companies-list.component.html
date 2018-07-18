@@ -86,6 +86,8 @@
                 <button (click)="deleteClick(data.Id, dt)" class="btn-white btn btn-xs">
                   <i class="fa fa-trash"></i>
                 </button>
+                <i title="Is Important" class="big-icon important-icon fa {{ data.IsImportant ? 'fa-star' : 'fa-star-o' }}" (click)="toggleImportant(data)"
+                aria-hidden="true"></i>
               </ng-template>
             </p-column>
           </p-dataTable>
