@@ -41,14 +41,14 @@ export class NoteListComponent implements OnInit {
     }, error => {
 
     });
-    this.sorting = { columnName: "Id", dir: true };
+    this.sorting = { columnName: "NoteDate", dir: false };
   }
 
   setPage(event) {
     if (event.sortField) {
       this.sorting = { columnName: event.sortField, dir: event.sortOrder === 1 };
     } else {
-      this.sorting = { columnName: "Id", dir: true };
+      this.sorting = { columnName: "NoteDate", dir: false };
     }
     let filterColumnString = "";
     let searchValue = ""
@@ -136,5 +136,20 @@ export class NoteListComponent implements OnInit {
     } else {
       this.page.pageNumber = event.first / this.page.size;
     }
+  }
+
+  markImportant(data) {
+    this.loadingIndicator = true;
+    this.caseService.markNoteAsImportant(data.Id).subscribe(res => {
+      if (res) {
+        //data.IsImportant = data.IsImportant ? false : true;
+        data.IsImportant = !data.IsImportant;
+        this.caseService.sendImpNotification(data.IsImportant);
+        this.loadingIndicator = false;
+      }
+    }, error => {
+      this.loadingIndicator = false;
+      this._notify.error('Something went wrong, Please try again');
+    });
   }
 }

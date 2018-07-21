@@ -780,6 +780,18 @@ export class CaseService {
     });
   }
 
+  markNoteAsImportant(id) {
+    const model = { id };
+    return this.httpService.post(`Notes/MarkImportantNotes/${id}`, model).map((res: any) => {
+      if (res) {
+        return res;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
   sendImpNotification(isImp) {
     this.impNotification.next(isImp);
   }

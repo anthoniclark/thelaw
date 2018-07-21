@@ -34,12 +34,18 @@
               </ng-template>
             </p-column>
             <p-column field="NotesByName" [filter]="true" [sortable]="true" header="Notes By"></p-column>
-            <p-column field="Subject" [filter]="true" [sortable]="true" header="Case Number"></p-column>
-            <p-column field="IsImportant" [filter]="true" [sortable]="true" header="Important Note">
+            <p-column field="Subject" [filter]="true" [sortable]="true" header="Subject">
+                <ng-template let-col let-data="rowData" pTemplate="body">
+                    <i (click)="markImportant(data)" class="big-icon fa {{ data.IsImportant ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"></i>
+                  <a class="view-detail" (click)="editClick(data.Id)">{{data[col.field]}}</a>
+                </ng-template> 
+              
+            </p-column>
+            <!-- <p-column field="IsImportant" [filter]="true" [sortable]="true" header="Important Note">
               <ng-template let-col let-data="rowData" pTemplate="body">
                 <i class="big-icon fa {{ data[col.field] ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"></i>
               </ng-template>
-            </p-column>
+            </p-column> -->
             <p-column header="Actions">
               <ng-template let-data="rowData" pTemplate="body">
                 <button (click)="editClick(data.Id)" class="btn-white btn btn-xs">
