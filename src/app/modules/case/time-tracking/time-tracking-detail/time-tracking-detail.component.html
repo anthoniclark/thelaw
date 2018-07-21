@@ -28,7 +28,19 @@
           <form name="timeTrackingForm" class="time-tracking-form" (ngSubmit)="timeTrackingForm.form.valid && save()" #timeTrackingForm="ngForm"
             novalidate>
             <div class="row">
-              <div class="col-sm-6">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="TaskName">Task Name
+                          <span class="req">*</span>
+                      </label>
+                      <input class="form-control" required type="text" id="TaskName" name="TaskName" [(ngModel)]="model.TaskName"
+                        #TaskName="ngModel"  />
+                        <label *ngIf="timeTrackingForm.submitted && !model.TaskName" class="error">
+                            Please enter task name.
+                          </label>
+                    </div>
+                  </div>
+              <div class="col-sm-4">
                 <div class="form-group">
                   <label for="AssociateName">Associate Name
                     <span class="req">*</span>
@@ -42,7 +54,7 @@
                   </label>
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                 <div class="form-group">
                   <label for="date">Date
                     <span class="req">*</span>
@@ -117,7 +129,7 @@
                 <div class="form-group">
                   <label for="BilledTotal">Total
                   </label>
-                  <input class="form-control" type="number" id="BilledTotal" name="BilledTotal" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.BilledTotal"
+                  <input class="form-control" type="number" id="BilledTotal" name="BilledTotal" pattern="^\d+(\.\d{1,2})?$" step="1" [(ngModel)]="model.BilledTotal"
                     #BilledTotal="ngModel" [disabled]="true" />
                 </div>
               </div>
@@ -146,7 +158,7 @@
                   </label>
                   <input ngui-auto-complete class="form-control" id="caseno" [(ngModel)]="caseDetail.CaseNo" name="caseno" [source]="caseNameSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" value-property-name="Id"
-                    (valueChanged)="onSelectCaseName($event)" required display-property-name="Name" #caseno="ngModel" />
+                    (valueChanged)="onSelectCaseName($event)"  display-property-name="Name" #caseno="ngModel" />
                   <!-- <label *ngIf="timeTrackingForm.submitted && !caseno.valid" class="error">
                     Please select Case No
                   </label> -->

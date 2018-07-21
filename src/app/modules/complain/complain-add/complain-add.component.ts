@@ -57,6 +57,12 @@ export class ComplainAddComponent implements OnInit {
   contactSearch(term: string): Observable<any[]> {
     return this.contactService.contactSearch(term);
   }
+  advocateSearch(term: string): Observable<any[]> {
+    return this.contactService.advocateSearch(term);
+  }
+  clientSearch(term: string): Observable<any[]> {
+    return this.contactService.clientSearch(term);
+  }
 
   onSelectComplainBy(item: any) {
     if (item) {

@@ -42,7 +42,7 @@
                   <label for="ComplainById">Complain By
                     <span class="req">*</span>
                   </label>
-                  <input ngui-auto-complete class="form-control" [disabled]='isReadOnly' [(ngModel)]="ComplainById" name="ComplainById" [source]="contactSearch.bind(this)"
+                  <input ngui-auto-complete class="form-control" [disabled]='isReadOnly' [(ngModel)]="ComplainById" name="ComplainById" [source]="clientSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectComplainBy($event)"
                     value-property-name="Id" display-property-name="Name" [class.inValidField]="complainForm.submitted && !model.ComplainBy"
                   />
@@ -58,7 +58,7 @@
                   <label for="ComplainOfId">Complain Of
                     <span class="req">*</span>
                   </label>
-                  <input ngui-auto-complete class="form-control" [disabled]='isReadOnly' [(ngModel)]="ComplainOfId" name="ComplainOfId" [source]="contactSearch.bind(this)"
+                  <input ngui-auto-complete class="form-control" [disabled]='isReadOnly' [(ngModel)]="ComplainOfId" name="ComplainOfId" [source]="advocateSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectComplainOf($event)"
                     value-property-name="Id" display-property-name="Name" [class.inValidField]="complainForm.submitted && !model.ComplainOf"
                   />

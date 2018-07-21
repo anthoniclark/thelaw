@@ -103,32 +103,6 @@
                   </label>
                 </div>
               </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="Description">Description</label>
-                  <textarea class="form-control" rows="3" id="Description" name="Description" maxlength="250" [(ngModel)]="model.Description"
-                    #Description="ngModel"></textarea>
-                </div>
-              </div>
-
-            </div>
-            <div class="row">
-
-
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="Amount">Amount
-                    <span class="req">*</span>
-                  </label>
-                  <input class="form-control" type="number" [class.inValidField]="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors"
-                    id="Amount" name="Amount" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.Amount" #Amount="ngModel"
-                    required />
-                  <label *ngIf="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors && Amount.errors['required']" class="error">
-                    Please enter Amount</label>
-                  <label *ngIf="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors && Amount.errors['pattern']" class="error">
-                    Enter Valid Amount</label>
-                </div>
-              </div>
               <div class="col-sm-3">
                 <div class="form-group">
                   <label for="Billable">Billable</label>
@@ -145,9 +119,25 @@
                   </div>
                 </div>
               </div>
+             
 
             </div>
             <div class="row">
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="Amount">Amount
+                    <span class="req">*</span>
+                  </label>
+                  <input class="form-control" type="number" [class.inValidField]="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors"
+                    id="Amount" name="Amount" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.Amount" #Amount="ngModel"
+                    required />
+                  <label *ngIf="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors && Amount.errors['required']" class="error">
+                    Please enter Amount</label>
+                  <label *ngIf="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors && Amount.errors['pattern']" class="error">
+                    Enter Valid Amount</label>
+                </div>
+              </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CaseId">Bill Document (Accept file types .doc,.pdf,.jpg,.jpeg,.png) less then 2 mb</label>
@@ -170,6 +160,17 @@
                     <label *ngIf="!validFileType" class="error"> Invalid File Type </label>
                     <label *ngIf="!validFileSize" class="error"> File size should less than 2 MB. </label>
                   </div>
+                </div>
+              </div>
+             
+
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="Description">Description</label>
+                  <textarea class="form-control" rows="3" id="Description" name="Description" maxlength="250" [(ngModel)]="model.Description"
+                    #Description="ngModel"></textarea>
                 </div>
               </div>
             </div>

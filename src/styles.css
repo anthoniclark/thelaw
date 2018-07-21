@@ -858,3 +858,7 @@ input:read-only {border: none;}
   {
      padding-bottom:10px;
   }
+  .ng-star-inserted
+  {
+    /* max-height: 200px; */
+  }

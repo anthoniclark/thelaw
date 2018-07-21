@@ -224,7 +224,7 @@
       <div class="col-sm-12 col-md-6 col-lg-6 ">
         <div class="form-group">
           <label for="EventTypeId">Attendees
-            <span class="req">*</span>
+            <!-- <span class="req">*</span> -->
           </label>
           <angular2-multiselect [data]="attendeesData" [(ngModel)]="selectedAttendees" [settings]="settings" class="form-control" #AttendeesId="ngModel"
             name="AttendeesId" id="AttendeesId">
@@ -302,7 +302,7 @@
       <div class="col-sm-12 col-md-6 col-lg-6 ">
         <div class="form-group">
           <label for="DefendantRemark">Frquency
-            <span class="req">*</span>
+            <!-- <span class="req">*</span> -->
           </label>
           <select class="form-control" [(ngModel)]="model.Frquency" [class.inValidField]="eventsForm.submitted && !model.Frquency"
             required id="Frquency" name="Frquency" #Frquency="ngModel">
@@ -333,9 +333,9 @@
       <div class="col-sm-12 col-md-6 col-lg-6 ">
         <div class="form-group">
           <label for="ReminderAt">Remind on Every
-            <span class="req">*</span>
+            <!-- <span class="req">*</span> -->
           </label>
-          <select class="form-control" [(ngModel)]="model.ReminderAt" [class.inValidField]="eventsForm.submitted && !model.ReminderAt"
+          <select class="form-control" [(ngModel)]="model.ReminderAt" 
             required id="ReminderAt" name="ReminderAt" #ReminderAt="ngModel">
             <option value="1" selected="selected">Hourly</option>
             <option value="2">Daily</option>
@@ -343,9 +343,9 @@
             <option value="4">Monthly</option>
             <option value="5">Yearly</option>
           </select>
-          <label *ngIf="eventsForm.submitted && !model.ReminderAt" class="err-label">
+          <!-- <label *ngIf="eventsForm.submitted && !model.ReminderAt" class="err-label">
             Please select Remind At
-          </label>
+          </label> -->
         </div>
       </div>
     </div>
@@ -359,25 +359,25 @@
           <div class="col-sm-12 col-md-6 col-lg-6 ">
             <div class="form-group">
               <label for="Description">Start at
-                <span class="req">*</span>
+                <!-- <span class="req">*</span> -->
               </label>
-              <p-calendar id="StartTime" [(ngModel)]="model.StartTime" #StartTime="ngModel" hourFormat="12" required name="StartTime" [class.inValidField]="eventsForm.submitted && !StartTime.valid"
+              <p-calendar id="StartTime" [(ngModel)]="model.StartTime" #StartTime="ngModel" hourFormat="12" required name="StartTime" 
                 inputStyleClass="form-control" timeOnly="true"></p-calendar>
-              <label *ngIf="eventsForm.submitted && !model.StartTime" class="err-label">
+              <!-- <label *ngIf="eventsForm.submitted && !model.StartTime" class="err-label">
                 Please select Start Time
-              </label>
+              </label> -->
             </div>
           </div>
           <div class="col-sm-12 col-md-6 col-lg-6 ">
             <div class="form-group">
               <label for="EndTime">End at
-                <span class="req">*</span>
+                <!-- <span class="req">*</span> -->
               </label>
-              <p-calendar id="EndTime" [(ngModel)]="model.EndTime" #EndTime="ngModel" hourFormat="12" required name="EndTime" [class.inValidField]="eventsForm.submitted && !EndTime.valid"
+              <p-calendar id="EndTime" [(ngModel)]="model.EndTime" #EndTime="ngModel" hourFormat="12" required name="EndTime" 
                 inputStyleClass="form-control" timeOnly="true"></p-calendar>
-              <label *ngIf="eventsForm.submitted && !model.EndTime" class="err-label">
+              <!-- <label *ngIf="eventsForm.submitted && !model.EndTime" class="err-label">
                 Please select End Time
-              </label>
+              </label> -->
             </div>
           </div>
         </div>

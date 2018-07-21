@@ -3288,7 +3288,7 @@ video {
   padding: 20px 10px 40px;
 overflow-y: auto;
 overflow-x: hidden; 
-min-height:450px;
+/* min-height:450px; */
 }
 
 #page-wrapper {

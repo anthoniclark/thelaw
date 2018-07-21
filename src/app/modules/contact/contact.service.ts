@@ -206,6 +206,17 @@ export class ContactService {
     });
   }
 
+  clientSearch(term: string) {
+    return this.httpService.get('Contact/GetClients?search=' + term).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
   companySearch(term: string) {
     return this.httpService.get('Contact/GetCompany?search=' + term).map((res: any) => {
       if (res.Success) {
