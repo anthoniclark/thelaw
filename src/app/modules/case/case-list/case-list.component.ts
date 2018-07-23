@@ -194,29 +194,55 @@ export class CaseListComponent implements OnInit {
   }
 
   showCommunication(id: any) {
-    this.router.navigate([`../../case/${id}/communication/dashboard`], { relativeTo: this.route });
+    //this.router.navigate([`../../case/${id}/communication/dashboard`], { relativeTo: this.route });
     //this.router.navigateByUrl('/case/' + id + '/communication/dashboard');
+
+    if (this.router.url.indexOf('/contact/') > -1)
+	      this.router.navigate([`../../../case/${id}/communication/dashboard`], { relativeTo: this.route });
+	    else
+	      this.router.navigate([`../../case/${id}/communication/dashboard`], { relativeTo: this.route });
+	    //this.router.navigateByUrl('/case/' + id + '/communication/dashboard');	181.	    //this.router.navigateByUrl('/case/' + id + '/communication/dashboard');
   }
   ShowTimeTracker(id: any) {
-    this.router.navigate([`../../case/${id}/time-tracking`], { relativeTo: this.route });
+   // this.router.navigate([`../../case/${id}/time-tracking`], { relativeTo: this.route });
     //this.router.navigateByUrl();
+    if (this.router.url.indexOf('contact/') > -1)
+    	      this.router.navigate([`../../../case/${id}/time-tracking`], { relativeTo: this.route });
+    	    else
+          this.router.navigate([`../../case/${id}/time-tracking`], { relativeTo: this.route });
+    	    //this.router.navigateByUrl();	188.	    //this.router.navigateByUrl();
   }
   ShowNotes(id: any) {
-    this.router.navigate([`../../case/${id}/note`], { relativeTo: this.route });
+    //this.router.navigate([`../../case/${id}/note`], { relativeTo: this.route });
     //this.router.navigateByUrl();
+    if (this.router.url.indexOf('contact/') > -1)
+	      this.router.navigate([`../../../case/${id}/note`], { relativeTo: this.route });
+	    else
+	      this.router.navigate([`../../case/${id}/note`], { relativeTo: this.route });
+	    //this.router.navigateByUrl();	195.	    //this.router.navigateByUrl();
   }
   ShowCommunications(id: any) {
-    this.router.navigate([`../../case/${id}/communication`], { relativeTo: this.route });
+    //this.router.navigate([`../../case/${id}/communication`], { relativeTo: this.route });
     //this.router.navigateByUrl();
+    if (this.router.url.indexOf('contact/') > -1)
+    	      this.router.navigate([`../../../case/${id}/communication`], { relativeTo: this.route });
+    	    else
+    	      this.router.navigate([`../../case/${id}/communication`], { relativeTo: this.route });
   }
   ShowEvidence(id: any) {
-    this.router.navigate([`../../case/${id}/evidence`], { relativeTo: this.route });
-    //this.router.navigateByUrl();
+   // this.router.navigate([`../../case/${id}/evidence`], { relativeTo: this.route });
+   if (this.router.url.indexOf('contact/') > -1)
+   	      this.router.navigate([`../../../case/${id}/evidence`], { relativeTo: this.route });
+   	    else
+   	      this.router.navigate([`../../case/${id}/evidence`], { relativeTo: this.route });
   }
 
   ShowDocuments(id: any) {
-    this.router.navigate([`../../case/${id}/document`], { relativeTo: this.route });
-    //this.router.navigateByUrl();
+   // this.router.navigate([`../../case/${id}/document`], { relativeTo: this.route });
+   if (this.router.url.indexOf('contact/') > -1)
+   	      this.router.navigate([`../../../case/${id}/document`], { relativeTo: this.route });
+   	    else
+   	      this.router.navigate([`../../case/${id}/document`], { relativeTo: this.route });
   }
 
   paginate(event) {
@@ -255,11 +281,21 @@ export class CaseListComponent implements OnInit {
   }
 
   viewDetail(id) {
-    this.router.navigate(['../../case/view/', id], { relativeTo: this.route });
+    //this.router.navigate(['../../case/view/', id], { relativeTo: this.route });
+    if (this.router.url.indexOf('contact/') > -1)
+	      this.router.navigate(['../../../case/view/', id], { relativeTo: this.route });
+	    else
+	      this.router.navigate(['../../case/view/', id], { relativeTo: this.route });
   }
 
   viewClientDetail(id) {
-    this.router.navigate(['../../contact/view/', id], { relativeTo: this.route });
+   // this.router.navigate(['../../contact/view/', id], { relativeTo: this.route });
+   if (this.router.url.indexOf('contact/') > -1) {
+    	      this.router.navigate(['../../../contact/view/', id], { relativeTo: this.route });
+    	    }
+    	    else {
+            this.router.navigate(['../../contact/view/', id], { relativeTo: this.route });
+          }
   }
 
   markImportant(data) {
@@ -267,7 +303,8 @@ export class CaseListComponent implements OnInit {
     this.caseService.markCaseAsImportant(data.Id, this.authService.getTenent()).subscribe(res => {
       if (res) {
         //data.IsImportant = data.IsImportant ? false : true;
-        data.IsImportant = !data.IsImportant;
+        //data.IsImportant = !data.IsImportant;
+        data.IsImportant = data.IsImportant ? false : true;
         this.caseService.sendImpNotification(data.IsImportant);
         this.loadingIndicator = false;
       }

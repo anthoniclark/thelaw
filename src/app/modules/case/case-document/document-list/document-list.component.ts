@@ -15,6 +15,7 @@ export class DocumentListComponent implements OnInit {
   loadingIndicator: boolean = false;
   sorting: Sorting = new Sorting();
   CaseId: number;
+  caseDetails: any = {};
   pageSize: number = PageSize;
   filterModel: FilterModel[] = [{
     columnName: 'DocumentName',
@@ -36,6 +37,12 @@ export class DocumentListComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(param => this.CaseId = param['caseId']);
     this.sorting = { columnName: "Id", dir: true };
+    this.caseService.getCaseById(this.CaseId).subscribe(res => {
+      this.caseDetails = res;
+     
+    }, err => {
+      this._notify.error(err.Result);
+    });
   }
 
   setPage(event) {

@@ -608,11 +608,11 @@ export class CaseService {
     });
   }
   downloadCaseEvidenceFile(id) {
-    window.open(`${environment.origin}CaseEvidence/DownloadEvidenceFile/${id}`, '_blank');
+    window.open(`${environment.origin}${this.authService.getTenent()}/CaseEvidence/DownloadEvidenceFile/${id}`, '_blank');
   }
 
   downloadDocument(id) {
-    window.open(`${environment.origin}Document/DownloadDocument/${id}`, '_blank');
+    window.open(`${environment.origin}${this.authService.getTenent()}/Document/DownloadDocument/${id}`, '_blank');
   }
 
   deleteCaseEvidenceFile(id) {
