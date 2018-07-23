@@ -301,12 +301,13 @@
 
       <div class="col-sm-12 col-md-6 col-lg-6 ">
         <div class="form-group">
-          <label for="DefendantRemark">Frquency
+          <label for="DefendantRemark">Repeat
             <!-- <span class="req">*</span> -->
           </label>
           <select class="form-control" [(ngModel)]="model.Frquency" [class.inValidField]="eventsForm.submitted && !model.Frquency"
             required id="Frquency" name="Frquency" #Frquency="ngModel">
-            <option value="Hourly" selected="selected">Hourly</option>
+            <option value="Never" selected="selected">Hourly</option>
+            <option value="Hourly" >Hourly</option>
             <option value="Daily">Daily</option>
             <option value="Weekly">Weekly</option>
             <option value="Monthly">Monthly</option>
@@ -337,7 +338,8 @@
           </label>
           <select class="form-control" [(ngModel)]="model.ReminderAt" 
             required id="ReminderAt" name="ReminderAt" #ReminderAt="ngModel">
-            <option value="1" selected="selected">Hourly</option>
+            <option value="0" selected="selected">Never</option>
+            <option value="1">Hourly</option>
             <option value="2">Daily</option>
             <option value="3">Weekly</option>
             <option value="4">Monthly</option>
